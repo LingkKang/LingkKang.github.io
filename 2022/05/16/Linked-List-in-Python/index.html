@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Test Article, Lingkang&#39;s Blog">
-    <meta name="description" content="a simple test">
+    <meta name="keywords" content="Linked List in Python, Lingkang&#39;s Blog">
+    <meta name="description" content="简记两道LeetCode单向链表题目在Python中的解法">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -28,7 +28,7 @@
     </style>
 
 
-    <title>Test Article | Lingkang&#39;s Blog</title>
+    <title>Linked List in Python | Lingkang&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -68,7 +68,7 @@
       
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
-      <span>Index</span>
+      <span>首页</span>
     </a>
     
   </li>
@@ -79,7 +79,7 @@
       
       <i class="fas fa-tags" style="zoom: 0.6;"></i>
       
-      <span>Tags</span>
+      <span>标签</span>
     </a>
     
   </li>
@@ -90,7 +90,7 @@
       
       <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
       
-      <span>Categories</span>
+      <span>分类</span>
     </a>
     
   </li>
@@ -101,7 +101,7 @@
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
       
-      <span>Archives</span>
+      <span>归档</span>
     </a>
     
   </li>
@@ -112,14 +112,14 @@
       
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
-      <span>About</span>
+      <span>关于</span>
     </a>
     
   </li>
   
   <li>
     <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
     </a>
   </li>
 </ul>
@@ -147,7 +147,7 @@
 			
 			    <i class="fa-fw fas fa-home"></i>
 			
-			Index
+			首页
 		</a>
           
         </li>
@@ -158,7 +158,7 @@
 			
 			    <i class="fa-fw fas fa-tags"></i>
 			
-			Tags
+			标签
 		</a>
           
         </li>
@@ -169,7 +169,7 @@
 			
 			    <i class="fa-fw fas fa-bookmark"></i>
 			
-			Categories
+			分类
 		</a>
           
         </li>
@@ -180,7 +180,7 @@
 			
 			    <i class="fa-fw fas fa-archive"></i>
 			
-			Archives
+			归档
 		</a>
           
         </li>
@@ -191,7 +191,7 @@
 			
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
-			About
+			关于
 		</a>
           
         </li>
@@ -212,12 +212,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://s3.bmp.ovh/imgs/2022/05/15/f6746bb1ff86d48d.jpeg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Test Article</h1>
+                    <h1 class="description center-align post-title">Linked List in Python</h1>
                 </div>
             </div>
         </div>
@@ -333,12 +333,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Markdown/">
-                                <span class="chip bg-color">Markdown</span>
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                <span class="chip bg-color">数据结构</span>
                             </a>
                         
-                            <a href="/tags/%E5%89%8D%E7%AB%AF/">
-                                <span class="chip bg-color">前端</span>
+                            <a href="/tags/Python/">
+                                <span class="chip bg-color">Python</span>
+                            </a>
+                        
+                            <a href="/tags/LeetCode/">
+                                <span class="chip bg-color">LeetCode</span>
                             </a>
                         
                     </div>
@@ -349,8 +353,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-category">
-                                前端
+                            <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
+                                算法与数据结构
                             </a>
                         
                     </div>
@@ -361,14 +365,14 @@
             <div class="post-info">
                 
                 <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-05-15
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-05-16
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
                     2022-05-16
                 </div>
                 
@@ -379,7 +383,7 @@
 
                 
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
                         <span id="busuanzi_value_page_pv"></span>
                     </div>
 				
@@ -393,7 +397,123 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="A-Simple-test"><a href="#A-Simple-test" class="headerlink" title="A Simple test"></a>A Simple test</h1><p>This is a simple test.<br>Pages hoseted on GitHub.<br>Build in Hexo with theme Matery. </p>
+                <h1 id="Linked-List-in-Python"><a href="#Linked-List-in-Python" class="headerlink" title="Linked List in Python"></a>Linked List in Python</h1><h2 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h2><p>这两天写了两道LeetCode题目，都是关于单向链表(Singly linked list)的，分别是<a target="_blank" rel="noopener" href="https://leetcode.com/problems/add-two-numbers/">2. Add Two Numbers (Medium)</a>以及<a target="_blank" rel="noopener" href="https://leetcode.com/problems/merge-two-sorted-lists/">21. Merge Two Sorted Lists (Easy)</a>。由简到难，先做了后者再去尝试了前者。</p>
+<p>非常巧的是，在做第21题前，刚好了解到了归并排序(Merge sort)，并且试着用python写了一个归并脚本，只不过当时只用了python内置的数组。</p>
+<h2 id="单向链表与节点"><a href="#单向链表与节点" class="headerlink" title="单向链表与节点"></a>单向链表与节点</h2><p>单向链表，顾名思义只有从前往后的单向连接，反之则不行。使用单向列表的好处在于，当需要在链表中插入数据时，只需要遍历链表找到需要插入数据的位置，将前一个节点改为指向新节点，并且让新节点指向后继节点即可，省去了数组中元素后移的麻烦。删除同理。</p>
+<p>在实际代码中往往用第一个节点来指代整个链表。</p>
+<p>在LeetCode题目中，单个节点的定义如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">ListNode</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> val<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> next<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>val <span class="token operator">=</span> val
+        self<span class="token punctuation">.</span>next <span class="token operator">=</span> next
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>也就是说，一个节点只有它本身的值(val)以及next两个属性，其中next用来指向下一个节点。通过<code>list1 = list.next</code>来移动到下一个节点，当 <code>list1 == None</code> 时（或<code>list1.next == None</code>，即没有后继节点），链表结束。</p>
+<p>一般情况下还会定义一个<code>LinkedList</code>类，把查找、插入、删除等函数都打包进类里。LeetCode这里属于是极简配置了，但不影响数据结构的讨论。</p>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>先看简单的第21题。</p>
+<h3 id="第21题-合并有序链表"><a href="#第21题-合并有序链表" class="headerlink" title="第21题 合并有序链表"></a>第21题 合并有序链表</h3><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/merge-two-sorted-lists/">21. Merge Two Sorted Lists</a></p>
+<p>题目要求将两个由小到大排序的单向链表合并成一个，输入和输出都是ListNode实例。</p>
+<p>先上代码：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">mergeTwoLists</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> list1<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>ListNode<span class="token punctuation">]</span><span class="token punctuation">,</span> list2<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>ListNode<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> Optional<span class="token punctuation">[</span>ListNode<span class="token punctuation">]</span><span class="token punctuation">:</span>   
+        
+        <span class="token comment" spellcheck="true"># 如果有空链表，直接返回另一个链表</span>
+        <span class="token keyword">if</span> <span class="token operator">not</span> list1<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> list2 
+        <span class="token keyword">elif</span> <span class="token operator">not</span> list2<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> list1
+        
+        <span class="token comment" spellcheck="true"># 将第一个值小的初始化为输出链表的第一个值</span>
+        <span class="token keyword">if</span> list1<span class="token punctuation">.</span>val <span class="token operator">&lt;=</span> list2<span class="token punctuation">.</span>val<span class="token punctuation">:</span>
+            output <span class="token operator">=</span> list1
+            list1 <span class="token operator">=</span> list1<span class="token punctuation">.</span>next
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            output <span class="token operator">=</span> list2
+            list2 <span class="token operator">=</span> list2<span class="token punctuation">.</span>next
+        head <span class="token operator">=</span> output
+
+        <span class="token keyword">while</span> list1 <span class="token operator">!=</span> None <span class="token operator">and</span> list2 <span class="token operator">!=</span> None<span class="token punctuation">:</span>
+            <span class="token comment" spellcheck="true"># 将较小的值赋给current，并将链表移到下一个节点</span>
+            <span class="token keyword">if</span> list1<span class="token punctuation">.</span>val <span class="token operator">&lt;=</span> list2<span class="token punctuation">.</span>val<span class="token punctuation">:</span>
+                current <span class="token operator">=</span> list1
+                list1 <span class="token operator">=</span> list1<span class="token punctuation">.</span>next
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                current <span class="token operator">=</span> list2
+                list2 <span class="token operator">=</span> list2<span class="token punctuation">.</span>next
+            output<span class="token punctuation">.</span>next <span class="token operator">=</span> current
+            output <span class="token operator">=</span> output<span class="token punctuation">.</span>next
+
+        <span class="token comment" spellcheck="true"># 如果有一个链表已经没有后继节点</span>
+        <span class="token comment" spellcheck="true"># 则直接将另一个链表剩余节点加在输出链表末尾</span>
+        <span class="token keyword">if</span> list1 <span class="token operator">!=</span> None<span class="token punctuation">:</span>
+            <span class="token keyword">while</span> list1 <span class="token operator">!=</span> None<span class="token punctuation">:</span>
+                output<span class="token punctuation">.</span>next <span class="token operator">=</span> list1
+                list1 <span class="token operator">=</span> list1<span class="token punctuation">.</span>next
+                output <span class="token operator">=</span> output<span class="token punctuation">.</span>next
+        <span class="token keyword">elif</span> list2 <span class="token operator">!=</span> None<span class="token punctuation">:</span>
+            <span class="token keyword">while</span> list2 <span class="token operator">!=</span> None<span class="token punctuation">:</span>
+                output<span class="token punctuation">.</span>next <span class="token operator">=</span> list2
+                list2 <span class="token operator">=</span> list2<span class="token punctuation">.</span>next
+                output <span class="token operator">=</span> output<span class="token punctuation">.</span>next
+
+        <span class="token keyword">return</span> head <span class="token comment" spellcheck="true">#用链表第一个节点来指代链表，只要返回第一个节点即可</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里值得注意的是和python内置的数组一样，<code>while list1 != None:</code> 和 <code>while list1:</code> 意义相同，都表示‘不为空时’。当节点为<code>None</code>时，逻辑值相当于<code>False</code>。</p>
+<p>这个解法看起来略显繁琐，但是运行时间和占用内存都并不大，也很容易理解。</p>
+<h3 id="第2题-反向求和"><a href="#第2题-反向求和" class="headerlink" title="第2题 反向求和"></a>第2题 反向求和</h3><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/add-two-numbers/">2. Add Two Numbers (Medium)</a></p>
+<p>这道题目本身还挺搞的，把两个需要相加的数倒了过来，每个数位都放在链表的节点中，如下所示：<br><img src="https://assets.leetcode.com/uploads/2020/10/02/addtwonumber1.jpg" alt="342 + 465 = 807" title="AddTwoNumbers"><br>这里注意到的是数字高位和低位颠倒了过来，因此相加时新的数位产生在最右侧。</p>
+<p>代码如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">addTwoNumbers</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> l1<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>ListNode<span class="token punctuation">]</span><span class="token punctuation">,</span> l2<span class="token punctuation">:</span> Optional<span class="token punctuation">[</span>ListNode<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> Optional<span class="token punctuation">[</span>ListNode<span class="token punctuation">]</span><span class="token punctuation">:</span>
+        output <span class="token operator">=</span> ListNode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        header <span class="token operator">=</span> output
+        upper <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment" spellcheck="true"># 表示进位</span>
+        <span class="token keyword">while</span> l1 <span class="token operator">!=</span> None<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> l2 <span class="token operator">!=</span> None<span class="token punctuation">:</span>
+                ans <span class="token operator">=</span> l1<span class="token punctuation">.</span>val <span class="token operator">+</span> l2<span class="token punctuation">.</span>val <span class="token operator">+</span> upper
+                upper <span class="token operator">=</span> <span class="token number">0</span>
+                <span class="token keyword">if</span> ans <span class="token operator">></span> <span class="token number">9</span><span class="token punctuation">:</span>
+                    output<span class="token punctuation">.</span>val <span class="token operator">=</span> ans <span class="token operator">-</span> <span class="token number">10</span>
+                    upper <span class="token operator">=</span> <span class="token number">1</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    output<span class="token punctuation">.</span>val <span class="token operator">=</span> ans
+                l2 <span class="token operator">=</span> l2<span class="token punctuation">.</span>next
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                ans <span class="token operator">=</span> l1<span class="token punctuation">.</span>val <span class="token operator">+</span> upper
+                upper <span class="token operator">=</span> <span class="token number">0</span>
+                <span class="token keyword">if</span> ans <span class="token operator">></span> <span class="token number">9</span><span class="token punctuation">:</span>
+                    output<span class="token punctuation">.</span>val <span class="token operator">=</span> ans <span class="token operator">-</span> <span class="token number">10</span>
+                    upper <span class="token operator">=</span> <span class="token number">1</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    output<span class="token punctuation">.</span>val <span class="token operator">=</span> ans
+            
+            <span class="token comment" spellcheck="true"># 当达到链表末尾时，需要考虑是否要留出一位来存放进位</span>
+            <span class="token comment" spellcheck="true"># 第40行同理</span>
+            <span class="token keyword">if</span> l1<span class="token punctuation">.</span>next <span class="token operator">!=</span> None <span class="token operator">or</span> upper <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">or</span> l2 <span class="token operator">!=</span> None<span class="token punctuation">:</span>
+                output<span class="token punctuation">.</span>next <span class="token operator">=</span> ListNode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            output <span class="token operator">=</span> output<span class="token punctuation">.</span>next
+            l1 <span class="token operator">=</span> l1<span class="token punctuation">.</span>next
+            
+        <span class="token keyword">while</span> l2 <span class="token operator">!=</span> None<span class="token punctuation">:</span>
+            ans <span class="token operator">=</span> l2<span class="token punctuation">.</span>val <span class="token operator">+</span> upper
+            upper <span class="token operator">=</span> <span class="token number">0</span>
+            <span class="token keyword">if</span> ans <span class="token operator">></span> <span class="token number">9</span><span class="token punctuation">:</span>
+                output<span class="token punctuation">.</span>val <span class="token operator">=</span> ans <span class="token operator">-</span> <span class="token number">10</span>
+                upper <span class="token operator">=</span> <span class="token number">1</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span> 
+                output<span class="token punctuation">.</span>val <span class="token operator">=</span> ans
+            <span class="token keyword">if</span> l2<span class="token punctuation">.</span>next <span class="token operator">!=</span> None <span class="token operator">or</span> upper <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+                output<span class="token punctuation">.</span>next <span class="token operator">=</span> ListNode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            output <span class="token operator">=</span> output<span class="token punctuation">.</span>next
+            l2 <span class="token operator">=</span> l2<span class="token punctuation">.</span>next
+            
+        <span class="token keyword">if</span> upper <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+            output<span class="token punctuation">.</span>val <span class="token operator">=</span> <span class="token number">1</span>
+        
+        <span class="token keyword">return</span> header
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>思路和上一题一样，取出一个数后移动节点，需要注意的是逢十进一。<em>此处还有优化空间。</em></p>
+<p>但是这次不同的是我选择新创建了一个节点实例来表示输出链表(<code>output = ListNode()</code>)，实际上和使用已有链表来初始化作用相同。</p>
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><p>在整个编程过程中，最需要注意的还是链表的末尾。一不小心经常容易出现赋值给<code>None</code>的报错。</p>
 
                 
             </div>
@@ -406,7 +526,7 @@
             <div class="reprint__author">
                 <span class="reprint-meta" style="font-weight: bold;">
                     <i class="fas fa-user">
-                        Author:
+                        文章作者:
                     </i>
                 </span>
                 <span class="reprint-info">
@@ -416,23 +536,23 @@
             <div class="reprint__type">
                 <span class="reprint-meta" style="font-weight: bold;">
                     <i class="fas fa-link">
-                        Link:
+                        文章链接:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://lingkkang.github.io/2022/05/15/test-article/">https://lingkkang.github.io/2022/05/15/test-article/</a>
+                    <a href="https://lingkkang.github.io/2022/05/16/Linked-List-in-Python/">https://lingkkang.github.io/2022/05/16/Linked-List-in-Python/</a>
                 </span>
             </div>
             <div class="reprint__notice">
                 <span class="reprint-meta" style="font-weight: bold;">
                     <i class="fas fa-copyright">
-                        Reprint policy:
+                        版权声明:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    All articles in this blog are used except for special statements
+                    本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
-                    reprint policy. If reproduced, please indicate source
+                    许可协议。转载请注明来源
                     <a href="/about" target="_blank">Lingkang</a>
                     !
                 </span>
@@ -442,7 +562,7 @@
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
@@ -458,12 +578,16 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Markdown/">
-                                    <span class="chip bg-color">Markdown</span>
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                    <span class="chip bg-color">数据结构</span>
                                 </a>
                             
-                                <a href="/tags/%E5%89%8D%E7%AB%AF/">
-                                    <span class="chip bg-color">前端</span>
+                                <a href="/tags/Python/">
+                                    <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                                <a href="/tags/LeetCode/">
+                                    <span class="chip bg-color">LeetCode</span>
                                 </a>
                             
                         </div>
@@ -511,9 +635,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/05/16/Linked-List-in-Python/">
                     <div class="card-image">
@@ -531,9 +656,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -546,6 +671,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -569,22 +695,21 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/05/15/hello-world/">
+                <a href="/2022/05/15/test-article/">
                     <div class="card-image">
                         
+                        <img src="https://s3.bmp.ovh/imgs/2022/05/15/f6746bb1ff86d48d.jpeg" class="responsive-img" alt="Test Article">
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">Test Article</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            a simple test
                         
                     </div>
                     <div class="publish-info">
@@ -593,11 +718,27 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Lingkang
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    前端
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Markdown/">
+                        <span class="chip bg-color">Markdown</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -631,7 +772,7 @@
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget card" style="background-color: white;">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -738,7 +879,7 @@
             
      
                 <span id="busuanzi_container_site_pv">
-                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;Total visits:&nbsp;
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
                     <span id="busuanzi_value_site_pv" class="white-color"></span>
             </span>
             
@@ -750,7 +891,7 @@
             
                 
                 <span id="busuanzi_container_site_uv">
-                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;Total visitors:&nbsp;
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
                     <span id="busuanzi_value_site_uv" class="white-color"></span>
             </span>
 
@@ -866,8 +1007,8 @@
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
-            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
                    class="search-input">
         </div>
         <div id="searchResult"></div>
