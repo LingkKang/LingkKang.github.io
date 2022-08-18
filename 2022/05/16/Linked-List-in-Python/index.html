@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://assets.leetcode.com/uploads/2020/10/02/addtwonumber1.jpg">
 <meta property="article:published_time" content="2022-05-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-08-18T01:50:31.401Z">
+<meta property="article:modified_time" content="2022-08-18T03:01:35.683Z">
 <meta property="article:author" content="Lingkang">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="Python">
@@ -206,9 +206,9 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/images/bg_post.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.6)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
@@ -317,7 +317,7 @@
 <p>但是这次不同的是我选择新创建了一个节点实例来表示输出链表(<code>output = ListNode()</code>)，实际上和使用已有链表来初始化作用相同。</p>
 <h3 id="第148题-链表排序"><a href="#第148题-链表排序" class="headerlink" title="第148题 链表排序"></a>第148题 链表排序</h3><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/sort-list/">148. Sort List (Medium)</a></p>
 <p>题目要求很简单，将输入链表排序后输出。</p>
-<h4 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h4><p>很显然，最容易想到和代码实现的排序方法就是冒泡排序。一下是我第一次尝试时写的代码。</p>
+<h4 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h4><p>很显然，最容易想到和代码实现的排序方法就是冒泡排序。以下是我第一次尝试时写的代码。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">sortList</span>(<span class="hljs-params">self, head: <span class="hljs-type">Optional</span>[ListNode]</span>) -&gt; <span class="hljs-type">Optional</span>[ListNode]:<br>        <span class="hljs-comment"># bubble sort</span><br>        current = head<br>        exchange = <span class="hljs-literal">True</span><br>        <span class="hljs-keyword">while</span> exchange:<br>            exchange = <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">while</span> current <span class="hljs-keyword">and</span> current.<span class="hljs-built_in">next</span>:<br>                <span class="hljs-keyword">if</span> current.val &gt; current.<span class="hljs-built_in">next</span>.val:<br>                    mid = current.val<br>                    current.val = current.<span class="hljs-built_in">next</span>.val<br>                    current.<span class="hljs-built_in">next</span>.val = mid<br>                    exchange = <span class="hljs-literal">True</span><br>                current = current.<span class="hljs-built_in">next</span><br>            current = head<br>        <span class="hljs-keyword">return</span> head<br></code></pre></td></tr></table></figure>
 
 <p>但非常可惜的是，当测试用例极大时，使用冒泡排序会超时。</p>
