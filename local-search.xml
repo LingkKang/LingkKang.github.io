@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Linked List with Python Built-in List</title>
+    <link href="/2022/08/18/Linked-List-with-Python-Built-in-List/"/>
+    <url>/2022/08/18/Linked-List-with-Python-Built-in-List/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Linked-List-with-Python-Built-in-List"><a href="#Linked-List-with-Python-Built-in-List" class="headerlink" title="Linked List with Python Built-in List"></a>Linked List with Python Built-in List</h1><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>I was currently reading the <a href="http://composingprograms.com/">Composing Programs</a>, which amazed me over and over again. </p><p>In section <a href="http://composingprograms.com/pages/23-sequences.html#:~:text=2.3.7%C2%A0%C2%A0%C2%A0Linked%20Lists">2.3.7 Linked Lists</a>, a definition of linked list was introduced by using the python built-in type <code>list</code> only. It used <code>empty = &#39;empty&#39;</code> to suggest the end of the linked list, whereas I plan to use <code>NoneType</code> to standadize the code. </p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">link0 = [<span class="hljs-number">1</span>, [<span class="hljs-number">2</span>, [<span class="hljs-number">3</span>, [<span class="hljs-number">4</span>, <span class="hljs-string">&#x27;empty&#x27;</span>]]]]  <span class="hljs-comment"># Linked list from book</span><br>link1 = [<span class="hljs-number">1</span>, [<span class="hljs-number">2</span>, [<span class="hljs-number">3</span>, [<span class="hljs-number">4</span>, <span class="hljs-literal">None</span>]]]]     <span class="hljs-comment"># Linked list with NoneType</span><br></code></pre></td></tr></table></figure><h2 id="Make-a-linked-list"><a href="#Make-a-linked-list" class="headerlink" title="Make a linked list"></a>Make a linked list</h2><p>Firstly, we need a function to check a given list is a linked list or not: </p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">is_link</span>(<span class="hljs-params">s</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;return True if argument is a linked list. &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> s == <span class="hljs-literal">None</span> <span class="hljs-keyword">or</span> (<span class="hljs-built_in">len</span>(s) == <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_link(s[<span class="hljs-number">1</span>]))<br></code></pre></td></tr></table></figure><p>And naturally, the function <code>link()</code> can help us wrap up the <code>head</code> and <code>rest</code> two part into a new list whose length is 2. </p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">link</span>(<span class="hljs-params">head, rest=<span class="hljs-literal">None</span></span>):<br>    <span class="hljs-keyword">assert</span> is_link(rest), <span class="hljs-string">&quot;The rest part must be a linked list. &quot;</span><br>    <span class="hljs-keyword">return</span> [head, rest]<br></code></pre></td></tr></table></figure><p>Different from the difinition I written in <a href="https://lingkkang.github.io/2022/05/16/Linked-List-in-Python/">my previous post</a>, this definition generates a linked list from tail side to head. </p><h2 id="Implement-it"><a href="#Implement-it" class="headerlink" title="Implement it"></a>Implement it</h2><p>We need some useful functions to manipulate our new data type. </p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">head</span>(<span class="hljs-params">s</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Get value of current node. &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">assert</span> is_link(s), <span class="hljs-string">&quot;The function must be applied to a linked list. &quot;</span><br>    <span class="hljs-keyword">assert</span> s != <span class="hljs-literal">None</span>, <span class="hljs-string">&quot;No empty linked list. &quot;</span><br>    <span class="hljs-keyword">return</span> s[<span class="hljs-number">0</span>]<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">rest</span>(<span class="hljs-params">s</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Move onto next node. &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">assert</span> is_link(s), <span class="hljs-string">&quot;The function must be applied to a linked list. &quot;</span><br>    <span class="hljs-keyword">assert</span> s != <span class="hljs-literal">None</span>, <span class="hljs-string">&quot;No empty linked list. &quot;</span><br>    <span class="hljs-keyword">return</span> s[<span class="hljs-number">1</span>]<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">len_link</span>(<span class="hljs-params">s</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Return the length of the linked list. &quot;&quot;&quot;</span><br>    length = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> s:<br>        s, length = rest(s), length + <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> length<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_item_link</span>(<span class="hljs-params">s, i</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Return the i-th term&#x27;s value of given linked list s. &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">while</span> i &gt; <span class="hljs-number">0</span>:<br>        s, i = rest(s), i - <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> head(s)<br></code></pre></td></tr></table></figure><p>The function <code>rest()</code> is a recursive function, and this concept will emerge again later. </p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li><a href="http://composingprograms.com/pages/23-sequences.html">Composing Programs</a> by John DeNero, Chapter 2: Building Abstractions with Data, 2.3 Sequences, ;</li><li><a href="https://pythontutor.com/composingprograms.html">Online Python Tutor</a>;</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法与数据结构</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数据结构</tag>
+      
+      <tag>Python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Prism Plugin ERROR</title>
     <link href="/2022/08/17/Prism-Plugin-ERROR/"/>
     <url>/2022/08/17/Prism-Plugin-ERROR/</url>
@@ -47,11 +74,11 @@
     
     <tags>
       
+      <tag>总结</tag>
+      
       <tag>读书</tag>
       
       <tag>生活</tag>
-      
-      <tag>总结</tag>
       
     </tags>
     
