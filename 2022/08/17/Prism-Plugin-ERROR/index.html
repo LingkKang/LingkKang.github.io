@@ -24,7 +24,7 @@
 <meta property="og:description" content="解决 hexo 运行时 ERROR Plugin load failed: hexo-prism-plugin 报错">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-17T08:59:39.000Z">
-<meta property="article:modified_time" content="2022-08-17T14:02:18.641Z">
+<meta property="article:modified_time" content="2022-08-18T03:18:33.546Z">
 <meta property="article:author" content="Lingkang">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="前端">
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          640 字
+          638 字
         
       </span>
     
@@ -288,7 +288,9 @@
                 
                 <h1 id="Prism-Plugin-ERROR"><a href="#Prism-Plugin-ERROR" class="headerlink" title="Prism Plugin ERROR"></a>Prism Plugin ERROR</h1><p>今天把 Hexo 主题换成了 <a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid">fluid</a>，感觉挺不错，但是在更改配置文件后出现了一些小问题。</p>
 <h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><p>更换好主题后运行 <code>hexo clean</code>，hexo 会报错，无法加载插件 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-prism-plugin">hexo-prism-plugin</a>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">INFO  Validating config<br>ERROR Plugin load failed: hexo-prism-plugin<br></code></pre></td></tr></table></figure>
+<div class="note note-danger">
+            <p>INFO  Validating config<br>ERROR Plugin load failed: hexo-prism-plugin</p>
+          </div>
 
 <p>这是一个代码块高亮的插件，fluid 默认使用的是 <code>highlightjs</code>, 这个插件应该是原来主题的依赖。</p>
 <p>但奇怪的是，尽管新主题并不会用到这个插件，hexo 仍会不断报错。</p>
