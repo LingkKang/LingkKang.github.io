@@ -24,7 +24,7 @@
 <meta property="og:description" content="Implementing linked list with python built-in data type - list">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-08-18T07:25:00.000Z">
-<meta property="article:modified_time" content="2022-08-19T09:09:32.354Z">
+<meta property="article:modified_time" content="2022-08-19T09:20:36.351Z">
 <meta property="article:author" content="Lingkang">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="Python">
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.4k words
+          4.5k words
         
       </span>
     
@@ -243,7 +243,7 @@
         
         
         
-          37 mins
+          38 mins
         
       </span>
     
@@ -331,14 +331,14 @@
 
 <h2 id="Conversion"><a href="#Conversion" class="headerlink" title="Conversion"></a>Conversion</h2><p>So how to conver a linked list into a normal list and vise versa? </p>
 <p>Inherited from methods above, answers may not be very complicated. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">link_to_list</span>(<span class="hljs-params">s</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Convert a linked list into a normal list. &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">assert</span> is_link(s), <span class="hljs-string">&quot;Should be a linked list. &quot;</span><br>    <span class="hljs-keyword">if</span> rest(s) <span class="hljs-keyword">and</span> s:<br>        <span class="hljs-keyword">return</span> [head(s)] + link_to_list(rest(s))<br>    <span class="hljs-keyword">return</span> [head(s)]<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">link_to_list</span>(<span class="hljs-params">s</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Convert a linked list into a normal list. &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">assert</span> is_link(s), <span class="hljs-string">&quot;Should be a linked list. &quot;</span><br>    <span class="hljs-keyword">if</span> rest(s) <span class="hljs-keyword">and</span> s:<br>        <span class="hljs-keyword">return</span> [head(s)] + link_to_list(rest(s))<br>    <span class="hljs-keyword">return</span> [head(s)]<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">list_to_link</span>(<span class="hljs-params">s</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Convert a normal list into a linked list. &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(s) == <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">return</span> link(s[<span class="hljs-number">0</span>])<br>    <span class="hljs-keyword">return</span> link(s[<span class="hljs-number">0</span>], list_to_link(s[<span class="hljs-number">1</span>:]))<br></code></pre></td></tr></table></figure>
 
 <div class="note note-warning">
             <p>UNFINISHED</p>
           </div>
 
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><a target="_blank" rel="noopener" href="http://composingprograms.com/pages/23-sequences.html">Composing Programs</a> by John DeNero, Chapter 2: Building Abstractions with Data, 2.3 Sequences;</li>
+<li><a target="_blank" rel="noopener" href="http://composingprograms.com/pages/23-sequences.html">Composing Programs</a> by John DeNero;</li>
 <li><a target="_blank" rel="noopener" href="https://pythontutor.com/composingprograms.html">Online Python Tutor</a>;</li>
 </ol>
 
