@@ -20,9 +20,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>DataType</tag>
+      
+      <tag>Python</tag>
       
     </tags>
     
@@ -40,7 +40,7 @@
     
     <categories>
       
-      <category>前端</category>
+      <category>Front End</category>
       
     </categories>
     
@@ -49,7 +49,7 @@
       
       <tag>Hexo</tag>
       
-      <tag>前端</tag>
+      <tag>FrontEnd</tag>
       
     </tags>
     
@@ -74,11 +74,11 @@
     
     <tags>
       
-      <tag>总结</tag>
-      
       <tag>读书</tag>
       
       <tag>生活</tag>
+      
+      <tag>Summary</tag>
       
     </tags>
     
@@ -96,14 +96,14 @@
     
     <categories>
       
-      <category>算法与数据结构</category>
+      <category>Algorithms &amp; Data Type</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>数据结构</tag>
+      <tag>DataType</tag>
       
       <tag>Python</tag>
       
@@ -125,7 +125,7 @@
     
     <categories>
       
-      <category>前端</category>
+      <category>Front End</category>
       
     </categories>
     
@@ -134,7 +134,7 @@
       
       <tag>Hexo</tag>
       
-      <tag>前端</tag>
+      <tag>FrontEnd</tag>
       
       <tag>Markdown</tag>
       
