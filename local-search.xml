@@ -13,14 +13,14 @@
     
     <categories>
       
-      <category>Algorithms &amp; Data Type</category>
+      <category>Algorithms &amp; Data Structures</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>DataType</tag>
+      <tag>DataStructure</tag>
       
       <tag>Python</tag>
       
@@ -47,9 +47,9 @@
     
     <tags>
       
-      <tag>FrontEnd</tag>
-      
       <tag>Hexo</tag>
+      
+      <tag>FrontEnd</tag>
       
     </tags>
     
@@ -96,14 +96,14 @@
     
     <categories>
       
-      <category>Algorithms &amp; Data Type</category>
+      <category>Algorithms &amp; Data Structures</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>DataType</tag>
+      <tag>DataStructure</tag>
       
       <tag>Python</tag>
       
@@ -132,11 +132,11 @@
     
     <tags>
       
-      <tag>Markdown</tag>
+      <tag>Hexo</tag>
       
       <tag>FrontEnd</tag>
       
-      <tag>Hexo</tag>
+      <tag>Markdown</tag>
       
     </tags>
     
