@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>Binary Tree in Python</title>
+    <link href="/2022/08/24/Binary-Tree-in-Python/"/>
+    <url>/2022/08/24/Binary-Tree-in-Python/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Binary-Tree-in-Python"><a href="#Binary-Tree-in-Python" class="headerlink" title="Binary Tree in Python"></a>Binary Tree in Python</h1><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TreeNode</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, val=<span class="hljs-number">0</span>, left=<span class="hljs-literal">None</span>, right=<span class="hljs-literal">None</span></span>):<br>        self.val = val<br>        self.left = left<br>        self.right = right<br></code></pre></td></tr></table></figure><p>The <code>input</code> is a list-like binary tree, which is probably difficult to understand at the first glance. For example, inputs wirtten as <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]</code> and <code>[1, 2, 3, 4, 5, null, 7, 8, 9, 10, 11, 12]</code> should be interpretered as image below. </p><p><img src="/../images/binary_tree/bt.png" alt="Image created in XMind"></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Recursive Solution</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">inorderTraversal</span>(<span class="hljs-params">self, root: <span class="hljs-type">Optional</span>[TreeNode]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:<br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">re</span>(<span class="hljs-params">lis, tree</span>):<br>            <span class="hljs-keyword">if</span> tree:<br>                re(lis, tree.left)<br>                lis.append(tree.val)<br>                re(lis, tree.right)<br>            <span class="hljs-keyword">return</span> lis<br>        <span class="hljs-keyword">return</span> re([], root)<br></code></pre></td></tr></table></figure><div class="note note-danger">            <p>UNFINISHED</p>          </div><h2 id="Referencre"><a href="#Referencre" class="headerlink" title="Referencre"></a>Referencre</h2><ol><li><a href="https://leetcode.com/problems/binary-tree-inorder-traversal/">Binary Tree Inorder Traversal - LeetCode</a></li><li><a href="http://composingprograms.com/pages/23-sequences.html#trees">Trees - Composing Programs</a></li><li><a href="https://leetcode.com/explore/learn/card/data-structure-tree/">Introduction to Data Structure - Binary Tree - LeetCode</a></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Algorithms &amp; Data Structures</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>DataStructure</tag>
+      
+      <tag>Python</tag>
+      
+      <tag>LeetCode</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Linked List with Python Built-in List</title>
     <link href="/2022/08/18/Linked-List-with-Python-Built-in-List/"/>
     <url>/2022/08/18/Linked-List-with-Python-Built-in-List/</url>
@@ -47,9 +76,9 @@
     
     <tags>
       
-      <tag>Hexo</tag>
-      
       <tag>FrontEnd</tag>
+      
+      <tag>Hexo</tag>
       
     </tags>
     
@@ -132,11 +161,11 @@
     
     <tags>
       
-      <tag>Hexo</tag>
+      <tag>Markdown</tag>
       
       <tag>FrontEnd</tag>
       
-      <tag>Markdown</tag>
+      <tag>Hexo</tag>
       
     </tags>
     
