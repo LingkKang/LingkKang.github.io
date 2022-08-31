@@ -19,13 +19,13 @@
     <meta name="description" content="Binary Tree Examples in LeetCode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Binary Tree in Python">
-<meta property="og:url" content="https://lingkkang.github.io/2022/08/24/Binary-Tree-in-Python/index.html">
+<meta property="og:url" content="https://lingkkang.github.io/2022/08/30/Binary-Tree-in-Python/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
 <meta property="og:description" content="Binary Tree Examples in LeetCode">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://lingkkang.github.io/images/binary_tree/bt.png">
-<meta property="article:published_time" content="2022-08-24T07:14:38.000Z">
-<meta property="article:modified_time" content="2022-08-31T09:00:43.631Z">
+<meta property="article:published_time" content="2022-08-30T07:14:38.000Z">
+<meta property="article:modified_time" content="2022-08-31T10:54:31.146Z">
 <meta property="article:author" content="Lingkang">
 <meta property="article:tag" content="DataStructure">
 <meta property="article:tag" content="Python">
@@ -225,8 +225,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-24 15:14" pubdate>
-          August 24, 2022 pm
+        <time datetime="2022-08-30 15:14" pubdate>
+          August 30, 2022 pm
         </time>
       </span>
     
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k words
+          3.2k words
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
         
-          21 mins
+          27 mins
         
       </span>
     
@@ -322,7 +322,14 @@
 <h3 id="Symmetric-Tree"><a href="#Symmetric-Tree" class="headerlink" title="Symmetric Tree"></a>Symmetric Tree</h3><p>And the question <a target="_blank" rel="noopener" href="https://leetcode.com/problems/symmetric-tree/">101. Symmetric Tree (Easy)</a>. </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">isSymmetric</span>(<span class="hljs-params">self, root: <span class="hljs-type">Optional</span>[TreeNode]</span>) -&gt; <span class="hljs-built_in">bool</span>:<br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">re</span>(<span class="hljs-params">t1, t2</span>):<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> t1 <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> t2:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">elif</span> t1 <span class="hljs-keyword">and</span> t2:<br>                <span class="hljs-keyword">if</span> t1.val != t2.val:<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>                <span class="hljs-keyword">if</span> re(t1.left, t2.right):<br>                    <span class="hljs-keyword">return</span> re(t1.right, t2.left)<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">return</span> re(root.left, root.right)<br></code></pre></td></tr></table></figure>
 
+<h3 id="Maximum-Depth-of-Binary-Tree"><a href="#Maximum-Depth-of-Binary-Tree" class="headerlink" title="Maximum Depth of Binary Tree"></a>Maximum Depth of Binary Tree</h3><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">104. Maximum Depth of Binary Tree (Easy)</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">maxDepth</span>(<span class="hljs-params">self, root: <span class="hljs-type">Optional</span>[TreeNode]</span>) -&gt; <span class="hljs-built_in">int</span>:<br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">re</span>(<span class="hljs-params">t</span>):<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> t:<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>            left_depth = re(t.left)<br>            right_depth = re(t.right)<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(left_depth, right_depth) + <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> re(root)<br></code></pre></td></tr></table></figure>
+
 <p>Recursion is probably the simplist way to manage a binary tree, and there is no waste on calculating same base cases.</p>
+<h3 id="Balanced-Binary-Tree"><a href="#Balanced-Binary-Tree" class="headerlink" title="Balanced Binary Tree"></a>Balanced Binary Tree</h3><p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/balanced-binary-tree/">110. Balanced Binary Tree (Easy)</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">isBalanced</span>(<span class="hljs-params">self, root: <span class="hljs-type">Optional</span>[TreeNode]</span>) -&gt; <span class="hljs-built_in">bool</span>:<br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_length</span>(<span class="hljs-params">a</span>):<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> a:<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>            left_depth = get_length(a.left)<br>            right_depth = get_length(a.right)<br>            l = <span class="hljs-built_in">max</span>(left_depth, right_depth) + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">return</span> l<br>        <br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">re</span>(<span class="hljs-params">t</span>):<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> t:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            left_len = get_length(t.left)<br>            right_len = get_length(t.right)<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">abs</span>(left_len - right_len) &gt; <span class="hljs-number">1</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">if</span> re(t.left):<br>                <span class="hljs-keyword">return</span> re(t.right)<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">return</span> re(root)<br></code></pre></td></tr></table></figure>
+
+<p>Here, for the first time, comes some waste calculation.</p>
 <h2 id="Referencre"><a href="#Referencre" class="headerlink" title="Referencre"></a>Referencre</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://leetcode.com/problems/binary-tree-inorder-traversal/">Binary Tree Inorder Traversal - LeetCode</a></li>
 <li><a target="_blank" rel="noopener" href="https://leetcode.com/explore/learn/card/data-structure-tree/">Introduction to Data Structure - Binary Tree - LeetCode</a></li>
@@ -379,7 +386,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>Binary Tree in Python</div>
-      <div>https://lingkkang.github.io/2022/08/24/Binary-Tree-in-Python/</div>
+      <div>https://lingkkang.github.io/2022/08/30/Binary-Tree-in-Python/</div>
     </div>
     <div class="license-meta">
       
@@ -391,7 +398,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 24, 2022</div>
+          <div>August 30, 2022</div>
         </div>
       
       
@@ -421,18 +428,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/24/Hujan/" title="Bumi mana yang tak ditimpa hujan">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Bumi mana yang tak ditimpa hujan</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/18/Linked-List-with-Python-Built-in-List/" title="Linked List with Python Built-in List">
-                        <span class="hidden-mobile">Linked List with Python Built-in List</span>
+                      <a href="/2022/08/24/Hujan/" title="Bumi mana yang tak ditimpa hujan">
+                        <span class="hidden-mobile">Bumi mana yang tak ditimpa hujan</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
