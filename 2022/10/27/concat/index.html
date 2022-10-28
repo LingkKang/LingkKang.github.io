@@ -68,10 +68,6 @@
 
 
 
-  
-<link rel="stylesheet" href="/css/custom.css">
-
-
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
@@ -328,12 +324,12 @@
 <p>And the output is surprisingly clear. </p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs txt">ID  Letter                      <br>--  ----------------------------<br>1   A                           <br>2   A, B                        <br>3   A, B, C                     <br>4   A, B, C, D                  <br>5   A, B, C, D, E               <br>6   A, B, C, D, E, F            <br>7   A, B, C, D, E, F, G         <br>8   A, B, C, D, E, F, G, H      <br>9   A, B, C, D, E, F, G, H, I   <br>10  A, B, C, D, E, F, G, H, I, J<br></code></pre></td></tr></table></figure>
 
-<p>This output may to large extent help you understand how this query work. </p>
+<p>This output may to large extent help you understand how this query works. </p>
 <p>The final step is just to sort them and output the line we want. </p>
 <h3 id="Remark"><a href="#Remark" class="headerlink" title="Remark"></a>Remark</h3><p>This is just like doing query recursivly, and Sqlite3 started supporting <code>RECURSIVE</code> keyword since version 3.34.0. <a target="_blank" rel="noopener" href="https://sqlite.org/lang_with.html">Read more</a>. </p>
 <p>In real implementation, probably there is no consecutive <code>ID</code> and you may think of using a window function <code>ROW_NUMBER()</code> to help you. </p>
 <p>Furthermore, this piece of SQL could be re-used every time you want to concatenate items cross different rows. It can be used as a fixed pattern only with minor modification. </p>
-<h2 id="Much-More-Complicated-Ones"><a href="#Much-More-Complicated-Ones" class="headerlink" title="Much More Complicated Ones"></a>Much More Complicated Ones</h2><p>There are some more complex question from <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/">CMU 15-445&#x2F;645 :: Intro to Database Systems</a>. In its homework 1, many questions are quite demanding, and <strong>Q10</strong> is always linked to this blog’s topic. </p>
+<h2 id="Much-More-Complicated-Ones"><a href="#Much-More-Complicated-Ones" class="headerlink" title="Much More Complicated Ones"></a>Much More Complicated Ones</h2><p>There are some more complex questions from <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/">CMU 15-445&#x2F;645 :: Intro to Database Systems</a>. In its homework 1, many questions are quite demanding, and <strong>Q10</strong> is always linked to this blog’s topic. </p>
 <h3 id="2022-Fall-Q10"><a href="#2022-Fall-Q10" class="headerlink" title="2022 Fall Q10"></a>2022 Fall Q10</h3><p><a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/homework1/">Homework #1 - SQL</a> <strong>Question 10</strong> with <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/files/hw1-sols.zip">official solution</a>, and my code can be found <a target="_blank" rel="noopener" href="https://github.com/LingkKang/CMU15-445_fa22/blob/master/hw1_SQL/q10_house_of_the_dragon.sql">here</a>. </p>
 <h3 id="2021-Fall-Q10"><a href="#2021-Fall-Q10" class="headerlink" title="2021 Fall Q10"></a>2021 Fall Q10</h3><p><a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2021/homework1/">Homework #1 - SQL</a> <strong>Question 10</strong> with <a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2021/files/hw1_sol.zip">official solution</a>, and my code can be found <a target="_blank" rel="noopener" href="https://github.com/LingkKang/CMU15-445_fa22/blob/master/history_hw/fa21_hw1_SQL/q10_christmas.sql">here</a></p>
 <p>Although added many other requirements and combined with other concepts, the essence never got changed. </p>
