@@ -68,6 +68,10 @@
 
 
 
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
@@ -325,7 +329,7 @@
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs txt">ID  Letter                      <br>--  ----------------------------<br>1   A                           <br>2   A, B                        <br>3   A, B, C                     <br>4   A, B, C, D                  <br>5   A, B, C, D, E               <br>6   A, B, C, D, E, F            <br>7   A, B, C, D, E, F, G         <br>8   A, B, C, D, E, F, G, H      <br>9   A, B, C, D, E, F, G, H, I   <br>10  A, B, C, D, E, F, G, H, I, J<br></code></pre></td></tr></table></figure>
 
 <p>This output may to large extent help you understand how this query work. </p>
-<p>The final step is just sort them and output the line we want. </p>
+<p>The final step is just to sort them and output the line we want. </p>
 <h3 id="Remark"><a href="#Remark" class="headerlink" title="Remark"></a>Remark</h3><p>This is just like doing query recursivly, and Sqlite3 started supporting <code>RECURSIVE</code> keyword since version 3.34.0. <a target="_blank" rel="noopener" href="https://sqlite.org/lang_with.html">Read more</a>. </p>
 <p>In real implementation, probably there is no consecutive <code>ID</code> and you may think of using a window function <code>ROW_NUMBER()</code> to help you. </p>
 <p>Furthermore, this piece of SQL could be re-used every time you want to concatenate items cross different rows. It can be used as a fixed pattern only with minor modification. </p>
