@@ -2,11 +2,14 @@
     --navbar-bg-color: #272728;
 } */
 
-/* 
 code {
     color: rgb(56 160 110);
 }
-*/
+
+pre code{
+    color: inherit;
+}
+
 
 /*
 .markdown-body code {
