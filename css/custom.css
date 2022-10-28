@@ -1,23 +1,24 @@
-<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script>code {
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script>
+.markedown-body pre code {
     color: rgb(56 160 110);
 }
 
 /* :root{
     --navbar-bg-color: #272728;
 } */
-/* code {
-    color: rgb(162, 41, 248);
-} */
+
+code {
+    /* color: rgb(162, 41, 248); */
+    color: rgb(56 160 110);
+}
 
 /* code {
 } */
 
 
 /* .markdown-body code {
-    color: rgb(56 160 110);
 } */
 
-/* .markedown-body  */
 /* pre  */
 
 
