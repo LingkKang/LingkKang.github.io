@@ -24,7 +24,7 @@
 <meta property="og:description" content="To improve robustness">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-12-07T11:45:27.000Z">
-<meta property="article:modified_time" content="2022-12-07T13:23:30.528Z">
+<meta property="article:modified_time" content="2022-12-07T16:04:17.804Z">
 <meta property="article:author" content="Lingkang">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="Dynamic Memory Allocation">
@@ -242,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k words
+          2.1k words
         
       </span>
     
@@ -253,7 +253,7 @@
         
         
         
-          11 mins
+          18 mins
         
       </span>
     
@@ -296,7 +296,7 @@
               <p class="note note-info">
                 
                   
-                    Last updated on December 7, 2022 pm
+                    Last updated on December 8, 2022 am
                   
                 
               </p>
@@ -307,8 +307,21 @@
                 <h1 id="Test-Malloc-Failure-with-Macros"><a href="#Test-Malloc-Failure-with-Macros" class="headerlink" title="Test Malloc Failure with Macros"></a>Test Malloc Failure with Macros</h1><p>We already know that if <code>malloc()</code> failed, it will return <code>NULL</code>, so almost every <code>C</code> programmer would wirte following snippet in their code:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">char</span> *<span class="hljs-built_in">string</span> = (<span class="hljs-type">char</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-number">10</span> * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>));<br><span class="hljs-keyword">if</span> (<span class="hljs-built_in">string</span> == <span class="hljs-literal">NULL</span>) &#123;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><span class="hljs-comment">// do something ...</span><br></code></pre></td></tr></table></figure>
 
-<p>However, if we want to do something else if the reture value is <code>NULL</code> for memory allocation? It is easy to put some code into it (i.e., <em>line 3</em> of above snippet), but the real problem is, how can we test this part?</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-type">int</span> set_null = <span class="hljs-number">2</span>;<br><br><span class="hljs-type">void</span> *<span class="hljs-title function_">my_malloc</span><span class="hljs-params">(<span class="hljs-type">size_t</span> n)</span> &#123;<br>    set_null += <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (set_null == <span class="hljs-number">497</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">malloc</span>(n);<br>&#125;<br><br><span class="hljs-type">void</span> *<span class="hljs-title function_">my_realloc</span><span class="hljs-params">(<span class="hljs-type">void</span> *ptr, <span class="hljs-type">size_t</span> n)</span> &#123;<br>    set_null += <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (set_null == <span class="hljs-number">223</span>) &#123;<br>        <span class="hljs-built_in">free</span>(ptr);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">realloc</span>(ptr, n);<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> malloc(x) my_malloc(x)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> realloc(a, b) my_realloc(a, b)</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;file_to_test.c&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">undef</span> malloc</span><br><span class="hljs-meta">#<span class="hljs-keyword">undef</span> realloc</span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;<br>    function_to_test();<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>However, if we want to do something else if the reture value is <code>NULL</code> for memory allocation? It is easy to put some code into it (i.e., <strong>line 3</strong> of above snippet), but the real problem is, how can we test this part?</p>
+<p>To make sure the robustness of our program, every part of the code should be massively tested. But it is almost impossible for us to run out of memory manually, we need some technique to emulate allocation failure.</p>
+<p>And here is the way.</p>
+<p>Take a quick look at the code and I will explain them later.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-type">int</span> set_null = <span class="hljs-number">2</span>;<br><br><span class="hljs-type">void</span> *<span class="hljs-title function_">my_malloc</span><span class="hljs-params">(<span class="hljs-type">size_t</span> n)</span> &#123;<br>    set_null += <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (set_null == <span class="hljs-number">497</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">malloc</span>(n);<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> malloc(x) my_malloc(x)</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;file_to_test.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">undef</span> malloc</span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;<br>    function_to_test();<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Firstly, we need some basic knowledge of <code>preprocessor</code> and <code>macro</code> in c.</p>
+<p>Don’t worry, in this context, they could be simply recognized as some kind of <strong>replacement</strong>. The essence is to replace the standard <code>malloc</code> function to a function defined by us, say <code>my_malloc</code>, so that we can make it return <code>NULL</code> if we want.</p>
+<p>So in <strong>line 13</strong>, we specify that we want to replace the standard <code>malloc()</code> with our <code>my_malloc()</code>, and the parameter <code>x</code> is just a placeholder to tell compiler that we only have one argument to pass to the macro.</p>
+<p>And secondly, we <code>include</code> our source code into our file. Note that we are in macro</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">void</span> *<span class="hljs-title function_">my_realloc</span><span class="hljs-params">(<span class="hljs-type">void</span> *ptr, <span class="hljs-type">size_t</span> n)</span> &#123;<br>    set_null += <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (set_null == <span class="hljs-number">223</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">realloc</span>(ptr, n);<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> realloc(a, b) my_realloc(a, b)</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;file_to_test.c&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">undef</span> realloc</span><br></code></pre></td></tr></table></figure>
+
+<div class="note note-warning">
+            <p>Unfinished</p>
+          </div>
 
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Robustness_(computer_science)">Robustness (computer science) - Wikipedia</a></li>
@@ -320,6 +333,7 @@
 <li><a target="_blank" rel="noopener" href="https://gcc.gnu.org/onlinedocs/gcc-3.2.3/cpp/Macro-Arguments.html">The C Preprocessor</a></li>
 <li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/cpp/preprocessor/hash-undef-directive-c-cpp">#undef directive (C&#x2F;C++) | Microsoft Learn</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.programiz.com/c-programming/c-preprocessor-macros">C Preprocessor and Macros</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1986538/how-to-handle-realloc-when-it-fails-due-to-memory">c - How to handle realloc when it fails due to memory? - Stack Overflow</a></li>
 </ol>
 
                 
