@@ -16,26 +16,29 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="a simple test">
+    <meta name="description" content="To improve robustness">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Test Article">
-<meta property="og:url" content="https://lingkkang.github.io/2022/05/15/test-article/index.html">
+<meta property="og:title" content="Test Malloc Failure with Macros">
+<meta property="og:url" content="https://lingkkang.github.io/2022/12/07/test-malloc-failure/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="a simple test">
+<meta property="og:description" content="To improve robustness">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-05-15T04:56:30.000Z">
-<meta property="article:modified_time" content="2022-12-07T12:02:28.964Z">
+<meta property="article:published_time" content="2022-12-07T11:45:27.000Z">
+<meta property="article:modified_time" content="2022-12-07T13:14:56.279Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="Hexo">
-<meta property="article:tag" content="Front-End">
-<meta property="article:tag" content="Markdown">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="Dynamic Memory Allocation">
+<meta property="article:tag" content="Robustness">
+<meta property="article:tag" content="Testing">
+<meta property="article:tag" content="C Macros">
+<meta property="article:tag" content="C Preprocessor">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Test Article - Lingkang&#39;s Blog</title>
+  <title>Test Malloc Failure with Macros - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -216,7 +219,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Test Article"></span>
+            <span id="subtitle" data-typed-text="Test Malloc Failure with Macros"></span>
           
         </div>
 
@@ -227,8 +230,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-05-15 12:56" pubdate>
-          May 15, 2022 pm
+        <time datetime="2022-12-07 19:45" pubdate>
+          December 7, 2022 pm
         </time>
       </span>
     
@@ -239,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          76 words
+          1.4k words
         
       </span>
     
@@ -250,7 +253,7 @@
         
         
         
-          1 mins
+          12 mins
         
       </span>
     
@@ -288,7 +291,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Test Article</h1>
+            <h1 style="display: none">Test Malloc Failure with Macros</h1>
             
               <p class="note note-info">
                 
@@ -301,7 +304,24 @@
             
               <div class="markdown-body">
                 
-                <h1 id="A-Simple-test"><a href="#A-Simple-test" class="headerlink" title="A Simple test"></a>A Simple test</h1><p>This is a simple test.<br>Pages hoseted on GitHub.<br>Build in Hexo with theme fluid. </p>
+                <h1 id="Test-Malloc-Failure-with-Macros"><a href="#Test-Malloc-Failure-with-Macros" class="headerlink" title="Test Malloc Failure with Macros"></a>Test Malloc Failure with Macros</h1><p>We already know that if <code>malloc()</code> failed, it will return <code>NULL</code>, so almost every <code>C</code> programmer would wirte following snippet in their code:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">char</span> *<span class="hljs-built_in">string</span> = (<span class="hljs-type">char</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-number">10</span> * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>));<br><span class="hljs-keyword">if</span> (<span class="hljs-built_in">string</span> == <span class="hljs-literal">NULL</span>) &#123;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><span class="hljs-comment">// do something ...</span><br></code></pre></td></tr></table></figure>
+
+<p>However, if we want to do something else if the reture value is <code>NULL</code> for memory allocation? It is easy to put some code into it (i.e., <em>line 3</em> of above snippet), but the real problem is, how can we test this part?</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-type">int</span> set_null = <span class="hljs-number">2</span>;<br><br><span class="hljs-type">void</span> *<span class="hljs-title function_">my_malloc</span><span class="hljs-params">(<span class="hljs-type">size_t</span> n)</span> &#123;<br>    set_null += <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (set_null == <span class="hljs-number">497</span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">malloc</span>(n);<br>&#125;<br><br><span class="hljs-type">void</span> *<span class="hljs-title function_">my_realloc</span><span class="hljs-params">(<span class="hljs-type">void</span> *ptr, <span class="hljs-type">size_t</span> n)</span> &#123;<br>    set_null += <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (set_null == <span class="hljs-number">223</span>) &#123;<br>        <span class="hljs-built_in">free</span>(ptr);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">realloc</span>(ptr, n);<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> malloc(x) my_malloc(x)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> realloc(a, b) my_realloc(a, b)</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;file_to_test.c&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">undef</span> malloc</span><br><span class="hljs-meta">#<span class="hljs-keyword">undef</span> realloc</span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> &#123;<br>    function_to_test();<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Robustness_(computer_science)">Robustness (computer science) - Wikipedia</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/74711886/how-to-test-malloc-failure-in-c">How to test malloc failure in C? - Stack Overflow</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1607004/does-realloc-free-the-former-buffer-if-it-fails">Does realloc free the former buffer if it fails? - Stack Overflow</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1986538/how-to-handle-realloc-when-it-fails-due-to-memory">How to handle realloc when it fails due to memory? - Stack Overflow</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/preprocessor/replace">Replacing text macros - cppreference.com</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.scaler.com/topics/c/macros-in-c/">Macros in C | Types and Examples - Scaler Topics</a></li>
+<li><a target="_blank" rel="noopener" href="https://gcc.gnu.org/onlinedocs/gcc-3.2.3/cpp/Macro-Arguments.html">The C Preprocessor</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/cpp/preprocessor/hash-undef-directive-c-cpp">#undef directive (C&#x2F;C++) | Microsoft Learn</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.programiz.com/c-programming/c-preprocessor-macros">C Preprocessor and Macros</a></li>
+</ol>
+<p>Lingkang’s Blog<br>To live is to risk it all.<br><a href="https://lingkkang.github.io/">https://lingkkang.github.io/</a><br><a href="https://lingkkang.github.io/images/profile_img.png">https://lingkkang.github.io/images/profile_img.png</a></p>
 
                 
               </div>
@@ -320,7 +340,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Front-End/" class="category-chain-item">Front End</a>
+  <a href="/categories/Software-Engineering/" class="category-chain-item">Software Engineering</a>
   
   
 
@@ -335,11 +355,17 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Hexo/">#Hexo</a>
+        <a href="/tags/C/">#C</a>
       
-        <a href="/tags/Front-End/">#Front-End</a>
+        <a href="/tags/Dynamic-Memory-Allocation/">#Dynamic Memory Allocation</a>
       
-        <a href="/tags/Markdown/">#Markdown</a>
+        <a href="/tags/Robustness/">#Robustness</a>
+      
+        <a href="/tags/Testing/">#Testing</a>
+      
+        <a href="/tags/C-Macros/">#C Macros</a>
+      
+        <a href="/tags/C-Preprocessor/">#C Preprocessor</a>
       
     </div>
   
@@ -351,8 +377,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Test Article</div>
-      <div>https://lingkkang.github.io/2022/05/15/test-article/</div>
+      <div>Test Malloc Failure with Macros</div>
+      <div>https://lingkkang.github.io/2022/12/07/test-malloc-failure/</div>
     </div>
     <div class="license-meta">
       
@@ -364,7 +390,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 15, 2022</div>
+          <div>December 7, 2022</div>
         </div>
       
       
@@ -394,18 +420,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/16/Linked-List-in-Python/" title="Linked List in Python">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Linked List in Python</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/15/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2022/11/28/better-way-to-cslinux/" title="Use CSLinux with SSH">
+                        <span class="hidden-mobile">Use CSLinux with SSH</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
