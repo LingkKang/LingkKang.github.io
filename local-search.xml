@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>Connect to Local Machine in Hyper-V with SSH</title>
+    <link href="/2022/12/31/ssh-hyper-v/"/>
+    <url>/2022/12/31/ssh-hyper-v/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Connect-to-Local-Machine-in-Hyper-V-with-SSH"><a href="#Connect-to-Local-Machine-in-Hyper-V-with-SSH" class="headerlink" title="Connect to Local Machine in Hyper-V with SSH"></a>Connect to Local Machine in Hyper-V with SSH</h1><h2 id="After-Boot"><a href="#After-Boot" class="headerlink" title="After Boot"></a>After Boot</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ip address<br></code></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl status sshd<br>sudo systemctl start sshd<br></code></pre></td></tr></table></figure><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li><a href="https://wiki.archlinux.org/title/OpenSSH">OpenSSH - ArchWiki</a></li><li><a href="https://superuser.com/questions/681213/how-to-connect-to-a-local-hyper-v-virtual-machine-via-ssh">linux - How to connect to a local hyper-v virtual machine via SSH? - Super User</a></li><li><a href="https://linuxhint.com/arch_linux_ssh_server/">Arch Linux SSH Server Setup, Customization and Optimization</a></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>SSH</tag>
+      
+      <tag>Hyper-V</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Test Malloc Failure with Macros</title>
     <link href="/2022/12/07/test-malloc-failure/"/>
     <url>/2022/12/07/test-malloc-failure/</url>
@@ -244,9 +265,9 @@
     
     <tags>
       
-      <tag>生活</tag>
-      
       <tag>读书</tag>
+      
+      <tag>生活</tag>
       
       <tag>Summary</tag>
       
