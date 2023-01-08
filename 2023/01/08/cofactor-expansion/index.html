@@ -16,25 +16,25 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Connect to Local Machine in Hyper-V with SSHAfter Boot1ip address  12systemctl status sshdsudo systemctl start sshd  Reference OpenSSH - ArchWiki linux - How to connect to a local hyper-v virtual mach">
+    <meta name="description" content="Real-life usage of cofactor expansion.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Connect to Local Machine in Hyper-V with SSH">
-<meta property="og:url" content="https://lingkkang.github.io/2022/12/31/ssh-hyper-v/index.html">
+<meta property="og:title" content="Application of Cofactor Expansion.">
+<meta property="og:url" content="https://lingkkang.github.io/2023/01/08/cofactor-expansion/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Connect to Local Machine in Hyper-V with SSHAfter Boot1ip address  12systemctl status sshdsudo systemctl start sshd  Reference OpenSSH - ArchWiki linux - How to connect to a local hyper-v virtual mach">
+<meta property="og:description" content="Real-life usage of cofactor expansion.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-12-31T06:39:24.000Z">
-<meta property="article:modified_time" content="2022-12-31T06:48:08.235Z">
+<meta property="article:published_time" content="2023-01-08T00:46:06.000Z">
+<meta property="article:modified_time" content="2023-01-08T00:46:09.492Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="SSH">
-<meta property="article:tag" content="Hyper-V">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Linear Algebra">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Connect to Local Machine in Hyper-V with SSH - Lingkang&#39;s Blog</title>
+  <title>Application of Cofactor Expansion. - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -215,7 +215,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Connect to Local Machine in Hyper-V with SSH"></span>
+            <span id="subtitle" data-typed-text="Application of Cofactor Expansion."></span>
           
         </div>
 
@@ -226,8 +226,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-12-31 14:39" pubdate>
-          December 31, 2022 pm
+        <time datetime="2023-01-08 08:46" pubdate>
+          January 8, 2023 am
         </time>
       </span>
     
@@ -238,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          240 words
+          2.8k words
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
         
-          3 mins
+          24 mins
         
       </span>
     
@@ -287,12 +287,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Connect to Local Machine in Hyper-V with SSH</h1>
+            <h1 style="display: none">Application of Cofactor Expansion.</h1>
             
               <p class="note note-info">
                 
                   
-                    Last updated on December 31, 2022 pm
+                    Last updated on January 8, 2023 am
                   
                 
               </p>
@@ -300,14 +300,41 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Connect-to-Local-Machine-in-Hyper-V-with-SSH"><a href="#Connect-to-Local-Machine-in-Hyper-V-with-SSH" class="headerlink" title="Connect to Local Machine in Hyper-V with SSH"></a>Connect to Local Machine in Hyper-V with SSH</h1><h2 id="After-Boot"><a href="#After-Boot" class="headerlink" title="After Boot"></a>After Boot</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ip address<br></code></pre></td></tr></table></figure>
+                <h1 id="Application-of-Cofactor-Expansion"><a href="#Application-of-Cofactor-Expansion" class="headerlink" title="Application of Cofactor Expansion"></a>Application of Cofactor Expansion</h1><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Laplace_expansion"><strong>Laplace expansion</strong></a>, also known as <strong>cofactor expansion</strong> or <strong>first Laplace Theorems on Determinants</strong>, is a recursive way to calculate determinant of a square matrix.</p>
+<p>But it’s also clear that for a generic matrix, using <strong>cofactor expansion</strong> is much slower than using <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/LU_decomposition">LU decomposition</a>. So, what’s the real advantage of Laplace expansion? In what kind of situation can we use this method?</p>
+<p>To give a quick answer: when a matrix comes with many zeros.</p>
+<p>Additionally, when a matrix constitutes some variables.</p>
+<h2 id="From-the-Definition"><a href="#From-the-Definition" class="headerlink" title="From the Definition"></a>From the Definition</h2><p>Besides expressing the theorem with sigma notaion (Σ), there is also another equivalent form accroding to <em>Linear Algebra for Computational Sciences and Engineering</em>:</p>
+<blockquote>
+<p>The determinant of a matrix is equal to scalar product of a row (column) vector by the corresponding vector of cofactors.</p>
+</blockquote>
+<p>I rather like this definition.</p>
+<h3 id="Being-Lazy"><a href="#Being-Lazy" class="headerlink" title="Being Lazy"></a>Being Lazy</h3><p>We can note that for each term of summation is the product of matrix entry and its cofactor.</p>
+<p>So, it’s clear that if any of the two factors is zero, this term will be zero and we can calculate one thing less.</p>
+<p>Although an entry’s cofactor needs some complex arithmetic, zero entries in a matrix can be easily determined.</p>
+<h3 id="Handling-Some-Uncertainty"><a href="#Handling-Some-Uncertainty" class="headerlink" title="Handling Some Uncertainty"></a>Handling Some Uncertainty</h3><p>Thinking from the opposite, lower-upper decomposition is probably not completely applicable to a matrix with some variables. In this case, we cannot determine an entry is a pivot or not if it contain some unknowns. </p>
+<p>At this point, cofactor expansion can help, but this is not the focus of this post.</p>
+<h2 id="Real-Stuff"><a href="#Real-Stuff" class="headerlink" title="Real Stuff"></a>Real Stuff</h2><p>Let’s realize it in Python and check what outcome exactly could be when there are some zeros in a matrix.</p>
+<h3 id="Reinvent-the-Wheel"><a href="#Reinvent-the-Wheel" class="headerlink" title="Reinvent the Wheel"></a>Reinvent the Wheel</h3><p>Firstly, we need to gengerate a square matrix randomly.</p>
+<h4 id="Generate-a-Matrix"><a href="#Generate-a-Matrix" class="headerlink" title="Generate a Matrix"></a>Generate a Matrix</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> random<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">square_matrix_gen</span>(<span class="hljs-params">n, a, b, zeros=<span class="hljs-number">0</span></span>):<br>    m = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>        row = []<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            entry = <span class="hljs-built_in">int</span>(random.uniform(a, b))<br>            <span class="hljs-keyword">if</span> entry == <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">if</span> zeros == <span class="hljs-number">0</span>:<br>                    <span class="hljs-keyword">while</span> (entry == <span class="hljs-number">0</span>):<br>                        entry = <span class="hljs-built_in">int</span>(random.uniform(a, b))<br>                <span class="hljs-keyword">if</span> zeros &gt; <span class="hljs-number">0</span>:<br>                    zeros = zeros -<span class="hljs-number">1</span><br>            row.append(entry)<br>        m.append(row)<br>    <span class="hljs-keyword">while</span> zeros != <span class="hljs-number">0</span>:<br>        i = <span class="hljs-built_in">int</span>(random.randrange(n))<br>        j = <span class="hljs-built_in">int</span>(random.randrange(n))<br>        <span class="hljs-keyword">if</span> m[i][j] != <span class="hljs-number">0</span>:<br>            m[i][j] = <span class="hljs-number">0</span><br>            zeros = zeros -<span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> m<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">print_matrix</span>(<span class="hljs-params">m</span>):<br>    n = <span class="hljs-built_in">len</span>(m)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            <span class="hljs-built_in">print</span>(m[i][j], end=<span class="hljs-string">&#x27;\t&#x27;</span>)<br>        <span class="hljs-built_in">print</span>()<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl status sshd<br>sudo systemctl start sshd<br></code></pre></td></tr></table></figure>
+<p>In <em>Line 8</em>, <code>int(random.uniform(lower, upper))</code> returns a value in continuous uniform distribution. Bounds <code>lower</code> and <code>upper</code> are not included since there is a type cast with <code>int()</code>.</p>
+<p>Note that <code>0</code> is also in the bounds, so from <em>Line 9</em> to <em>Line 14</em> we are handling this problem, trying to make sure that the number of zeros in the returned matrix is exactly the same as <code>zeros</code> we passed in. This may demolish the idea of <em>uniform distribution</em>, but not impact the purpose of this demonstration.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Python">A = square_matrix_gen(<span class="hljs-number">3</span>, -<span class="hljs-number">100</span>, <span class="hljs-number">100</span>)<br>print_matrix(A)<br><br>B = square_matrix_gen(<span class="hljs-number">5</span>, -<span class="hljs-number">100</span>, <span class="hljs-number">100</span>, <span class="hljs-number">4</span>)<br>print_matrix(B)<br></code></pre></td></tr></table></figure>
 
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/OpenSSH">OpenSSH - ArchWiki</a></li>
-<li><a target="_blank" rel="noopener" href="https://superuser.com/questions/681213/how-to-connect-to-a-local-hyper-v-virtual-machine-via-ssh">linux - How to connect to a local hyper-v virtual machine via SSH? - Super User</a></li>
-<li><a target="_blank" rel="noopener" href="https://linuxhint.com/arch_linux_ssh_server/">Arch Linux SSH Server Setup, Customization and Optimization</a></li>
+<p>Output (probably):</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs TXT">-11     -9      -89<br>39      44      72<br>-96     -14     70<br><br>-28     22      69      79      79<br>17      71      -7      3       12<br>-69     50      25      -48     27<br>70      56      60      0       -2<br>0       56      0       0       67<br></code></pre></td></tr></table></figure>
+
+<h4 id="Realization"><a href="#Realization" class="headerlink" title="Realization"></a>Realization</h4><div class="note note-warning">
+            <p>Unfinished</p>
+          </div>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-030-21321-3">Linear Algebra for Computational Sciences and Engineering, 2nd Edition</a>, Ferrante Neri, Springer Cham, 2019.</li>
+<li><a target="_blank" rel="noopener" href="https://math.mit.edu/~gs/linearalgebra/ila5/indexila5.html">Introduction to Linear Algebra, 5th Edition</a>, Gilbert Strang, Wellesley-Cambridge Press, 2016.</li>
+<li><a target="_blank" rel="noopener" href="https://textbooks.math.gatech.edu/ila/determinants-cofactors.html">Cofactor Expansions</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Laplace_expansion">Laplace expansion - Wikipedia</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Minor_(linear_algebra)#Applications_of_minors_and_cofactors">Applications of minors and cofactors</a></li>
 </ol>
 
                 
@@ -317,13 +344,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Mathmatics/" class="category-chain-item">Mathmatics</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/SSH/">#SSH</a>
+        <a href="/tags/Python/">#Python</a>
       
-        <a href="/tags/Hyper-V/">#Hyper-V</a>
+        <a href="/tags/Linear-Algebra/">#Linear Algebra</a>
       
     </div>
   
@@ -335,8 +383,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Connect to Local Machine in Hyper-V with SSH</div>
-      <div>https://lingkkang.github.io/2022/12/31/ssh-hyper-v/</div>
+      <div>Application of Cofactor Expansion.</div>
+      <div>https://lingkkang.github.io/2023/01/08/cofactor-expansion/</div>
     </div>
     <div class="license-meta">
       
@@ -348,7 +396,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>December 31, 2022</div>
+          <div>January 8, 2023</div>
         </div>
       
       
@@ -378,18 +426,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/08/cofactor-expansion/" title="Application of Cofactor Expansion.">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Application of Cofactor Expansion.</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/12/07/test-malloc-failure/" title="Test Malloc Failure with Macros">
-                        <span class="hidden-mobile">Test Malloc Failure with Macros</span>
+                      <a href="/2022/12/31/ssh-hyper-v/" title="Connect to Local Machine in Hyper-V with SSH">
+                        <span class="hidden-mobile">Connect to Local Machine in Hyper-V with SSH</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
