@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-02-21T16:36:06.843Z</updated>
+  <updated>2023-02-22T01:44:50.879Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://lingkkang.github.io/2023/02/22/prose01/"/>
     <id>https://lingkkang.github.io/2023/02/22/prose01/</id>
     <published>2023-02-21T16:08:15.000Z</published>
-    <updated>2023-02-21T16:36:06.843Z</updated>
+    <updated>2023-02-22T01:44:50.879Z</updated>
     
     
       
@@ -67,7 +67,7 @@
     <link href="https://lingkkang.github.io/2022/12/31/ssh-hyper-v/"/>
     <id>https://lingkkang.github.io/2022/12/31/ssh-hyper-v/</id>
     <published>2022-12-31T06:39:24.000Z</published>
-    <updated>2022-12-31T06:48:08.235Z</updated>
+    <updated>2023-02-22T01:42:04.045Z</updated>
     
     
       
@@ -81,7 +81,7 @@
     
     
     
-    <category term="SSH" scheme="https://lingkkang.github.io/tags/SSH/"/>
+    <category term="ssh" scheme="https://lingkkang.github.io/tags/ssh/"/>
     
     <category term="Hyper-V" scheme="https://lingkkang.github.io/tags/Hyper-V/"/>
     
