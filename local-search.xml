@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>随想两则</title>
+    <link href="/2023/02/22/prose01/"/>
+    <url>/2023/02/22/prose01/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="随想两则"><a href="#随想两则" class="headerlink" title="随想两则"></a>随想两则</h1><h2 id="一、"><a href="#一、" class="headerlink" title="一、"></a>一、</h2><p>最近悄悄给网站上线了 <a href="https://lingkkang.github.io/atom.xml">RSS</a>。</p><p>原本不怎么打算弄这个的，因为觉得这样回回直接把新内容直接推到订阅者面前，好像毛遂自荐一样，似乎很生硬。甚至感觉很唐突。</p><p>而且一直以为部署很麻烦的，没想到这么方便。</p><p>当然，最终还是弄了——主要是大家都加了，而且 RSS 阅读器能集成各个博客的源，读起来比专门去一个一个网站翻方便多了。也很少会有人专门去刷新别人网站看看有没有更新吧。</p><p>自己日常在用，怎么能有理由不加呢？</p><h2 id="二、"><a href="#二、" class="headerlink" title="二、"></a>二、</h2><p>之前用上了 ChatGPT，真的很惊艳。已经逐渐把它纳入日常信息搜索流中了。</p><p>直接问答还是比搜索和检索方便太多，尤其在于它能够结合上下文。而且得到答案之快速也基本胜过在论坛上提问了。尽管还是要记得验证一下它的答案。</p><p>以后会越来越如此吧。</p><p>感觉就像进入大学后逐渐习惯了 <code>ctrl + f</code> 的搜索快捷键，已经基本受不了再像以前一样凭肉眼扫描文本寻找关键字了。又好像习惯了搜索引擎，也很难习惯再像几十年前一样从百科全书、参考文献、索引里寻找线索，再在图书馆一排排书架上苦苦搜寻了吧。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>随笔</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>生活</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Application of Cofactor Expansion</title>
     <link href="/2023/01/08/cofactor-expansion/"/>
     <url>/2023/01/08/cofactor-expansion/</url>
