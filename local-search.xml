@@ -20,8 +20,6 @@
     
     <tags>
       
-      <tag>C</tag>
-      
       <tag>RISC-V</tag>
       
       <tag>Assembly</tag>
@@ -29,6 +27,8 @@
       <tag>Stack</tag>
       
       <tag>QEMU</tag>
+      
+      <tag>C</tag>
       
       <tag>Memory</tag>
       
@@ -325,9 +325,9 @@
     
     <tags>
       
-      <tag>读书</tag>
-      
       <tag>生活</tag>
+      
+      <tag>读书</tag>
       
       <tag>Summary</tag>
       
