@@ -16,24 +16,29 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="随想两则一、最近悄悄给网站上线了 RSS。 原本不怎么打算弄这个的，因为觉得这样回回直接把新内容直接推到订阅者面前，好像毛遂自荐一样，似乎很生硬。甚至感觉很唐突。 而且一直以为部署很麻烦的，没想到这么方便。 当然，最终还是弄了——主要是大家都加了，而且 RSS 阅读器能集成各个博客的源，读起来比专门去一个一个网站翻方便多了。也很少会有人专门去刷新别人网站看看有没有更新吧。 自己日常在用，怎么能有理">
+    <meta name="description" content="Basic boot process of a RISC-V hardware, with sample boot assembly code explained.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="随想两则">
-<meta property="og:url" content="https://lingkkang.github.io/2023/02/22/prose01/index.html">
+<meta property="og:title" content="RISC-V Machine Boot Code">
+<meta property="og:url" content="https://lingkkang.github.io/2023/02/23/boot-risc-v/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="随想两则一、最近悄悄给网站上线了 RSS。 原本不怎么打算弄这个的，因为觉得这样回回直接把新内容直接推到订阅者面前，好像毛遂自荐一样，似乎很生硬。甚至感觉很唐突。 而且一直以为部署很麻烦的，没想到这么方便。 当然，最终还是弄了——主要是大家都加了，而且 RSS 阅读器能集成各个博客的源，读起来比专门去一个一个网站翻方便多了。也很少会有人专门去刷新别人网站看看有没有更新吧。 自己日常在用，怎么能有理">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-21T16:08:15.000Z">
-<meta property="article:modified_time" content="2023-02-22T01:50:00.000Z">
+<meta property="og:description" content="Basic boot process of a RISC-V hardware, with sample boot assembly code explained.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-02-22T16:05:26.000Z">
+<meta property="article:modified_time" content="2023-02-23T04:24:33.000Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="生活">
+<meta property="article:tag" content="RISC-V">
+<meta property="article:tag" content="Assembly">
+<meta property="article:tag" content="Stack">
+<meta property="article:tag" content="QEMU">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="Memory">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>随想两则 - Lingkang&#39;s Blog</title>
+  <title>RISC-V Machine Boot Code - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -122,7 +127,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
+                <span>Home</span>
               </a>
             </li>
           
@@ -134,7 +139,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
+                <span>Archives</span>
               </a>
             </li>
           
@@ -146,7 +151,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
+                <span>Categories</span>
               </a>
             </li>
           
@@ -158,7 +163,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
+                <span>Tags</span>
               </a>
             </li>
           
@@ -170,7 +175,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
-                <span>友链</span>
+                <span>Links</span>
               </a>
             </li>
           
@@ -182,7 +187,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
+                <span>About</span>
               </a>
             </li>
           
@@ -216,7 +221,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="随想两则"></span>
+            <span id="subtitle" data-typed-text="RISC-V Machine Boot Code"></span>
           
         </div>
 
@@ -227,8 +232,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-22 00:08" pubdate>
-          2023年2月22日 凌晨
+        <time datetime="2023-02-23 00:05" pubdate>
+          February 23, 2023 am
         </time>
       </span>
     
@@ -239,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          430 字
+          5.1k words
         
       </span>
     
@@ -250,7 +255,7 @@
         
         
         
-          4 分钟
+          43 mins
         
       </span>
     
@@ -288,12 +293,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">随想两则</h1>
+            <h1 style="display: none">RISC-V Machine Boot Code</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年2月22日 上午
+                    Last updated on February 23, 2023 pm
                   
                 
               </p>
@@ -301,15 +306,53 @@
             
               <div class="markdown-body">
                 
-                <h1 id="随想两则"><a href="#随想两则" class="headerlink" title="随想两则"></a>随想两则</h1><h2 id="一、"><a href="#一、" class="headerlink" title="一、"></a>一、</h2><p>最近悄悄给网站上线了 <a href="https://lingkkang.github.io/atom.xml">RSS</a>。</p>
-<p>原本不怎么打算弄这个的，因为觉得这样回回直接把新内容直接推到订阅者面前，好像毛遂自荐一样，似乎很生硬。甚至感觉很唐突。</p>
-<p>而且一直以为部署很麻烦的，没想到这么方便。</p>
-<p>当然，最终还是弄了——主要是大家都加了，而且 RSS 阅读器能集成各个博客的源，读起来比专门去一个一个网站翻方便多了。也很少会有人专门去刷新别人网站看看有没有更新吧。</p>
-<p>自己日常在用，怎么能有理由不加呢？</p>
-<h2 id="二、"><a href="#二、" class="headerlink" title="二、"></a>二、</h2><p>之前用上了 ChatGPT，真的很惊艳。已经逐渐把它纳入日常信息搜索流中了。</p>
-<p>直接问答还是比搜索和检索方便太多，尤其在于它能够结合上下文。而且得到答案之快速也基本胜过在论坛上提问了。尽管还是要记得验证一下它的答案。</p>
-<p>以后会越来越如此吧。</p>
-<p>感觉就像进入大学后逐渐习惯了 <code>ctrl + f</code> 的搜索快捷键，已经基本受不了再像以前一样凭肉眼扫描文本寻找关键字了。又好像习惯了搜索引擎，也很难习惯再像几十年前一样从百科全书、参考文献、索引里寻找线索，再在图书馆一排排书架上苦苦搜寻了吧。</p>
+                <h1 id="RISC-V-Machine-Boot-Code"><a href="#RISC-V-Machine-Boot-Code" class="headerlink" title="RISC-V Machine Boot Code"></a>RISC-V Machine Boot Code</h1><p>Basically, when a RISC-V machine powers on, the bootloader built in hardware or emulator will go to memory address <a href="#Load-Address"><code>0x8000_0000</code></a> to load an OS.</p>
+<p>At this time, the computer works in <strong>machine</strong> mode, and our <code>boot.S</code> needs to do something that can only be done in this privilege level. And here is a line-by-line explanation.</p>
+<h2 id="Some-Definitions"><a href="#Some-Definitions" class="headerlink" title="Some Definitions"></a>Some Definitions</h2><p>If you want, you can take a glance at <a href="#Code">code</a> first, and come back when encountering any problems.</p>
+<h3 id="Directives"><a href="#Directives" class="headerlink" title="Directives"></a>Directives</h3><p>All keywords begin with a period are called <a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/as/Pseudo-Ops.html"><strong>directives</strong></a>. They are not defined in RISC-V specification, but in assembler’s side, to give some hints to assembler. Its syntax may be different from assembler to assembler, and it’s not corresponding to any specific instruction.</p>
+<h3 id="Pseudoinstructions"><a href="#Pseudoinstructions" class="headerlink" title="Pseudoinstructions"></a>Pseudoinstructions</h3><p>Technically, <a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#-a-listing-of-standard-risc-v-pseudoinstructions"><strong>pseudoinstructions</strong></a> are not instruction. They resemble common instructions and are used to improve programming efficiency. One line of pseudo instruction may correspond to more than one instruction when assembled by assembler.</p>
+<p>For example, <code>li</code> (<a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#load-immediate">load immediately</a>) is a common pseudoinstruction.</p>
+<h3 id="ABI"><a href="#ABI" class="headerlink" title="ABI"></a>ABI</h3><p>ABI stands for <strong>application binary interface</strong>. Instead of naming registers’ absolute location, say, <code>x0</code>, <code>x1</code> and so on, it is highly recommended to refer them with their <a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#general-registers">ABI</a>, such as <code>zero</code>, <code>ra</code> and so on.</p>
+<h3 id="CSR-and-Zicsr"><a href="#CSR-and-Zicsr" class="headerlink" title="CSR and Zicsr"></a>CSR and Zicsr</h3><p><strong>Control and status registers</strong> (CSR) are used to control and monitor the operation of various hardware components. They are part of privileged component in architechure, and thus, accessible by using different opcodes. These opcodes for CSRs are differently categorized and named as <strong>Zicsr</strong>.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs RISCV">.globl _start<br><br>.equ STACK_SIZE, 1024<br>.equ CPU_NUM, 8<br><br>.section .text<br><br>_start:<br>    csrr t0, mhartid<br>    bnez t0, pend<br><br>    slli t0, t0, 10<br>    la sp, stacks + STACK_SIZE<br>    add sp, sp, t0<br><br>    j enter<br><br>stacks:<br>    .space STACK_SIZE * CPU_NUM<br><br>pend:<br>    wfi<br>    j pend<br><br>.end<br></code></pre></td></tr></table></figure>
+
+<h2 id="Branching-out-Other-Harts"><a href="#Branching-out-Other-Harts" class="headerlink" title="Branching out Other Harts"></a>Branching out Other Harts</h2><p><strong>Hart</strong> is a conventional name for a <strong>Hardware Thread</strong>. </p>
+<p>In <em>line 9</em>, <code>csrr</code> is a <strong>pseudoinstruction</strong> meaning ‘read CSR’. You can simply understand it as ‘read <code>mhartid</code> and save into <code>t0</code>‘, but since <code>mhartid</code> is a CSR, it requires using <code>csrr</code>, which is also in Zicsr, to read it.</p>
+<p><code>mhartid</code> can be understood as ‘machine mode hart id’. When hardware boots, all its harts are activated and run this assembly code, whereas this snippet is only intended to use one hart.</p>
+<p><code>t0</code> is the first <strong>temporary register</strong>, mapping to register <code>x5</code>.</p>
+<p>In <em>line 9</em>, <code>bnez</code> is also a pseudoinstruction, standing for ‘branch if not equal to zero’.</p>
+<p>So this two lines are trying to figure out which hart is running, and then lead it to the <code>pend</code> label, unless it is the first hart.</p>
+<p>Let a hart jump endlessly is a common way to pend it. And in <em>line 22</em>, we added an instruction called <code>wfi</code>, meaning ‘wait for interrupt’. It could be seen as entering sleep mode for this hart.</p>
+<h2 id="Setting-up-Stacks"><a href="#Setting-up-Stacks" class="headerlink" title="Setting up Stacks"></a>Setting up Stacks</h2><p>The layout of stacks is quite baffling and took me a lot of time to figure out.</p>
+<p>In general, we assign a bunch of memory, let <code>sp</code> points to the end of first hart’s stack, and move <code>sp</code> to its corresponding hart’s stack, with respect to label <code>stacks</code>(<em>line 18-19</em>), <em>line 13</em> and <em>line 14</em> accordingly.</p>
+<p>The stacks have a gross size of <code>STACK_SIZE * CPU_NUM</code> in bytes. The directive <code>.space</code> means fill these size with zeros automatically, the same as <code>.skip</code>. When <em>line 13</em> refers to <code>stacks</code>, it refers to the beginning, or in other words, smallest address of this assigned memory. By adding exactly one <code>STACK_SIZE</code>, the sum should be the end address of first hart’s stack.</p>
+<p>Always remember these rules when trying to understand this part:</p>
+<ol>
+<li>The low address is the start of the stack, whereas the high address is its end.</li>
+<li>The stack pointer <code>sp</code> always points to the end of the stack.</li>
+<li>Hart id starts at 0.</li>
+</ol>
+<p>Since we designed the size of the stack to be 1024 bytes, which is 2<sup>10</sup>, we can left shift the hart ID 10 bits and add it to location of the first stack to find its own stack. <em>Line 12</em> is the instruction that exactly does this. The opcode <code>slli</code> instructs the hart to logical shift <code>t0</code> left, which also means multiplying it by 1024.</p>
+<h2 id="Go-to-C"><a href="#Go-to-C" class="headerlink" title="Go to C"></a>Go to C</h2><p>In <em>line 16</em>, the program jumps to <code>enter</code> which is declared in C language. Calling a C function is just like calling an assembly function since they are both converted to binary and located in <code>text</code> section. When booting, quickly switching to high-level programming language can be helpful.</p>
+<p>Initializing stacks can also be done in C. Referring to <a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/start.c"><code>xv6-riscv/kernel/start.c</code></a>, it is written as: </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">// entry.S needs one stack per CPU.</span><br>__attribute__ ((aligned (<span class="hljs-number">16</span>))) <span class="hljs-type">char</span> stack0[<span class="hljs-number">4096</span> * NCPU];<br></code></pre></td></tr></table></figure>
+
+<p>Here <code>__attribute__</code> is a GNU GCC feature used to provide additional information to the compiler. In this case, it ensures that <code>stack0</code> is aligned on a 16-byte boundary. It gives each hart 4096 bytes and <code>NCPU</code> stands for the number of harts.</p>
+<h2 id="Load-Address"><a href="#Load-Address" class="headerlink" title="Load Address"></a>Load Address</h2><p>Note that address <code>0x8000_0000</code> is different from so-called <em>magic number</em>, which is <code>0xAA55</code>, in x86. The latter is defined as the end of boot sector. BIOS would go through all storage devices and try to boot from this section.</p>
+<p>Thus, when linking objects together, we need to add flag <code>-Ttext=0x80000000</code> to make sure the <code>.text</code> section is located at where we want. From the <a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/ld/Options.html#index-_002d_002dsection_002dstart_003dsectionname_003dorg">doc</a>, <code>-Ttext</code> here is a short hand for <code>--section-start=.text</code>.</p>
+<p>This <code>80000000</code> is not standardized, but conventionally, it should be this location, as you can find out in QEMU source code. For example, in <a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c"><code>qemu/hw/riscv/virt.c</code></a>, in the array of memory map <code>virt_memap</code>, the last one is <code>VIRT_DRAM</code> and starts at <code>0x80000000</code>.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2022/xv6/book-riscv-rev3.pdf">xv6: a simple, Unix-like teaching operating system</a>, Russ Cox, Frans Kaashoek, Robert Morris, MIT, 5 September 2022</li>
+<li><a target="_blank" rel="noopener" href="https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf">Writing a Simple Operating System – from Scratch</a>, Nick Blundell, University of Birmingham, 2 December 2010</li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@iotapioneer/55-and-aa-8c06b8719c1">55 and AA. What’s special about 55 and AA? Or more… | by Larry K. | Medium</a></li>
+<li><a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/">Documentation for binutils 2.40</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Q5411w7z5/">[完结] 循序渐进，学习开发一个RISC-V上的操作系统 - 汪辰 - 2021春_哔哩哔哩_bilibili</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md">riscv-asm-manual&#x2F;riscv-asm.md at master · riscv-non-isa&#x2F;riscv-asm-manual</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.qemu.org/docs/master/system/target-riscv.html">RISC-V System emulator — QEMU documentation</a></li>
+<li><a target="_blank" rel="noopener" href="https://riscv.org/technical/specifications/">Specifications - RISC-V International</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv">mit-pdos&#x2F;xv6-riscv: Xv6 for RISC-V</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/plctlab/riscv-operating-system-mooc">plctlab&#x2F;riscv-operating-system-mooc: 《从头写一个RISC-V OS》课程配套的资源</a></li>
+</ol>
 
                 
               </div>
@@ -328,7 +371,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E9%9A%8F%E7%AC%94/" class="category-chain-item">随笔</a>
+  <a href="/categories/Operating-System/" class="category-chain-item">Operating System</a>
   
   
 
@@ -343,7 +386,17 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%94%9F%E6%B4%BB/">#生活</a>
+        <a href="/tags/RISC-V/">#RISC-V</a>
+      
+        <a href="/tags/Assembly/">#Assembly</a>
+      
+        <a href="/tags/Stack/">#Stack</a>
+      
+        <a href="/tags/QEMU/">#QEMU</a>
+      
+        <a href="/tags/C/">#C</a>
+      
+        <a href="/tags/Memory/">#Memory</a>
       
     </div>
   
@@ -355,32 +408,32 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>随想两则</div>
-      <div>https://lingkkang.github.io/2023/02/22/prose01/</div>
+      <div>RISC-V Machine Boot Code</div>
+      <div>https://lingkkang.github.io/2023/02/23/boot-risc-v/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>作者</div>
+          <div>Author</div>
           <div>Lingkang</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2023年2月22日</div>
+          <div>Posted on</div>
+          <div>February 23, 2023</div>
         </div>
       
       
       
         <div class="license-meta-item">
-          <div>许可协议</div>
+          <div>Licensed under</div>
           <div>
             
               
               
                 <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
                     <i class="iconfont icon-by"></i>
                   </span>
                 </a>
@@ -400,19 +453,13 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/23/boot-risc-v/" title="RISC-V Machine Boot Code">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">RISC-V Machine Boot Code</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/08/cofactor-expansion/" title="Application of Cofactor Expansion">
-                        <span class="hidden-mobile">Application of Cofactor Expansion</span>
-                        <span class="visible-mobile">下一篇</span>
+                      <a href="/2023/02/22/prose01/" title="随想两则">
+                        <span class="hidden-mobile">随想两则</span>
+                        <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -433,7 +480,7 @@
     <div id="toc">
   <p class="toc-header">
     <i class="iconfont icon-list"></i>
-    <span>目录</span>
+    <span>Table of Contents</span>
   </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
@@ -489,7 +536,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -497,7 +544,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -674,7 +721,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
   </noscript>
 </body>
 </html>
