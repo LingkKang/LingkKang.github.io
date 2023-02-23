@@ -26,11 +26,11 @@
 <meta property="article:published_time" content="2023-02-22T16:05:26.000Z">
 <meta property="article:modified_time" content="2023-02-23T04:24:33.000Z">
 <meta property="article:author" content="Lingkang">
+<meta property="article:tag" content="C">
 <meta property="article:tag" content="RISC-V">
 <meta property="article:tag" content="Assembly">
 <meta property="article:tag" content="Stack">
 <meta property="article:tag" content="QEMU">
-<meta property="article:tag" content="C">
 <meta property="article:tag" content="Memory">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -306,7 +306,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="RISC-V-Machine-Boot-Code"><a href="#RISC-V-Machine-Boot-Code" class="headerlink" title="RISC-V Machine Boot Code"></a>RISC-V Machine Boot Code</h1><p>Basically, when a RISC-V machine powers on, the bootloader built in hardware or emulator will go to memory address <a href="#Load-Address"><code>0x8000_0000</code></a> to load an OS.</p>
+                <h1 id="RISC-V-Machine-Boot-Code"><a href="#RISC-V-Machine-Boot-Code" class="headerlink" title="RISC-V Machine Boot Code"></a>RISC-V Machine Boot Code</h1><p>Basically, when a RISC-V machine powers on, the bootloader built in hardware or emulator will go to memory address <a href="#Loading-Address"><code>0x8000_0000</code></a> to load an OS.</p>
 <p>At this time, the computer works in <strong>machine</strong> mode, and our <code>boot.S</code> needs to do something that can only be done in this privilege level. And here is a line-by-line explanation.</p>
 <h2 id="Some-Definitions"><a href="#Some-Definitions" class="headerlink" title="Some Definitions"></a>Some Definitions</h2><p>If you want, you can take a glance at <a href="#Code">code</a> first, and come back when encountering any problems.</p>
 <h3 id="Directives"><a href="#Directives" class="headerlink" title="Directives"></a>Directives</h3><p>All keywords begin with a period are called <a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/as/Pseudo-Ops.html"><strong>directives</strong></a>. They are not defined in RISC-V specification, but in assembler’s side, to give some hints to assembler. Its syntax may be different from assembler to assembler, and it’s not corresponding to any specific instruction.</p>
@@ -317,15 +317,15 @@
 <h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs RISCV">.globl _start<br><br>.equ STACK_SIZE, 1024<br>.equ CPU_NUM, 8<br><br>.section .text<br><br>_start:<br>    csrr t0, mhartid<br>    bnez t0, pend<br><br>    slli t0, t0, 10<br>    la sp, stacks + STACK_SIZE<br>    add sp, sp, t0<br><br>    j enter<br><br>stacks:<br>    .space STACK_SIZE * CPU_NUM<br><br>pend:<br>    wfi<br>    j pend<br><br>.end<br></code></pre></td></tr></table></figure>
 
 <h2 id="Branching-out-Other-Harts"><a href="#Branching-out-Other-Harts" class="headerlink" title="Branching out Other Harts"></a>Branching out Other Harts</h2><p><strong>Hart</strong> is a conventional name for a <strong>Hardware Thread</strong>. </p>
-<p>In <em>line 9</em>, <code>csrr</code> is a <strong>pseudoinstruction</strong> meaning ‘read CSR’. You can simply understand it as ‘read <code>mhartid</code> and save into <code>t0</code>‘, but since <code>mhartid</code> is a CSR, it requires using <code>csrr</code>, which is also in Zicsr, to read it.</p>
+<p>In <em>line 9</em>, <code>csrr</code> is a <a href="#Pseudoinstructions">pseudoinstruction</a> meaning ‘read CSR’. You can simply understand it as ‘read <code>mhartid</code> and save into <code>t0</code>‘, but since <code>mhartid</code> is a <a href="#CSR-and-Zicsr">CSR</a>, it requires using <code>csrr</code>, which is also in Zicsr, to read it.</p>
 <p><code>mhartid</code> can be understood as ‘machine mode hart id’. When hardware boots, all its harts are activated and run this assembly code, whereas this snippet is only intended to use one hart.</p>
-<p><code>t0</code> is the first <strong>temporary register</strong>, mapping to register <code>x5</code>.</p>
-<p>In <em>line 9</em>, <code>bnez</code> is also a pseudoinstruction, standing for ‘branch if not equal to zero’.</p>
+<p><code>t0</code> is the first <a href="#ABI"><strong>temporary register</strong></a>, mapping to register <code>x5</code>.</p>
+<p>In <em>line 10</em>, <code>bnez</code> is also a pseudoinstruction, standing for ‘branch if not equal to zero’.</p>
 <p>So this two lines are trying to figure out which hart is running, and then lead it to the <code>pend</code> label, unless it is the first hart.</p>
 <p>Let a hart jump endlessly is a common way to pend it. And in <em>line 22</em>, we added an instruction called <code>wfi</code>, meaning ‘wait for interrupt’. It could be seen as entering sleep mode for this hart.</p>
 <h2 id="Setting-up-Stacks"><a href="#Setting-up-Stacks" class="headerlink" title="Setting up Stacks"></a>Setting up Stacks</h2><p>The layout of stacks is quite baffling and took me a lot of time to figure out.</p>
 <p>In general, we assign a bunch of memory, let <code>sp</code> points to the end of first hart’s stack, and move <code>sp</code> to its corresponding hart’s stack, with respect to label <code>stacks</code>(<em>line 18-19</em>), <em>line 13</em> and <em>line 14</em> accordingly.</p>
-<p>The stacks have a gross size of <code>STACK_SIZE * CPU_NUM</code> in bytes. The directive <code>.space</code> means fill these size with zeros automatically, the same as <code>.skip</code>. When <em>line 13</em> refers to <code>stacks</code>, it refers to the beginning, or in other words, smallest address of this assigned memory. By adding exactly one <code>STACK_SIZE</code>, the sum should be the end address of first hart’s stack.</p>
+<p>The stacks have a gross size of <code>STACK_SIZE * CPU_NUM</code> in bytes. The <a href="#Directives">directive</a> <code>.space</code> means fill these size with zeros automatically, the same as <code>.skip</code>. When <em>line 13</em> refers to <code>stacks</code>, it refers to the beginning, or in other words, smallest address of this assigned memory. By adding exactly one <code>STACK_SIZE</code>, the sum should be the end address of first hart’s stack.</p>
 <p>Always remember these rules when trying to understand this part:</p>
 <ol>
 <li>The low address is the start of the stack, whereas the high address is its end.</li>
@@ -386,6 +386,8 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
+        <a href="/tags/C/">#C</a>
+      
         <a href="/tags/RISC-V/">#RISC-V</a>
       
         <a href="/tags/Assembly/">#Assembly</a>
@@ -393,8 +395,6 @@
         <a href="/tags/Stack/">#Stack</a>
       
         <a href="/tags/QEMU/">#QEMU</a>
-      
-        <a href="/tags/C/">#C</a>
       
         <a href="/tags/Memory/">#Memory</a>
       
