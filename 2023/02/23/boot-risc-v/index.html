@@ -16,16 +16,17 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Basic boot process of a RISC-V hardware, with sample boot assembly code explained.">
+    <meta name="description" content="Basic boot process of a RISC-V hardware, with sample bootstrap assembly code explained.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RISC-V Machine Boot Code">
 <meta property="og:url" content="https://lingkkang.github.io/2023/02/23/boot-risc-v/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Basic boot process of a RISC-V hardware, with sample boot assembly code explained.">
+<meta property="og:description" content="Basic boot process of a RISC-V hardware, with sample bootstrap assembly code explained.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-02-22T16:05:26.000Z">
-<meta property="article:modified_time" content="2023-02-23T04:24:33.000Z">
+<meta property="article:modified_time" content="2023-02-24T11:52:04.000Z">
 <meta property="article:author" content="Lingkang">
+<meta property="article:tag" content="Bootstrap">
 <meta property="article:tag" content="RISC-V">
 <meta property="article:tag" content="Assembly">
 <meta property="article:tag" content="Stack">
@@ -244,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.1k words
+          5.5k words
         
       </span>
     
@@ -255,7 +256,7 @@
         
         
         
-          43 mins
+          46 mins
         
       </span>
     
@@ -298,7 +299,7 @@
               <p class="note note-info">
                 
                   
-                    Last updated on February 23, 2023 pm
+                    Last updated on February 24, 2023 pm
                   
                 
               </p>
@@ -340,18 +341,24 @@
 <p>Here <code>__attribute__</code> is a GNU GCC feature used to provide additional information to the compiler. In this case, it ensures that <code>stack0</code> is aligned on a 16-byte boundary. It gives each hart 4096 bytes and <code>NCPU</code> stands for the number of harts.</p>
 <h2 id="Loading-Address"><a href="#Loading-Address" class="headerlink" title="Loading Address"></a>Loading Address</h2><p>Note that address <code>0x8000_0000</code> is different from so-called <em>magic number</em>, which is <code>0xAA55</code>, in x86. The latter is defined as the end of boot sector. BIOS would go through all storage devices and try to boot from this section.</p>
 <p>Thus, when linking objects together, we need to add flag <code>-Ttext=0x80000000</code> to make sure the <code>.text</code> section is located at where we want. From the <a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/ld/Options.html#index-_002d_002dsection_002dstart_003dsectionname_003dorg">doc</a>, <code>-Ttext</code> here is a short hand for <code>--section-start=.text</code>.</p>
-<p>This <code>80000000</code> is not standardized, but conventionally, it should be this location, as you can find out in QEMU source code. For example, in <a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c"><code>qemu/hw/riscv/virt.c</code></a>, in the array of memory map <code>virt_memap</code>, the last one is <code>VIRT_DRAM</code> and starts at <code>0x80000000</code>.</p>
+<p>This <code>8000_0000</code> is not standardized, but conventionally, it should be this location, as you can find out in QEMU source code. For example, in <a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c"><code>qemu/hw/riscv/virt.c</code></a>, in the array of memory map <code>virt_memap</code>, the last one is <code>VIRT_DRAM</code> and starts at <code>0x8000_0000</code>.</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2022/xv6/book-riscv-rev3.pdf">xv6: a simple, Unix-like teaching operating system</a>, Russ Cox, Frans Kaashoek, Robert Morris, MIT, 5 September 2022</li>
-<li><a target="_blank" rel="noopener" href="https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf">Writing a Simple Operating System – from Scratch</a>, Nick Blundell, University of Birmingham, 2 December 2010</li>
+<li><a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2022/xv6/book-riscv-rev3.pdf">xv6: a simple, Unix-like teaching operating system</a>, Russ Cox, Frans Kaashoek, Robert Morris, MIT, 5 September 2022, <em>2.6 Code: starting xv6, the first process and system call</em> (P27 - 28)</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/entry.S">xv6-riscv&#x2F;entry.S at riscv · mit-pdos&#x2F;xv6-riscv</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf">Writing a Simple Operating System – from Scratch</a>, Nick Blundell, University of Birmingham, 2 December 2010, <em>Chapter 2 Computer Architecture and the Boot Process</em> (P3 - 7)</li>
 <li><a target="_blank" rel="noopener" href="https://medium.com/@iotapioneer/55-and-aa-8c06b8719c1">55 and AA. What’s special about 55 and AA? Or more… | by Larry K. | Medium</a></li>
-<li><a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/">Documentation for binutils 2.40</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Q5411w7z5/">[完结] 循序渐进，学习开发一个RISC-V上的操作系统 - 汪辰 - 2021春_哔哩哔哩_bilibili</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md">riscv-asm-manual&#x2F;riscv-asm.md at master · riscv-non-isa&#x2F;riscv-asm-manual</a></li>
+<li><a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/as/Pseudo-Ops.html">Pseudo Ops (Using as)</a></li>
+<li><a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/ld/Options.html">Options (LD)</a></li>
+<li><a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/">Documentation for binutils 2.40</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Q5411w7z5?p=16">[完结] 循序渐进，学习开发一个RISC-V上的操作系统 - 汪辰 - 第7章（上）-Hello RVOS_哔哩哔哩_bilibili</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/plctlab/riscv-operating-system-mooc/blob/main/code/os/01-helloRVOS/start.S">riscv-operating-system-mooc&#x2F;start.S at main · plctlab&#x2F;riscv-operating-system-mooc</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.qemu.org/docs/master/system/target-riscv.html">RISC-V System emulator — QEMU documentation</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c">qemu&#x2F;virt.c at master · qemu&#x2F;qemu</a></li>
 <li><a target="_blank" rel="noopener" href="https://riscv.org/technical/specifications/">Specifications - RISC-V International</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv">mit-pdos&#x2F;xv6-riscv: Xv6 for RISC-V</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/plctlab/riscv-operating-system-mooc">plctlab&#x2F;riscv-operating-system-mooc: 《从头写一个RISC-V OS》课程配套的资源</a></li>
+<li><a target="_blank" rel="noopener" href="https://five-embeddev.com/riscv-isa-manual/latest/csr.html">RISC-V Instruction Set Manual, Volume I: RISC-V User-Level ISA | Five EmbedDev</a></li>
+<li><a target="_blank" rel="noopener" href="https://osblog.stephenmarz.com/ch1.html">Taking control of RISC-V: RISCV OS in Rust</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/sgmarz/osblog/blob/master/risc_v/chapters/ch1/src/asm/boot.S">osblog&#x2F;boot.S at master · sgmarz&#x2F;osblog</a></li>
 </ol>
 
                 
@@ -385,6 +392,8 @@
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Bootstrap/">#Bootstrap</a>
       
         <a href="/tags/RISC-V/">#RISC-V</a>
       

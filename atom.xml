@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-02-23T04:24:33.000Z</updated>
+  <updated>2023-02-24T11:52:04.000Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -21,15 +21,17 @@
     <link href="https://lingkkang.github.io/2023/02/23/boot-risc-v/"/>
     <id>https://lingkkang.github.io/2023/02/23/boot-risc-v/</id>
     <published>2023-02-22T16:05:26.000Z</published>
-    <updated>2023-02-23T04:24:33.000Z</updated>
+    <updated>2023-02-24T11:52:04.000Z</updated>
     
     
-    <summary type="html">Basic boot process of a RISC-V hardware, with sample boot assembly code explained.</summary>
+    <summary type="html">Basic boot process of a RISC-V hardware, with sample bootstrap assembly code explained.</summary>
     
     
     
     <category term="Operating System" scheme="https://lingkkang.github.io/categories/Operating-System/"/>
     
+    
+    <category term="Bootstrap" scheme="https://lingkkang.github.io/tags/Bootstrap/"/>
     
     <category term="RISC-V" scheme="https://lingkkang.github.io/tags/RISC-V/"/>
     
