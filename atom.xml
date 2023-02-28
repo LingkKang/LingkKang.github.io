@@ -31,9 +31,9 @@
     <category term="Operating System" scheme="https://lingkkang.github.io/categories/Operating-System/"/>
     
     
-    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
-    
     <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
+    
+    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
     
     <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
     
@@ -62,8 +62,6 @@
     <category term="Operating System" scheme="https://lingkkang.github.io/categories/Operating-System/"/>
     
     
-    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
-    
     <category term="Bootstrap" scheme="https://lingkkang.github.io/tags/Bootstrap/"/>
     
     <category term="RISC-V" scheme="https://lingkkang.github.io/tags/RISC-V/"/>
@@ -73,6 +71,8 @@
     <category term="Stack" scheme="https://lingkkang.github.io/tags/Stack/"/>
     
     <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
+    
+    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
     
     <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
     
