@@ -26,14 +26,14 @@
 <meta property="article:published_time" content="2023-02-22T16:05:26.000Z">
 <meta property="article:modified_time" content="2023-02-24T11:52:04.000Z">
 <meta property="article:author" content="Lingkang">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="xv6">
+<meta property="article:tag" content="Memory">
 <meta property="article:tag" content="Bootstrap">
 <meta property="article:tag" content="RISC-V">
 <meta property="article:tag" content="Assembly">
 <meta property="article:tag" content="Stack">
 <meta property="article:tag" content="QEMU">
-<meta property="article:tag" content="C">
-<meta property="article:tag" content="Memory">
-<meta property="article:tag" content="xv6">
 <meta property="article:tag" content="Register">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -344,7 +344,7 @@
 <h2 id="Loading-Address"><a href="#Loading-Address" class="headerlink" title="Loading Address"></a>Loading Address</h2><p>Note that address <code>0x8000_0000</code> is different from so-called <em>magic number</em>, which is <code>0xAA55</code>, in x86. The latter is defined as the end of boot sector. BIOS would go through all storage devices and try to boot from this section.</p>
 <p>Thus, when linking objects together, we need to add flag <code>-Ttext=0x80000000</code> to make sure the <code>.text</code> section is located at where we want. From the <a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/ld/Options.html#index-_002d_002dsection_002dstart_003dsectionname_003dorg">doc</a>, <code>-Ttext</code> here is a short hand for <code>--section-start=.text</code>.</p>
 <p>This <code>8000_0000</code> is not standardized, but conventionally, it should be this location, as you can find out in QEMU source code. For example, in <a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c"><code>qemu/hw/riscv/virt.c</code></a>, in the array of memory map <code>virt_memap</code>, the last one is <code>VIRT_DRAM</code> and starts at <code>0x8000_0000</code>.</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2022/xv6/book-riscv-rev3.pdf">xv6: a simple, Unix-like teaching operating system</a>, Russ Cox, Frans Kaashoek, Robert Morris, MIT, 5 September 2022, <em>2.6 Code: starting xv6, the first process and system call</em> (P27 - 28)</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/entry.S">xv6-riscv&#x2F;entry.S at riscv · mit-pdos&#x2F;xv6-riscv</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf">Writing a Simple Operating System – from Scratch</a>, Nick Blundell, University of Birmingham, 2 December 2010, <em>Chapter 2 Computer Architecture and the Boot Process</em> (P3 - 7)</li>
@@ -395,6 +395,12 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
+        <a href="/tags/C/">#C</a>
+      
+        <a href="/tags/xv6/">#xv6</a>
+      
+        <a href="/tags/Memory/">#Memory</a>
+      
         <a href="/tags/Bootstrap/">#Bootstrap</a>
       
         <a href="/tags/RISC-V/">#RISC-V</a>
@@ -404,12 +410,6 @@
         <a href="/tags/Stack/">#Stack</a>
       
         <a href="/tags/QEMU/">#QEMU</a>
-      
-        <a href="/tags/C/">#C</a>
-      
-        <a href="/tags/Memory/">#Memory</a>
-      
-        <a href="/tags/xv6/">#xv6</a>
       
         <a href="/tags/Register/">#Register</a>
       

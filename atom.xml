@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-02-28T12:05:00.000Z</updated>
+  <updated>2023-03-12T03:28:11.862Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Align Number to Multiple</title>
+    <link href="https://lingkkang.github.io/2023/03/12/align/"/>
+    <id>https://lingkkang.github.io/2023/03/12/align/</id>
+    <published>2023-03-12T01:28:05.000Z</published>
+    <updated>2023-03-12T03:28:11.862Z</updated>
+    
+    
+    <summary type="html">Aligning an integer to its closest muplitple of number m is easy. But if m is a power of 2, using bitwise operations can help a lot.</summary>
+    
+    
+    
+    <category term="Algorithms &amp; Data Structures" scheme="https://lingkkang.github.io/categories/Algorithms-Data-Structures/"/>
+    
+    
+    <category term="Bitwise Operation" scheme="https://lingkkang.github.io/tags/Bitwise-Operation/"/>
+    
+    <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
+    
+    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
+    
+    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
+    
+  </entry>
   
   <entry>
     <title>Read and Write by Polling with UART</title>
@@ -31,11 +56,11 @@
     <category term="Operating System" scheme="https://lingkkang.github.io/categories/Operating-System/"/>
     
     
-    <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
-    
     <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
     
     <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
+    
+    <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
     
     <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
     
@@ -62,6 +87,12 @@
     <category term="Operating System" scheme="https://lingkkang.github.io/categories/Operating-System/"/>
     
     
+    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
+    
+    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
+    
+    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
+    
     <category term="Bootstrap" scheme="https://lingkkang.github.io/tags/Bootstrap/"/>
     
     <category term="RISC-V" scheme="https://lingkkang.github.io/tags/RISC-V/"/>
@@ -71,12 +102,6 @@
     <category term="Stack" scheme="https://lingkkang.github.io/tags/Stack/"/>
     
     <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
-    
-    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
-    
-    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
-    
-    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
     
     <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
     
@@ -125,31 +150,6 @@
     <category term="Python" scheme="https://lingkkang.github.io/tags/Python/"/>
     
     <category term="Linear Algebra" scheme="https://lingkkang.github.io/tags/Linear-Algebra/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Connect to Local Machine in Hyper-V with SSH</title>
-    <link href="https://lingkkang.github.io/2022/12/31/ssh-hyper-v/"/>
-    <id>https://lingkkang.github.io/2022/12/31/ssh-hyper-v/</id>
-    <published>2022-12-31T06:39:24.000Z</published>
-    <updated>2022-12-31T06:48:08.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="ssh" scheme="https://lingkkang.github.io/tags/ssh/"/>
-    
-    <category term="Hyper-V" scheme="https://lingkkang.github.io/tags/Hyper-V/"/>
     
   </entry>
   

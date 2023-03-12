@@ -16,37 +16,27 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="“那时，穿过林子便是海。”">
+    <meta name="description" content="Aligning an integer to its closest muplitple of number m is easy. But if m is a power of 2, using bitwise operations can help a lot.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Preliminary Year Summary">
-<meta property="og:url" content="https://lingkkang.github.io/2022/05/19/year-1-summary/index.html">
+<meta property="og:title" content="Align Number to Multiple">
+<meta property="og:url" content="https://lingkkang.github.io/2023/03/12/align/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="“那时，穿过林子便是海。”">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://lingkkang.github.io/images/PreYearSum/first_run.jpg">
-<meta property="og:image" content="https://lingkkang.github.io/images/PreYearSum/lib1.jpg">
-<meta property="og:image" content="https://lingkkang.github.io/images/PreYearSum/lib2.jpg">
-<meta property="og:image" content="https://lingkkang.github.io/images/PreYearSum/cat.jpg">
-<meta property="og:image" content="https://lingkkang.github.io/images/PreYearSum/Christmas.jpg">
-<meta property="og:image" content="https://lingkkang.github.io/images/PreYearSum/5ht.jpg">
-<meta property="og:image" content="https://lingkkang.github.io/images/PreYearSum/img1.png">
-<meta property="og:image" content="https://lingkkang.github.io/images/PreYearSum/playground.jpg">
-<meta property="og:image" content="https://lingkkang.github.io/images/PreYearSum/littlebird.jpg">
-<meta property="og:image" content="https://lingkkang.github.io/images/PreYearSum/res.jpg">
-<meta property="article:published_time" content="2022-05-19T08:11:35.000Z">
-<meta property="article:modified_time" content="2022-05-19T11:11:35.000Z">
+<meta property="og:description" content="Aligning an integer to its closest muplitple of number m is easy. But if m is a power of 2, using bitwise operations can help a lot.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-03-12T01:28:05.000Z">
+<meta property="article:modified_time" content="2023-03-12T03:28:11.862Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="读书">
-<meta property="article:tag" content="生活">
-<meta property="article:tag" content="Summary">
+<meta property="article:tag" content="Bitwise Operation">
+<meta property="article:tag" content="Optimization">
+<meta property="article:tag" content="xv6">
+<meta property="article:tag" content="Memory">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://lingkkang.github.io/images/PreYearSum/first_run.jpg">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Preliminary Year Summary - Lingkang&#39;s Blog</title>
+  <title>Align Number to Multiple - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -135,7 +125,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
+                <span>Home</span>
               </a>
             </li>
           
@@ -147,7 +137,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
+                <span>Archives</span>
               </a>
             </li>
           
@@ -159,7 +149,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
+                <span>Categories</span>
               </a>
             </li>
           
@@ -171,7 +161,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
+                <span>Tags</span>
               </a>
             </li>
           
@@ -183,7 +173,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
-                <span>友链</span>
+                <span>Links</span>
               </a>
             </li>
           
@@ -195,7 +185,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
+                <span>About</span>
               </a>
             </li>
           
@@ -223,13 +213,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/images/PreYearSum/playground.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/images/bg_img/bg_post.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.6)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Preliminary Year Summary"></span>
+            <span id="subtitle" data-typed-text="Align Number to Multiple"></span>
           
         </div>
 
@@ -240,8 +230,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-05-19 16:11" pubdate>
-          2022年5月19日 下午
+        <time datetime="2023-03-12 09:28" pubdate>
+          March 12, 2023 am
         </time>
       </span>
     
@@ -252,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.2k words
         
       </span>
     
@@ -263,7 +253,7 @@
         
         
         
-          10 分钟
+          10 mins
         
       </span>
     
@@ -301,12 +291,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Preliminary Year Summary</h1>
+            <h1 style="display: none">Align Number to Multiple</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年5月19日 晚上
+                    Last updated on March 12, 2023 am
                   
                 
               </p>
@@ -314,51 +304,47 @@
             
               <div class="markdown-body">
                 
-                <h1 id="学年总结"><a href="#学年总结" class="headerlink" title="学年总结"></a>学年总结</h1><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=3944160&auto=0&height=66"></iframe>
+                <h1 id="Align-Number-to-Multiple"><a href="#Align-Number-to-Multiple" class="headerlink" title="Align Number to Multiple"></a>Align Number to Multiple</h1><p>Aligning an integer, say <code>n</code>, to its closest muplitple of <code>m</code> is easy by using <code>round(n / m) * m</code> (arithmetic division) or <code>(n + m - 1) / m * m</code> (<em>Euclidean division</em>).</p>
+<p>However, if <code>m</code> is a power of 2, i.e., <code>m</code> &#x3D; 2<sup>k</sup>, using bitwise operations can help a lot.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C">aligned_n = (n + (m - <span class="hljs-number">1</span>)) &amp; ~(m - <span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
 
-<blockquote>
-<p>涛声隐隐，那时，穿过林子应该便是海了。</p>
-<p>黄锦树《雨》</p>
-</blockquote>
-<p>按往常来说，上个暑假叫“高三暑假”，那这个暑假便应该是“大一暑假”——也就是说大一还没有结束。但反正春季学期已经结束了，便当作这一学年也已经结束了吧。</p>
-<p>本来觉得没有太多东西可以写，翻开手机相册发现也许能写的并不算太少。随便写一些。有许多照片已经不记得为什么拍下了，譬如说好几个小蛋糕，大概是买来犒劳自己的，但是因为完成了什么事而犒劳自己，已经没印象了。</p>
-<h2 id="一、"><a href="#一、" class="headerlink" title="一、"></a>一、</h2><p>记得刚来学校的第二天还是第三天晚上，刚刚安顿下来，就去绕着学校里跑了一圈。的确是感觉学校真的太小了，一圈才两公里。不过后来也感慨，多亏学校小，就算上课前五分钟才醒也赶得上早课。</p>
-<p><img src="/images/PreYearSum/first_run.jpg" srcset="/img/loading.gif" lazyload alt="校园跑（不是"> </p>
-<h2 id="二、"><a href="#二、" class="headerlink" title="二、"></a>二、</h2><p>特别喜欢学校的图书馆，感觉好像很久之前就来过一样。</p>
-<p><img src="/images/PreYearSum/lib1.jpg" srcset="/img/loading.gif" lazyload alt="图书馆初印象"></p>
-<p>最近这段时间特别喜欢在图书馆的露台上坐着。大概还是因为这两天天气好的缘故吧。有太阳又不太热，有风又不太冷。就坐着看书，常常坐到太阳下山。快把黄锦树的《雨》给看完了。</p>
-<p><img src="/images/PreYearSum/lib2.jpg" srcset="/img/loading.gif" lazyload alt="图书馆的奇妙经历"></p>
-<p>上周期末考试的时候一整周都在下雨。下雨，但是又不怎么下得猛烈。东西都被雨沾得潮潮的，水汽把所有东西笼着，衣服干得慢，人也总不能舒爽。我老是想，既然一直下，何妨不下得大一点呢。</p>
-<blockquote>
-<p>第几天了，夜里下起大雨。好似一口瀑布直泻在屋顶上。他们全家就安睡于那轰然一气的雨声中，平时的虫声蛙鸣大人的鼾声梦话等等都听不到了。雨声充塞于天地之间。雨下满了整个夜。无边无际，也仿佛无始无终的。</p>
-<p>黄锦树《老虎，老虎》</p>
-</blockquote>
-<h2 id="三、"><a href="#三、" class="headerlink" title="三、"></a>三、</h2><p>学校里猫猫很多，但是和我没什么交集。我很喜欢那些猫猫，但是它们好像都不怎么喜欢我。每次还没来得及拍照就溜走了。</p>
-<p><img src="/images/PreYearSum/cat.jpg" srcset="/img/loading.gif" lazyload alt="猫猫不回头"></p>
-<p>然后还有很多鸭鸭，但是都很霸气，我靠近都不带让路的。</p>
-<h2 id="四、"><a href="#四、" class="headerlink" title="四、"></a>四、</h2><p>去年期末的时候画了棵圣诞树。真是独树一帜的风格。最开始的时候在上面写了 <code>&quot;Merry Christmas&quot;</code>，但是很搞笑地把<code>Merry</code>拼错了。这是第二版，已经学乖了，干脆不写字了哈哈哈。</p>
-<p><img src="/images/PreYearSum/Christmas.jpg" srcset="/img/loading.gif" lazyload alt="Merry Christmas!"></p>
-<h2 id="五、"><a href="#五、" class="headerlink" title="五、"></a>五、</h2><p><img src="/images/PreYearSum/5ht.jpg" srcset="/img/loading.gif" lazyload alt="5-HT Week"> </p>
-<p>上上周学校有减压周的活动，但是我基本上啥都没参加，只蹭了件T恤和咖啡券——当懒和社恐合在一起的时候，人总是无可救药的。</p>
-<h2 id="六、"><a href="#六、" class="headerlink" title="六、"></a>六、</h2><p>今天早上刚看了一部电影，《瞬息全宇宙》——或者叫《妈的多重宇宙》哈哈哈哈哈哈哈哈哈哈哈。</p>
-<p><img src="/images/PreYearSum/img1.png" srcset="/img/loading.gif" lazyload alt="摆烂箴言"></p>
-<p align=center>
-    <code>
-        ↑是学习时的我！
-    </code>
-</p>
-
-<h2 id="七、"><a href="#七、" class="headerlink" title="七、"></a>七、</h2><p>感谢这一学年遇到的人，nice的室友、老师、朋友、同学、学长学姐······</p>
-<h2 id="八、"><a href="#八、" class="headerlink" title="八、"></a>八、</h2><p>然后是两张无意义的照片。经常喜欢一个人在操场乱走——或者说，叫作散步。</p>
-<p><img src="/images/PreYearSum/playground.jpg" srcset="/img/loading.gif" lazyload alt="操场在发呆，所以失焦了；不过也有可能是镜头在发呆"></p>
-<p><img src="/images/PreYearSum/littlebird.jpg" srcset="/img/loading.gif" lazyload alt="一只小小小小鸟"></p>
-<p><img src="/images/PreYearSum/res.jpg" srcset="/img/loading.gif" lazyload alt="食堂蒸汽朋克车间"></p>
-<p>不写太多了，插入图片还挺麻烦，预览起来也不太好看，等我搞懂怎么控制图片的大小再说。</p>
-<p>最后有一段话，送给自己吧，虽然已经抄在笔记本里很久了，也不妨再码一遍。</p>
-<blockquote>
-<p>铃木君是个聪明人，他很清楚，在这个应该尽量避免无畏之抵抗的世上，毫无必要的议论简直就是封建时代的流毒。要实现人生的目标不在于口舌而在于身体力行。凡事只要能按照自己的意愿不断推进，人生目标就会达成。没有辛劳、担心、争论而事情能够顺利进行，人生便可以“极乐流”的方式而达成。</p>
-<p>夏目漱石《我是猫》</p>
-</blockquote>
+<h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><p>This should be viewed from a binary perspective.</p>
+<p>For example, say <code>m = 8</code> and demonstrate it in 8-bit binary.</p>
+<table>
+<thead>
+<tr>
+<th>variable</th>
+<th align="center">number</th>
+<th align="center">binary</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>m</code></td>
+<td align="center">8</td>
+<td align="center">0000 1000</td>
+</tr>
+<tr>
+<td><code>m - 1</code></td>
+<td align="center">7</td>
+<td align="center">0000 0111</td>
+</tr>
+<tr>
+<td><code>~(m - 1)</code></td>
+<td align="center">&#x2F;</td>
+<td align="center">1111 1000</td>
+</tr>
+</tbody></table>
+<p>By applying <em>bitwise AND</em> <code>&amp;</code>, the lower bits of the number are cleaned to <code>0</code>, leaving the result becoming the multiple of <code>m</code>.</p>
+<p>If not adding <code>m - 1</code>, the result will be the closest multiple smaller than <code>n</code>, and adding it makes sure the result is bigger than the original number <code>n</code>.</p>
+<h2 id="Remark"><a href="#Remark" class="headerlink" title="Remark"></a>Remark</h2><p><code>(n + m/2) &amp; ~(m-1)</code> is an alternative, and adding a number ranging from <code>m/2</code> to <code>m - 1</code> is technically all fine.</p>
+<p>This method could be helpful in memory page alignment, where standard library is not available and we can sacrifice a little bit of readability of the code. For example, <code>PGROUNDUP</code> and <code>PGROUNDDOWN</code> in <a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/riscv.h#L338-L339">xv6</a>, which stand for <em>page round up</em> and <em>page round down</em>, are implemented in this way.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/10493411/what-is-bit-masking">c - What is bit masking? - Stack Overflow</a></li>
+<li><a target="_blank" rel="noopener" href="https://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2">Bit Twiddling Hacks - Round up to the next highest power of 2</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/43289022/what-do-pgroundup-and-pgrounddown-in-xv6-mean">c - What do PGROUNDUP and PGROUNDDOWN in xv6 mean? - Stack Overflow</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv">mit-pdos&#x2F;xv6-riscv: Xv6 for RISC-V</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Bitwise_operation">Bitwise operation - Wikipedia</a></li>
+</ol>
 
                 
               </div>
@@ -377,7 +363,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E9%9A%8F%E7%AC%94/" class="category-chain-item">随笔</a>
+  <a href="/categories/Algorithms-Data-Structures/" class="category-chain-item">Algorithms &amp; Data Structures</a>
   
   
 
@@ -392,11 +378,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E8%AF%BB%E4%B9%A6/">#读书</a>
+        <a href="/tags/Bitwise-Operation/">#Bitwise Operation</a>
       
-        <a href="/tags/%E7%94%9F%E6%B4%BB/">#生活</a>
+        <a href="/tags/Optimization/">#Optimization</a>
       
-        <a href="/tags/Summary/">#Summary</a>
+        <a href="/tags/xv6/">#xv6</a>
+      
+        <a href="/tags/Memory/">#Memory</a>
       
     </div>
   
@@ -408,32 +396,32 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Preliminary Year Summary</div>
-      <div>https://lingkkang.github.io/2022/05/19/year-1-summary/</div>
+      <div>Align Number to Multiple</div>
+      <div>https://lingkkang.github.io/2023/03/12/align/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>作者</div>
+          <div>Author</div>
           <div>Lingkang</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2022年5月19日</div>
+          <div>Posted on</div>
+          <div>March 12, 2023</div>
         </div>
       
       
       
         <div class="license-meta-item">
-          <div>许可协议</div>
+          <div>Licensed under</div>
           <div>
             
               
               
                 <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
                     <i class="iconfont icon-by"></i>
                   </span>
                 </a>
@@ -453,19 +441,13 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/17/Prism-Plugin-ERROR/" title="Prism Plugin ERROR">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Prism Plugin ERROR</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/16/Linked-List-in-Python/" title="Linked List in Python">
-                        <span class="hidden-mobile">Linked List in Python</span>
-                        <span class="visible-mobile">下一篇</span>
+                      <a href="/2023/02/28/polling-read-write/" title="Read and Write by Polling with UART">
+                        <span class="hidden-mobile">Read and Write by Polling with UART</span>
+                        <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -486,7 +468,7 @@
     <div id="toc">
   <p class="toc-header">
     <i class="iconfont icon-list"></i>
-    <span>目录</span>
+    <span>Table of Contents</span>
   </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
@@ -542,7 +524,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -550,7 +532,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -727,7 +709,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
   </noscript>
 </body>
 </html>
