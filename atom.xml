@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-03-12T03:28:11.862Z</updated>
+  <updated>2023-04-02T09:38:50.219Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -17,11 +17,40 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Peripheral Interrupt Procedure in RISC-V</title>
+    <link href="https://lingkkang.github.io/2023/04/02/peripheral-interrupt/"/>
+    <id>https://lingkkang.github.io/2023/04/02/peripheral-interrupt/</id>
+    <published>2023-04-02T07:06:05.000Z</published>
+    <updated>2023-04-02T09:38:50.219Z</updated>
+    
+    
+    <summary type="html">Some notes on PLIC and external interrupt in machine mode.</summary>
+    
+    
+    
+    <category term="Operating System" scheme="https://lingkkang.github.io/categories/Operating-System/"/>
+    
+    
+    <category term="RISC-V" scheme="https://lingkkang.github.io/tags/RISC-V/"/>
+    
+    <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
+    
+    <category term="Interrupt" scheme="https://lingkkang.github.io/tags/Interrupt/"/>
+    
+    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
+    
+    <category term="PLIC" scheme="https://lingkkang.github.io/tags/PLIC/"/>
+    
+    <category term="FDT" scheme="https://lingkkang.github.io/tags/FDT/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Align Number to Multiple</title>
     <link href="https://lingkkang.github.io/2023/03/12/align/"/>
     <id>https://lingkkang.github.io/2023/03/12/align/</id>
     <published>2023-03-12T01:28:05.000Z</published>
-    <updated>2023-03-12T03:28:11.862Z</updated>
+    <updated>2023-03-12T03:30:19.096Z</updated>
     
     
     <summary type="html">Aligning an integer to its closest muplitple of number m is easy. But if m is a power of 2, using bitwise operations can help a lot.</summary>
@@ -63,6 +92,8 @@
     <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
     
     <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
+    
+    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
     
     <category term="UART" scheme="https://lingkkang.github.io/tags/UART/"/>
     
@@ -129,27 +160,6 @@
     
     
     <category term="生活" scheme="https://lingkkang.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Application of Cofactor Expansion</title>
-    <link href="https://lingkkang.github.io/2023/01/08/cofactor-expansion/"/>
-    <id>https://lingkkang.github.io/2023/01/08/cofactor-expansion/</id>
-    <published>2023-01-08T00:46:06.000Z</published>
-    <updated>2023-01-09T01:20:30.000Z</updated>
-    
-    
-    <summary type="html">Real-life usage of cofactor expansion.</summary>
-    
-    
-    
-    <category term="Mathematics" scheme="https://lingkkang.github.io/categories/Mathematics/"/>
-    
-    
-    <category term="Python" scheme="https://lingkkang.github.io/tags/Python/"/>
-    
-    <category term="Linear Algebra" scheme="https://lingkkang.github.io/tags/Linear-Algebra/"/>
     
   </entry>
   

@@ -16,27 +16,29 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Aligning an integer to its closest muplitple of number m is easy. But if m is a power of 2, using bitwise operations can help a lot.">
+    <meta name="description" content="Some notes on PLIC and external interrupt in machine mode.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Align Number to Multiple">
-<meta property="og:url" content="https://lingkkang.github.io/2023/03/12/align/index.html">
+<meta property="og:title" content="Peripheral Interrupt Procedure in RISC-V">
+<meta property="og:url" content="https://lingkkang.github.io/2023/04/02/peripheral-interrupt/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Aligning an integer to its closest muplitple of number m is easy. But if m is a power of 2, using bitwise operations can help a lot.">
+<meta property="og:description" content="Some notes on PLIC and external interrupt in machine mode.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-03-12T01:28:05.000Z">
-<meta property="article:modified_time" content="2023-03-12T03:30:19.096Z">
+<meta property="article:published_time" content="2023-04-02T07:06:05.000Z">
+<meta property="article:modified_time" content="2023-04-02T09:38:50.219Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="Bitwise Operation">
-<meta property="article:tag" content="Optimization">
-<meta property="article:tag" content="xv6">
-<meta property="article:tag" content="Memory">
+<meta property="article:tag" content="RISC-V">
+<meta property="article:tag" content="QEMU">
+<meta property="article:tag" content="Interrupt">
+<meta property="article:tag" content="Peripheral">
+<meta property="article:tag" content="PLIC">
+<meta property="article:tag" content="FDT">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Align Number to Multiple - Lingkang&#39;s Blog</title>
+  <title>Peripheral Interrupt Procedure in RISC-V - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -219,7 +221,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Align Number to Multiple"></span>
+            <span id="subtitle" data-typed-text="Peripheral Interrupt Procedure in RISC-V"></span>
           
         </div>
 
@@ -230,8 +232,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-12 09:28" pubdate>
-          March 12, 2023 am
+        <time datetime="2023-04-02 15:06" pubdate>
+          April 2, 2023 pm
         </time>
       </span>
     
@@ -242,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k words
+          2.6k words
         
       </span>
     
@@ -253,7 +255,7 @@
         
         
         
-          10 mins
+          22 mins
         
       </span>
     
@@ -291,12 +293,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Align Number to Multiple</h1>
+            <h1 style="display: none">Peripheral Interrupt Procedure in RISC-V</h1>
             
               <p class="note note-info">
                 
                   
-                    Last updated on March 12, 2023 am
+                    Last updated on April 2, 2023 pm
                   
                 
               </p>
@@ -304,46 +306,88 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Align-Number-to-Multiple"><a href="#Align-Number-to-Multiple" class="headerlink" title="Align Number to Multiple"></a>Align Number to Multiple</h1><p>Aligning an integer, say <code>n</code>, to its closest muplitple of <code>m</code> is easy by using <code>round(n / m) * m</code> (arithmetic division) or <code>(n + m - 1) / m * m</code> (<em>Euclidean division</em>).</p>
-<p>However, if <code>m</code> is a power of 2, i.e., <code>m</code> &#x3D; 2<sup>k</sup>, using bitwise operations can help a lot.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C">aligned_n = (n + (m - <span class="hljs-number">1</span>)) &amp; ~(m - <span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
-
-<h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><p>This should be viewed from a binary perspective.</p>
-<p>For example, say <code>m = 8</code> and demonstrate it in 8-bit binary.</p>
+                <h1 id="Peripheral-Interrupt-Procedure-in-RISC-V"><a href="#Peripheral-Interrupt-Procedure-in-RISC-V" class="headerlink" title="Peripheral Interrupt Procedure in RISC-V"></a>Peripheral Interrupt Procedure in RISC-V</h1><p>The procedure of peripheral interrupt in RISC-V is quite complicated and multi-layered.</p>
+<p>Basically, all peripheral interrupts are reported to <strong>platform-level interrupt controller</strong> or <strong>PLIC</strong>, which is similar to PIC (programmable interrupt controller) in x86 architecture.</p>
+<p>The memory mapped from PLIC varied by platforms. Chapter 3 of official <a target="_blank" rel="noopener" href="https://github.com/riscv/riscv-plic-spec">PLIC Specification</a> gives a sample. In QEMU, it could be found under <a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/tree/master/include/hw/riscv"><code>qemu/include/hw/riscv</code></a> folder.</p>
+<h2 id="Registers"><a href="#Registers" class="headerlink" title="Registers"></a>Registers</h2><p>There are (five types of) registers for PLIC:</p>
+<ul>
+<li><code>priority</code></li>
+<li><code>pending</code></li>
+<li><code>enable</code></li>
+<li><code>threshold</code></li>
+<li><code>claim</code>&#x2F;<code>complete</code></li>
+</ul>
+<h3 id="Priorities"><a href="#Priorities" class="headerlink" title="Priorities"></a>Priorities</h3><p>The priorities of external interrupts are defined in <code>priority</code> registers, whose ranges from <code>1</code> to <code>1023</code> (1023 sources in total, also known as <em>interrupt identifiers</em>, ID). Note that <code>0</code> is reserved for no interrupt occurring (see <a href=""></a>)</p>
+<p>1 interrupt source maps to 1 register. For example, </p>
 <table>
 <thead>
 <tr>
-<th>variable</th>
-<th align="center">number</th>
-<th align="center">binary</th>
+<th>Address</th>
+<th>Mapping</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>m</code></td>
-<td align="center">8</td>
-<td align="center">0000 1000</td>
+<td><code>base</code> + <code>0x0000</code></td>
+<td><strong>Reserved</strong></td>
 </tr>
 <tr>
-<td><code>m - 1</code></td>
-<td align="center">7</td>
-<td align="center">0000 0111</td>
+<td><code>base</code> + <code>0x0004</code></td>
+<td>priority value of Interrupt source 1</td>
 </tr>
 <tr>
-<td><code>~(m - 1)</code></td>
-<td align="center">&#x2F;</td>
-<td align="center">1111 1000</td>
+<td><code>base</code> + <code>0x0008</code></td>
+<td>priority value of Interrupt source 2</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td><code>base</code> + <code>0x0FFC</code></td>
+<td>priority value of Interrupt source 1023</td>
 </tr>
 </tbody></table>
-<p>By applying <em>bitwise AND</em> <code>&amp;</code>, the lower bits of the number are cleaned to <code>0</code>, leaving the result becoming the multiple of <code>m</code>.</p>
-<p>If not adding <code>m - 1</code>, the result will be the closest multiple smaller than <code>n</code>, and adding it makes sure the result is bigger than the original number <code>n</code>.</p>
-<h2 id="Remark"><a href="#Remark" class="headerlink" title="Remark"></a>Remark</h2><p><code>(n + m/2) &amp; ~(m-1)</code> is an alternative, and adding a number ranging from <code>m/2</code> to <code>m - 1</code> is technically all fine.</p>
-<p>This method could be helpful in memory page alignment, where standard library is not available and we can sacrifice a little bit of readability of the code. For example, <code>PGROUNDUP</code> and <code>PGROUNDDOWN</code> in <a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/riscv.h#L338-L339">xv6</a>, which stand for <em>page round up</em> and <em>page round down</em>, are implemented in this way.</p>
+<p>The value in the <code>priority</code> is the priority level of mapped resource. <code>0</code> is representing <em>never interrupt</em>, and the larger the higher priority.</p>
+<p>If two interrupt resources have the same priority level, PLIC will get the smallest ID first and give the interrupt to Hart to handle.</p>
+<h4 id="QEMU-Specific"><a href="#QEMU-Specific" class="headerlink" title="QEMU Specific"></a>QEMU Specific</h4><p>QEMU’s RISC-V virtual machine <a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c"><code>virt</code></a> supports 7 levels of priority.</p>
+<p>In its <code>create_pcie_irq_map</code> function, it set that</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C">qemu_fdt_setprop_cells(fdt, nodename, <span class="hljs-string">&quot;interrupt-map-mask&quot;</span>,<br>                           <span class="hljs-number">0x1800</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0x7</span>);<br></code></pre></td></tr></table></figure>
+
+<p><code>qemu_fdt_setprop_cells</code> is a function-like macro defined in <code>qemu/include/sysemu/device_tree.h</code>, helping set up. <code>fdt</code> stands for <em>flattened device tree</em> and represents the device tree blob pointer. And <code>prop</code> means properties. It treats <code>interrupt-map-mask</code> as a property whit smallest value <code>0</code> and biggest value <code>7</code>.</p>
+<h3 id="Pending"><a href="#Pending" class="headerlink" title="Pending"></a>Pending</h3><p>Each bit of <code>pending</code> corresponds to one interrupt source, <code>1</code> for interrupt happening.  </p>
+<h2 id="Interrupt-Flow"><a href="#Interrupt-Flow" class="headerlink" title="Interrupt Flow"></a>Interrupt Flow</h2><p>When external interrupts come in:</p>
+<ol>
+<li><strong>PLIC</strong> checks their <code>priority</code><ul>
+<li>if same, get the one with the smallest interrupt source ID</li>
+</ul>
+</li>
+<li><strong>PLIC</strong> checks <code>enable</code></li>
+<li><strong>PLIC</strong> checks is the <code>priority</code> bigger than <code>threshold</code></li>
+<li><strong>PLIC</strong> sets corresponding <code>pending</code><ul>
+<li>HART’s running is interrupted and starts to handle the interrupt</li>
+</ul>
+</li>
+<li><strong>HART</strong> reads value from <code>claim</code> to know interrupt source ID</li>
+<li><strong>HART</strong> calls corresponding functions</li>
+<li><strong>HART</strong> writes back to <code>complete</code></li>
+<li><strong>HART</strong> returns to normal running</li>
+<li><strong>PLIC</strong> cleans the <code>pending</code></li>
+</ol>
+<h2 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h2><ol>
+<li>Define interrupt source ID</li>
+<li>Set <code>priority</code></li>
+<li>Set <code>enable</code></li>
+<li>Set <code>threshold</code></li>
+<li>Set <code>MIE</code> bit in <code>mstatus</code>, M-mode global interrupt-enable bit (for M-mode)</li>
+<li>Set <code>MEIE</code> bit in <code>mie</code>, machine-level external interrupts enable bit in machine interrupt enable register.</li>
+</ol>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/10493411/what-is-bit-masking">c - What is bit masking? - Stack Overflow</a></li>
-<li><a target="_blank" rel="noopener" href="https://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2">Bit Twiddling Hacks - Round up to the next highest power of 2</a></li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/43289022/what-do-pgroundup-and-pgrounddown-in-xv6-mean">c - What do PGROUNDUP and PGROUNDDOWN in xv6 mean? - Stack Overflow</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv">mit-pdos&#x2F;xv6-riscv: Xv6 for RISC-V</a></li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Bitwise_operation">Bitwise operation - Wikipedia</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/riscv/riscv-plic-spec">riscv&#x2F;riscv-plic-spec: PLIC Specification</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Q5411w7z5/?p=21">[完结] 循序渐进，学习开发一个RISC-V上的操作系统 - 汪辰 - 2021春：第11章-外部设备中断_哔哩哔哩_bilibili</a></li>
+<li><a target="_blank" rel="noopener" href="https://picguides.com/beginner/interrupts.php">Interrupts - Beginner’s Guide to PIC Programming - picguides.com</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/cccriscv/mini-riscv-os/blob/master/doc/tw/07-ExterInterrupt.md">mini-riscv-os&#x2F;07-ExterInterrupt.md at master · cccriscv&#x2F;mini-riscv-os</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.osdev.org/PLIC">PLIC - OSDev Wiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.osdev.org/PIC">8259 PIC - OSDev Wiki</a></li>
 </ol>
 
                 
@@ -363,7 +407,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Algorithms-Data-Structures/" class="category-chain-item">Algorithms &amp; Data Structures</a>
+  <a href="/categories/Operating-System/" class="category-chain-item">Operating System</a>
   
   
 
@@ -378,13 +422,17 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Bitwise-Operation/">#Bitwise Operation</a>
+        <a href="/tags/RISC-V/">#RISC-V</a>
       
-        <a href="/tags/Optimization/">#Optimization</a>
+        <a href="/tags/QEMU/">#QEMU</a>
       
-        <a href="/tags/xv6/">#xv6</a>
+        <a href="/tags/Interrupt/">#Interrupt</a>
       
-        <a href="/tags/Memory/">#Memory</a>
+        <a href="/tags/Peripheral/">#Peripheral</a>
+      
+        <a href="/tags/PLIC/">#PLIC</a>
+      
+        <a href="/tags/FDT/">#FDT</a>
       
     </div>
   
@@ -396,8 +444,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Align Number to Multiple</div>
-      <div>https://lingkkang.github.io/2023/03/12/align/</div>
+      <div>Peripheral Interrupt Procedure in RISC-V</div>
+      <div>https://lingkkang.github.io/2023/04/02/peripheral-interrupt/</div>
     </div>
     <div class="license-meta">
       
@@ -409,7 +457,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 12, 2023</div>
+          <div>April 2, 2023</div>
         </div>
       
       
@@ -441,18 +489,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/02/peripheral-interrupt/" title="Peripheral Interrupt Procedure in RISC-V">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Peripheral Interrupt Procedure in RISC-V</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/28/polling-read-write/" title="Read and Write by Polling with UART">
-                        <span class="hidden-mobile">Read and Write by Polling with UART</span>
+                      <a href="/2023/03/12/align/" title="Align Number to Multiple">
+                        <span class="hidden-mobile">Align Number to Multiple</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
