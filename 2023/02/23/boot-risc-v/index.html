@@ -27,13 +27,13 @@
 <meta property="article:modified_time" content="2023-02-24T11:52:04.000Z">
 <meta property="article:author" content="Lingkang">
 <meta property="article:tag" content="C">
-<meta property="article:tag" content="xv6">
-<meta property="article:tag" content="Memory">
 <meta property="article:tag" content="Bootstrap">
 <meta property="article:tag" content="RISC-V">
 <meta property="article:tag" content="Assembly">
 <meta property="article:tag" content="Stack">
 <meta property="article:tag" content="QEMU">
+<meta property="article:tag" content="Memory">
+<meta property="article:tag" content="xv6">
 <meta property="article:tag" content="Register">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -314,7 +314,7 @@
 <h2 id="Some-Definitions"><a href="#Some-Definitions" class="headerlink" title="Some Definitions"></a>Some Definitions</h2><p>If you want, you can take a glance at <a href="#Code">code</a> first, and come back when encountering any problems.</p>
 <h3 id="Directives"><a href="#Directives" class="headerlink" title="Directives"></a>Directives</h3><p>All keywords begin with a period are called <a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/as/Pseudo-Ops.html"><strong>directives</strong></a>. They are not defined in RISC-V specification, but in assembler’s side, to give some hints to assembler. Its syntax may be different from assembler to assembler, and it’s not corresponding to any specific instruction.</p>
 <h3 id="Pseudoinstructions"><a href="#Pseudoinstructions" class="headerlink" title="Pseudoinstructions"></a>Pseudoinstructions</h3><p>Technically, <a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#-a-listing-of-standard-risc-v-pseudoinstructions"><strong>pseudoinstructions</strong></a> are not instruction. They resemble common instructions and are used to improve programming efficiency. One line of pseudo instruction may correspond to more than one instruction when assembled by assembler.</p>
-<p>For example, <code>li</code> (<a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#load-immediate">load immediately</a>) is a common pseudoinstruction.</p>
+<p>For example, <code>li</code> (<a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#load-immediate">load immediate</a>) is a common pseudoinstruction.</p>
 <h3 id="ABI"><a href="#ABI" class="headerlink" title="ABI"></a>ABI</h3><p>ABI stands for <strong>application binary interface</strong>. Instead of naming registers’ absolute location, say, <code>x0</code>, <code>x1</code> and so on, it is highly recommended to refer them with their <a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#general-registers">ABI</a>, such as <code>zero</code>, <code>ra</code> and so on.</p>
 <h3 id="CSR-and-Zicsr"><a href="#CSR-and-Zicsr" class="headerlink" title="CSR and Zicsr"></a>CSR and Zicsr</h3><p><strong>Control and status registers</strong> (CSR) are used to control and monitor the operation of various hardware components. They are part of privileged component in architechure, and thus, accessible by using different opcodes. These opcodes for CSRs are differently categorized and named as <strong>Zicsr</strong>.</p>
 <h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs RISCV">.globl _start<br><br>.equ STACK_SIZE, 1024<br>.equ CPU_NUM, 8<br><br>.section .text<br><br>_start:<br>    csrr t0, mhartid<br>    bnez t0, pend<br><br>    slli t0, t0, 10<br>    la sp, stacks + STACK_SIZE<br>    add sp, sp, t0<br><br>    j enter<br><br>stacks:<br>    .space STACK_SIZE * CPU_NUM<br><br>pend:<br>    wfi<br>    j pend<br><br>.end<br></code></pre></td></tr></table></figure>
@@ -397,10 +397,6 @@
       
         <a href="/tags/C/">#C</a>
       
-        <a href="/tags/xv6/">#xv6</a>
-      
-        <a href="/tags/Memory/">#Memory</a>
-      
         <a href="/tags/Bootstrap/">#Bootstrap</a>
       
         <a href="/tags/RISC-V/">#RISC-V</a>
@@ -410,6 +406,10 @@
         <a href="/tags/Stack/">#Stack</a>
       
         <a href="/tags/QEMU/">#QEMU</a>
+      
+        <a href="/tags/Memory/">#Memory</a>
+      
+        <a href="/tags/xv6/">#xv6</a>
       
         <a href="/tags/Register/">#Register</a>
       
