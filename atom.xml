@@ -35,9 +35,9 @@
     
     <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
     
-    <category term="Interrupt" scheme="https://lingkkang.github.io/tags/Interrupt/"/>
-    
     <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
+    
+    <category term="Interrupt" scheme="https://lingkkang.github.io/tags/Interrupt/"/>
     
     <category term="PLIC" scheme="https://lingkkang.github.io/tags/PLIC/"/>
     
@@ -93,13 +93,13 @@
     
     <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
     
-    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
-    
     <category term="UART" scheme="https://lingkkang.github.io/tags/UART/"/>
     
     <category term="Baud Rate" scheme="https://lingkkang.github.io/tags/Baud-Rate/"/>
     
     <category term="Polling" scheme="https://lingkkang.github.io/tags/Polling/"/>
+    
+    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
     
   </entry>
   
