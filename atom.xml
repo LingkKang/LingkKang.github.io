@@ -60,13 +60,13 @@
     <category term="Algorithms &amp; Data Structures" scheme="https://lingkkang.github.io/categories/Algorithms-Data-Structures/"/>
     
     
-    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
-    
-    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
-    
     <category term="Bitwise Operation" scheme="https://lingkkang.github.io/tags/Bitwise-Operation/"/>
     
     <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
+    
+    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
+    
+    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
     
   </entry>
   
@@ -87,9 +87,9 @@
     
     <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
     
-    <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
-    
     <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
+    
+    <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
     
     <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
     
@@ -120,6 +120,10 @@
     
     <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
     
+    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
+    
+    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
+    
     <category term="Bootstrap" scheme="https://lingkkang.github.io/tags/Bootstrap/"/>
     
     <category term="RISC-V" scheme="https://lingkkang.github.io/tags/RISC-V/"/>
@@ -129,10 +133,6 @@
     <category term="Stack" scheme="https://lingkkang.github.io/tags/Stack/"/>
     
     <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
-    
-    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
-    
-    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
     
     <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
     

@@ -8,7 +8,7 @@
     <link href="/2023/04/02/peripheral-interrupt/"/>
     <url>/2023/04/02/peripheral-interrupt/</url>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Peripheral-Interrupt-Procedure-in-RISC-V"><a href="#Peripheral-Interrupt-Procedure-in-RISC-V" class="headerlink" title="Peripheral Interrupt Procedure in RISC-V"></a>Peripheral Interrupt Procedure in RISC-V</h1><p>The procedure of peripheral interrupt in RISC-V is quite complicated and multi-layered.</p><p>Basically, all peripheral interrupts are reported to <strong>platform-level interrupt controller</strong> or <strong>PLIC</strong>, which is similar to PIC (programmable interrupt controller) in x86 architecture.</p><p>The memory mapped from PLIC varied by platforms. Chapter 3 of official <a href="https://github.com/riscv/riscv-plic-spec">PLIC Specification</a> gives a sample. In QEMU, it could be found under <a href="https://github.com/qemu/qemu/tree/master/include/hw/riscv"><code>qemu/include/hw/riscv</code></a> folder.</p><h2 id="Registers"><a href="#Registers" class="headerlink" title="Registers"></a>Registers</h2><p>There are (five types of) registers for PLIC:</p><ul><li><code>priority</code></li><li><code>pending</code></li><li><code>enable</code></li><li><code>threshold</code></li><li><code>claim</code>&#x2F;<code>complete</code></li></ul><h3 id="Priorities"><a href="#Priorities" class="headerlink" title="Priorities"></a>Priorities</h3><p>The priorities of external interrupts are defined in <code>priority</code> registers, whose ranges from <code>1</code> to <code>1023</code> (1023 sources in total, also known as <em>interrupt identifiers</em>, ID). Note that <code>0</code> is reserved for no interrupt occurring (see <a href=""></a>)</p><p>1 interrupt source maps to 1 register. For example, </p><table><thead><tr><th>Address</th><th>Mapping</th></tr></thead><tbody><tr><td><code>base</code> + <code>0x0000</code></td><td><strong>Reserved</strong></td></tr><tr><td><code>base</code> + <code>0x0004</code></td><td>priority value of Interrupt source 1</td></tr><tr><td><code>base</code> + <code>0x0008</code></td><td>priority value of Interrupt source 2</td></tr><tr><td>…</td><td>…</td></tr><tr><td><code>base</code> + <code>0x0FFC</code></td><td>priority value of Interrupt source 1023</td></tr></tbody></table><p>The value in the <code>priority</code> is the priority level of mapped resource. <code>0</code> is representing <em>never interrupt</em>, and the larger the higher priority.</p><p>If two interrupt resources have the same priority level, PLIC will get the smallest ID first and give the interrupt to Hart to handle.</p><h4 id="QEMU-Specific"><a href="#QEMU-Specific" class="headerlink" title="QEMU Specific"></a>QEMU Specific</h4><p>QEMU’s RISC-V virtual machine <a href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c"><code>virt</code></a> supports 7 levels of priority.</p><p>In its <code>create_pcie_irq_map</code> function, it set that</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C">qemu_fdt_setprop_cells(fdt, nodename, <span class="hljs-string">&quot;interrupt-map-mask&quot;</span>,<br>                           <span class="hljs-number">0x1800</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0x7</span>);<br></code></pre></td></tr></table></figure><p><code>qemu_fdt_setprop_cells</code> is a function-like macro defined in <code>qemu/include/sysemu/device_tree.h</code>, helping set up. <code>fdt</code> stands for <em>flattened device tree</em> and represents the device tree blob pointer. And <code>prop</code> means properties. It treats <code>interrupt-map-mask</code> as a property whit smallest value <code>0</code> and biggest value <code>7</code>.</p><h3 id="Pending"><a href="#Pending" class="headerlink" title="Pending"></a>Pending</h3><p>Each bit of <code>pending</code> corresponds to one interrupt source, <code>1</code> for interrupt happening.  </p><h2 id="Interrupt-Flow"><a href="#Interrupt-Flow" class="headerlink" title="Interrupt Flow"></a>Interrupt Flow</h2><p>When external interrupts come in:</p><ol><li><strong>PLIC</strong> checks their <code>priority</code><ul><li>if same, get the one with the smallest interrupt source ID</li></ul></li><li><strong>PLIC</strong> checks <code>enable</code></li><li><strong>PLIC</strong> checks is the <code>priority</code> bigger than <code>threshold</code></li><li><strong>PLIC</strong> sets corresponding <code>pending</code><ul><li>HART’s running is interrupted and starts to handle the interrupt</li></ul></li><li><strong>HART</strong> reads value from <code>claim</code> to know interrupt source ID</li><li><strong>HART</strong> calls corresponding functions</li><li><strong>HART</strong> writes back to <code>complete</code></li><li><strong>HART</strong> returns to normal running</li><li><strong>PLIC</strong> cleans the <code>pending</code></li></ol><h2 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h2><ol><li>Define interrupt source ID</li><li>Set <code>priority</code></li><li>Set <code>enable</code></li><li>Set <code>threshold</code></li><li>Set <code>MIE</code> bit in <code>mstatus</code>, M-mode global interrupt-enable bit (for M-mode)</li><li>Set <code>MEIE</code> bit in <code>mie</code>, machine-level external interrupts enable bit in machine interrupt enable register.</li></ol><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol><li><a href="https://github.com/riscv/riscv-plic-spec">riscv&#x2F;riscv-plic-spec: PLIC Specification</a></li><li><a href="https://www.bilibili.com/video/BV1Q5411w7z5/?p=21">[完结] 循序渐进，学习开发一个RISC-V上的操作系统 - 汪辰 - 2021春：第11章-外部设备中断_哔哩哔哩_bilibili</a></li><li><a href="https://picguides.com/beginner/interrupts.php">Interrupts - Beginner’s Guide to PIC Programming - picguides.com</a></li><li><a href="https://github.com/cccriscv/mini-riscv-os/blob/master/doc/tw/07-ExterInterrupt.md">mini-riscv-os&#x2F;07-ExterInterrupt.md at master · cccriscv&#x2F;mini-riscv-os</a></li><li><a href="https://wiki.osdev.org/PLIC">PLIC - OSDev Wiki</a></li><li><a href="https://wiki.osdev.org/PIC">8259 PIC - OSDev Wiki</a></li></ol>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Peripheral-Interrupt-Procedure-in-RISC-V"><a href="#Peripheral-Interrupt-Procedure-in-RISC-V" class="headerlink" title="Peripheral Interrupt Procedure in RISC-V"></a>Peripheral Interrupt Procedure in RISC-V</h1><p>The procedure of peripheral interrupt in RISC-V is quite complicated and multi-layered.</p><p>Basically, all peripheral interrupts are reported to <strong>platform-level interrupt controller</strong> or <strong>PLIC</strong>, which is similar to PIC (programmable interrupt controller) in x86 architecture.</p><p>The memory mapped from PLIC varied by platforms. Chapter 3 of official <a href="https://github.com/riscv/riscv-plic-spec">PLIC Specification</a> gives a sample. In QEMU, it could be found under <a href="https://github.com/qemu/qemu/tree/master/include/hw/riscv"><code>qemu/include/hw/riscv</code></a> folder.</p><h2 id="Registers"><a href="#Registers" class="headerlink" title="Registers"></a>Registers</h2><p>There are (five types of) registers for PLIC:</p><ul><li><code>priority</code></li><li><code>pending</code></li><li><code>enable</code></li><li><code>threshold</code></li><li><code>claim</code>&#x2F;<code>complete</code></li></ul><h3 id="Priorities"><a href="#Priorities" class="headerlink" title="Priorities"></a>Priorities</h3><p>The priorities of external interrupts are defined in <code>priority</code> registers, whose ranges from <code>1</code> to <code>1023</code> (1023 sources in total, also known as <em>interrupt identifiers</em>, ID). Note that <code>0</code> is reserved for no interrupt occurring.</p><p>1 interrupt source maps to 1 register. For example, </p><table><thead><tr><th>Address</th><th>Mapping</th></tr></thead><tbody><tr><td><code>base</code> + <code>0x0000</code></td><td><strong>Reserved</strong></td></tr><tr><td><code>base</code> + <code>0x0004</code></td><td>priority value of Interrupt source 1</td></tr><tr><td><code>base</code> + <code>0x0008</code></td><td>priority value of Interrupt source 2</td></tr><tr><td>…</td><td>…</td></tr><tr><td><code>base</code> + <code>0x0FFC</code></td><td>priority value of Interrupt source 1023</td></tr></tbody></table><p>The value in the <code>priority</code> is the priority level of mapped resource. <code>0</code> is representing <em>never interrupt</em>, and the larger the higher priority.</p><p>If two interrupt resources have the same priority level, PLIC will get the smallest ID first and give the interrupt to Hart to handle.</p><h4 id="QEMU-Specific"><a href="#QEMU-Specific" class="headerlink" title="QEMU Specific"></a>QEMU Specific</h4><p>QEMU’s RISC-V virtual machine <a href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c"><code>virt</code></a> supports 7 levels of priority.</p><p>In its <code>create_pcie_irq_map</code> function, it set that</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C">qemu_fdt_setprop_cells(fdt, nodename, <span class="hljs-string">&quot;interrupt-map-mask&quot;</span>,<br>                           <span class="hljs-number">0x1800</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0x7</span>);<br></code></pre></td></tr></table></figure><p><code>qemu_fdt_setprop_cells</code> is a function-like macro defined in <code>qemu/include/sysemu/device_tree.h</code>, helping set up. <code>fdt</code> stands for <em>flattened device tree</em> and represents the device tree blob pointer. And <code>prop</code> means properties. It treats <code>interrupt-map-mask</code> as a property whit smallest value <code>0</code> and biggest value <code>7</code>.</p><h3 id="Pending"><a href="#Pending" class="headerlink" title="Pending"></a>Pending</h3><p>Each bit of <code>pending</code> corresponds to one interrupt source, <code>1</code> for interrupt happening.  </p><h2 id="Interrupt-Flow"><a href="#Interrupt-Flow" class="headerlink" title="Interrupt Flow"></a>Interrupt Flow</h2><p>When external interrupts come in:</p><ol><li><strong>PLIC</strong> checks their <code>priority</code><ul><li>if same, get the one with the smallest interrupt source ID</li></ul></li><li><strong>PLIC</strong> checks <code>enable</code></li><li><strong>PLIC</strong> checks is the <code>priority</code> bigger than <code>threshold</code></li><li><strong>PLIC</strong> sets corresponding <code>pending</code><ul><li>HART’s running is interrupted and starts to handle the interrupt</li></ul></li><li><strong>HART</strong> reads value from <code>claim</code> to know interrupt source ID</li><li><strong>HART</strong> calls corresponding functions</li><li><strong>HART</strong> writes back to <code>complete</code></li><li><strong>HART</strong> returns to normal running</li><li><strong>PLIC</strong> cleans the <code>pending</code></li></ol><h2 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h2><ol><li>Define interrupt source ID</li><li>Set <code>priority</code></li><li>Set <code>enable</code></li><li>Set <code>threshold</code></li><li>Set <code>MIE</code> bit in <code>mstatus</code>, M-mode global interrupt-enable bit (for M-mode)</li><li>Set <code>MEIE</code> bit in <code>mie</code>, machine-level external interrupts enable bit in machine interrupt enable register.</li></ol><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol><li><a href="https://github.com/riscv/riscv-plic-spec">riscv&#x2F;riscv-plic-spec: PLIC Specification</a></li><li><a href="https://www.bilibili.com/video/BV1Q5411w7z5/?p=21">[完结] 循序渐进，学习开发一个RISC-V上的操作系统 - 汪辰 - 2021春：第11章-外部设备中断_哔哩哔哩_bilibili</a></li><li><a href="https://picguides.com/beginner/interrupts.php">Interrupts - Beginner’s Guide to PIC Programming - picguides.com</a></li><li><a href="https://github.com/cccriscv/mini-riscv-os/blob/master/doc/tw/07-ExterInterrupt.md">mini-riscv-os&#x2F;07-ExterInterrupt.md at master · cccriscv&#x2F;mini-riscv-os</a></li><li><a href="https://wiki.osdev.org/PLIC">PLIC - OSDev Wiki</a></li><li><a href="https://wiki.osdev.org/PIC">8259 PIC - OSDev Wiki</a></li></ol>]]></content>
     
     
     <categories>
@@ -55,13 +55,13 @@
     
     <tags>
       
-      <tag>Memory</tag>
-      
-      <tag>xv6</tag>
-      
       <tag>Bitwise Operation</tag>
       
       <tag>Optimization</tag>
+      
+      <tag>xv6</tag>
+      
+      <tag>Memory</tag>
       
     </tags>
     
@@ -88,9 +88,9 @@
       
       <tag>C</tag>
       
-      <tag>QEMU</tag>
-      
       <tag>xv6</tag>
+      
+      <tag>QEMU</tag>
       
       <tag>Register</tag>
       
@@ -127,6 +127,10 @@
       
       <tag>C</tag>
       
+      <tag>xv6</tag>
+      
+      <tag>Memory</tag>
+      
       <tag>Bootstrap</tag>
       
       <tag>RISC-V</tag>
@@ -136,10 +140,6 @@
       <tag>Stack</tag>
       
       <tag>QEMU</tag>
-      
-      <tag>Memory</tag>
-      
-      <tag>xv6</tag>
       
       <tag>Register</tag>
       
@@ -328,11 +328,11 @@
     
     <tags>
       
+      <tag>Python</tag>
+      
       <tag>Tree</tag>
       
       <tag>Binary Tree</tag>
-      
-      <tag>Python</tag>
       
       <tag>LeetCode</tag>
       
@@ -384,9 +384,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>Linked List</tag>
+      
+      <tag>Python</tag>
       
     </tags>
     
@@ -467,11 +467,11 @@
     
     <tags>
       
+      <tag>Linked List</tag>
+      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
-      
-      <tag>Linked List</tag>
       
     </tags>
     
