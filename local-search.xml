@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Manipulate 64-bit value with 32-bit registers</title>
+    <link href="/2023/04/15/64bit-val-in-32/"/>
+    <url>/2023/04/15/64bit-val-in-32/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Manipulate-64-bit-value-with-32-bit-registers"><a href="#Manipulate-64-bit-value-with-32-bit-registers" class="headerlink" title="Manipulate 64-bit value with 32-bit registers"></a>Manipulate 64-bit value with 32-bit registers</h1><p>Say, a 64-bit unsigned integer is stored at two 32-bit registers, <code>s0</code> (lower bits) and <code>s1</code> (higher bits) respectively.</p><h2 id="Addition"><a href="#Addition" class="headerlink" title="Addition"></a>Addition</h2><p>And now, we need to add a 32-bit unsigned integer stored at register <code>t0</code> to it, how could we do.</p><p>Recall the feature of two’s complement in binary, integer overflow is same as left a carry forgotten.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ASM">mv          t1, s0      # save a copy of lower bits<br>add         s0, s0, t0  # add to lower bits<br>sltu        t2, s0, t1  # check for carry<br>addi        s1, s1, t2  # add carry<br></code></pre></td></tr></table></figure><p>Here <code>sltu</code> stands for <em>set less than unsigned</em>, meaning that if <code>s0</code> is less than <code>t1</code>, <code>t2</code> will be set to <code>1</code>, otherwise, <code>t2</code> will be <code>0</code>. This is just what we need.</p><p>If the new lower 32 bits is smaller than the original one (at <code>t1</code>), meaning there is an overflow, so we should increase the higher 32 bits <code>s1</code> by 1.</p><h2 id="Subtraction"><a href="#Subtraction" class="headerlink" title="Subtraction"></a>Subtraction</h2><p>This can also apply to subtraction.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asm">mv          t1, s0<br>sub         s0, s0, t1<br>sltu        t2, s0, t1<br>addi        t2, t2, 1<br>add         s1, s1, t2<br></code></pre></td></tr></table></figure><h2 id="More-Details"><a href="#More-Details" class="headerlink" title="More Details"></a>More Details</h2><p>Take 4 bits and 8 bits as an example.</p><table><thead><tr><th>Meaning</th><th align="right">binary</th><th>decimal</th></tr></thead><tbody><tr><td><em>1.</em> 8 bits unsigned integer</td><td align="right"><code>0x0001_0101</code></td><td>21</td></tr><tr><td><em>2.</em> 4 bits unsigned integer <code>t0</code></td><td align="right"><code>0x0111</code></td><td>7</td></tr><tr><td><em>3.</em> difference in 8 bits</td><td align="right"><code>0x0000_1110</code></td><td>14</td></tr><tr><td><em>4.</em> opposite number of <code>t0</code></td><td align="right"><code>0x1001</code></td><td>-</td></tr><tr><td><em>5.</em> add <em>4</em> to lower bits</td><td align="right"><code>0x1110</code></td><td>-</td></tr></tbody></table><p>If borrow occurred, value in <em>5</em> will greater than the lower bits of the original number.</p><p>In other words, if new lower bits is less than the original one, <code>t2</code> will be set to <code>1</code> and then <code>0</code>, there is no borrow. Otherwise, <code>t2</code> will be set to <code>0</code> and then <code>-1</code>, take away one from higher bits.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Algorithms &amp; Data Structures</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RISC-V</tag>
+      
+      <tag>Register</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Peripheral Interrupt Procedure in RISC-V</title>
     <link href="/2023/04/02/peripheral-interrupt/"/>
     <url>/2023/04/02/peripheral-interrupt/</url>
@@ -24,9 +51,9 @@
       
       <tag>QEMU</tag>
       
-      <tag>Peripheral</tag>
-      
       <tag>Interrupt</tag>
+      
+      <tag>Peripheral</tag>
       
       <tag>PLIC</tag>
       
@@ -55,13 +82,13 @@
     
     <tags>
       
-      <tag>Bitwise Operation</tag>
-      
-      <tag>Optimization</tag>
+      <tag>Memory</tag>
       
       <tag>xv6</tag>
       
-      <tag>Memory</tag>
+      <tag>Bitwise Operation</tag>
+      
+      <tag>Optimization</tag>
       
     </tags>
     
@@ -88,19 +115,19 @@
       
       <tag>C</tag>
       
-      <tag>xv6</tag>
+      <tag>Register</tag>
       
       <tag>QEMU</tag>
       
-      <tag>Register</tag>
+      <tag>xv6</tag>
+      
+      <tag>Peripheral</tag>
       
       <tag>UART</tag>
       
       <tag>Baud Rate</tag>
       
       <tag>Polling</tag>
-      
-      <tag>Peripheral</tag>
       
     </tags>
     
@@ -127,13 +154,11 @@
       
       <tag>C</tag>
       
-      <tag>xv6</tag>
+      <tag>RISC-V</tag>
       
-      <tag>Memory</tag>
+      <tag>Register</tag>
       
       <tag>Bootstrap</tag>
-      
-      <tag>RISC-V</tag>
       
       <tag>Assembly</tag>
       
@@ -141,7 +166,9 @@
       
       <tag>QEMU</tag>
       
-      <tag>Register</tag>
+      <tag>Memory</tag>
+      
+      <tag>xv6</tag>
       
     </tags>
     

@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-04-02T09:40:14.000Z</updated>
+  <updated>2023-04-15T09:58:19.970Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Manipulate 64-bit value with 32-bit registers</title>
+    <link href="https://lingkkang.github.io/2023/04/15/64bit-val-in-32/"/>
+    <id>https://lingkkang.github.io/2023/04/15/64bit-val-in-32/</id>
+    <published>2023-04-15T09:09:38.000Z</published>
+    <updated>2023-04-15T09:58:19.970Z</updated>
+    
+    
+    <summary type="html">How to add and subtract a 32-bit unsigned number to/from a 62-bit unsigned number stored in two registers.</summary>
+    
+    
+    
+    <category term="Algorithms &amp; Data Structures" scheme="https://lingkkang.github.io/categories/Algorithms-Data-Structures/"/>
+    
+    
+    <category term="RISC-V" scheme="https://lingkkang.github.io/tags/RISC-V/"/>
+    
+    <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
+    
+  </entry>
   
   <entry>
     <title>Peripheral Interrupt Procedure in RISC-V</title>
@@ -35,9 +56,9 @@
     
     <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
     
-    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
-    
     <category term="Interrupt" scheme="https://lingkkang.github.io/tags/Interrupt/"/>
+    
+    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
     
     <category term="PLIC" scheme="https://lingkkang.github.io/tags/PLIC/"/>
     
@@ -60,13 +81,13 @@
     <category term="Algorithms &amp; Data Structures" scheme="https://lingkkang.github.io/categories/Algorithms-Data-Structures/"/>
     
     
-    <category term="Bitwise Operation" scheme="https://lingkkang.github.io/tags/Bitwise-Operation/"/>
-    
-    <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
+    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
     
     <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
     
-    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
+    <category term="Bitwise Operation" scheme="https://lingkkang.github.io/tags/Bitwise-Operation/"/>
+    
+    <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
     
   </entry>
   
@@ -87,19 +108,19 @@
     
     <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
     
-    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
+    <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
     
     <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
     
-    <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
+    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
+    
+    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
     
     <category term="UART" scheme="https://lingkkang.github.io/tags/UART/"/>
     
     <category term="Baud Rate" scheme="https://lingkkang.github.io/tags/Baud-Rate/"/>
     
     <category term="Polling" scheme="https://lingkkang.github.io/tags/Polling/"/>
-    
-    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
     
   </entry>
   
@@ -120,13 +141,11 @@
     
     <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
     
-    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
+    <category term="RISC-V" scheme="https://lingkkang.github.io/tags/RISC-V/"/>
     
-    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
+    <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
     
     <category term="Bootstrap" scheme="https://lingkkang.github.io/tags/Bootstrap/"/>
-    
-    <category term="RISC-V" scheme="https://lingkkang.github.io/tags/RISC-V/"/>
     
     <category term="Assembly" scheme="https://lingkkang.github.io/tags/Assembly/"/>
     
@@ -134,32 +153,9 @@
     
     <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
     
-    <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
+    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
     
-  </entry>
-  
-  <entry>
-    <title>随想两则</title>
-    <link href="https://lingkkang.github.io/2023/02/22/prose01/"/>
-    <id>https://lingkkang.github.io/2023/02/22/prose01/</id>
-    <published>2023-02-21T16:08:15.000Z</published>
-    <updated>2023-02-22T01:50:00.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="随笔" scheme="https://lingkkang.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
-    
-    
-    <category term="生活" scheme="https://lingkkang.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
     
   </entry>
   

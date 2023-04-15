@@ -16,32 +16,25 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Basic boot process of a RISC-V hardware, with sample bootstrap assembly code explained.">
+    <meta name="description" content="How to add and subtract a 32-bit unsigned number to&#x2F;from a 62-bit unsigned number stored in two registers.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RISC-V Machine Boot Code">
-<meta property="og:url" content="https://lingkkang.github.io/2023/02/23/boot-risc-v/index.html">
+<meta property="og:title" content="Manipulate 64-bit value with 32-bit registers">
+<meta property="og:url" content="https://lingkkang.github.io/2023/04/15/64bit-val-in-32/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Basic boot process of a RISC-V hardware, with sample bootstrap assembly code explained.">
+<meta property="og:description" content="How to add and subtract a 32-bit unsigned number to&#x2F;from a 62-bit unsigned number stored in two registers.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-02-22T16:05:26.000Z">
-<meta property="article:modified_time" content="2023-02-24T11:52:04.000Z">
+<meta property="article:published_time" content="2023-04-15T09:09:38.000Z">
+<meta property="article:modified_time" content="2023-04-15T09:58:19.970Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="C">
 <meta property="article:tag" content="RISC-V">
 <meta property="article:tag" content="Register">
-<meta property="article:tag" content="Bootstrap">
-<meta property="article:tag" content="Assembly">
-<meta property="article:tag" content="Stack">
-<meta property="article:tag" content="QEMU">
-<meta property="article:tag" content="Memory">
-<meta property="article:tag" content="xv6">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>RISC-V Machine Boot Code - Lingkang&#39;s Blog</title>
+  <title>Manipulate 64-bit value with 32-bit registers - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -224,7 +217,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="RISC-V Machine Boot Code"></span>
+            <span id="subtitle" data-typed-text="Manipulate 64-bit value with 32-bit registers"></span>
           
         </div>
 
@@ -235,8 +228,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-23 00:05" pubdate>
-          February 23, 2023 am
+        <time datetime="2023-04-15 17:09" pubdate>
+          April 15, 2023 pm
         </time>
       </span>
     
@@ -247,7 +240,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.5k words
+          1.2k words
         
       </span>
     
@@ -258,7 +251,7 @@
         
         
         
-          46 mins
+          10 mins
         
       </span>
     
@@ -296,12 +289,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">RISC-V Machine Boot Code</h1>
+            <h1 style="display: none">Manipulate 64-bit value with 32-bit registers</h1>
             
               <p class="note note-info">
                 
                   
-                    Last updated on February 24, 2023 pm
+                    Last updated on April 15, 2023 pm
                   
                 
               </p>
@@ -309,59 +302,53 @@
             
               <div class="markdown-body">
                 
-                <h1 id="RISC-V-Machine-Boot-Code"><a href="#RISC-V-Machine-Boot-Code" class="headerlink" title="RISC-V Machine Boot Code"></a>RISC-V Machine Boot Code</h1><p>Basically, when a RISC-V machine powers on, the bootloader built in hardware or emulator will go to memory address <a href="#Loading-Address"><code>0x8000_0000</code></a> to load an OS.</p>
-<p>At this time, the computer works in <strong>machine</strong> mode, and our <code>boot.S</code> needs to do something that can only be done in this privilege level. And here is a line-by-line explanation.</p>
-<h2 id="Some-Definitions"><a href="#Some-Definitions" class="headerlink" title="Some Definitions"></a>Some Definitions</h2><p>If you want, you can take a glance at <a href="#Code">code</a> first, and come back when encountering any problems.</p>
-<h3 id="Directives"><a href="#Directives" class="headerlink" title="Directives"></a>Directives</h3><p>All keywords begin with a period are called <a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/as/Pseudo-Ops.html"><strong>directives</strong></a>. They are not defined in RISC-V specification, but in assembler’s side, to give some hints to assembler. Its syntax may be different from assembler to assembler, and it’s not corresponding to any specific instruction.</p>
-<h3 id="Pseudoinstructions"><a href="#Pseudoinstructions" class="headerlink" title="Pseudoinstructions"></a>Pseudoinstructions</h3><p>Technically, <a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#-a-listing-of-standard-risc-v-pseudoinstructions"><strong>pseudoinstructions</strong></a> are not instruction. They resemble common instructions and are used to improve programming efficiency. One line of pseudo instruction may correspond to more than one instruction when assembled by assembler.</p>
-<p>For example, <code>li</code> (<a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#load-immediate">load immediate</a>) is a common pseudoinstruction.</p>
-<h3 id="ABI"><a href="#ABI" class="headerlink" title="ABI"></a>ABI</h3><p>ABI stands for <strong>application binary interface</strong>. Instead of naming registers’ absolute location, say, <code>x0</code>, <code>x1</code> and so on, it is highly recommended to refer them with their <a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#general-registers">ABI</a>, such as <code>zero</code>, <code>ra</code> and so on.</p>
-<h3 id="CSR-and-Zicsr"><a href="#CSR-and-Zicsr" class="headerlink" title="CSR and Zicsr"></a>CSR and Zicsr</h3><p><strong>Control and status registers</strong> (CSR) are used to control and monitor the operation of various hardware components. They are part of privileged component in architechure, and thus, accessible by using different opcodes. These opcodes for CSRs are differently categorized and named as <strong>Zicsr</strong>.</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs RISCV">.globl _start<br><br>.equ STACK_SIZE, 1024<br>.equ CPU_NUM, 8<br><br>.section .text<br><br>_start:<br>    csrr t0, mhartid<br>    bnez t0, pend<br><br>    slli t0, t0, 10<br>    la sp, stacks + STACK_SIZE<br>    add sp, sp, t0<br><br>    j enter<br><br>stacks:<br>    .space STACK_SIZE * CPU_NUM<br><br>pend:<br>    wfi<br>    j pend<br><br>.end<br></code></pre></td></tr></table></figure>
+                <h1 id="Manipulate-64-bit-value-with-32-bit-registers"><a href="#Manipulate-64-bit-value-with-32-bit-registers" class="headerlink" title="Manipulate 64-bit value with 32-bit registers"></a>Manipulate 64-bit value with 32-bit registers</h1><p>Say, a 64-bit unsigned integer is stored at two 32-bit registers, <code>s0</code> (lower bits) and <code>s1</code> (higher bits) respectively.</p>
+<h2 id="Addition"><a href="#Addition" class="headerlink" title="Addition"></a>Addition</h2><p>And now, we need to add a 32-bit unsigned integer stored at register <code>t0</code> to it, how could we do.</p>
+<p>Recall the feature of two’s complement in binary, integer overflow is same as left a carry forgotten.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ASM">mv          t1, s0      # save a copy of lower bits<br>add         s0, s0, t0  # add to lower bits<br>sltu        t2, s0, t1  # check for carry<br>addi        s1, s1, t2  # add carry<br></code></pre></td></tr></table></figure>
 
-<h2 id="Branching-out-Other-Harts"><a href="#Branching-out-Other-Harts" class="headerlink" title="Branching out Other Harts"></a>Branching out Other Harts</h2><p><strong>Hart</strong> is a conventional name for a <strong>Hardware Thread</strong>. </p>
-<p>In <em>line 9</em>, <code>csrr</code> is a <a href="#Pseudoinstructions">pseudoinstruction</a> meaning ‘read CSR’. You can simply understand it as ‘read <code>mhartid</code> and save into <code>t0</code>‘, but since <code>mhartid</code> is a <a href="#CSR-and-Zicsr">CSR</a>, it requires using <code>csrr</code>, which is also in Zicsr, to read it.</p>
-<p><code>mhartid</code> can be understood as ‘machine mode hart id’. When hardware boots, all its harts are activated and run this assembly code, whereas this snippet is only intended to use one hart.</p>
-<p><code>t0</code> is the first <a href="#ABI"><strong>temporary register</strong></a>, mapping to register <code>x5</code>.</p>
-<p>In <em>line 10</em>, <code>bnez</code> is also a pseudoinstruction, standing for ‘branch if not equal to zero’.</p>
-<p>So this two lines are trying to figure out which hart is running, and then lead it to the <code>pend</code> label, unless it is the first hart.</p>
-<p>Let a hart jump endlessly is a common way to pend it. And in <em>line 22</em>, we added an instruction called <code>wfi</code>, meaning ‘wait for interrupt’. It could be seen as entering sleep mode for this hart.</p>
-<h2 id="Setting-up-Stacks"><a href="#Setting-up-Stacks" class="headerlink" title="Setting up Stacks"></a>Setting up Stacks</h2><p>The layout of stacks is quite baffling and took me a lot of time to figure out.</p>
-<p>In general, we assign a bunch of memory, let <code>sp</code> points to the end of first hart’s stack, and move <code>sp</code> to its corresponding hart’s stack, with respect to label <code>stacks</code>(<em>line 18-19</em>), <em>line 13</em> and <em>line 14</em> accordingly.</p>
-<p>The stacks have a gross size of <code>STACK_SIZE * CPU_NUM</code> in bytes. The <a href="#Directives">directive</a> <code>.space</code> means fill these size with zeros automatically, the same as <code>.skip</code>. When <em>line 13</em> refers to <code>stacks</code>, it refers to the beginning, or in other words, smallest address of this assigned memory. By adding exactly one <code>STACK_SIZE</code>, the sum should be the end address of first hart’s stack.</p>
-<p>Always remember these rules when trying to understand this part:</p>
-<ol>
-<li>The low address is the start of the stack, whereas the high address is its end.</li>
-<li>The stack pointer <code>sp</code> always points to the end of the stack.</li>
-<li>Hart id starts at 0.</li>
-</ol>
-<p>Since we designed the size of the stack to be 1024 bytes, which is 2<sup>10</sup>, we can left shift the hart ID 10 bits and add it to location of the first stack to find its own stack. <em>Line 12</em> is the instruction that exactly does this. The opcode <code>slli</code> instructs the hart to logical shift <code>t0</code> left, which also means multiplying it by 1024.</p>
-<h2 id="Going-to-C"><a href="#Going-to-C" class="headerlink" title="Going to C"></a>Going to C</h2><p>In <em>line 16</em>, the program jumps to <code>enter</code> which is declared in C language. Calling a C function is just like calling an assembly function since they are both converted to binary and located in <code>text</code> section. When booting, quickly switching to high-level programming language can be helpful.</p>
-<p>Initializing stacks can also be done in C. Referring to <a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/start.c"><code>xv6-riscv/kernel/start.c</code></a>, it is written as: </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">// entry.S needs one stack per CPU.</span><br>__attribute__ ((aligned (<span class="hljs-number">16</span>))) <span class="hljs-type">char</span> stack0[<span class="hljs-number">4096</span> * NCPU];<br></code></pre></td></tr></table></figure>
+<p>Here <code>sltu</code> stands for <em>set less than unsigned</em>, meaning that if <code>s0</code> is less than <code>t1</code>, <code>t2</code> will be set to <code>1</code>, otherwise, <code>t2</code> will be <code>0</code>. This is just what we need.</p>
+<p>If the new lower 32 bits is smaller than the original one (at <code>t1</code>), meaning there is an overflow, so we should increase the higher 32 bits <code>s1</code> by 1.</p>
+<h2 id="Subtraction"><a href="#Subtraction" class="headerlink" title="Subtraction"></a>Subtraction</h2><p>This can also apply to subtraction.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asm">mv          t1, s0<br>sub         s0, s0, t1<br>sltu        t2, s0, t1<br>addi        t2, t2, 1<br>add         s1, s1, t2<br></code></pre></td></tr></table></figure>
 
-<p>Here <code>__attribute__</code> is a GNU GCC feature used to provide additional information to the compiler. In this case, it ensures that <code>stack0</code> is aligned on a 16-byte boundary. It gives each hart 4096 bytes and <code>NCPU</code> stands for the number of harts.</p>
-<h2 id="Loading-Address"><a href="#Loading-Address" class="headerlink" title="Loading Address"></a>Loading Address</h2><p>Note that address <code>0x8000_0000</code> is different from so-called <em>magic number</em>, which is <code>0xAA55</code>, in x86. The latter is defined as the end of boot sector. BIOS would go through all storage devices and try to boot from this section.</p>
-<p>Thus, when linking objects together, we need to add flag <code>-Ttext=0x80000000</code> to make sure the <code>.text</code> section is located at where we want. From the <a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/ld/Options.html#index-_002d_002dsection_002dstart_003dsectionname_003dorg">doc</a>, <code>-Ttext</code> here is a short hand for <code>--section-start=.text</code>.</p>
-<p>This <code>8000_0000</code> is not standardized, but conventionally, it should be this location, as you can find out in QEMU source code. For example, in <a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c"><code>qemu/hw/riscv/virt.c</code></a>, in the array of memory map <code>virt_memap</code>, the last one is <code>VIRT_DRAM</code> and starts at <code>0x8000_0000</code>.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2022/xv6/book-riscv-rev3.pdf">xv6: a simple, Unix-like teaching operating system</a>, Russ Cox, Frans Kaashoek, Robert Morris, MIT, 5 September 2022, <em>2.6 Code: starting xv6, the first process and system call</em> (P27 - 28)</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/entry.S">xv6-riscv&#x2F;entry.S at riscv · mit-pdos&#x2F;xv6-riscv</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf">Writing a Simple Operating System – from Scratch</a>, Nick Blundell, University of Birmingham, 2 December 2010, <em>Chapter 2 Computer Architecture and the Boot Process</em> (P3 - 7)</li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@iotapioneer/55-and-aa-8c06b8719c1">55 and AA. What’s special about 55 and AA? Or more… | by Larry K. | Medium</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md">riscv-asm-manual&#x2F;riscv-asm.md at master · riscv-non-isa&#x2F;riscv-asm-manual</a></li>
-<li><a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/as/Pseudo-Ops.html">Pseudo Ops (Using as)</a></li>
-<li><a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/ld/Options.html">Options (LD)</a></li>
-<li><a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/">Documentation for binutils 2.40</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Q5411w7z5?p=16">[完结] 循序渐进，学习开发一个RISC-V上的操作系统 - 汪辰 - 第7章（上）-Hello RVOS_哔哩哔哩_bilibili</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/plctlab/riscv-operating-system-mooc/blob/main/code/os/01-helloRVOS/start.S">riscv-operating-system-mooc&#x2F;start.S at main · plctlab&#x2F;riscv-operating-system-mooc</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.qemu.org/docs/master/system/target-riscv.html">RISC-V System emulator — QEMU documentation</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c">qemu&#x2F;virt.c at master · qemu&#x2F;qemu</a></li>
-<li><a target="_blank" rel="noopener" href="https://riscv.org/technical/specifications/">Specifications - RISC-V International</a></li>
-<li><a target="_blank" rel="noopener" href="https://five-embeddev.com/riscv-isa-manual/latest/csr.html">RISC-V Instruction Set Manual, Volume I: RISC-V User-Level ISA | Five EmbedDev</a></li>
-<li><a target="_blank" rel="noopener" href="https://osblog.stephenmarz.com/ch1.html">Taking control of RISC-V: RISCV OS in Rust</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/sgmarz/osblog/blob/master/risc_v/chapters/ch1/src/asm/boot.S">osblog&#x2F;boot.S at master · sgmarz&#x2F;osblog</a></li>
-</ol>
+<h2 id="More-Details"><a href="#More-Details" class="headerlink" title="More Details"></a>More Details</h2><p>Take 4 bits and 8 bits as an example.</p>
+<table>
+<thead>
+<tr>
+<th>Meaning</th>
+<th align="right">binary</th>
+<th>decimal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>1.</em> 8 bits unsigned integer</td>
+<td align="right"><code>0x0001_0101</code></td>
+<td>21</td>
+</tr>
+<tr>
+<td><em>2.</em> 4 bits unsigned integer <code>t0</code></td>
+<td align="right"><code>0x0111</code></td>
+<td>7</td>
+</tr>
+<tr>
+<td><em>3.</em> difference in 8 bits</td>
+<td align="right"><code>0x0000_1110</code></td>
+<td>14</td>
+</tr>
+<tr>
+<td><em>4.</em> opposite number of <code>t0</code></td>
+<td align="right"><code>0x1001</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td><em>5.</em> add <em>4</em> to lower bits</td>
+<td align="right"><code>0x1110</code></td>
+<td>-</td>
+</tr>
+</tbody></table>
+<p>If borrow occurred, value in <em>5</em> will greater than the lower bits of the original number.</p>
+<p>In other words, if new lower bits is less than the original one, <code>t2</code> will be set to <code>1</code> and then <code>0</code>, there is no borrow. Otherwise, <code>t2</code> will be set to <code>0</code> and then <code>-1</code>, take away one from higher bits.</p>
 
                 
               </div>
@@ -380,7 +367,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Operating-System/" class="category-chain-item">Operating System</a>
+  <a href="/categories/Algorithms-Data-Structures/" class="category-chain-item">Algorithms &amp; Data Structures</a>
   
   
 
@@ -395,23 +382,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/C/">#C</a>
-      
         <a href="/tags/RISC-V/">#RISC-V</a>
       
         <a href="/tags/Register/">#Register</a>
-      
-        <a href="/tags/Bootstrap/">#Bootstrap</a>
-      
-        <a href="/tags/Assembly/">#Assembly</a>
-      
-        <a href="/tags/Stack/">#Stack</a>
-      
-        <a href="/tags/QEMU/">#QEMU</a>
-      
-        <a href="/tags/Memory/">#Memory</a>
-      
-        <a href="/tags/xv6/">#xv6</a>
       
     </div>
   
@@ -423,8 +396,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>RISC-V Machine Boot Code</div>
-      <div>https://lingkkang.github.io/2023/02/23/boot-risc-v/</div>
+      <div>Manipulate 64-bit value with 32-bit registers</div>
+      <div>https://lingkkang.github.io/2023/04/15/64bit-val-in-32/</div>
     </div>
     <div class="license-meta">
       
@@ -436,7 +409,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 23, 2023</div>
+          <div>April 15, 2023</div>
         </div>
       
       
@@ -468,18 +441,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/28/polling-read-write/" title="Read and Write by Polling with UART">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Read and Write by Polling with UART</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/22/prose01/" title="随想两则">
-                        <span class="hidden-mobile">随想两则</span>
+                      <a href="/2023/04/02/peripheral-interrupt/" title="Peripheral Interrupt Procedure in RISC-V">
+                        <span class="hidden-mobile">Peripheral Interrupt Procedure in RISC-V</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
