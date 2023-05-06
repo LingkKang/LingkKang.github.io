@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-04-15T09:58:19.970Z</updated>
+  <updated>2023-05-06T13:03:21.308Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>A MDP Take-away</title>
+    <link href="https://lingkkang.github.io/2023/05/06/mdp/"/>
+    <id>https://lingkkang.github.io/2023/05/06/mdp/</id>
+    <published>2023-05-06T11:51:15.000Z</published>
+    <updated>2023-05-06T13:03:21.308Z</updated>
+    
+    
+    <summary type="html">Mainly focusing on value iteration and policy iteration.</summary>
+    
+    
+    
+    <category term="Algorithms &amp; Data Structures" scheme="https://lingkkang.github.io/categories/Algorithms-Data-Structures/"/>
+    
+    
+    <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
+    
+    <category term="MDP" scheme="https://lingkkang.github.io/tags/MDP/"/>
+    
+    <category term="Machine Learning" scheme="https://lingkkang.github.io/tags/Machine-Learning/"/>
+    
+    <category term="Artificial Intelligence" scheme="https://lingkkang.github.io/tags/Artificial-Intelligence/"/>
+    
+    <category term="Bellman Equation" scheme="https://lingkkang.github.io/tags/Bellman-Equation/"/>
+    
+  </entry>
   
   <entry>
     <title>Manipulate 64-bit value with 32-bit registers</title>
@@ -81,13 +108,13 @@
     <category term="Algorithms &amp; Data Structures" scheme="https://lingkkang.github.io/categories/Algorithms-Data-Structures/"/>
     
     
-    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
-    
-    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
-    
     <category term="Bitwise Operation" scheme="https://lingkkang.github.io/tags/Bitwise-Operation/"/>
     
     <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
+    
+    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
+    
+    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
     
   </entry>
   
@@ -110,9 +137,9 @@
     
     <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
     
-    <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
-    
     <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
+    
+    <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
     
     <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
     
@@ -121,41 +148,6 @@
     <category term="Baud Rate" scheme="https://lingkkang.github.io/tags/Baud-Rate/"/>
     
     <category term="Polling" scheme="https://lingkkang.github.io/tags/Polling/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>RISC-V Machine Boot Code</title>
-    <link href="https://lingkkang.github.io/2023/02/23/boot-risc-v/"/>
-    <id>https://lingkkang.github.io/2023/02/23/boot-risc-v/</id>
-    <published>2023-02-22T16:05:26.000Z</published>
-    <updated>2023-02-24T11:52:04.000Z</updated>
-    
-    
-    <summary type="html">Basic boot process of a RISC-V hardware, with sample bootstrap assembly code explained.</summary>
-    
-    
-    
-    <category term="Operating System" scheme="https://lingkkang.github.io/categories/Operating-System/"/>
-    
-    
-    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
-    
-    <category term="RISC-V" scheme="https://lingkkang.github.io/tags/RISC-V/"/>
-    
-    <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
-    
-    <category term="Bootstrap" scheme="https://lingkkang.github.io/tags/Bootstrap/"/>
-    
-    <category term="Assembly" scheme="https://lingkkang.github.io/tags/Assembly/"/>
-    
-    <category term="Stack" scheme="https://lingkkang.github.io/tags/Stack/"/>
-    
-    <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
-    
-    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
-    
-    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
     
   </entry>
   
