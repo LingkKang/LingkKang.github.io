@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-05-06T13:03:21.308Z</updated>
+  <updated>2023-05-06T13:22:37.777Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://lingkkang.github.io/2023/05/06/mdp/"/>
     <id>https://lingkkang.github.io/2023/05/06/mdp/</id>
     <published>2023-05-06T11:51:15.000Z</published>
-    <updated>2023-05-06T13:03:21.308Z</updated>
+    <updated>2023-05-06T13:22:37.777Z</updated>
     
     
     <summary type="html">Mainly focusing on value iteration and policy iteration.</summary>
@@ -83,9 +83,9 @@
     
     <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
     
-    <category term="Interrupt" scheme="https://lingkkang.github.io/tags/Interrupt/"/>
-    
     <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
+    
+    <category term="Interrupt" scheme="https://lingkkang.github.io/tags/Interrupt/"/>
     
     <category term="PLIC" scheme="https://lingkkang.github.io/tags/PLIC/"/>
     
@@ -133,21 +133,21 @@
     <category term="Operating System" scheme="https://lingkkang.github.io/categories/Operating-System/"/>
     
     
-    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
-    
     <category term="Register" scheme="https://lingkkang.github.io/tags/Register/"/>
     
     <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
     
     <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
     
-    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
+    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
     
     <category term="UART" scheme="https://lingkkang.github.io/tags/UART/"/>
     
     <category term="Baud Rate" scheme="https://lingkkang.github.io/tags/Baud-Rate/"/>
     
     <category term="Polling" scheme="https://lingkkang.github.io/tags/Polling/"/>
+    
+    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
     
   </entry>
   
