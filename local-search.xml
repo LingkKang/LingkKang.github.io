@@ -4,6 +4,41 @@
   
   
   <entry>
+    <title>Update Weights in Linear Perceptron</title>
+    <link href="/2023/05/12/perceptron/"/>
+    <url>/2023/05/12/perceptron/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Update-Weights-in-Linear-Perceptron"><a href="#Update-Weights-in-Linear-Perceptron" class="headerlink" title="Update Weights in Linear Perceptron"></a>Update Weights in Linear Perceptron</h1><p>Sometimes you just find that preparing the data and visualizing it takes more time than building an AI model. </p><h2 id="Linear-Perceptron"><a href="#Linear-Perceptron" class="headerlink" title="Linear Perceptron"></a>Linear Perceptron</h2><p>It took me quite a long time to figure out how the weights are updated in a simple perceptron model. Basically it follows the gradient descent procedure, but things in linear algebra format confused me for a while and I don’t know why so few people write it down explicitly. </p><p>It goes like this:</p><p><code>w_new</code> &#x3D; <code>w_old</code> + <code>learning_rate</code> * (<code>y_true</code> - <code>y_predicted</code>) * <code>x</code></p><p>where</p><ul><li>all of the parameters are <strong>vectors</strong>, except the learning rate.</li><li><code>x</code> is the input vector</li><li><code>y_true</code> is the true label of the input (either 1 or -1 for a binary classification problem)</li><li><code>y_predicted</code> is the predicted label of the input (either 1 or -1 for a binary classification problem)</li></ul><p>If it predicts a positive value as negative, <code>w</code> should be set higher and vice versa.</p><h2 id="Some-Quotes"><a href="#Some-Quotes" class="headerlink" title="Some Quotes"></a>Some Quotes</h2><p>Here are some intriguing quotes from Prof. Hung-yi Lee (李宏毅)’s lecture. What a charismatic man.</p><blockquote><p>好，那到目前为止，我们讲了很多各式各样的模型，那我们现在还缺了一个东西，你知道缺什么东西吗？缺一个好名字。你知道这个外表啊是很重要的，一个死臭酸宅穿上西装以后就潮了起来；或者是织席贩履的，说他是汉左将军宜城亭侯中山靖王之后，也就潮了起来，对不对？所以我们的模型，也需要一个好名字。</p></blockquote><div style='text-align: right'><p><a href="https://youtu.be/bHcJCp2Fyxs?t=2955">Source</a></p></div><blockquote><p>Neuron 是什么？Neuron 就是神经元。人脑中就是有很多神经元，很多神经元串起来就是一个神经网路，跟你的脑是一样的。接下来你就可以到处骗麻瓜说，“看到没有，这个模型就是在模拟人们脑，知道吗？这就是在模拟人脑，这个就是人工智慧”，然后麻瓜就会吓得把钱掏出来。</p><p>但是啊，这个把戏在 80，90 年代的时候已经玩过了。Neural Network 不是什么新的技术，80，90 年代就已经用过了，当时已经把这个技术的名字搞到臭掉了。Neural Network 因为之前被吹捧得太过浮夸，所以后来大家对 Neural Network 这个名字都非常地感冒。它就像是个脏话一样，写在 paper 上面都注定害你的 paper 被拒绝。所以后来为了要重振 Neural Network 的雄风，所以怎么办呢？需要新的名字。怎么样新的名字呢？这边有很多的 Neuron，每一排 Neuron 我们就叫它一个 Layer，它们叫 Hidden Layer。有很多的 Hidden Layer 就叫做 Deep，这整套技术就叫做 Deep Learning。</p></blockquote><div style='text-align: right'><p><a href="https://youtu.be/bHcJCp2Fyxs?t=2989">Source</a></p></div><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol><li><a href="https://www.youtube.com/watch?v=Ye018rCVvOo&t=1614s">【機器學習2021】預測本頻道觀看人數 (上) - 機器學習基本概念簡介 - YouTube</a></li><li><a href="https://www.youtube.com/watch?v=bHcJCp2Fyxs">【機器學習2021】預測本頻道觀看人數 (下) - 深度學習基本概念簡介 - YouTube</a></li><li><a href="https://speech.ee.ntu.edu.tw/~hylee/index.php">Hung-yi Lee (李宏毅)</a></li><li><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note20.pdf">cs188-fa22-note20.pdf</a></li><li><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/">CS 188 Fall 2022 | Introduction to Artificial Intelligence at UC Berkeley</a></li><li><a href="https://www.youtube.com/watch?v=iZTeva0WSTQ&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&index=5">Lecture 4 - Perceptron &amp; Generalized Linear Model | Stanford CS229: Machine Learning (Autumn 2018) - YouTube</a></li><li><a href="https://cs229.stanford.edu/syllabus-spring2021.html">CS229: Machine Learning</a></li><li><a href="https://wty-yy.space/posts/62139/">Perceptron Learning Algorithm 感知器算法 - 神经网络基础 - wty’s blog</a></li><li><a href="https://www.cnblogs.com/pinard/p/6042320.html">感知机原理小结 - 刘建平Pinard - 博客园</a></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Algorithms &amp; Data Structures</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Optimization</tag>
+      
+      <tag>Artificial Intelligence</tag>
+      
+      <tag>Linear Perceptron</tag>
+      
+      <tag>Neural Network</tag>
+      
+      <tag>Machine Learning</tag>
+      
+      <tag>Deep Learning</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>A MDP Take-away</title>
     <link href="/2023/05/06/mdp/"/>
     <url>/2023/05/06/mdp/</url>
@@ -22,11 +57,11 @@
       
       <tag>Optimization</tag>
       
-      <tag>MDP</tag>
+      <tag>Artificial Intelligence</tag>
       
       <tag>Machine Learning</tag>
       
-      <tag>Artificial Intelligence</tag>
+      <tag>MDP</tag>
       
       <tag>Bellman Equation</tag>
       
@@ -146,13 +181,13 @@
     
     <tags>
       
+      <tag>C</tag>
+      
       <tag>Register</tag>
       
       <tag>xv6</tag>
       
       <tag>QEMU</tag>
-      
-      <tag>C</tag>
       
       <tag>UART</tag>
       
@@ -185,6 +220,8 @@
     
     <tags>
       
+      <tag>C</tag>
+      
       <tag>RISC-V</tag>
       
       <tag>Register</tag>
@@ -200,8 +237,6 @@
       <tag>Stack</tag>
       
       <tag>QEMU</tag>
-      
-      <tag>C</tag>
       
     </tags>
     
@@ -299,9 +334,9 @@
     
     <tags>
       
-      <tag>Memory</tag>
-      
       <tag>C</tag>
+      
+      <tag>Memory</tag>
       
       <tag>Dynamic Memory Allocation</tag>
       
@@ -388,13 +423,13 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
-      <tag>LeetCode</tag>
-      
       <tag>Tree</tag>
       
       <tag>Binary Tree</tag>
+      
+      <tag>Python</tag>
+      
+      <tag>LeetCode</tag>
       
     </tags>
     
@@ -444,9 +479,9 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     
@@ -498,9 +533,9 @@
     
     <tags>
       
-      <tag>生活</tag>
-      
       <tag>读书</tag>
+      
+      <tag>生活</tag>
       
       <tag>Summary</tag>
       
@@ -527,11 +562,11 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     

@@ -16,32 +16,29 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Basic boot process of a RISC-V hardware, with sample bootstrap assembly code explained.">
+    <meta name="description" content="Update Weights in Linear PerceptronSometimes you just find that preparing the data and visualizing it takes more time than building an AI model.  Linear PerceptronIt took me quite a long time to figur">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RISC-V Machine Boot Code">
-<meta property="og:url" content="https://lingkkang.github.io/2023/02/23/boot-risc-v/index.html">
+<meta property="og:title" content="Update Weights in Linear Perceptron">
+<meta property="og:url" content="https://lingkkang.github.io/2023/05/12/perceptron/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Basic boot process of a RISC-V hardware, with sample bootstrap assembly code explained.">
+<meta property="og:description" content="Update Weights in Linear PerceptronSometimes you just find that preparing the data and visualizing it takes more time than building an AI model.  Linear PerceptronIt took me quite a long time to figur">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-02-22T16:05:26.000Z">
-<meta property="article:modified_time" content="2023-02-24T11:52:04.000Z">
+<meta property="article:published_time" content="2023-05-12T06:26:43.000Z">
+<meta property="article:modified_time" content="2023-05-12T07:02:24.353Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="C">
-<meta property="article:tag" content="RISC-V">
-<meta property="article:tag" content="Register">
-<meta property="article:tag" content="xv6">
-<meta property="article:tag" content="Memory">
-<meta property="article:tag" content="Bootstrap">
-<meta property="article:tag" content="Assembly">
-<meta property="article:tag" content="Stack">
-<meta property="article:tag" content="QEMU">
+<meta property="article:tag" content="Optimization">
+<meta property="article:tag" content="Artificial Intelligence">
+<meta property="article:tag" content="Linear Perceptron">
+<meta property="article:tag" content="Neural Network">
+<meta property="article:tag" content="Machine Learning">
+<meta property="article:tag" content="Deep Learning">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>RISC-V Machine Boot Code - Lingkang&#39;s Blog</title>
+  <title>Update Weights in Linear Perceptron - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -224,7 +221,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="RISC-V Machine Boot Code"></span>
+            <span id="subtitle" data-typed-text="Update Weights in Linear Perceptron"></span>
           
         </div>
 
@@ -235,8 +232,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-23 00:05" pubdate>
-          February 23, 2023 am
+        <time datetime="2023-05-12 14:26" pubdate>
+          May 12, 2023 pm
         </time>
       </span>
     
@@ -247,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.5k words
+          1.8k words
         
       </span>
     
@@ -258,7 +255,7 @@
         
         
         
-          46 mins
+          15 mins
         
       </span>
     
@@ -296,12 +293,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">RISC-V Machine Boot Code</h1>
+            <h1 style="display: none">Update Weights in Linear Perceptron</h1>
             
               <p class="note note-info">
                 
                   
-                    Last updated on February 24, 2023 pm
+                    Last updated on May 12, 2023 pm
                   
                 
               </p>
@@ -309,58 +306,46 @@
             
               <div class="markdown-body">
                 
-                <h1 id="RISC-V-Machine-Boot-Code"><a href="#RISC-V-Machine-Boot-Code" class="headerlink" title="RISC-V Machine Boot Code"></a>RISC-V Machine Boot Code</h1><p>Basically, when a RISC-V machine powers on, the bootloader built in hardware or emulator will go to memory address <a href="#Loading-Address"><code>0x8000_0000</code></a> to load an OS.</p>
-<p>At this time, the computer works in <strong>machine</strong> mode, and our <code>boot.S</code> needs to do something that can only be done in this privilege level. And here is a line-by-line explanation.</p>
-<h2 id="Some-Definitions"><a href="#Some-Definitions" class="headerlink" title="Some Definitions"></a>Some Definitions</h2><p>If you want, you can take a glance at <a href="#Code">code</a> first, and come back when encountering any problems.</p>
-<h3 id="Directives"><a href="#Directives" class="headerlink" title="Directives"></a>Directives</h3><p>All keywords begin with a period are called <a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/as/Pseudo-Ops.html"><strong>directives</strong></a>. They are not defined in RISC-V specification, but in assembler’s side, to give some hints to assembler. Its syntax may be different from assembler to assembler, and it’s not corresponding to any specific instruction.</p>
-<h3 id="Pseudoinstructions"><a href="#Pseudoinstructions" class="headerlink" title="Pseudoinstructions"></a>Pseudoinstructions</h3><p>Technically, <a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#-a-listing-of-standard-risc-v-pseudoinstructions"><strong>pseudoinstructions</strong></a> are not instruction. They resemble common instructions and are used to improve programming efficiency. One line of pseudo instruction may correspond to more than one instruction when assembled by assembler.</p>
-<p>For example, <code>li</code> (<a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#load-immediate">load immediate</a>) is a common pseudoinstruction.</p>
-<h3 id="ABI"><a href="#ABI" class="headerlink" title="ABI"></a>ABI</h3><p>ABI stands for <strong>application binary interface</strong>. Instead of naming registers’ absolute location, say, <code>x0</code>, <code>x1</code> and so on, it is highly recommended to refer them with their <a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md#general-registers">ABI</a>, such as <code>zero</code>, <code>ra</code> and so on.</p>
-<h3 id="CSR-and-Zicsr"><a href="#CSR-and-Zicsr" class="headerlink" title="CSR and Zicsr"></a>CSR and Zicsr</h3><p><strong>Control and status registers</strong> (CSR) are used to control and monitor the operation of various hardware components. They are part of privileged component in architechure, and thus, accessible by using different opcodes. These opcodes for CSRs are differently categorized and named as <strong>Zicsr</strong>.</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs RISCV">.globl _start<br><br>.equ STACK_SIZE, 1024<br>.equ CPU_NUM, 8<br><br>.section .text<br><br>_start:<br>    csrr t0, mhartid<br>    bnez t0, pend<br><br>    slli t0, t0, 10<br>    la sp, stacks + STACK_SIZE<br>    add sp, sp, t0<br><br>    j enter<br><br>stacks:<br>    .space STACK_SIZE * CPU_NUM<br><br>pend:<br>    wfi<br>    j pend<br><br>.end<br></code></pre></td></tr></table></figure>
+                <h1 id="Update-Weights-in-Linear-Perceptron"><a href="#Update-Weights-in-Linear-Perceptron" class="headerlink" title="Update Weights in Linear Perceptron"></a>Update Weights in Linear Perceptron</h1><p>Sometimes you just find that preparing the data and visualizing it takes more time than building an AI model. </p>
+<h2 id="Linear-Perceptron"><a href="#Linear-Perceptron" class="headerlink" title="Linear Perceptron"></a>Linear Perceptron</h2><p>It took me quite a long time to figure out how the weights are updated in a simple perceptron model. Basically it follows the gradient descent procedure, but things in linear algebra format confused me for a while and I don’t know why so few people write it down explicitly. </p>
+<p>It goes like this:</p>
+<p><code>w_new</code> &#x3D; <code>w_old</code> + <code>learning_rate</code> * (<code>y_true</code> - <code>y_predicted</code>) * <code>x</code></p>
+<p>where</p>
+<ul>
+<li>all of the parameters are <strong>vectors</strong>, except the learning rate.</li>
+<li><code>x</code> is the input vector</li>
+<li><code>y_true</code> is the true label of the input (either 1 or -1 for a binary classification problem)</li>
+<li><code>y_predicted</code> is the predicted label of the input (either 1 or -1 for a binary classification problem)</li>
+</ul>
+<p>If it predicts a positive value as negative, <code>w</code> should be set higher and vice versa.</p>
+<h2 id="Some-Quotes"><a href="#Some-Quotes" class="headerlink" title="Some Quotes"></a>Some Quotes</h2><p>Here are some intriguing quotes from Prof. Hung-yi Lee (李宏毅)’s lecture. What a charismatic man.</p>
+<blockquote>
+<p>好，那到目前为止，我们讲了很多各式各样的模型，那我们现在还缺了一个东西，你知道缺什么东西吗？缺一个好名字。你知道这个外表啊是很重要的，一个死臭酸宅穿上西装以后就潮了起来；或者是织席贩履的，说他是汉左将军宜城亭侯中山靖王之后，也就潮了起来，对不对？所以我们的模型，也需要一个好名字。</p>
+</blockquote>
+<div style='text-align: right'>
 
-<h2 id="Branching-out-Other-Harts"><a href="#Branching-out-Other-Harts" class="headerlink" title="Branching out Other Harts"></a>Branching out Other Harts</h2><p><strong>Hart</strong> is a conventional name for a <strong>Hardware Thread</strong>. </p>
-<p>In <em>line 9</em>, <code>csrr</code> is a <a href="#Pseudoinstructions">pseudoinstruction</a> meaning ‘read CSR’. You can simply understand it as ‘read <code>mhartid</code> and save into <code>t0</code>‘, but since <code>mhartid</code> is a <a href="#CSR-and-Zicsr">CSR</a>, it requires using <code>csrr</code>, which is also in Zicsr, to read it.</p>
-<p><code>mhartid</code> can be understood as ‘machine mode hart id’. When hardware boots, all its harts are activated and run this assembly code, whereas this snippet is only intended to use one hart.</p>
-<p><code>t0</code> is the first <a href="#ABI"><strong>temporary register</strong></a>, mapping to register <code>x5</code>.</p>
-<p>In <em>line 10</em>, <code>bnez</code> is also a pseudoinstruction, standing for ‘branch if not equal to zero’.</p>
-<p>So this two lines are trying to figure out which hart is running, and then lead it to the <code>pend</code> label, unless it is the first hart.</p>
-<p>Let a hart jump endlessly is a common way to pend it. And in <em>line 22</em>, we added an instruction called <code>wfi</code>, meaning ‘wait for interrupt’. It could be seen as entering sleep mode for this hart.</p>
-<h2 id="Setting-up-Stacks"><a href="#Setting-up-Stacks" class="headerlink" title="Setting up Stacks"></a>Setting up Stacks</h2><p>The layout of stacks is quite baffling and took me a lot of time to figure out.</p>
-<p>In general, we assign a bunch of memory, let <code>sp</code> points to the end of first hart’s stack, and move <code>sp</code> to its corresponding hart’s stack, with respect to label <code>stacks</code>(<em>line 18-19</em>), <em>line 13</em> and <em>line 14</em> accordingly.</p>
-<p>The stacks have a gross size of <code>STACK_SIZE * CPU_NUM</code> in bytes. The <a href="#Directives">directive</a> <code>.space</code> means fill these size with zeros automatically, the same as <code>.skip</code>. When <em>line 13</em> refers to <code>stacks</code>, it refers to the beginning, or in other words, smallest address of this assigned memory. By adding exactly one <code>STACK_SIZE</code>, the sum should be the end address of first hart’s stack.</p>
-<p>Always remember these rules when trying to understand this part:</p>
-<ol>
-<li>The low address is the start of the stack, whereas the high address is its end.</li>
-<li>The stack pointer <code>sp</code> always points to the end of the stack.</li>
-<li>Hart id starts at 0.</li>
-</ol>
-<p>Since we designed the size of the stack to be 1024 bytes, which is 2<sup>10</sup>, we can left shift the hart ID 10 bits and add it to location of the first stack to find its own stack. <em>Line 12</em> is the instruction that exactly does this. The opcode <code>slli</code> instructs the hart to logical shift <code>t0</code> left, which also means multiplying it by 1024.</p>
-<h2 id="Going-to-C"><a href="#Going-to-C" class="headerlink" title="Going to C"></a>Going to C</h2><p>In <em>line 16</em>, the program jumps to <code>enter</code> which is declared in C language. Calling a C function is just like calling an assembly function since they are both converted to binary and located in <code>text</code> section. When booting, quickly switching to high-level programming language can be helpful.</p>
-<p>Initializing stacks can also be done in C. Referring to <a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/start.c"><code>xv6-riscv/kernel/start.c</code></a>, it is written as: </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">// entry.S needs one stack per CPU.</span><br>__attribute__ ((aligned (<span class="hljs-number">16</span>))) <span class="hljs-type">char</span> stack0[<span class="hljs-number">4096</span> * NCPU];<br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://youtu.be/bHcJCp2Fyxs?t=2955">Source</a></p>
+</div>
 
-<p>Here <code>__attribute__</code> is a GNU GCC feature used to provide additional information to the compiler. In this case, it ensures that <code>stack0</code> is aligned on a 16-byte boundary. It gives each hart 4096 bytes and <code>NCPU</code> stands for the number of harts.</p>
-<h2 id="Loading-Address"><a href="#Loading-Address" class="headerlink" title="Loading Address"></a>Loading Address</h2><p>Note that address <code>0x8000_0000</code> is different from so-called <em>magic number</em>, which is <code>0xAA55</code>, in x86. The latter is defined as the end of boot sector. BIOS would go through all storage devices and try to boot from this section.</p>
-<p>Thus, when linking objects together, we need to add flag <code>-Ttext=0x80000000</code> to make sure the <code>.text</code> section is located at where we want. From the <a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/ld/Options.html#index-_002d_002dsection_002dstart_003dsectionname_003dorg">doc</a>, <code>-Ttext</code> here is a short hand for <code>--section-start=.text</code>.</p>
-<p>This <code>8000_0000</code> is not standardized, but conventionally, it should be this location, as you can find out in QEMU source code. For example, in <a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c"><code>qemu/hw/riscv/virt.c</code></a>, in the array of memory map <code>virt_memap</code>, the last one is <code>VIRT_DRAM</code> and starts at <code>0x8000_0000</code>.</p>
+<blockquote>
+<p>Neuron 是什么？Neuron 就是神经元。人脑中就是有很多神经元，很多神经元串起来就是一个神经网路，跟你的脑是一样的。接下来你就可以到处骗麻瓜说，“看到没有，这个模型就是在模拟人们脑，知道吗？这就是在模拟人脑，这个就是人工智慧”，然后麻瓜就会吓得把钱掏出来。</p>
+<p>但是啊，这个把戏在 80，90 年代的时候已经玩过了。Neural Network 不是什么新的技术，80，90 年代就已经用过了，当时已经把这个技术的名字搞到臭掉了。Neural Network 因为之前被吹捧得太过浮夸，所以后来大家对 Neural Network 这个名字都非常地感冒。它就像是个脏话一样，写在 paper 上面都注定害你的 paper 被拒绝。所以后来为了要重振 Neural Network 的雄风，所以怎么办呢？需要新的名字。怎么样新的名字呢？这边有很多的 Neuron，每一排 Neuron 我们就叫它一个 Layer，它们叫 Hidden Layer。有很多的 Hidden Layer 就叫做 Deep，这整套技术就叫做 Deep Learning。</p>
+</blockquote>
+<div style='text-align: right'>
+
+<p><a target="_blank" rel="noopener" href="https://youtu.be/bHcJCp2Fyxs?t=2989">Source</a></p>
+</div>
+
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2022/xv6/book-riscv-rev3.pdf">xv6: a simple, Unix-like teaching operating system</a>, Russ Cox, Frans Kaashoek, Robert Morris, MIT, 5 September 2022, <em>2.6 Code: starting xv6, the first process and system call</em> (P27 - 28)</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/entry.S">xv6-riscv&#x2F;entry.S at riscv · mit-pdos&#x2F;xv6-riscv</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf">Writing a Simple Operating System – from Scratch</a>, Nick Blundell, University of Birmingham, 2 December 2010, <em>Chapter 2 Computer Architecture and the Boot Process</em> (P3 - 7)</li>
-<li><a target="_blank" rel="noopener" href="https://medium.com/@iotapioneer/55-and-aa-8c06b8719c1">55 and AA. What’s special about 55 and AA? Or more… | by Larry K. | Medium</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/riscv-non-isa/riscv-asm-manual/blob/master/riscv-asm.md">riscv-asm-manual&#x2F;riscv-asm.md at master · riscv-non-isa&#x2F;riscv-asm-manual</a></li>
-<li><a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/as/Pseudo-Ops.html">Pseudo Ops (Using as)</a></li>
-<li><a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/ld/Options.html">Options (LD)</a></li>
-<li><a target="_blank" rel="noopener" href="https://sourceware.org/binutils/docs-2.40/">Documentation for binutils 2.40</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Q5411w7z5?p=16">[完结] 循序渐进，学习开发一个RISC-V上的操作系统 - 汪辰 - 第7章（上）-Hello RVOS_哔哩哔哩_bilibili</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/plctlab/riscv-operating-system-mooc/blob/main/code/os/01-helloRVOS/start.S">riscv-operating-system-mooc&#x2F;start.S at main · plctlab&#x2F;riscv-operating-system-mooc</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.qemu.org/docs/master/system/target-riscv.html">RISC-V System emulator — QEMU documentation</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c">qemu&#x2F;virt.c at master · qemu&#x2F;qemu</a></li>
-<li><a target="_blank" rel="noopener" href="https://riscv.org/technical/specifications/">Specifications - RISC-V International</a></li>
-<li><a target="_blank" rel="noopener" href="https://five-embeddev.com/riscv-isa-manual/latest/csr.html">RISC-V Instruction Set Manual, Volume I: RISC-V User-Level ISA | Five EmbedDev</a></li>
-<li><a target="_blank" rel="noopener" href="https://osblog.stephenmarz.com/ch1.html">Taking control of RISC-V: RISCV OS in Rust</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/sgmarz/osblog/blob/master/risc_v/chapters/ch1/src/asm/boot.S">osblog&#x2F;boot.S at master · sgmarz&#x2F;osblog</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Ye018rCVvOo&t=1614s">【機器學習2021】預測本頻道觀看人數 (上) - 機器學習基本概念簡介 - YouTube</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=bHcJCp2Fyxs">【機器學習2021】預測本頻道觀看人數 (下) - 深度學習基本概念簡介 - YouTube</a></li>
+<li><a target="_blank" rel="noopener" href="https://speech.ee.ntu.edu.tw/~hylee/index.php">Hung-yi Lee (李宏毅)</a></li>
+<li><a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note20.pdf">cs188-fa22-note20.pdf</a></li>
+<li><a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs188/fa22/">CS 188 Fall 2022 | Introduction to Artificial Intelligence at UC Berkeley</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=iZTeva0WSTQ&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&index=5">Lecture 4 - Perceptron &amp; Generalized Linear Model | Stanford CS229: Machine Learning (Autumn 2018) - YouTube</a></li>
+<li><a target="_blank" rel="noopener" href="https://cs229.stanford.edu/syllabus-spring2021.html">CS229: Machine Learning</a></li>
+<li><a target="_blank" rel="noopener" href="https://wty-yy.space/posts/62139/">Perceptron Learning Algorithm 感知器算法 - 神经网络基础 - wty’s blog</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pinard/p/6042320.html">感知机原理小结 - 刘建平Pinard - 博客园</a></li>
 </ol>
 
                 
@@ -380,7 +365,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Operating-System/" class="category-chain-item">Operating System</a>
+  <a href="/categories/Algorithms-Data-Structures/" class="category-chain-item">Algorithms &amp; Data Structures</a>
   
   
 
@@ -395,23 +380,17 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/C/">#C</a>
+        <a href="/tags/Optimization/">#Optimization</a>
       
-        <a href="/tags/RISC-V/">#RISC-V</a>
+        <a href="/tags/Artificial-Intelligence/">#Artificial Intelligence</a>
       
-        <a href="/tags/Register/">#Register</a>
+        <a href="/tags/Linear-Perceptron/">#Linear Perceptron</a>
       
-        <a href="/tags/xv6/">#xv6</a>
+        <a href="/tags/Neural-Network/">#Neural Network</a>
       
-        <a href="/tags/Memory/">#Memory</a>
+        <a href="/tags/Machine-Learning/">#Machine Learning</a>
       
-        <a href="/tags/Bootstrap/">#Bootstrap</a>
-      
-        <a href="/tags/Assembly/">#Assembly</a>
-      
-        <a href="/tags/Stack/">#Stack</a>
-      
-        <a href="/tags/QEMU/">#QEMU</a>
+        <a href="/tags/Deep-Learning/">#Deep Learning</a>
       
     </div>
   
@@ -423,8 +402,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>RISC-V Machine Boot Code</div>
-      <div>https://lingkkang.github.io/2023/02/23/boot-risc-v/</div>
+      <div>Update Weights in Linear Perceptron</div>
+      <div>https://lingkkang.github.io/2023/05/12/perceptron/</div>
     </div>
     <div class="license-meta">
       
@@ -436,7 +415,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 23, 2023</div>
+          <div>May 12, 2023</div>
         </div>
       
       
@@ -468,18 +447,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/28/polling-read-write/" title="Read and Write by Polling with UART">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Read and Write by Polling with UART</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/22/prose01/" title="随想两则">
-                        <span class="hidden-mobile">随想两则</span>
+                      <a href="/2023/05/06/mdp/" title="A MDP Take-away">
+                        <span class="hidden-mobile">A MDP Take-away</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
