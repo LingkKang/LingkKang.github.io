@@ -8,7 +8,7 @@
     <link href="/2023/05/15/subnet/"/>
     <url>/2023/05/15/subnet/</url>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Subnet-amp-Subnet-Mask"><a href="#Subnet-amp-Subnet-Mask" class="headerlink" title="Subnet &amp; Subnet Mask"></a>Subnet &amp; Subnet Mask</h1><p>For a random IP address <code>a.b.c.d/x</code>, <code>x</code> denotes the number of <code>0</code> of the <strong>subnet mask</strong>, starting from the most significant bits.</p><p>For example, <code>192.168.19.123/20</code> is:</p><table><thead><tr><th>Address Type</th><th>Decimal</th><th>Binary</th></tr></thead><tbody><tr><td>IP Address</td><td><code>192.168.19.123</code></td><td><code>11000000.10101000.00010011.01111011</code></td></tr><tr><td>Subnet Mask</td><td><code>255.255.240.0</code></td><td><code>11111111.11111111.11110000.00000000</code></td></tr><tr><td>Host Identifier</td><td><code>0.0.3.123</code></td><td><code>00000000.00000000.00000011.01111011</code></td></tr><tr><td>Network Prefix</td><td><code>192.168.16.0</code></td><td><code>11000000.10101000.00010000.00000000</code></td></tr><tr><td>First Available Address</td><td><code>192.168.16.1</code></td><td><code>11000000.10101000.00010000.00000001</code></td></tr><tr><td>Last Available Address</td><td><code>192.168.31.254</code></td><td><code>11000000.10101000.00011111.11111110</code></td></tr><tr><td>Broadcast Address</td><td><code>192.168.31.255</code></td><td><code>11000000.10101000.00011111.11111111</code></td></tr></tbody></table><p>The subnet is always referred as its <strong>network prefix</strong>. It is used for routing outside the subnet.</p><p>Inside the subnet, connection and communication only cares about the <strong>host identifier</strong>.</p><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul><li><a href="https://lexssama.github.io/2020/05/18/Chapter4-The-Network-Layer/">Chapter4-The-Network-Layer ~ Lexssama’s Blogs</a></li><li><a href="https://kiprey.github.io/2021/05/cnatda-2/">计算机网络笔记-2 | Kiprey’s Blog</a></li><li><a href="https://avinetworks.com/glossary/subnet-mask/">What is Subnet Mask? Definition &amp; FAQs | Avi Networks</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages">HTTP Messages - HTTP | MDN</a></li><li><a href="https://www.zhihu.com/question/56895036/answer/155071962">如何理解子网掩码？ - 我不是段子手的回答 - 知乎</a></li><li><a href="https://en.wikipedia.org/wiki/Subnetwork">Subnetwork - Wikipedia</a></li></ul>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Subnet-amp-Subnet-Mask"><a href="#Subnet-amp-Subnet-Mask" class="headerlink" title="Subnet &amp; Subnet Mask"></a>Subnet &amp; Subnet Mask</h1><p>For a random IP address <code>a.b.c.d/x</code>, <code>x</code> denotes the number of <code>0</code> of the <strong>subnet mask</strong>, starting from the most significant bits.</p><p>Divided by <strong>subnet mask</strong>, the whole IP Address can be seen as two parts: the <strong>network prefix</strong> and the <strong>host identifier</strong>.</p><p>For example, <code>192.168.19.123/20</code> is:</p><table><thead><tr><th>Address Type</th><th>Decimal</th><th>Binary</th></tr></thead><tbody><tr><td>IP Address</td><td><code>192.168.19.123</code></td><td><code>11000000.10101000.00010011.01111011</code></td></tr><tr><td>Subnet Mask</td><td><code>255.255.240.0</code></td><td><code>11111111.11111111.11110000.00000000</code></td></tr><tr><td>Host Identifier</td><td><code>0.0.3.123</code></td><td><code>00000000.00000000.00000011.01111011</code></td></tr><tr><td>Network Prefix</td><td><code>192.168.16.0</code></td><td><code>11000000.10101000.00010000.00000000</code></td></tr><tr><td>First Available Address</td><td><code>192.168.16.1</code></td><td><code>11000000.10101000.00010000.00000001</code></td></tr><tr><td>Last Available Address</td><td><code>192.168.31.254</code></td><td><code>11000000.10101000.00011111.11111110</code></td></tr><tr><td>Broadcast Address</td><td><code>192.168.31.255</code></td><td><code>11000000.10101000.00011111.11111111</code></td></tr></tbody></table><p>The subnet is always referred as its <strong>network prefix</strong>. It is used for routing outside the subnet.</p><p>Inside the subnet, connection and communication only care about the <strong>host identifier</strong>.</p><p>This two-layer separation makes routing more efficient and convenient.</p><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul><li><a href="https://lexssama.github.io/2020/05/18/Chapter4-The-Network-Layer/">Chapter4-The-Network-Layer ~ Lexssama’s Blogs</a></li><li><a href="https://kiprey.github.io/2021/05/cnatda-2/">计算机网络笔记-2 | Kiprey’s Blog</a></li><li><a href="https://avinetworks.com/glossary/subnet-mask/">What is Subnet Mask? Definition &amp; FAQs | Avi Networks</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages">HTTP Messages - HTTP | MDN</a></li><li><a href="https://www.zhihu.com/question/56895036/answer/155071962">如何理解子网掩码？ - 我不是段子手的回答 - 知乎</a></li><li><a href="https://en.wikipedia.org/wiki/Subnetwork">Subnetwork - Wikipedia</a></li></ul>]]></content>
     
     
     <categories>
@@ -212,13 +212,13 @@
     
     <tags>
       
+      <tag>C</tag>
+      
       <tag>Register</tag>
       
       <tag>xv6</tag>
       
       <tag>QEMU</tag>
-      
-      <tag>C</tag>
       
       <tag>Peripheral</tag>
       
@@ -251,6 +251,8 @@
     
     <tags>
       
+      <tag>C</tag>
+      
       <tag>RISC-V</tag>
       
       <tag>Register</tag>
@@ -266,8 +268,6 @@
       <tag>Stack</tag>
       
       <tag>QEMU</tag>
-      
-      <tag>C</tag>
       
     </tags>
     
@@ -365,9 +365,9 @@
     
     <tags>
       
-      <tag>Memory</tag>
-      
       <tag>C</tag>
+      
+      <tag>Memory</tag>
       
       <tag>Dynamic Memory Allocation</tag>
       
@@ -454,13 +454,13 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
-      <tag>LeetCode</tag>
-      
       <tag>Tree</tag>
       
       <tag>Binary Tree</tag>
+      
+      <tag>Python</tag>
+      
+      <tag>LeetCode</tag>
       
     </tags>
     
@@ -510,9 +510,9 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     
@@ -564,9 +564,9 @@
     
     <tags>
       
-      <tag>生活</tag>
-      
       <tag>读书</tag>
+      
+      <tag>生活</tag>
       
       <tag>Summary</tag>
       
@@ -593,11 +593,11 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     

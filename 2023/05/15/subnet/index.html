@@ -24,7 +24,7 @@
 <meta property="og:description" content="Understand it quickly with a table.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-05-15T13:05:00.000Z">
-<meta property="article:modified_time" content="2023-05-15T13:35:56.747Z">
+<meta property="article:modified_time" content="2023-05-15T13:42:19.807Z">
 <meta property="article:author" content="Lingkang">
 <meta property="article:tag" content="IP">
 <meta property="article:tag" content="Routing">
@@ -242,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          950 words
+          1.1k words
         
       </span>
     
@@ -253,7 +253,7 @@
         
         
         
-          8 mins
+          10 mins
         
       </span>
     
@@ -305,6 +305,7 @@
               <div class="markdown-body">
                 
                 <h1 id="Subnet-amp-Subnet-Mask"><a href="#Subnet-amp-Subnet-Mask" class="headerlink" title="Subnet &amp; Subnet Mask"></a>Subnet &amp; Subnet Mask</h1><p>For a random IP address <code>a.b.c.d/x</code>, <code>x</code> denotes the number of <code>0</code> of the <strong>subnet mask</strong>, starting from the most significant bits.</p>
+<p>Divided by <strong>subnet mask</strong>, the whole IP Address can be seen as two parts: the <strong>network prefix</strong> and the <strong>host identifier</strong>.</p>
 <p>For example, <code>192.168.19.123/20</code> is:</p>
 <table>
 <thead>
@@ -351,7 +352,8 @@
 </tr>
 </tbody></table>
 <p>The subnet is always referred as its <strong>network prefix</strong>. It is used for routing outside the subnet.</p>
-<p>Inside the subnet, connection and communication only cares about the <strong>host identifier</strong>.</p>
+<p>Inside the subnet, connection and communication only care about the <strong>host identifier</strong>.</p>
+<p>This two-layer separation makes routing more efficient and convenient.</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://lexssama.github.io/2020/05/18/Chapter4-The-Network-Layer/">Chapter4-The-Network-Layer ~ Lexssama’s Blogs</a></li>
 <li><a target="_blank" rel="noopener" href="https://kiprey.github.io/2021/05/cnatda-2/">计算机网络笔记-2 | Kiprey’s Blog</a></li>
