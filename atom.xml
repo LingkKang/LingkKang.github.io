@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-05-12T07:02:24.353Z</updated>
+  <updated>2023-05-15T13:31:54.076Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Subnet &amp; Subnet Mask</title>
+    <link href="https://lingkkang.github.io/2023/05/19/subnet/"/>
+    <id>https://lingkkang.github.io/2023/05/19/subnet/</id>
+    <published>2023-05-19T13:05:00.000Z</published>
+    <updated>2023-05-15T13:31:54.076Z</updated>
+    
+    
+    <summary type="html">Understand it quickly with a table.</summary>
+    
+    
+    
+    <category term="Computer Network" scheme="https://lingkkang.github.io/categories/Computer-Network/"/>
+    
+    
+    <category term="IP" scheme="https://lingkkang.github.io/tags/IP/"/>
+    
+    <category term="Routing" scheme="https://lingkkang.github.io/tags/Routing/"/>
+    
+    <category term="Subnet" scheme="https://lingkkang.github.io/tags/Subnet/"/>
+    
+    <category term="Subnet Mask" scheme="https://lingkkang.github.io/tags/Subnet-Mask/"/>
+    
+  </entry>
   
   <entry>
     <title>Update Weights in Linear Perceptron</title>
@@ -118,38 +143,13 @@
     
     <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
     
-    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
-    
     <category term="Interrupt" scheme="https://lingkkang.github.io/tags/Interrupt/"/>
+    
+    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
     
     <category term="PLIC" scheme="https://lingkkang.github.io/tags/PLIC/"/>
     
     <category term="FDT" scheme="https://lingkkang.github.io/tags/FDT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Align Number to Multiple</title>
-    <link href="https://lingkkang.github.io/2023/03/12/align/"/>
-    <id>https://lingkkang.github.io/2023/03/12/align/</id>
-    <published>2023-03-12T01:28:05.000Z</published>
-    <updated>2023-03-12T03:30:19.096Z</updated>
-    
-    
-    <summary type="html">Aligning an integer to its closest muplitple of number m is easy. But if m is a power of 2, using bitwise operations can help a lot.</summary>
-    
-    
-    
-    <category term="Algorithms &amp; Data Structures" scheme="https://lingkkang.github.io/categories/Algorithms-Data-Structures/"/>
-    
-    
-    <category term="Bitwise Operation" scheme="https://lingkkang.github.io/tags/Bitwise-Operation/"/>
-    
-    <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
-    
-    <category term="xv6" scheme="https://lingkkang.github.io/tags/xv6/"/>
-    
-    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
     
   </entry>
   
