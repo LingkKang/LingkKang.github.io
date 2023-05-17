@@ -4,11 +4,11 @@
   
   
   <entry>
-    <title>Subnet and Subnet Mask</title>
+    <title>Subnet and IPv4 Classes</title>
     <link href="/2023/05/15/subnet/"/>
     <url>/2023/05/15/subnet/</url>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Subnet-amp-Subnet-Mask"><a href="#Subnet-amp-Subnet-Mask" class="headerlink" title="Subnet &amp; Subnet Mask"></a>Subnet &amp; Subnet Mask</h1><p>For a random IP address <code>a.b.c.d/x</code>, <code>x</code> denotes the number of <code>1</code>s in the <strong>subnet mask</strong>, starting from the most significant bits.</p><p>Divided by the <strong>subnet mask</strong>, the whole IP address can be seen as two parts: the <strong>network prefix</strong> and the <strong>host identifier</strong>.</p><p>For example, <code>192.168.19.123/20</code> is:</p><table><thead><tr><th>Address Type</th><th>Decimal</th><th>Binary</th></tr></thead><tbody><tr><td>IP Address</td><td><code>192.168.19.123</code></td><td><code>11000000.10101000.00010011.01111011</code></td></tr><tr><td>Subnet Mask</td><td><code>255.255.240.0</code></td><td><code>11111111.11111111.11110000.00000000</code></td></tr><tr><td>Host Identifier</td><td><code>0.0.3.123</code></td><td><code>00000000.00000000.00000011.01111011</code></td></tr><tr><td>Network Prefix</td><td><code>192.168.16.0</code></td><td><code>11000000.10101000.00010000.00000000</code></td></tr><tr><td>First Available Address</td><td><code>192.168.16.1</code></td><td><code>11000000.10101000.00010000.00000001</code></td></tr><tr><td>Last Available Address</td><td><code>192.168.31.254</code></td><td><code>11000000.10101000.00011111.11111110</code></td></tr><tr><td>Broadcast Address</td><td><code>192.168.31.255</code></td><td><code>11000000.10101000.00011111.11111111</code></td></tr></tbody></table><p>The subnet is always referred as its <strong>network prefix</strong>. It is used for routing outside the subnet.</p><p>Inside the subnet, connection and communication only care about the <strong>host identifier</strong>.</p><p>This two-layer separation makes routing more efficient and convenient.</p><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul><li><a href="https://lexssama.github.io/2020/05/18/Chapter4-The-Network-Layer/">Chapter4-The-Network-Layer ~ Lexssama’s Blogs</a></li><li><a href="https://kiprey.github.io/2021/05/cnatda-2/">计算机网络笔记-2 | Kiprey’s Blog</a></li><li><a href="https://avinetworks.com/glossary/subnet-mask/">What is Subnet Mask? Definition &amp; FAQs | Avi Networks</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages">HTTP Messages - HTTP | MDN</a></li><li><a href="https://www.zhihu.com/question/56895036/answer/155071962">如何理解子网掩码？ - 我不是段子手的回答 - 知乎</a></li><li><a href="https://en.wikipedia.org/wiki/Subnetwork">Subnetwork - Wikipedia</a></li></ul>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Subnet-amp-IPv4-Classes"><a href="#Subnet-amp-IPv4-Classes" class="headerlink" title="Subnet &amp; IPv4 Classes"></a>Subnet &amp; IPv4 Classes</h1><h2 id="Subnet-amp-Subnet-Mask"><a href="#Subnet-amp-Subnet-Mask" class="headerlink" title="Subnet &amp; Subnet Mask"></a>Subnet &amp; Subnet Mask</h2><p>For a random IP address <code>a.b.c.d/x</code>, <code>x</code> denotes the number of <code>1</code>s in the <strong>subnet mask</strong>, starting from the most significant bits.</p><p>Divided by the <strong>subnet mask</strong>, the whole IP address can be seen as two parts: the <strong>network prefix</strong> and the <strong>host identifier</strong>.</p><p>For example, <code>192.168.19.123/20</code> is:</p><table><thead><tr><th>Address Type</th><th>Decimal</th><th>Binary</th></tr></thead><tbody><tr><td>IP Address</td><td><code>192.168.19.123</code></td><td><code>11000000.10101000.00010011.01111011</code></td></tr><tr><td>Subnet Mask</td><td><code>255.255.240.0</code></td><td><code>11111111.11111111.11110000.00000000</code></td></tr><tr><td>Host Identifier</td><td><code>0.0.3.123</code></td><td><code>00000000.00000000.00000011.01111011</code></td></tr><tr><td>Network Prefix</td><td><code>192.168.16.0</code></td><td><code>11000000.10101000.00010000.00000000</code></td></tr><tr><td>First Available Address</td><td><code>192.168.16.1</code></td><td><code>11000000.10101000.00010000.00000001</code></td></tr><tr><td>Last Available Address</td><td><code>192.168.31.254</code></td><td><code>11000000.10101000.00011111.11111110</code></td></tr><tr><td>Broadcast Address</td><td><code>192.168.31.255</code></td><td><code>11000000.10101000.00011111.11111111</code></td></tr></tbody></table><p>The subnet is always referred as its <strong>network prefix</strong>. It is used for routing outside the subnet.</p><p>Inside the subnet, connection and communication only care about the <strong>host identifier</strong>.</p><p>This two-layer separation makes routing more efficient and convenient.</p><h2 id="IPv4-Classes"><a href="#IPv4-Classes" class="headerlink" title="IPv4 Classes"></a>IPv4 Classes</h2><p>It’s wroth to note that IPv4 classes are already deprecated.</p><table><thead><tr><th>Class</th><th>Decimal</th><th>Binary</th></tr></thead><tbody><tr><td>A Start</td><td><code>1.0.0.0</code></td><td><code>00000001.00000000.00000000.00000000</code></td></tr><tr><td>A Private Start</td><td><code>10.0.0.0</code></td><td><code>00001010.00000000.00000000.00000000</code></td></tr><tr><td>A Private End</td><td><code>10.255.255.255</code></td><td><code>00001010.11111111.11111111.11111111</code></td></tr><tr><td>A End</td><td><code>127.0.0.0</code></td><td><code>01111111.00000000.00000000.00000000</code></td></tr><tr><td>A Mask</td><td><code>255.0.0.0</code></td><td><code>11111111.00000000.00000000.00000000</code></td></tr><tr><td>B Start</td><td><code>128.0.0.0</code></td><td><code>10000000.00000000.00000000.00000000</code></td></tr><tr><td>B Private Start</td><td><code>172.16.0.0</code></td><td><code>10101100.00010000.00000000.00000000</code></td></tr><tr><td>B Private End</td><td><code>172.31.255.255</code></td><td><code>10101100.00011111.11111111.11111111</code></td></tr><tr><td>B End</td><td><code>191.255.0.0</code></td><td><code>10111111.11111111.00000000.00000000</code></td></tr><tr><td>B Mask</td><td><code>255.255.0.0</code></td><td><code>11111111.11111111.00000000.00000000</code></td></tr><tr><td>C Start</td><td><code>192.0.0.0</code></td><td><code>11000000.00000000.00000000.00000000</code></td></tr><tr><td>C Private Start</td><td><code>192.168.0.0</code></td><td><code>11000000.10101000.00000000.00000000</code></td></tr><tr><td>C Private End</td><td><code>192.168.255.255</code></td><td><code>11000000.10101000.11111111.11111111</code></td></tr><tr><td>C End</td><td><code>223.255.255.0</code></td><td><code>11011111.11111111.11111111.00000000</code></td></tr><tr><td>C Mask</td><td><code>255.255.255.0</code></td><td><code>11111111.11111111.11111111.00000000</code></td></tr><tr><td>D Start</td><td><code>224.0.0.0</code></td><td><code>11100000.00000000.00000000.00000000</code></td></tr><tr><td>D End</td><td><code>239.255.255.255</code></td><td><code>11101111.11111111.11111111.11111111</code></td></tr><tr><td>E Start</td><td><code>240.0.0.0</code></td><td><code>11110000.00000000.00000000.00000000</code></td></tr><tr><td>E End</td><td><code>255.255.255.255</code></td><td><code>11111111.11111111.11111111.11111111</code></td></tr></tbody></table><h2 id="Quote"><a href="#Quote" class="headerlink" title="Quote"></a>Quote</h2><blockquote><p>拥塞如果不加控制的话，它坏的程度会非常坏，就是这个概念。你不在适合的节点，和传染病一样切入一下，它传染的速度会非常快，扩张的速度会非常快。这是一个非线性的思维。那么人啊，基本上都是线性的思维。有些事情是非线性的。所以说人啊，不管是人本身，还是机器本身，在处理这些非线性的时候，通常会造成一些误判。</p></blockquote><div style='text-align: right'><p>Source: <a href="https://www.bilibili.com/video/BV1JV411t7ow/?p=28&t=755">中科大郑烇、杨坚全套《计算机网络（自顶向下方法 第7版，James F.Kurose，Keith W.Ross）》课程_3.6 拥塞控制原理_哔哩哔哩_bilibili</a></p></div><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul><li><a href="https://lexssama.github.io/2020/05/18/Chapter4-The-Network-Layer/">Chapter4-The-Network-Layer ~ Lexssama’s Blogs</a></li><li><a href="https://kiprey.github.io/2021/05/cnatda-2/">计算机网络笔记-2 | Kiprey’s Blog</a></li><li><a href="https://avinetworks.com/glossary/subnet-mask/">What is Subnet Mask? Definition &amp; FAQs | Avi Networks</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages">HTTP Messages - HTTP | MDN</a></li><li><a href="https://www.zhihu.com/question/56895036/answer/155071962">如何理解子网掩码？ - 我不是段子手的回答 - 知乎</a></li><li><a href="https://en.wikipedia.org/wiki/Subnetwork">Subnetwork - Wikipedia</a></li></ul>]]></content>
     
     
     <categories>
@@ -28,6 +28,8 @@
       
       <tag>Subnet Mask</tag>
       
+      <tag>IPv4</tag>
+      
     </tags>
     
   </entry>
@@ -39,7 +41,7 @@
     <link href="/2023/05/12/perceptron/"/>
     <url>/2023/05/12/perceptron/</url>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Update-Weights-in-Linear-Perceptron"><a href="#Update-Weights-in-Linear-Perceptron" class="headerlink" title="Update Weights in Linear Perceptron"></a>Update Weights in Linear Perceptron</h1><p>Sometimes you just find that preparing the data and visualizing it takes more time than building an AI model. </p><h2 id="Linear-Perceptron"><a href="#Linear-Perceptron" class="headerlink" title="Linear Perceptron"></a>Linear Perceptron</h2><p>It took me quite a long time to figure out how the weights are updated in a simple perceptron model. Basically it follows the gradient descent procedure, but things in linear algebra format confused me for a while and I don’t know why so few people write it down explicitly. </p><p>It goes like this:</p><p><code>w_new</code> &#x3D; <code>w_old</code> + <code>learning_rate</code> * (<code>y_true</code> - <code>y_predicted</code>) * <code>x</code></p><p>where</p><ul><li>all of the parameters are <strong>vectors</strong>, except the learning rate.</li><li><code>x</code> is the input vector</li><li><code>y_true</code> is the true label of the input (either 1 or -1 for a binary classification problem)</li><li><code>y_predicted</code> is the predicted label of the input (either 1 or -1 for a binary classification problem)</li></ul><p>If it predicts a positive value as negative, <code>w</code> should be set higher and vice versa.</p><h2 id="Some-Quotes"><a href="#Some-Quotes" class="headerlink" title="Some Quotes"></a>Some Quotes</h2><p>Here are some intriguing quotes from Prof. Hung-yi Lee (李宏毅)’s lecture. What a charismatic man.</p><blockquote><p>好，那到目前为止，我们讲了很多各式各样的模型，那我们现在还缺了一个东西，你知道缺什么东西吗？缺一个好名字。你知道这个外表啊是很重要的，一个死臭酸宅穿上西装以后就潮了起来；或者是织席贩履的，说他是汉左将军宜城亭侯中山靖王之后，也就潮了起来，对不对？所以我们的模型，也需要一个好名字。</p></blockquote><div style='text-align: right'><p><a href="https://youtu.be/bHcJCp2Fyxs?t=2955">Source</a></p></div><blockquote><p>Neuron 是什么？Neuron 就是神经元。人脑中就是有很多神经元，很多神经元串起来就是一个神经网路，跟你的脑是一样的。接下来你就可以到处骗麻瓜说，“看到没有，这个模型就是在模拟人们脑，知道吗？这就是在模拟人脑，这个就是人工智慧”，然后麻瓜就会吓得把钱掏出来。</p><p>但是啊，这个把戏在 80，90 年代的时候已经玩过了。Neural Network 不是什么新的技术，80，90 年代就已经用过了，当时已经把这个技术的名字搞到臭掉了。Neural Network 因为之前被吹捧得太过浮夸，所以后来大家对 Neural Network 这个名字都非常地感冒。它就像是个脏话一样，写在 paper 上面都注定害你的 paper 被拒绝。所以后来为了要重振 Neural Network 的雄风，所以怎么办呢？需要新的名字。怎么样新的名字呢？这边有很多的 Neuron，每一排 Neuron 我们就叫它一个 Layer，它们叫 Hidden Layer。有很多的 Hidden Layer 就叫做 Deep，这整套技术就叫做 Deep Learning。</p></blockquote><div style='text-align: right'><p><a href="https://youtu.be/bHcJCp2Fyxs?t=2989">Source</a></p></div><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol><li><a href="https://www.youtube.com/watch?v=Ye018rCVvOo&t=1614s">【機器學習2021】預測本頻道觀看人數 (上) - 機器學習基本概念簡介 - YouTube</a></li><li><a href="https://www.youtube.com/watch?v=bHcJCp2Fyxs">【機器學習2021】預測本頻道觀看人數 (下) - 深度學習基本概念簡介 - YouTube</a></li><li><a href="https://speech.ee.ntu.edu.tw/~hylee/index.php">Hung-yi Lee (李宏毅)</a></li><li><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note20.pdf">cs188-fa22-note20.pdf</a></li><li><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/">CS 188 Fall 2022 | Introduction to Artificial Intelligence at UC Berkeley</a></li><li><a href="https://www.youtube.com/watch?v=iZTeva0WSTQ&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&index=5">Lecture 4 - Perceptron &amp; Generalized Linear Model | Stanford CS229: Machine Learning (Autumn 2018) - YouTube</a></li><li><a href="https://cs229.stanford.edu/syllabus-spring2021.html">CS229: Machine Learning</a></li><li><a href="https://wty-yy.space/posts/62139/">Perceptron Learning Algorithm 感知器算法 - 神经网络基础 - wty’s blog</a></li><li><a href="https://www.cnblogs.com/pinard/p/6042320.html">感知机原理小结 - 刘建平Pinard - 博客园</a></li></ol>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Update-Weights-in-Linear-Perceptron"><a href="#Update-Weights-in-Linear-Perceptron" class="headerlink" title="Update Weights in Linear Perceptron"></a>Update Weights in Linear Perceptron</h1><p>Sometimes you just find that preparing the data and visualizing it takes more time than building an AI model. </p><h2 id="Linear-Perceptron"><a href="#Linear-Perceptron" class="headerlink" title="Linear Perceptron"></a>Linear Perceptron</h2><p>It took me quite a long time to figure out how the weights are updated in a simple perceptron model. Basically it follows the gradient descent procedure, but things in linear algebra format confused me for a while and I don’t know why so few people write it down explicitly. </p><p>It goes like this:</p><p><code>w_new</code> &#x3D; <code>w_old</code> + <code>learning_rate</code> * (<code>y_true</code> - <code>y_predicted</code>) * <code>x</code></p><p>where</p><ul><li>all of the parameters are <strong>vectors</strong>, except the learning rate.</li><li><code>x</code> is the input vector</li><li><code>y_true</code> is the true label of the input (either 1 or -1 for a binary classification problem)</li><li><code>y_predicted</code> is the predicted label of the input (either 1 or -1 for a binary classification problem)</li></ul><p>If it predicts a positive value as negative, <code>w</code> should be set higher and vice versa.</p><h2 id="Some-Quotes"><a href="#Some-Quotes" class="headerlink" title="Some Quotes"></a>Some Quotes</h2><p>Here are some intriguing quotes from Prof. Hung-yi Lee (李宏毅)’s lecture. What a charismatic man.</p><blockquote><p>好，那到目前为止，我们讲了很多各式各样的模型，那我们现在还缺了一个东西，你知道缺什么东西吗？缺一个好名字。你知道这个外表啊是很重要的，一个死臭酸宅穿上西装以后就潮了起来；或者是织席贩履的，说他是汉左将军宜城亭侯中山靖王之后，也就潮了起来，对不对？所以我们的模型，也需要一个好名字。</p></blockquote><div style='text-align: right'><p>Source: <a href="https://youtu.be/bHcJCp2Fyxs?t=2955">【機器學習2021】預測本頻道觀看人數 (下) - 深度學習基本概念簡介 - YouTube</a></p></div><blockquote><p>Neuron 是什么？Neuron 就是神经元。人脑中就是有很多神经元，很多神经元串起来就是一个神经网路，跟你的脑是一样的。接下来你就可以到处骗麻瓜说，“看到没有，这个模型就是在模拟人们脑，知道吗？这就是在模拟人脑，这个就是人工智慧”，然后麻瓜就会吓得把钱掏出来。</p><p>但是啊，这个把戏在 80，90 年代的时候已经玩过了。Neural Network 不是什么新的技术，80，90 年代就已经用过了，当时已经把这个技术的名字搞到臭掉了。Neural Network 因为之前被吹捧得太过浮夸，所以后来大家对 Neural Network 这个名字都非常地感冒。它就像是个脏话一样，写在 paper 上面都注定害你的 paper 被拒绝。所以后来为了要重振 Neural Network 的雄风，所以怎么办呢？需要新的名字。怎么样新的名字呢？这边有很多的 Neuron，每一排 Neuron 我们就叫它一个 Layer，它们叫 Hidden Layer。有很多的 Hidden Layer 就叫做 Deep，这整套技术就叫做 Deep Learning。</p></blockquote><div style='text-align: right'><p>Source: <a href="https://youtu.be/bHcJCp2Fyxs?t=2989">【機器學習2021】預測本頻道觀看人數 (下) - 深度學習基本概念簡介 - YouTube</a></p></div><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol><li><a href="https://www.youtube.com/watch?v=Ye018rCVvOo">【機器學習2021】預測本頻道觀看人數 (上) - 機器學習基本概念簡介 - YouTube</a></li><li><a href="https://www.youtube.com/watch?v=bHcJCp2Fyxs">【機器學習2021】預測本頻道觀看人數 (下) - 深度學習基本概念簡介 - YouTube</a></li><li><a href="https://speech.ee.ntu.edu.tw/~hylee/index.php">Hung-yi Lee (李宏毅)</a></li><li><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note20.pdf">cs188-fa22-note20.pdf</a></li><li><a href="https://inst.eecs.berkeley.edu/~cs188/fa22/">CS 188 Fall 2022 | Introduction to Artificial Intelligence at UC Berkeley</a></li><li><a href="https://www.youtube.com/watch?v=iZTeva0WSTQ&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&index=5">Lecture 4 - Perceptron &amp; Generalized Linear Model | Stanford CS229: Machine Learning (Autumn 2018) - YouTube</a></li><li><a href="https://cs229.stanford.edu/syllabus-spring2021.html">CS229: Machine Learning</a></li><li><a href="https://wty-yy.space/posts/62139/">Perceptron Learning Algorithm 感知器算法 - 神经网络基础 - wty’s blog</a></li><li><a href="https://www.cnblogs.com/pinard/p/6042320.html">感知机原理小结 - 刘建平Pinard - 博客园</a></li></ol>]]></content>
     
     
     <categories>
@@ -150,9 +152,9 @@
       
       <tag>QEMU</tag>
       
-      <tag>Peripheral</tag>
-      
       <tag>Interrupt</tag>
+      
+      <tag>Peripheral</tag>
       
       <tag>PLIC</tag>
       
@@ -181,13 +183,13 @@
     
     <tags>
       
-      <tag>Bitwise Operation</tag>
-      
-      <tag>Optimization</tag>
+      <tag>Memory</tag>
       
       <tag>xv6</tag>
       
-      <tag>Memory</tag>
+      <tag>Bitwise Operation</tag>
+      
+      <tag>Optimization</tag>
       
     </tags>
     
@@ -216,17 +218,17 @@
       
       <tag>Register</tag>
       
+      <tag>QEMU</tag>
+      
       <tag>xv6</tag>
       
-      <tag>QEMU</tag>
+      <tag>Peripheral</tag>
       
       <tag>UART</tag>
       
       <tag>Baud Rate</tag>
       
       <tag>Polling</tag>
-      
-      <tag>Peripheral</tag>
       
     </tags>
     
@@ -257,10 +259,6 @@
       
       <tag>Register</tag>
       
-      <tag>xv6</tag>
-      
-      <tag>Memory</tag>
-      
       <tag>Bootstrap</tag>
       
       <tag>Assembly</tag>
@@ -268,6 +266,10 @@
       <tag>Stack</tag>
       
       <tag>QEMU</tag>
+      
+      <tag>Memory</tag>
+      
+      <tag>xv6</tag>
       
     </tags>
     

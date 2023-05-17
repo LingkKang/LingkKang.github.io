@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-05-15T13:51:32.115Z</updated>
+  <updated>2023-05-17T14:50:35.293Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Subnet and Subnet Mask</title>
+    <title>Subnet and IPv4 Classes</title>
     <link href="https://lingkkang.github.io/2023/05/15/subnet/"/>
     <id>https://lingkkang.github.io/2023/05/15/subnet/</id>
     <published>2023-05-15T13:05:00.000Z</published>
-    <updated>2023-05-15T13:51:32.115Z</updated>
+    <updated>2023-05-17T14:50:35.293Z</updated>
     
     
     <summary type="html">Understand it quickly with a table.</summary>
@@ -39,6 +39,8 @@
     
     <category term="Subnet Mask" scheme="https://lingkkang.github.io/tags/Subnet-Mask/"/>
     
+    <category term="IPv4" scheme="https://lingkkang.github.io/tags/IPv4/"/>
+    
   </entry>
   
   <entry>
@@ -46,7 +48,7 @@
     <link href="https://lingkkang.github.io/2023/05/12/perceptron/"/>
     <id>https://lingkkang.github.io/2023/05/12/perceptron/</id>
     <published>2023-05-12T06:26:43.000Z</published>
-    <updated>2023-05-12T07:02:24.353Z</updated>
+    <updated>2023-05-17T14:26:55.972Z</updated>
     
     
       
@@ -143,9 +145,9 @@
     
     <category term="QEMU" scheme="https://lingkkang.github.io/tags/QEMU/"/>
     
-    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
-    
     <category term="Interrupt" scheme="https://lingkkang.github.io/tags/Interrupt/"/>
+    
+    <category term="Peripheral" scheme="https://lingkkang.github.io/tags/Peripheral/"/>
     
     <category term="PLIC" scheme="https://lingkkang.github.io/tags/PLIC/"/>
     
