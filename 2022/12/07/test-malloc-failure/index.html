@@ -18,7 +18,7 @@
   
     <meta name="description" content="To improve robustness">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Test Malloc Failure with Macros">
+<meta property="og:title" content="Test Malloc Failure with Macros in C">
 <meta property="og:url" content="https://lingkkang.github.io/2022/12/07/test-malloc-failure/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
 <meta property="og:description" content="To improve robustness">
@@ -39,7 +39,7 @@
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Test Malloc Failure with Macros - Lingkang&#39;s Blog</title>
+  <title>Test Malloc Failure with Macros in C - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -222,7 +222,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Test Malloc Failure with Macros"></span>
+            <span id="subtitle" data-typed-text="Test Malloc Failure with Macros in C"></span>
           
         </div>
 
@@ -294,7 +294,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Test Malloc Failure with Macros</h1>
+            <h1 style="display: none">Test Malloc Failure with Macros in C</h1>
             
               <p class="note note-info">
                 
@@ -307,7 +307,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Test-Malloc-Failure-with-Macros"><a href="#Test-Malloc-Failure-with-Macros" class="headerlink" title="Test Malloc Failure with Macros"></a>Test Malloc Failure with Macros</h1><p>We already know that if <code>malloc()</code> failed, it will return <code>NULL</code>, so almost every <code>C</code> programmer would write the following snippet in their code:</p>
+                <h1 id="Test-Malloc-Failure-with-Macros-in-C"><a href="#Test-Malloc-Failure-with-Macros-in-C" class="headerlink" title="Test Malloc Failure with Macros in C"></a>Test Malloc Failure with Macros in C</h1><p>We already know that if <code>malloc()</code> failed, it will return <code>NULL</code>, so almost every <code>C</code> programmer would write the following snippet in their code:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">char</span> *<span class="hljs-built_in">string</span> = (<span class="hljs-type">char</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-number">10</span> * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>));<br><span class="hljs-keyword">if</span> (<span class="hljs-built_in">string</span> == <span class="hljs-literal">NULL</span>) &#123;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><span class="hljs-comment">// do something ...</span><br></code></pre></td></tr></table></figure>
 
 <p>However, if we want to do something else if the reture value is <code>NULL</code> for memory allocation? It is easy to put some code into it (i.e., <strong>line 3</strong> of above snippet), but the real problem is, how can we test this part?</p>
@@ -372,7 +372,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Software-Engineering/" class="category-chain-item">Software Engineering</a>
+  <a href="/categories/Programming-Language/" class="category-chain-item">Programming Language</a>
   
   
 
@@ -411,7 +411,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Test Malloc Failure with Macros</div>
+      <div>Test Malloc Failure with Macros in C</div>
       <div>https://lingkkang.github.io/2022/12/07/test-malloc-failure/</div>
     </div>
     <div class="license-meta">
