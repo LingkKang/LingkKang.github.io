@@ -39,7 +39,9 @@
     
     <category term="Polymorphism" scheme="https://lingkkang.github.io/tags/Polymorphism/"/>
     
-    <category term="Override" scheme="https://lingkkang.github.io/tags/Override/"/>
+    <category term="Overriding" scheme="https://lingkkang.github.io/tags/Overriding/"/>
+    
+    <category term="Hiding" scheme="https://lingkkang.github.io/tags/Hiding/"/>
     
   </entry>
   
@@ -91,15 +93,15 @@
     <category term="Algorithms &amp; Data Structures" scheme="https://lingkkang.github.io/categories/Algorithms-Data-Structures/"/>
     
     
-    <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
-    
-    <category term="Machine Learning" scheme="https://lingkkang.github.io/tags/Machine-Learning/"/>
-    
     <category term="Artificial Intelligence" scheme="https://lingkkang.github.io/tags/Artificial-Intelligence/"/>
     
     <category term="Linear Perceptron" scheme="https://lingkkang.github.io/tags/Linear-Perceptron/"/>
     
     <category term="Neural Network" scheme="https://lingkkang.github.io/tags/Neural-Network/"/>
+    
+    <category term="Machine Learning" scheme="https://lingkkang.github.io/tags/Machine-Learning/"/>
+    
+    <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
     
     <category term="Deep Learning" scheme="https://lingkkang.github.io/tags/Deep-Learning/"/>
     
@@ -120,13 +122,13 @@
     <category term="Algorithms &amp; Data Structures" scheme="https://lingkkang.github.io/categories/Algorithms-Data-Structures/"/>
     
     
-    <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
-    
-    <category term="MDP" scheme="https://lingkkang.github.io/tags/MDP/"/>
+    <category term="Artificial Intelligence" scheme="https://lingkkang.github.io/tags/Artificial-Intelligence/"/>
     
     <category term="Machine Learning" scheme="https://lingkkang.github.io/tags/Machine-Learning/"/>
     
-    <category term="Artificial Intelligence" scheme="https://lingkkang.github.io/tags/Artificial-Intelligence/"/>
+    <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
+    
+    <category term="MDP" scheme="https://lingkkang.github.io/tags/MDP/"/>
     
     <category term="Bellman Equation" scheme="https://lingkkang.github.io/tags/Bellman-Equation/"/>
     
