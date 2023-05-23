@@ -4,6 +4,39 @@
   
   
   <entry>
+    <title>Hide Superclass Static Methods in Java</title>
+    <link href="/2023/05/23/hide-static-java/"/>
+    <url>/2023/05/23/hide-static-java/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Hide-Superclass-Static-Methods-in-Java"><a href="#Hide-Superclass-Static-Methods-in-Java" class="headerlink" title="Hide Superclass Static Methods in Java"></a>Hide Superclass Static Methods in Java</h1><p>A <code>static</code> method <em><strong>cannot</strong></em> be overridden in Java. </p><p>This is because the concept of method <strong>overriding</strong> is based on dynamic or late binding, which means the actual method to be executed is determined at runtime based on the type of the object.</p><p>However, Java does accept a static method existing in subclass with same declaration signature to its superclass. It does not override the static method in the superclass. Instead, it hides the superclass method, meaning the subclass has its own separate static method with the same name. </p><p>This could be seen with the following example:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x + <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x * <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>Simply calling static method is easy to understand: </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Java">A.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br>B.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br></code></pre></td></tr></table></figure><p>The two methods exist peacefully. Inside the class <code>B</code>, the <code>myMethod</code> of class <code>A</code> is only <em>hidden</em> from the scope. Note how is this different from <strong>overriding</strong>.</p><p>Another way to check it out is like this:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-type">A</span> <span class="hljs-variable">myInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">A</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br><br>myInstance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br><br><span class="hljs-type">B</span> <span class="hljs-variable">anotherInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>anotherInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br></code></pre></td></tr></table></figure><p>But note that access <code>static</code> method by instance is not a good practice. This is only for demonstration. Typically, it will cause a warning that <em>The static method <code>myMethod(int)</code> from the type <code>A</code> should be accessed in a static way</em>.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Programming Language</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java</tag>
+      
+      <tag>Inheritance</tag>
+      
+      <tag>Static</tag>
+      
+      <tag>Polymorphism</tag>
+      
+      <tag>Override</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Subnet and IPv4 Classes</title>
     <link href="/2023/05/15/subnet/"/>
     <url>/2023/05/15/subnet/</url>
@@ -216,9 +249,9 @@
       
       <tag>C</tag>
       
-      <tag>xv6</tag>
-      
       <tag>Register</tag>
+      
+      <tag>xv6</tag>
       
       <tag>QEMU</tag>
       
@@ -255,13 +288,13 @@
       
       <tag>C</tag>
       
-      <tag>xv6</tag>
-      
-      <tag>Memory</tag>
-      
       <tag>RISC-V</tag>
       
       <tag>Register</tag>
+      
+      <tag>xv6</tag>
+      
+      <tag>Memory</tag>
       
       <tag>Bootstrap</tag>
       
