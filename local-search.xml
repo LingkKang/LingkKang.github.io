@@ -8,7 +8,7 @@
     <link href="/2023/05/23/hide-static-java/"/>
     <url>/2023/05/23/hide-static-java/</url>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Hide-Superclass-Static-Methods-in-Java"><a href="#Hide-Superclass-Static-Methods-in-Java" class="headerlink" title="Hide Superclass Static Methods in Java"></a>Hide Superclass Static Methods in Java</h1><p>A <code>static</code> method <em><strong>cannot</strong></em> be overridden in Java. </p><p>This is because the concept of method <strong>overriding</strong> is based on dynamic or late binding, which means the actual method to be executed is determined at runtime based on the type of the object. And a static method cannot show runtime polymorphism.</p><p>However, Java does accept a static method existing in subclass with same declaration signature to its superclass. It does not override the static method in the superclass. Instead, it hides the superclass method, meaning the subclass has its own separate static method with the same name. </p><h2 id="Hiding"><a href="#Hiding" class="headerlink" title="Hiding"></a>Hiding</h2><p>This could be seen with the following example:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x + <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x * <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>Simply calling static method is easy to understand: </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Java">A.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br>B.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br></code></pre></td></tr></table></figure><p>The two methods exist peacefully. Inside the class <code>B</code>, the <code>myMethod</code> of class <code>A</code> is only <em>hidden</em> from the scope.</p><h2 id="Another-Perspective"><a href="#Another-Perspective" class="headerlink" title="Another Perspective"></a>Another Perspective</h2><p>Another way to check it out is like this:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-type">A</span> <span class="hljs-variable">myInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">A</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br><br>myInstance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br><br><span class="hljs-type">B</span> <span class="hljs-variable">anotherInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>anotherInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br></code></pre></td></tr></table></figure><p>But note that access <code>static</code> method by instance is not a good practice. This is only for demonstration. Typically, it will cause a warning that <em>The static method <code>myMethod(int)</code> from the type <code>A</code> should be accessed in a static way</em>.</p><h2 id="Overriding"><a href="#Overriding" class="headerlink" title="Overriding"></a>Overriding</h2><p>Note how is this different from <strong>overriding</strong>.</p><p>For example, if both comment out the keyword <code>static</code> in class <code>A</code> and <code>B</code>,</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-comment">/* static */</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x + <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-comment">/* static */</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x * <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>In class <code>B</code>, overriding occurs, and the result of running <code>myMethod</code> would be different:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-type">A</span> <span class="hljs-variable">myInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">A</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br><br>myInstance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br><br><span class="hljs-type">B</span> <span class="hljs-variable">anotherInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>anotherInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br></code></pre></td></tr></table></figure><p>There is also no warning anymore.</p><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul><li><a href="https://docs.oracle.com/javase/tutorial/java/IandI/override.html">Overriding and Hiding Methods (The Java™ Tutorials &gt; Learning the Java Language &gt; Interfaces and Inheritance)</a></li><li><a href="https://stackoverflow.com/questions/2475259/can-i-override-and-overload-static-methods-in-java">Can I override and overload static methods in Java? - Stack Overflow</a></li><li><a href="https://www.javatpoint.com/can-we-override-static-method-in-java">Can We Override Static Method in Java - Javatpoint</a></li></ul>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Hide-Superclass-Static-Methods-in-Java"><a href="#Hide-Superclass-Static-Methods-in-Java" class="headerlink" title="Hide Superclass Static Methods in Java"></a>Hide Superclass Static Methods in Java</h1><p>A <code>static</code> method <em><strong>cannot</strong></em> be overridden in Java. </p><p>This is because the concept of method <strong>overriding</strong> is based on dynamic or late binding, which means the actual method to be executed is determined at runtime based on the type of the object. And a static method cannot show runtime polymorphism.</p><p>However, Java does accept a static method existing in subclass with same declaration signature to its superclass. It does not override the static method in the superclass. Instead, it hides the superclass method, meaning the subclass has its own separate static method with the same name. </p><h2 id="Hiding"><a href="#Hiding" class="headerlink" title="Hiding"></a>Hiding</h2><p>This could be seen with the following example:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x + <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x * <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>Simply calling static method is easy to understand: </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Java">A.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br>B.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br></code></pre></td></tr></table></figure><p>The two methods exist peacefully. Inside the class <code>B</code>, the <code>myMethod</code> of class <code>A</code> is only <em>hidden</em> from the scope.</p><h2 id="Another-Perspective"><a href="#Another-Perspective" class="headerlink" title="Another Perspective"></a>Another Perspective</h2><p>Another way to check it out is like this:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-type">A</span> <span class="hljs-variable">myInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">A</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br><br>myInstance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br><br><span class="hljs-type">B</span> <span class="hljs-variable">anotherInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>anotherInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br></code></pre></td></tr></table></figure><p>But note that access <code>static</code> method by instance is not a good practice. This is only for demonstration. Typically, it will cause a warning that <em>The static method <code>myMethod(int)</code> from the type <code>A</code> should be accessed in a static way</em>.</p><h2 id="Overriding"><a href="#Overriding" class="headerlink" title="Overriding"></a>Overriding</h2><p>Note how is this different from <strong>overriding</strong>.</p><p>For example, if both comment out the keyword <code>static</code> in class <code>A</code> and <code>B</code>,</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-comment">/* static */</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x + <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-comment">/* static */</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x * <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>In class <code>B</code>, overriding occurs, and the result of running <code>myMethod</code> would be different:</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-type">A</span> <span class="hljs-variable">myInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">A</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br><br>myInstance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br><br><span class="hljs-type">B</span> <span class="hljs-variable">anotherInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>anotherInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br></code></pre></td></tr></table></figure><p>There is also no warning anymore.</p><h2 id="Remark"><a href="#Remark" class="headerlink" title="Remark"></a>Remark</h2><p>Same as preventing from overriding, add keyword <code>final</code> can also prevent a <code>static</code> method from hiding.</p><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul><li><a href="https://docs.oracle.com/javase/tutorial/java/IandI/override.html">Overriding and Hiding Methods (The Java™ Tutorials &gt; Learning the Java Language &gt; Interfaces and Inheritance)</a></li><li><a href="https://stackoverflow.com/questions/2475259/can-i-override-and-overload-static-methods-in-java">Can I override and overload static methods in Java? - Stack Overflow</a></li><li><a href="https://www.javatpoint.com/can-we-override-static-method-in-java">Can We Override Static Method in Java - Javatpoint</a></li><li><a href="https://docs.oracle.com/javase/specs/jls/se20/html/jls-8.html#jls-8.4.3.3">Chapter 8. Classes - 8.4.3.3. <code>final</code> Methods</a></li></ul>]]></content>
     
     
     <categories>
@@ -88,6 +88,8 @@
     
     <tags>
       
+      <tag>Optimization</tag>
+      
       <tag>Artificial Intelligence</tag>
       
       <tag>Linear Perceptron</tag>
@@ -95,8 +97,6 @@
       <tag>Neural Network</tag>
       
       <tag>Machine Learning</tag>
-      
-      <tag>Optimization</tag>
       
       <tag>Deep Learning</tag>
       
@@ -123,11 +123,11 @@
     
     <tags>
       
+      <tag>Optimization</tag>
+      
       <tag>Artificial Intelligence</tag>
       
       <tag>Machine Learning</tag>
-      
-      <tag>Optimization</tag>
       
       <tag>MDP</tag>
       
@@ -218,13 +218,13 @@
     
     <tags>
       
-      <tag>Memory</tag>
-      
-      <tag>xv6</tag>
+      <tag>Bitwise Operation</tag>
       
       <tag>Optimization</tag>
       
-      <tag>Bitwise Operation</tag>
+      <tag>xv6</tag>
+      
+      <tag>Memory</tag>
       
     </tags>
     
@@ -249,13 +249,13 @@
     
     <tags>
       
-      <tag>C</tag>
-      
       <tag>Register</tag>
+      
+      <tag>xv6</tag>
       
       <tag>QEMU</tag>
       
-      <tag>xv6</tag>
+      <tag>C</tag>
       
       <tag>Peripheral</tag>
       
@@ -288,11 +288,13 @@
     
     <tags>
       
-      <tag>C</tag>
-      
       <tag>RISC-V</tag>
       
       <tag>Register</tag>
+      
+      <tag>xv6</tag>
+      
+      <tag>Memory</tag>
       
       <tag>Bootstrap</tag>
       
@@ -302,9 +304,7 @@
       
       <tag>QEMU</tag>
       
-      <tag>Memory</tag>
-      
-      <tag>xv6</tag>
+      <tag>C</tag>
       
     </tags>
     
@@ -402,9 +402,9 @@
     
     <tags>
       
-      <tag>C</tag>
-      
       <tag>Memory</tag>
+      
+      <tag>C</tag>
       
       <tag>Dynamic Memory Allocation</tag>
       
@@ -491,13 +491,13 @@
     
     <tags>
       
-      <tag>Tree</tag>
-      
-      <tag>Binary Tree</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Tree</tag>
+      
+      <tag>Binary Tree</tag>
       
     </tags>
     
@@ -547,9 +547,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>Linked List</tag>
+      
+      <tag>Python</tag>
       
     </tags>
     
@@ -630,11 +630,11 @@
     
     <tags>
       
+      <tag>Linked List</tag>
+      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
-      
-      <tag>Linked List</tag>
       
     </tags>
     
