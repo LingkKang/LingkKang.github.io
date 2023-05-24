@@ -26,10 +26,10 @@
 <meta property="article:published_time" content="2023-05-24T12:07:00.000Z">
 <meta property="article:modified_time" content="2023-05-24T12:17:00.000Z">
 <meta property="article:author" content="Lingkang">
+<meta property="article:tag" content="Polymorphism">
 <meta property="article:tag" content="Haskell">
 <meta property="article:tag" content="Functional Programming">
 <meta property="article:tag" content="Currying">
-<meta property="article:tag" content="Polymorphism">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -242,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k words
+          1.9k words
         
       </span>
     
@@ -253,7 +253,7 @@
         
         
         
-          15 mins
+          16 mins
         
       </span>
     
@@ -317,7 +317,10 @@
 <h2 id="e"><a href="#e" class="headerlink" title="(e)"></a>(e)</h2><p>An empty matrix which have 3 empty row, each row is a empty list.</p>
 <h2 id="f"><a href="#f" class="headerlink" title="(f)"></a>(f)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">insertColumnRight</span> :: <span class="hljs-type">Matrix</span> -&gt; [<span class="hljs-type">Float</span>] -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">insertColumnRight</span> <span class="hljs-type">Null</span> [] = <span class="hljs-type">Null</span><br><span class="hljs-title">insertColumnRight</span> (<span class="hljs-type">Row</span> row rest) (x:xs) = <span class="hljs-type">Row</span> (row ++ [x]) (insertColumnRight rest xs)<br><br><span class="hljs-title">transposeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">transposeMatrix</span> m = helper m e<br>    <span class="hljs-keyword">where</span><br>        (_, y) = sizeMatrix m<br>        e = emptyMatrix y<br>        helper <span class="hljs-type">Null</span> new = new<br>        helper (<span class="hljs-type">Row</span> row rest) new = helper rest (insertColumnRight new row)<br></code></pre></td></tr></table></figure>
 
-<h2 id="g"><a href="#g" class="headerlink" title="(g)"></a>(g)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">addRows</span> :: [<span class="hljs-type">Float</span>] -&gt; [<span class="hljs-type">Float</span>] -&gt; [<span class="hljs-type">Float</span>]<br><span class="hljs-title">addRows</span> xs ys = [xs !! i + ys !! i | i &lt;- index]<br>	<span class="hljs-keyword">where</span><br>		len = length xs<br>		index = take len [<span class="hljs-number">0</span>..]<br></code></pre></td></tr></table></figure>
+<p>Better one:</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">transposeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">transposeMatrix</span> (<span class="hljs-type">Row</span> a <span class="hljs-type">Null</span>) = insertColumn (emptyMatrix (length a)) a<br><span class="hljs-title">transposeMatrix</span> (<span class="hljs-type">Row</span> a b) = insertColumn (transposeMatrix b) a<br></code></pre></td></tr></table></figure>
+
+<h2 id="g"><a href="#g" class="headerlink" title="(g)"></a>(g)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">addRows</span> :: [<span class="hljs-type">Float</span>] -&gt; [<span class="hljs-type">Float</span>] -&gt; [<span class="hljs-type">Float</span>]<br><span class="hljs-title">addRows</span> xs ys = [fst item + snd item | item &lt;- zip xs ys]<br><br><span class="hljs-comment">--    addRows xs ys = [xs !! i + ys !! i | i &lt;- index]</span><br><span class="hljs-comment">--    where</span><br><span class="hljs-comment">--        len = length xs</span><br><span class="hljs-comment">--        index = take len [0..]</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="h"><a href="#h" class="headerlink" title="(h)"></a>(h)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Haskell">(+#+) :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br>(+#+) x <span class="hljs-type">Null</span> = x<br>(+#+) <span class="hljs-type">Null</span> x = x<br>(+#+) (<span class="hljs-type">Row</span> row1 rest1) (<span class="hljs-type">Row</span> row2 rest2) = <span class="hljs-type">Row</span> (addRows row1 row2) ((+#+) rest1 rest2)<br></code></pre></td></tr></table></figure>
 
@@ -357,13 +360,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
+        <a href="/tags/Polymorphism/">#Polymorphism</a>
+      
         <a href="/tags/Haskell/">#Haskell</a>
       
         <a href="/tags/Functional-Programming/">#Functional Programming</a>
       
         <a href="/tags/Currying/">#Currying</a>
-      
-        <a href="/tags/Polymorphism/">#Polymorphism</a>
       
     </div>
   
