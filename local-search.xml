@@ -8,7 +8,7 @@
     <link href="/2023/05/24/hs-practice/"/>
     <url>/2023/05/24/hs-practice/</url>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="A-Haskell-Practice-with-Answer"><a href="#A-Haskell-Practice-with-Answer" class="headerlink" title="A Haskell Practice with Answer"></a>A Haskell Practice with Answer</h1><p>The problem sheet can be found <a href="/files/21-22-6-7.pdf">here</a>.</p><h2 id="a"><a href="#a" class="headerlink" title="(a)"></a>(a)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">m2</span> :: <span class="hljs-type">Matrix</span><br><span class="hljs-title">m2</span> = <span class="hljs-type">Row</span> [<span class="hljs-number">1.2</span>, -<span class="hljs-number">1.0</span>] (<span class="hljs-type">Row</span> [<span class="hljs-number">4.5</span>, -<span class="hljs-number">0.9</span>] (<span class="hljs-type">Row</span> [<span class="hljs-number">2.3</span>, <span class="hljs-number">1.8</span>] <span class="hljs-type">Null</span>))<br></code></pre></td></tr></table></figure><h2 id="b"><a href="#b" class="headerlink" title="(b)"></a>(b)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">legitMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Bool</span><br><span class="hljs-title">legitMatrix</span> <span class="hljs-type">Null</span> = <span class="hljs-type">True</span><br><span class="hljs-title">legitMatrix</span> (<span class="hljs-type">Row</span> row rest) = sameLength (length row) rest<br>    <span class="hljs-keyword">where</span><br>        isEnd <span class="hljs-type">Null</span> = <span class="hljs-type">True</span><br>        isEnd _ = <span class="hljs-type">False</span><br>        sameLength len <span class="hljs-type">Null</span> = <span class="hljs-type">True</span><br>        sameLength len (<span class="hljs-type">Row</span> row rest) = length row == len &amp;&amp; sameLength len rest<br></code></pre></td></tr></table></figure><h2 id="c"><a href="#c" class="headerlink" title="(c)"></a>(c)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">sizeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; (<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>)<br><span class="hljs-title">sizeMatrix</span> <span class="hljs-type">Null</span> = (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<br><span class="hljs-title">sizeMatrix</span> (<span class="hljs-type">Row</span> row rest) = (x, y)<br><span class="hljs-keyword">where</span> <br>y = length row<br>x = <span class="hljs-number">1</span> + columnSize rest<br>columnSize <span class="hljs-type">Null</span> = <span class="hljs-number">0</span><br>columnSize (<span class="hljs-type">Row</span> row rest) = <span class="hljs-number">1</span> + columnSize rest<br></code></pre></td></tr></table></figure><h2 id="d"><a href="#d" class="headerlink" title="(d)"></a>(d)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">insertColumn</span> :: <span class="hljs-type">Matrix</span> -&gt; [<span class="hljs-type">Float</span>] -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">insertColumn</span> <span class="hljs-type">Null</span> [] = <span class="hljs-type">Null</span><br><span class="hljs-title">insertColumn</span> (<span class="hljs-type">Row</span> row rest) (x:xs) = <span class="hljs-type">Row</span> ([x] ++ row) (insertColumn rest xs)<br></code></pre></td></tr></table></figure><h2 id="e"><a href="#e" class="headerlink" title="(e)"></a>(e)</h2><p>An empty matrix which have 3 empty row, each row is a empty list.</p><h2 id="f"><a href="#f" class="headerlink" title="(f)"></a>(f)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">insertColumnRight</span> :: <span class="hljs-type">Matrix</span> -&gt; [<span class="hljs-type">Float</span>] -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">insertColumnRight</span> <span class="hljs-type">Null</span> [] = <span class="hljs-type">Null</span><br><span class="hljs-title">insertColumnRight</span> (<span class="hljs-type">Row</span> row rest) (x:xs) = <span class="hljs-type">Row</span> (row ++ [x]) (insertColumnRight rest xs)<br><br><span class="hljs-title">transposeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">transposeMatrix</span> m = helper m e<br>    <span class="hljs-keyword">where</span><br>        (_, y) = sizeMatrix m<br>        e = emptyMatrix y<br>        helper <span class="hljs-type">Null</span> new = new<br>        helper (<span class="hljs-type">Row</span> row rest) new = helper rest (insertColumnRight new row)<br></code></pre></td></tr></table></figure><p>Better one:</p><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">transposeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">transposeMatrix</span> (<span class="hljs-type">Row</span> a <span class="hljs-type">Null</span>) = insertColumn (emptyMatrix (length a)) a<br><span class="hljs-title">transposeMatrix</span> (<span class="hljs-type">Row</span> a b) = insertColumn (transposeMatrix b) a<br></code></pre></td></tr></table></figure><h2 id="g"><a href="#g" class="headerlink" title="(g)"></a>(g)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">addRows</span> :: [<span class="hljs-type">Float</span>] -&gt; [<span class="hljs-type">Float</span>] -&gt; [<span class="hljs-type">Float</span>]<br><span class="hljs-title">addRows</span> xs ys = [fst item + snd item | item &lt;- zip xs ys]<br><br><span class="hljs-comment">--    addRows xs ys = [xs !! i + ys !! i | i &lt;- index]</span><br><span class="hljs-comment">--    where</span><br><span class="hljs-comment">--        len = length xs</span><br><span class="hljs-comment">--        index = take len [0..]</span><br></code></pre></td></tr></table></figure><h2 id="h"><a href="#h" class="headerlink" title="(h)"></a>(h)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Haskell">(+#+) :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br>(+#+) x <span class="hljs-type">Null</span> = x<br>(+#+) <span class="hljs-type">Null</span> x = x<br>(+#+) (<span class="hljs-type">Row</span> row1 rest1) (<span class="hljs-type">Row</span> row2 rest2) = <span class="hljs-type">Row</span> (addRows row1 row2) ((+#+) rest1 rest2)<br></code></pre></td></tr></table></figure><h2 id="i"><a href="#i" class="headerlink" title="(i)"></a>(i)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Haskell">(+##+) :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Maybe</span> <span class="hljs-type">Matrix</span><br>(+##+) x y<br>    | not (legitMatrix x) || not (legitMatrix y) = <span class="hljs-type">Nothing</span><br>    | sizeMatrix x /= sizeMatrix y = <span class="hljs-type">Nothing</span><br>    | otherwise = <span class="hljs-type">Just</span> ((+#+) x y)<br></code></pre></td></tr></table></figure><h2 id="j"><a href="#j" class="headerlink" title="(j)"></a>(j)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">showMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">IO</span>()<br><span class="hljs-title">showMatrix</span> <span class="hljs-type">Null</span> = putStr <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-title">showMatrix</span> (<span class="hljs-type">Row</span> row rest) =<br>    <span class="hljs-keyword">do</span><br>        putStr <span class="hljs-string">&quot;[&quot;</span><br>        putStr a<br>        putStrLn <span class="hljs-string">&quot;]&quot;</span><br>        showMatrix rest<br>    <span class="hljs-keyword">where</span><br>        a = concat [show item ++ <span class="hljs-string">&quot;\t&quot;</span> | item &lt;- row]<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="A-Haskell-Practice-with-Answer"><a href="#A-Haskell-Practice-with-Answer" class="headerlink" title="A Haskell Practice with Answer"></a>A Haskell Practice with Answer</h1><p>The problem sheet can be found <a href="/files/21-22-6-7.pdf">here</a>.</p><h2 id="a"><a href="#a" class="headerlink" title="(a)"></a>(a)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">m2</span> :: <span class="hljs-type">Matrix</span><br><span class="hljs-title">m2</span> = <span class="hljs-type">Row</span> [<span class="hljs-number">1.2</span>, -<span class="hljs-number">1.0</span>] (<span class="hljs-type">Row</span> [<span class="hljs-number">4.5</span>, -<span class="hljs-number">0.9</span>] (<span class="hljs-type">Row</span> [<span class="hljs-number">2.3</span>, <span class="hljs-number">1.8</span>] <span class="hljs-type">Null</span>))<br></code></pre></td></tr></table></figure><h2 id="b"><a href="#b" class="headerlink" title="(b)"></a>(b)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">legitMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Bool</span><br><span class="hljs-title">legitMatrix</span> <span class="hljs-type">Null</span> = <span class="hljs-type">True</span><br><span class="hljs-title">legitMatrix</span> (<span class="hljs-type">Row</span> row rest) = sameLength (length row) rest<br>    <span class="hljs-keyword">where</span><br>        isEnd <span class="hljs-type">Null</span> = <span class="hljs-type">True</span><br>        isEnd _ = <span class="hljs-type">False</span><br>        sameLength len <span class="hljs-type">Null</span> = <span class="hljs-type">True</span><br>        sameLength len (<span class="hljs-type">Row</span> row rest) = length row == len &amp;&amp; sameLength len rest<br></code></pre></td></tr></table></figure><h2 id="c"><a href="#c" class="headerlink" title="(c)"></a>(c)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">sizeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; (<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>)<br><span class="hljs-title">sizeMatrix</span> <span class="hljs-type">Null</span> = (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<br><span class="hljs-title">sizeMatrix</span> (<span class="hljs-type">Row</span> row rest) = (x, y)<br><span class="hljs-keyword">where</span> <br>y = length row<br>x = <span class="hljs-number">1</span> + columnSize rest<br>columnSize <span class="hljs-type">Null</span> = <span class="hljs-number">0</span><br>columnSize (<span class="hljs-type">Row</span> row rest) = <span class="hljs-number">1</span> + columnSize rest<br></code></pre></td></tr></table></figure><h2 id="d"><a href="#d" class="headerlink" title="(d)"></a>(d)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">insertColumn</span> :: <span class="hljs-type">Matrix</span> -&gt; [<span class="hljs-type">Float</span>] -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">insertColumn</span> <span class="hljs-type">Null</span> [] = <span class="hljs-type">Null</span><br><span class="hljs-title">insertColumn</span> (<span class="hljs-type">Row</span> row rest) (x:xs) = <span class="hljs-type">Row</span> ([x] ++ row) (insertColumn rest xs)<br></code></pre></td></tr></table></figure><h2 id="e"><a href="#e" class="headerlink" title="(e)"></a>(e)</h2><p>An empty matrix which have 3 empty row, each row is a empty list.</p><h2 id="f"><a href="#f" class="headerlink" title="(f)"></a>(f)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">insertColumnRight</span> :: <span class="hljs-type">Matrix</span> -&gt; [<span class="hljs-type">Float</span>] -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">insertColumnRight</span> <span class="hljs-type">Null</span> [] = <span class="hljs-type">Null</span><br><span class="hljs-title">insertColumnRight</span> (<span class="hljs-type">Row</span> row rest) (x:xs) = <span class="hljs-type">Row</span> (row ++ [x]) (insertColumnRight rest xs)<br><br><span class="hljs-title">transposeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">transposeMatrix</span> m = helper m e<br>    <span class="hljs-keyword">where</span><br>        (_, y) = sizeMatrix m<br>        e = emptyMatrix y<br>        helper <span class="hljs-type">Null</span> new = new<br>        helper (<span class="hljs-type">Row</span> row rest) new = helper rest (insertColumnRight new row)<br></code></pre></td></tr></table></figure><p>Better one:</p><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">transposeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">transposeMatrix</span> (<span class="hljs-type">Row</span> a <span class="hljs-type">Null</span>) = insertColumn (emptyMatrix (length a)) a<br><span class="hljs-title">transposeMatrix</span> (<span class="hljs-type">Row</span> a b) = insertColumn (transposeMatrix b) a<br></code></pre></td></tr></table></figure><h2 id="g"><a href="#g" class="headerlink" title="(g)"></a>(g)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">addRows</span> :: [<span class="hljs-type">Float</span>] -&gt; [<span class="hljs-type">Float</span>] -&gt; [<span class="hljs-type">Float</span>]<br><span class="hljs-title">addRows</span> xs ys = [fst item + snd item | item &lt;- zip xs ys]<br><br><span class="hljs-comment">--    addRows xs ys = [xs !! i + ys !! i | i &lt;- index]</span><br><span class="hljs-comment">--    where</span><br><span class="hljs-comment">--        len = length xs</span><br><span class="hljs-comment">--        index = take len [0..]</span><br></code></pre></td></tr></table></figure><h2 id="h"><a href="#h" class="headerlink" title="(h)"></a>(h)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Haskell">(+#+) :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br>(+#+) x <span class="hljs-type">Null</span> = x<br>(+#+) <span class="hljs-type">Null</span> x = x<br>(+#+) (<span class="hljs-type">Row</span> row1 rest1) (<span class="hljs-type">Row</span> row2 rest2) = <span class="hljs-type">Row</span> (addRows row1 row2) ((+#+) rest1 rest2)<br></code></pre></td></tr></table></figure><h2 id="i"><a href="#i" class="headerlink" title="(i)"></a>(i)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Haskell">(+##+) :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Maybe</span> <span class="hljs-type">Matrix</span><br>(+##+) x y<br>    | not (legitMatrix x) || not (legitMatrix y) = <span class="hljs-type">Nothing</span><br>    | sizeMatrix x /= sizeMatrix y = <span class="hljs-type">Nothing</span><br>    | otherwise = <span class="hljs-type">Just</span> ((+#+) x y)<br></code></pre></td></tr></table></figure><h2 id="j"><a href="#j" class="headerlink" title="(j)"></a>(j)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">showMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">IO</span>()<br><span class="hljs-title">showMatrix</span> <span class="hljs-type">Null</span> = putStr <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-title">showMatrix</span> (<span class="hljs-type">Row</span> row rest) = <br>    <span class="hljs-keyword">do</span><br>        putStr <span class="hljs-string">&quot;[&quot;</span><br>        putStr (display row)<br>        putStrLn <span class="hljs-string">&quot;]&quot;</span><br>        showMatrix rest<br>    <span class="hljs-keyword">where</span><br>        display row <br>            | length row == <span class="hljs-number">1</span> = show (head row)<br>            | otherwise = show (head row) ++ <span class="hljs-string">&quot;\t&quot;</span> ++ display (tail row)<br></code></pre></td></tr></table></figure>]]></content>
     
     
     <categories>
@@ -121,13 +121,13 @@
       
       <tag>Optimization</tag>
       
-      <tag>Machine Learning</tag>
-      
       <tag>Artificial Intelligence</tag>
       
       <tag>Linear Perceptron</tag>
       
       <tag>Neural Network</tag>
+      
+      <tag>Machine Learning</tag>
       
       <tag>Deep Learning</tag>
       
@@ -156,11 +156,11 @@
       
       <tag>Optimization</tag>
       
-      <tag>MDP</tag>
+      <tag>Artificial Intelligence</tag>
       
       <tag>Machine Learning</tag>
       
-      <tag>Artificial Intelligence</tag>
+      <tag>MDP</tag>
       
       <tag>Bellman Equation</tag>
       
@@ -282,11 +282,11 @@
       
       <tag>Register</tag>
       
+      <tag>C</tag>
+      
       <tag>xv6</tag>
       
       <tag>QEMU</tag>
-      
-      <tag>C</tag>
       
       <tag>UART</tag>
       
@@ -323,6 +323,8 @@
       
       <tag>Register</tag>
       
+      <tag>C</tag>
+      
       <tag>xv6</tag>
       
       <tag>Memory</tag>
@@ -334,8 +336,6 @@
       <tag>Stack</tag>
       
       <tag>QEMU</tag>
-      
-      <tag>C</tag>
       
     </tags>
     
@@ -433,9 +433,9 @@
     
     <tags>
       
-      <tag>Memory</tag>
-      
       <tag>C</tag>
+      
+      <tag>Memory</tag>
       
       <tag>Dynamic Memory Allocation</tag>
       
@@ -522,13 +522,13 @@
     
     <tags>
       
-      <tag>Tree</tag>
-      
-      <tag>Binary Tree</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Tree</tag>
+      
+      <tag>Binary Tree</tag>
       
     </tags>
     
@@ -578,9 +578,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>Linked List</tag>
+      
+      <tag>Python</tag>
       
     </tags>
     
@@ -632,9 +632,9 @@
     
     <tags>
       
-      <tag>生活</tag>
-      
       <tag>读书</tag>
+      
+      <tag>生活</tag>
       
       <tag>Summary</tag>
       
@@ -661,11 +661,11 @@
     
     <tags>
       
+      <tag>Linked List</tag>
+      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
-      
-      <tag>Linked List</tag>
       
     </tags>
     

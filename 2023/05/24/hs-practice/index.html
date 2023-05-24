@@ -242,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k words
+          2k words
         
       </span>
     
@@ -253,7 +253,7 @@
         
         
         
-          16 mins
+          17 mins
         
       </span>
     
@@ -313,7 +313,6 @@
 
 <h2 id="d"><a href="#d" class="headerlink" title="(d)"></a>(d)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">insertColumn</span> :: <span class="hljs-type">Matrix</span> -&gt; [<span class="hljs-type">Float</span>] -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">insertColumn</span> <span class="hljs-type">Null</span> [] = <span class="hljs-type">Null</span><br><span class="hljs-title">insertColumn</span> (<span class="hljs-type">Row</span> row rest) (x:xs) = <span class="hljs-type">Row</span> ([x] ++ row) (insertColumn rest xs)<br></code></pre></td></tr></table></figure>
 
-
 <h2 id="e"><a href="#e" class="headerlink" title="(e)"></a>(e)</h2><p>An empty matrix which have 3 empty row, each row is a empty list.</p>
 <h2 id="f"><a href="#f" class="headerlink" title="(f)"></a>(f)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">insertColumnRight</span> :: <span class="hljs-type">Matrix</span> -&gt; [<span class="hljs-type">Float</span>] -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">insertColumnRight</span> <span class="hljs-type">Null</span> [] = <span class="hljs-type">Null</span><br><span class="hljs-title">insertColumnRight</span> (<span class="hljs-type">Row</span> row rest) (x:xs) = <span class="hljs-type">Row</span> (row ++ [x]) (insertColumnRight rest xs)<br><br><span class="hljs-title">transposeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">transposeMatrix</span> m = helper m e<br>    <span class="hljs-keyword">where</span><br>        (_, y) = sizeMatrix m<br>        e = emptyMatrix y<br>        helper <span class="hljs-type">Null</span> new = new<br>        helper (<span class="hljs-type">Row</span> row rest) new = helper rest (insertColumnRight new row)<br></code></pre></td></tr></table></figure>
 
@@ -326,7 +325,7 @@
 
 <h2 id="i"><a href="#i" class="headerlink" title="(i)"></a>(i)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Haskell">(+##+) :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Maybe</span> <span class="hljs-type">Matrix</span><br>(+##+) x y<br>    | not (legitMatrix x) || not (legitMatrix y) = <span class="hljs-type">Nothing</span><br>    | sizeMatrix x /= sizeMatrix y = <span class="hljs-type">Nothing</span><br>    | otherwise = <span class="hljs-type">Just</span> ((+#+) x y)<br></code></pre></td></tr></table></figure>
 
-<h2 id="j"><a href="#j" class="headerlink" title="(j)"></a>(j)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">showMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">IO</span>()<br><span class="hljs-title">showMatrix</span> <span class="hljs-type">Null</span> = putStr <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-title">showMatrix</span> (<span class="hljs-type">Row</span> row rest) =<br>    <span class="hljs-keyword">do</span><br>        putStr <span class="hljs-string">&quot;[&quot;</span><br>        putStr a<br>        putStrLn <span class="hljs-string">&quot;]&quot;</span><br>        showMatrix rest<br>    <span class="hljs-keyword">where</span><br>        a = concat [show item ++ <span class="hljs-string">&quot;\t&quot;</span> | item &lt;- row]<br></code></pre></td></tr></table></figure>
+<h2 id="j"><a href="#j" class="headerlink" title="(j)"></a>(j)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">showMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">IO</span>()<br><span class="hljs-title">showMatrix</span> <span class="hljs-type">Null</span> = putStr <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-title">showMatrix</span> (<span class="hljs-type">Row</span> row rest) = <br>    <span class="hljs-keyword">do</span><br>        putStr <span class="hljs-string">&quot;[&quot;</span><br>        putStr (display row)<br>        putStrLn <span class="hljs-string">&quot;]&quot;</span><br>        showMatrix rest<br>    <span class="hljs-keyword">where</span><br>        display row <br>            | length row == <span class="hljs-number">1</span> = show (head row)<br>            | otherwise = show (head row) ++ <span class="hljs-string">&quot;\t&quot;</span> ++ display (tail row)<br></code></pre></td></tr></table></figure>
 
                 
               </div>
