@@ -20,13 +20,13 @@
     
     <tags>
       
-      <tag>Polymorphism</tag>
-      
       <tag>Haskell</tag>
       
       <tag>Functional Programming</tag>
       
       <tag>Currying</tag>
+      
+      <tag>Polymorphism</tag>
       
     </tags>
     
@@ -51,13 +51,13 @@
     
     <tags>
       
+      <tag>Polymorphism</tag>
+      
       <tag>Java</tag>
       
       <tag>Inheritance</tag>
       
       <tag>Static</tag>
-      
-      <tag>Polymorphism</tag>
       
       <tag>Overriding</tag>
       
@@ -121,13 +121,13 @@
       
       <tag>Optimization</tag>
       
+      <tag>Machine Learning</tag>
+      
       <tag>Artificial Intelligence</tag>
       
       <tag>Linear Perceptron</tag>
       
       <tag>Neural Network</tag>
-      
-      <tag>Machine Learning</tag>
       
       <tag>Deep Learning</tag>
       
@@ -156,11 +156,11 @@
       
       <tag>Optimization</tag>
       
-      <tag>Artificial Intelligence</tag>
+      <tag>MDP</tag>
       
       <tag>Machine Learning</tag>
       
-      <tag>MDP</tag>
+      <tag>Artificial Intelligence</tag>
       
       <tag>Bellman Equation</tag>
       
@@ -218,9 +218,9 @@
       
       <tag>QEMU</tag>
       
-      <tag>Peripheral</tag>
-      
       <tag>Interrupt</tag>
+      
+      <tag>Peripheral</tag>
       
       <tag>PLIC</tag>
       
@@ -249,13 +249,13 @@
     
     <tags>
       
-      <tag>Bitwise Operation</tag>
-      
-      <tag>Optimization</tag>
+      <tag>Memory</tag>
       
       <tag>xv6</tag>
       
-      <tag>Memory</tag>
+      <tag>Bitwise Operation</tag>
+      
+      <tag>Optimization</tag>
       
     </tags>
     
@@ -282,19 +282,19 @@
       
       <tag>Register</tag>
       
+      <tag>QEMU</tag>
+      
       <tag>C</tag>
       
       <tag>xv6</tag>
       
-      <tag>QEMU</tag>
+      <tag>Peripheral</tag>
       
       <tag>UART</tag>
       
       <tag>Baud Rate</tag>
       
       <tag>Polling</tag>
-      
-      <tag>Peripheral</tag>
       
     </tags>
     
@@ -323,12 +323,6 @@
       
       <tag>Register</tag>
       
-      <tag>C</tag>
-      
-      <tag>xv6</tag>
-      
-      <tag>Memory</tag>
-      
       <tag>Bootstrap</tag>
       
       <tag>Assembly</tag>
@@ -336,6 +330,12 @@
       <tag>Stack</tag>
       
       <tag>QEMU</tag>
+      
+      <tag>C</tag>
+      
+      <tag>Memory</tag>
+      
+      <tag>xv6</tag>
       
     </tags>
     
