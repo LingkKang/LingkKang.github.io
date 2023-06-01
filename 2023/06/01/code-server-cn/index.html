@@ -32,6 +32,7 @@
 <meta property="article:tag" content="Proxy">
 <meta property="article:tag" content="Cloud">
 <meta property="article:tag" content="Nginx">
+<meta property="article:tag" content="ECS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://lingkkang.github.io/images/code/code-server.png">
   
@@ -245,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          1.8k 字
         
       </span>
     
@@ -256,7 +257,7 @@
         
         
         
-          15 分钟
+          16 分钟
         
       </span>
     
@@ -343,7 +344,9 @@
 <p>可以看到 Code Server 正在监听 <code>localhost:8080</code>。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">~<span class="hljs-comment"># curl localhost:8080</span><br>Found. Redirecting to ./login<br>~<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
 
-<h3 id="4-通过-Nginx-将-Code-Server-公开"><a href="#4-通过-Nginx-将-Code-Server-公开" class="headerlink" title="4. 通过 Nginx 将 Code Server 公开"></a>4. 通过 Nginx 将 Code Server 公开</h3><p>在 <code>/etc/nginx/sites-available/code-server</code> 中写入如下内容（如文件目录下没有 <code>code-server</code> 配置文件，新建一个即可）：</p>
+<h3 id="4-在服务器控制台开放端口"><a href="#4-在服务器控制台开放端口" class="headerlink" title="4. 在服务器控制台开放端口"></a>4. 在服务器控制台开放端口</h3><p>在服务器的控制台中开放需要留给 Code Server 使用的端口。</p>
+<p>Nginx 默认监听 <code>80</code> 端口，可在下一步客制化（例如此处改为 <code>8443</code>）。</p>
+<h3 id="5-通过-Nginx-将-Code-Server-公开"><a href="#5-通过-Nginx-将-Code-Server-公开" class="headerlink" title="5. 通过 Nginx 将 Code Server 公开"></a>5. 通过 Nginx 将 Code Server 公开</h3><p>在 <code>/etc/nginx/sites-available/code-server</code> 中写入如下内容（如文件目录下没有 <code>code-server</code> 配置文件，新建一个即可）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs config">server &#123;<br>    listen 8443;<br>    listen [::]:8443;<br><br>    server_name &#123;YOUR_DOMAIN_NAME&#125;;<br><br>    location / &#123;<br>        proxy_pass http://localhost:8080/;<br>        proxy_set_header Host $host;<br>        proxy_set_header Upgrade $http_upgrade;<br>        proxy_set_header Connection upgrade;<br>        proxy_set_header Accept-Encoding gzip;<br>        proxy_set_header X-Forwarded-Host $http_host;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>注意将 <code>&#123;YOUR_DOMAIN_NAME&#125;</code> 替换为当前域名或者服务器 IP 地址。</p>
@@ -356,7 +359,7 @@
 <p>然后可能需要重新加载服务：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">systemctl daemon-reload<br></code></pre></td></tr></table></figure>
 
-<h3 id="5-修改访问密码"><a href="#5-修改访问密码" class="headerlink" title="5. 修改访问密码"></a>5. 修改访问密码</h3><p>在这时 Code Server 已经可以通过设置的端口（此处为 <code>8443</code>）公开访问了，需要密码。</p>
+<h3 id="6-修改访问密码"><a href="#6-修改访问密码" class="headerlink" title="6. 修改访问密码"></a>6. 修改访问密码</h3><p>在这时 Code Server 已经可以通过设置的端口（此处为 <code>8443</code>）公开访问了，需要密码。</p>
 <p>默认密码在 <code>~/.config/code-server/config.yaml</code> 中，可以直接修改。</p>
 <p>修改后重启 code-server 服务生效。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">systemctl start code-server@<span class="hljs-variable">$USER</span><br></code></pre></td></tr></table></figure>
@@ -413,6 +416,8 @@
         <a href="/tags/Cloud/">#Cloud</a>
       
         <a href="/tags/Nginx/">#Nginx</a>
+      
+        <a href="/tags/ECS/">#ECS</a>
       
     </div>
   
