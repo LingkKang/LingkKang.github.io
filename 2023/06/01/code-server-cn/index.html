@@ -333,32 +333,34 @@
 </tbody></table>
 <p>其中 <code>code-server</code> 会在后面用安装脚本安装。</p>
 <h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><h3 id="1-升级"><a href="#1-升级" class="headerlink" title="1. 升级"></a>1. 升级</h3><p>在 root 权限下更新。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt update<br>apt upgrade<br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">apt update<br>apt upgrade<br></code></pre></td></tr></table></figure>
 
 <h3 id="2-安装-VS-Code-Server"><a href="#2-安装-VS-Code-Server" class="headerlink" title="2. 安装 VS Code Server"></a>2. 安装 VS Code Server</h3><p>使用 Code 提供的安装脚本安装 Code Server。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -SL https://code-server.dev/install.sh | sh<br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">curl -SL https://code-server.dev/install.sh | sh<br></code></pre></td></tr></table></figure>
 
-<h3 id="3-启动-Code-服务"><a href="#3-启动-Code-服务" class="headerlink" title="3. 启动 Code 服务"></a>3. 启动 Code 服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl <span class="hljs-built_in">enable</span> --now code-server@<span class="hljs-variable">$USER</span><br>systemctl start code-server@<span class="hljs-variable">$USER</span><br>systemctl status code-server@<span class="hljs-variable">$USER</span><br></code></pre></td></tr></table></figure>
+<h3 id="3-启动-Code-服务"><a href="#3-启动-Code-服务" class="headerlink" title="3. 启动 Code 服务"></a>3. 启动 Code 服务</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">systemctl <span class="hljs-built_in">enable</span> --now code-server@<span class="hljs-variable">$USER</span><br>systemctl start code-server@<span class="hljs-variable">$USER</span><br>systemctl status code-server@<span class="hljs-variable">$USER</span><br></code></pre></td></tr></table></figure>
 
 <p>可以看到 Code Server 正在监听 <code>localhost:8080</code>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">~<span class="hljs-comment"># curl localhost:8080</span><br>Found. Redirecting to ./login<br>~<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">~<span class="hljs-comment"># curl localhost:8080</span><br>Found. Redirecting to ./login<br>~<span class="hljs-comment"># </span><br></code></pre></td></tr></table></figure>
 
 <h3 id="4-通过-Nginx-将-Code-Server-公开"><a href="#4-通过-Nginx-将-Code-Server-公开" class="headerlink" title="4. 通过 Nginx 将 Code Server 公开"></a>4. 通过 Nginx 将 Code Server 公开</h3><p>在 <code>/etc/nginx/sites-available/code-server</code> 中写入如下内容（如文件目录下没有 <code>code-server</code> 配置文件，新建一个即可）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs config">server &#123;<br>    listen 8443;<br>    listen [::]:8443;<br><br>    server_name &#123;YOUR_DOMAIN_NAME&#125;;<br><br>    location / &#123;<br>        proxy_pass http://localhost:8080/;<br>        proxy_set_header Host $host;<br>        proxy_set_header Upgrade $http_upgrade;<br>        proxy_set_header Connection upgrade;<br>        proxy_set_header Accept-Encoding gzip;<br>        proxy_set_header X-Forwarded-Host $http_host;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>注意将 <code>&#123;YOUR_DOMAIN_NAME&#125;</code> 替换为当前域名或者服务器 IP 地址。</p>
 <p>并且通过软链接将内容同步到 <code>/etc/nginx/sites-enabled</code> 目录中：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ln</span> -s /etc/nginx/sites-available/code-server /etc/nginx/sites-enabled/code-server<br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">ln</span> -s /etc/nginx/sites-available/code-server /etc/nginx/sites-enabled/code-server<br></code></pre></td></tr></table></figure>
 
 <p>或者复制文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> /etc/nginx/sites-available code-server /etc/nginx/sites-enabled/code-server<br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">cp</span> /etc/nginx/sites-available code-server /etc/nginx/sites-enabled/code-server<br></code></pre></td></tr></table></figure>
 
 <p>然后可能需要重新加载服务：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl daemon-reload<br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">systemctl daemon-reload<br></code></pre></td></tr></table></figure>
 
 <h3 id="5-修改访问密码"><a href="#5-修改访问密码" class="headerlink" title="5. 修改访问密码"></a>5. 修改访问密码</h3><p>在这时 Code Server 已经可以通过设置的端口（此处为 <code>8443</code>）公开访问了，需要密码。</p>
 <p>默认密码在 <code>~/.config/code-server/config.yaml</code> 中，可以直接修改。</p>
 <p>修改后重启 code-server 服务生效。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">systemctl start code-server@<span class="hljs-variable">$USER</span><br></code></pre></td></tr></table></figure>
+
 <p><img src="/images/code/code-server.png" srcset="/img/loading.gif" lazyload alt="VS Code on web browser"></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://github.com/coder/code-server">coder&#x2F;code-server: VS Code in the browser</a></li>
