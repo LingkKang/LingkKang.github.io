@@ -16,27 +16,27 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="HSK!">
+    <meta name="description" content="LockQuote 我们实际上编程的时候应该尽可能从简单的角度出发，少用这种并发。少用多线程，那么自然就会少用锁，少存在并发，那么自然就不会出现讨厌的这种死锁问题。因为一旦出现死锁问题的话，调试也是非常麻烦的。所以说能够简单就尽量简单，这也是我们编程的一个主要原则。就是一上来不要把代码写得太花哨。就是用最简单的方式去解决最大、最复杂的问题，这是最好的一种策略。    Source: [完结] 循序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="A Haskell Practice with Answer">
-<meta property="og:url" content="https://lingkkang.github.io/2023/05/24/hs-practice/index.html">
+<meta property="og:title" content="Lock">
+<meta property="og:url" content="https://lingkkang.github.io/2023/05/29/lock/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="HSK!">
+<meta property="og:description" content="LockQuote 我们实际上编程的时候应该尽可能从简单的角度出发，少用这种并发。少用多线程，那么自然就会少用锁，少存在并发，那么自然就不会出现讨厌的这种死锁问题。因为一旦出现死锁问题的话，调试也是非常麻烦的。所以说能够简单就尽量简单，这也是我们编程的一个主要原则。就是一上来不要把代码写得太花哨。就是用最简单的方式去解决最大、最复杂的问题，这是最好的一种策略。    Source: [完结] 循序">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-05-24T12:07:00.000Z">
-<meta property="article:modified_time" content="2023-05-24T13:34:00.000Z">
+<meta property="article:published_time" content="2023-05-29T15:07:00.000Z">
+<meta property="article:modified_time" content="2023-06-01T01:43:45.364Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="Haskell">
-<meta property="article:tag" content="Functional Programming">
-<meta property="article:tag" content="Currying">
-<meta property="article:tag" content="Polymorphism">
+<meta property="article:tag" content="Lock">
+<meta property="article:tag" content="Dead Lock">
+<meta property="article:tag" content="Concurrency">
+<meta property="article:tag" content="Synchronization">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>A Haskell Practice with Answer - Lingkang&#39;s Blog</title>
+  <title>Lock - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -219,7 +219,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="A Haskell Practice with Answer"></span>
+            <span id="subtitle" data-typed-text="Lock"></span>
           
         </div>
 
@@ -230,8 +230,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-24 20:07" pubdate>
-          May 24, 2023 pm
+        <time datetime="2023-05-29 23:07" pubdate>
+          May 29, 2023 pm
         </time>
       </span>
     
@@ -242,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k words
+          243 words
         
       </span>
     
@@ -253,7 +253,7 @@
         
         
         
-          17 mins
+          3 mins
         
       </span>
     
@@ -291,12 +291,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">A Haskell Practice with Answer</h1>
+            <h1 style="display: none">Lock</h1>
             
               <p class="note note-info">
                 
                   
-                    Last updated on May 24, 2023 pm
+                    Last updated on June 1, 2023 am
                   
                 
               </p>
@@ -304,29 +304,13 @@
             
               <div class="markdown-body">
                 
-                <h1 id="A-Haskell-Practice-with-Answer"><a href="#A-Haskell-Practice-with-Answer" class="headerlink" title="A Haskell Practice with Answer"></a>A Haskell Practice with Answer</h1><p>The problem sheet can be found <a href="/files/21-22-6-7.pdf">here</a>.</p>
-<h2 id="a"><a href="#a" class="headerlink" title="(a)"></a>(a)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">m2</span> :: <span class="hljs-type">Matrix</span><br><span class="hljs-title">m2</span> = <span class="hljs-type">Row</span> [<span class="hljs-number">1.2</span>, -<span class="hljs-number">1.0</span>] (<span class="hljs-type">Row</span> [<span class="hljs-number">4.5</span>, -<span class="hljs-number">0.9</span>] (<span class="hljs-type">Row</span> [<span class="hljs-number">2.3</span>, <span class="hljs-number">1.8</span>] <span class="hljs-type">Null</span>))<br></code></pre></td></tr></table></figure>
+                <h1 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h1><h2 id="Quote"><a href="#Quote" class="headerlink" title="Quote"></a>Quote</h2><blockquote>
+<p>我们实际上编程的时候应该尽可能从简单的角度出发，少用这种并发。少用多线程，那么自然就会少用锁，少存在并发，那么自然就不会出现讨厌的这种死锁问题。因为一旦出现死锁问题的话，调试也是非常麻烦的。所以说能够简单就尽量简单，这也是我们编程的一个主要原则。就是一上来不要把代码写得太花哨。就是用最简单的方式去解决最大、最复杂的问题，这是最好的一种策略。</p>
+</blockquote>
+<div style='text-align: right'>
 
-<h2 id="b"><a href="#b" class="headerlink" title="(b)"></a>(b)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">legitMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Bool</span><br><span class="hljs-title">legitMatrix</span> <span class="hljs-type">Null</span> = <span class="hljs-type">True</span><br><span class="hljs-title">legitMatrix</span> (<span class="hljs-type">Row</span> row rest) = sameLength (length row) rest<br>    <span class="hljs-keyword">where</span><br>        isEnd <span class="hljs-type">Null</span> = <span class="hljs-type">True</span><br>        isEnd _ = <span class="hljs-type">False</span><br>        sameLength len <span class="hljs-type">Null</span> = <span class="hljs-type">True</span><br>        sameLength len (<span class="hljs-type">Row</span> row rest) = length row == len &amp;&amp; sameLength len rest<br></code></pre></td></tr></table></figure>
-
-<h2 id="c"><a href="#c" class="headerlink" title="(c)"></a>(c)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">sizeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; (<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>)<br><span class="hljs-title">sizeMatrix</span> <span class="hljs-type">Null</span> = (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<br><span class="hljs-title">sizeMatrix</span> (<span class="hljs-type">Row</span> row rest) = (x, y)<br>	<span class="hljs-keyword">where</span> <br>		y = length row<br>		x = <span class="hljs-number">1</span> + columnSize rest<br>		columnSize <span class="hljs-type">Null</span> = <span class="hljs-number">0</span><br>		columnSize (<span class="hljs-type">Row</span> row rest) = <span class="hljs-number">1</span> + columnSize rest	<br></code></pre></td></tr></table></figure>
-
-<h2 id="d"><a href="#d" class="headerlink" title="(d)"></a>(d)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">insertColumn</span> :: <span class="hljs-type">Matrix</span> -&gt; [<span class="hljs-type">Float</span>] -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">insertColumn</span> <span class="hljs-type">Null</span> [] = <span class="hljs-type">Null</span><br><span class="hljs-title">insertColumn</span> (<span class="hljs-type">Row</span> row rest) (x:xs) = <span class="hljs-type">Row</span> ([x] ++ row) (insertColumn rest xs)<br></code></pre></td></tr></table></figure>
-
-<h2 id="e"><a href="#e" class="headerlink" title="(e)"></a>(e)</h2><p>An empty matrix which have 3 empty row, each row is a empty list.</p>
-<h2 id="f"><a href="#f" class="headerlink" title="(f)"></a>(f)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">insertColumnRight</span> :: <span class="hljs-type">Matrix</span> -&gt; [<span class="hljs-type">Float</span>] -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">insertColumnRight</span> <span class="hljs-type">Null</span> [] = <span class="hljs-type">Null</span><br><span class="hljs-title">insertColumnRight</span> (<span class="hljs-type">Row</span> row rest) (x:xs) = <span class="hljs-type">Row</span> (row ++ [x]) (insertColumnRight rest xs)<br><br><span class="hljs-title">transposeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">transposeMatrix</span> m = helper m e<br>    <span class="hljs-keyword">where</span><br>        (_, y) = sizeMatrix m<br>        e = emptyMatrix y<br>        helper <span class="hljs-type">Null</span> new = new<br>        helper (<span class="hljs-type">Row</span> row rest) new = helper rest (insertColumnRight new row)<br></code></pre></td></tr></table></figure>
-
-<p>Better one:</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">transposeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">transposeMatrix</span> (<span class="hljs-type">Row</span> a <span class="hljs-type">Null</span>) = insertColumn (emptyMatrix (length a)) a<br><span class="hljs-title">transposeMatrix</span> (<span class="hljs-type">Row</span> a b) = insertColumn (transposeMatrix b) a<br></code></pre></td></tr></table></figure>
-
-<h2 id="g"><a href="#g" class="headerlink" title="(g)"></a>(g)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">addRows</span> :: [<span class="hljs-type">Float</span>] -&gt; [<span class="hljs-type">Float</span>] -&gt; [<span class="hljs-type">Float</span>]<br><span class="hljs-title">addRows</span> xs ys = [fst item + snd item | item &lt;- zip xs ys]<br><br><span class="hljs-comment">--    addRows xs ys = [xs !! i + ys !! i | i &lt;- index]</span><br><span class="hljs-comment">--    where</span><br><span class="hljs-comment">--        len = length xs</span><br><span class="hljs-comment">--        index = take len [0..]</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="h"><a href="#h" class="headerlink" title="(h)"></a>(h)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Haskell">(+#+) :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br>(+#+) x <span class="hljs-type">Null</span> = x<br>(+#+) <span class="hljs-type">Null</span> x = x<br>(+#+) (<span class="hljs-type">Row</span> row1 rest1) (<span class="hljs-type">Row</span> row2 rest2) = <span class="hljs-type">Row</span> (addRows row1 row2) ((+#+) rest1 rest2)<br></code></pre></td></tr></table></figure>
-
-<h2 id="i"><a href="#i" class="headerlink" title="(i)"></a>(i)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Haskell">(+##+) :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Maybe</span> <span class="hljs-type">Matrix</span><br>(+##+) x y<br>    | not (legitMatrix x) || not (legitMatrix y) = <span class="hljs-type">Nothing</span><br>    | sizeMatrix x /= sizeMatrix y = <span class="hljs-type">Nothing</span><br>    | otherwise = <span class="hljs-type">Just</span> ((+#+) x y)<br></code></pre></td></tr></table></figure>
-
-<h2 id="j"><a href="#j" class="headerlink" title="(j)"></a>(j)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">showMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">IO</span>()<br><span class="hljs-title">showMatrix</span> <span class="hljs-type">Null</span> = putStr <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-title">showMatrix</span> (<span class="hljs-type">Row</span> row rest) = <br>    <span class="hljs-keyword">do</span><br>        putStr <span class="hljs-string">&quot;[&quot;</span><br>        putStr (display row)<br>        putStrLn <span class="hljs-string">&quot;]&quot;</span><br>        showMatrix rest<br>    <span class="hljs-keyword">where</span><br>        display row <br>            | length row == <span class="hljs-number">1</span> = show (head row)<br>            | otherwise = show (head row) ++ <span class="hljs-string">&quot;\t&quot;</span> ++ display (tail row)<br></code></pre></td></tr></table></figure>
-
+<p>Source: <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Q5411w7z5/?p=24&t=1905&vd_source=f7c016514f900db009fdd21b30f4afa1">[完结] 循序渐进，学习开发一个RISC-V上的操作系统 - 汪辰 - 第14章-任务同步和锁_哔哩哔哩_bilibili</a></p>
+</div>
                 
               </div>
             
@@ -344,7 +328,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Programming-Language/" class="category-chain-item">Programming Language</a>
+  <a href="/categories/Operating-System/" class="category-chain-item">Operating System</a>
   
   
 
@@ -359,13 +343,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Haskell/">#Haskell</a>
+        <a href="/tags/Lock/">#Lock</a>
       
-        <a href="/tags/Functional-Programming/">#Functional Programming</a>
+        <a href="/tags/Dead-Lock/">#Dead Lock</a>
       
-        <a href="/tags/Currying/">#Currying</a>
+        <a href="/tags/Concurrency/">#Concurrency</a>
       
-        <a href="/tags/Polymorphism/">#Polymorphism</a>
+        <a href="/tags/Synchronization/">#Synchronization</a>
       
     </div>
   
@@ -377,8 +361,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>A Haskell Practice with Answer</div>
-      <div>https://lingkkang.github.io/2023/05/24/hs-practice/</div>
+      <div>Lock</div>
+      <div>https://lingkkang.github.io/2023/05/29/lock/</div>
     </div>
     <div class="license-meta">
       
@@ -390,7 +374,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 24, 2023</div>
+          <div>May 29, 2023</div>
         </div>
       
       
@@ -417,29 +401,6 @@
 
 
 
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2023/06/01/code-server-cn/" title="在云服务器部署 VS Code Server">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">在云服务器部署 VS Code Server</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2023/05/23/hide-static-java/" title="Hide Superclass Static Methods in Java">
-                        <span class="hidden-mobile">Hide Superclass Static Methods in Java</span>
-                        <span class="visible-mobile">Next</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
               
             </div>
 

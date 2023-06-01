@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-05-24T13:34:00.000Z</updated>
+  <updated>2023-06-01T05:52:30.000Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在云服务器部署 VS Code Server</title>
+    <link href="https://lingkkang.github.io/2023/06/01/code-server-cn/"/>
+    <id>https://lingkkang.github.io/2023/06/01/code-server-cn/</id>
+    <published>2023-06-01T01:44:00.000Z</published>
+    <updated>2023-06-01T05:52:30.000Z</updated>
+    
+    
+    <summary type="html">白嫖好耶！</summary>
+    
+    
+    
+    <category term="DevOps" scheme="https://lingkkang.github.io/categories/DevOps/"/>
+    
+    
+    <category term="VS Code" scheme="https://lingkkang.github.io/tags/VS-Code/"/>
+    
+    <category term="Server" scheme="https://lingkkang.github.io/tags/Server/"/>
+    
+    <category term="Proxy" scheme="https://lingkkang.github.io/tags/Proxy/"/>
+    
+    <category term="Cloud" scheme="https://lingkkang.github.io/tags/Cloud/"/>
+    
+  </entry>
   
   <entry>
     <title>A Haskell Practice with Answer</title>
@@ -129,33 +154,6 @@
     <category term="Neural Network" scheme="https://lingkkang.github.io/tags/Neural-Network/"/>
     
     <category term="Deep Learning" scheme="https://lingkkang.github.io/tags/Deep-Learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>A MDP Take-away</title>
-    <link href="https://lingkkang.github.io/2023/05/06/mdp/"/>
-    <id>https://lingkkang.github.io/2023/05/06/mdp/</id>
-    <published>2023-05-06T11:51:15.000Z</published>
-    <updated>2023-05-06T13:22:37.777Z</updated>
-    
-    
-    <summary type="html">Mainly focusing on value iteration and policy iteration.</summary>
-    
-    
-    
-    <category term="Algorithms &amp; Data Structures" scheme="https://lingkkang.github.io/categories/Algorithms-Data-Structures/"/>
-    
-    
-    <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
-    
-    <category term="MDP" scheme="https://lingkkang.github.io/tags/MDP/"/>
-    
-    <category term="Machine Learning" scheme="https://lingkkang.github.io/tags/Machine-Learning/"/>
-    
-    <category term="Artificial Intelligence" scheme="https://lingkkang.github.io/tags/Artificial-Intelligence/"/>
-    
-    <category term="Bellman Equation" scheme="https://lingkkang.github.io/tags/Bellman-Equation/"/>
     
   </entry>
   
