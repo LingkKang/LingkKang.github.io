@@ -16,27 +16,29 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="HSK!">
+    <meta name="description" content="Some dirty works.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="A Haskell Practice with Answer">
-<meta property="og:url" content="https://lingkkang.github.io/2023/05/24/hs-practice/index.html">
+<meta property="og:title" content="Partition and Mount TF Card on Linux">
+<meta property="og:url" content="https://lingkkang.github.io/2023/06/13/access-tf/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="HSK!">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-05-24T12:07:00.000Z">
-<meta property="article:modified_time" content="2023-05-24T13:34:00.000Z">
+<meta property="og:description" content="Some dirty works.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-13T03:55:40.000Z">
+<meta property="article:modified_time" content="2023-06-13T03:55:00.000Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="Haskell">
-<meta property="article:tag" content="Functional Programming">
-<meta property="article:tag" content="Currying">
-<meta property="article:tag" content="Polymorphism">
+<meta property="article:tag" content="TF Card">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Mount">
+<meta property="article:tag" content="Partition">
+<meta property="article:tag" content="SBC">
+<meta property="article:tag" content="Huashan-pi">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>A Haskell Practice with Answer - Lingkang&#39;s Blog</title>
+  <title>Partition and Mount TF Card on Linux - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -125,7 +127,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                <span>Home</span>
+                <span>首页</span>
               </a>
             </li>
           
@@ -137,7 +139,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                <span>Archives</span>
+                <span>归档</span>
               </a>
             </li>
           
@@ -149,7 +151,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                <span>Categories</span>
+                <span>分类</span>
               </a>
             </li>
           
@@ -161,7 +163,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                <span>Tags</span>
+                <span>标签</span>
               </a>
             </li>
           
@@ -173,7 +175,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
-                <span>Links</span>
+                <span>友链</span>
               </a>
             </li>
           
@@ -185,7 +187,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                <span>About</span>
+                <span>关于</span>
               </a>
             </li>
           
@@ -219,7 +221,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="A Haskell Practice with Answer"></span>
+            <span id="subtitle" data-typed-text="Partition and Mount TF Card on Linux"></span>
           
         </div>
 
@@ -230,8 +232,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-24 20:07" pubdate>
-          May 24, 2023 pm
+        <time datetime="2023-06-13 11:55" pubdate>
+          2023年6月13日 中午
         </time>
       </span>
     
@@ -242,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k words
+          2.8k 字
         
       </span>
     
@@ -253,7 +255,7 @@
         
         
         
-          17 mins
+          24 分钟
         
       </span>
     
@@ -291,12 +293,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">A Haskell Practice with Answer</h1>
+            <h1 style="display: none">Partition and Mount TF Card on Linux</h1>
             
               <p class="note note-info">
                 
                   
-                    Last updated on May 24, 2023 pm
+                    本文最后更新于：2023年6月13日 中午
                   
                 
               </p>
@@ -304,28 +306,36 @@
             
               <div class="markdown-body">
                 
-                <h1 id="A-Haskell-Practice-with-Answer"><a href="#A-Haskell-Practice-with-Answer" class="headerlink" title="A Haskell Practice with Answer"></a>A Haskell Practice with Answer</h1><p>The problem sheet can be found <a href="/files/21-22-6-7.pdf">here</a>.</p>
-<h2 id="a"><a href="#a" class="headerlink" title="(a)"></a>(a)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">m2</span> :: <span class="hljs-type">Matrix</span><br><span class="hljs-title">m2</span> = <span class="hljs-type">Row</span> [<span class="hljs-number">1.2</span>, -<span class="hljs-number">1.0</span>] (<span class="hljs-type">Row</span> [<span class="hljs-number">4.5</span>, -<span class="hljs-number">0.9</span>] (<span class="hljs-type">Row</span> [<span class="hljs-number">2.3</span>, <span class="hljs-number">1.8</span>] <span class="hljs-type">Null</span>))<br></code></pre></td></tr></table></figure>
+                <h1 id="Partition-and-Mount-TF-Card-on-Linux"><a href="#Partition-and-Mount-TF-Card-on-Linux" class="headerlink" title="Partition and Mount TF Card on Linux"></a>Partition and Mount TF Card on Linux</h1><p>Simply plug in a TF Card to board can not work even with drivers built in.</p>
+<p>This blog takes an 16 GB micro SD card and a single board computer (SBC) Huashan-pi CV1812H as example</p>
+<h2 id="Basic-Commands"><a href="#Basic-Commands" class="headerlink" title="Basic Commands"></a>Basic Commands</h2><h3 id="df"><a href="#df" class="headerlink" title="df"></a><code>df</code></h3><p>Run bash command <code>df -h</code> can see all mounted disk devices.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs log">Filesystem                Size      Used Available Use% Mounted on<br>/dev/root                13.6M     13.6M         0 100% /<br>devtmpfs                 33.3M         0     33.3M   0% /dev<br>tmpfs                    33.3M         0     33.3M   0% /dev/shm<br>tmpfs                     2.9G     80.0K      2.7G   0% /tmp<br>tmpfs                    33.3M     12.0K     33.3M   0% /run<br>tmpfs                    33.3M     12.0K     33.3M   0% /run<br>tmpfs                     2.9G     80.0K      2.7G   0% /tmp<br>tmpfs                    33.3M         0     33.3M   0% /var/empty<br>/dev/mmcblk0p6            5.5M      5.5M         0 100% /mnt/cfg<br>/dev/mmcblk0p7            2.9G     80.0K      2.7G   0% /mnt/data<br>/dev/mmcblk0p7            2.9G     80.0K      2.7G   0% /tmp<br></code></pre></td></tr></table></figure>
 
-<h2 id="b"><a href="#b" class="headerlink" title="(b)"></a>(b)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">legitMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Bool</span><br><span class="hljs-title">legitMatrix</span> <span class="hljs-type">Null</span> = <span class="hljs-type">True</span><br><span class="hljs-title">legitMatrix</span> (<span class="hljs-type">Row</span> row rest) = sameLength (length row) rest<br>    <span class="hljs-keyword">where</span><br>        isEnd <span class="hljs-type">Null</span> = <span class="hljs-type">True</span><br>        isEnd _ = <span class="hljs-type">False</span><br>        sameLength len <span class="hljs-type">Null</span> = <span class="hljs-type">True</span><br>        sameLength len (<span class="hljs-type">Row</span> row rest) = length row == len &amp;&amp; sameLength len rest<br></code></pre></td></tr></table></figure>
+<p>It is clear that our 16 GB micro SD card is not listed.</p>
+<h3 id="fdisk"><a href="#fdisk" class="headerlink" title="fdisk"></a><code>fdisk</code></h3><p>Running command <code>fdisk -l</code> can show all of hardware disk drives:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs log">Disk /dev/mmcblk0: 7456 MB, 7818182656 bytes, 15269888 sectors<br>238592 cylinders, 4 heads, 16 sectors/track<br>Units: sectors of 1 * 512 = 512 bytes<br><br>Disk /dev/mmcblk0 doesn&#x27;t contain a valid partition table<br>Disk /dev/mmcblk0p1: 8 MB, 8388608 bytes, 16384 sectors<br>256 cylinders, 4 heads, 16 sectors/track<br>Units: sectors of 1 * 512 = 512 bytes<br><br>Disk /dev/mmcblk0p1 doesn&#x27;t contain a valid partition table<br>Disk /dev/mmcblk1: 15 GB, 15931539456 bytes, 31116288 sectors<br>1936 cylinders, 255 heads, 63 sectors/track<br>Units: sectors of 1 * 512 = 512 bytes<br><br>Device       Boot StartCHS    EndCHS        StartLBA     EndLBA    Sectors  Size Id Type<br>/dev/mmcblk1p1    0,130,3     1023,254,63       8192   31116287   31108096 14.8G  c Win95 FAT32 (LBA)<br></code></pre></td></tr></table></figure>
 
-<h2 id="c"><a href="#c" class="headerlink" title="(c)"></a>(c)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">sizeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; (<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>)<br><span class="hljs-title">sizeMatrix</span> <span class="hljs-type">Null</span> = (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)<br><span class="hljs-title">sizeMatrix</span> (<span class="hljs-type">Row</span> row rest) = (x, y)<br>	<span class="hljs-keyword">where</span> <br>		y = length row<br>		x = <span class="hljs-number">1</span> + columnSize rest<br>		columnSize <span class="hljs-type">Null</span> = <span class="hljs-number">0</span><br>		columnSize (<span class="hljs-type">Row</span> row rest) = <span class="hljs-number">1</span> + columnSize rest	<br></code></pre></td></tr></table></figure>
+<p><em>Line 11</em> is exactly what we are looking for. This 15 GB is the size of our TF card. There is always <a target="_blank" rel="noopener" href="https://www.integralmemory.com/faq1/why-does-my-usb-drive-show-less-capacity-than-stated-on-my-pc-or-mac/">a lap between labeled size and actual available size on OS</a>, quite annoying.</p>
+<p>Our card is located at path <code>/dev/mmcblk1</code></p>
+<h2 id="Partitioning"><a href="#Partitioning" class="headerlink" title="Partitioning"></a>Partitioning</h2><p>So the next step is going to partition the disk. This could be seen as map the disk space to the OS memory.</p>
+<div class="note note-warning">
+            <p>Unfinished</p>
+          </div>
 
-<h2 id="d"><a href="#d" class="headerlink" title="(d)"></a>(d)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">insertColumn</span> :: <span class="hljs-type">Matrix</span> -&gt; [<span class="hljs-type">Float</span>] -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">insertColumn</span> <span class="hljs-type">Null</span> [] = <span class="hljs-type">Null</span><br><span class="hljs-title">insertColumn</span> (<span class="hljs-type">Row</span> row rest) (x:xs) = <span class="hljs-type">Row</span> ([x] ++ row) (insertColumn rest xs)<br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">fdisk /dev/mmcblk1<br></code></pre></td></tr></table></figure>
 
-<h2 id="e"><a href="#e" class="headerlink" title="(e)"></a>(e)</h2><p>An empty matrix which have 3 empty row, each row is a empty list.</p>
-<h2 id="f"><a href="#f" class="headerlink" title="(f)"></a>(f)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">insertColumnRight</span> :: <span class="hljs-type">Matrix</span> -&gt; [<span class="hljs-type">Float</span>] -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">insertColumnRight</span> <span class="hljs-type">Null</span> [] = <span class="hljs-type">Null</span><br><span class="hljs-title">insertColumnRight</span> (<span class="hljs-type">Row</span> row rest) (x:xs) = <span class="hljs-type">Row</span> (row ++ [x]) (insertColumnRight rest xs)<br><br><span class="hljs-title">transposeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">transposeMatrix</span> m = helper m e<br>    <span class="hljs-keyword">where</span><br>        (_, y) = sizeMatrix m<br>        e = emptyMatrix y<br>        helper <span class="hljs-type">Null</span> new = new<br>        helper (<span class="hljs-type">Row</span> row rest) new = helper rest (insertColumnRight new row)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs log">The number of cylinders for this disk is set to 1936.<br>There is nothing wrong with that, but this is larger than 1024,<br>and could in certain setups cause problems with:<br>1) software that runs at boot time (e.g., old versions of LILO)<br>2) booting and partitioning software from other OSs<br>   (e.g., DOS FDISK, OS/2 FDISK)<br><br>Command (m for help): p<br>Disk /dev/mmcblk1: 15 GB, 15931539456 bytes, 31116288 sectors<br>1936 cylinders, 255 heads, 63 sectors/track<br>Units: sectors of 1 * 512 = 512 bytes<br><br>Device       Boot StartCHS    EndCHS        StartLBA     EndLBA    Sectors  Size Id Type<br>/dev/mmcblk1p1    0,130,3     1023,254,63       8192   31116287   31108096 14.8G  c Win95 FAT32 (LBA)<br><br>Command (m for help): n<br>Partition type<br>   p   primary partition (1-4)<br>   e   extended<br>e<br>Partition number (1-4): 4<br>First sector (63-31116287, default 63):<br>Using default value 63<br>Last sector or +size&#123;,K,M,G,T&#125; (63-8191, default 8191):<br>Using default value 8191<br><br>Command (m for help): w<br>The partition table has been altered.<br>Calling ioctl() to re-read partition table<br></code></pre></td></tr></table></figure>
 
-<p>Better one:</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">transposeMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br><span class="hljs-title">transposeMatrix</span> (<span class="hljs-type">Row</span> a <span class="hljs-type">Null</span>) = insertColumn (emptyMatrix (length a)) a<br><span class="hljs-title">transposeMatrix</span> (<span class="hljs-type">Row</span> a b) = insertColumn (transposeMatrix b) a<br></code></pre></td></tr></table></figure>
+<p>press <code>Enter</code> to use default value.</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">mount <span class="hljs-regexp">/dev/mm</span>cblk1p1 <span class="hljs-regexp">/mnt/</span>sd<br></code></pre></td></tr></table></figure>
 
-<h2 id="g"><a href="#g" class="headerlink" title="(g)"></a>(g)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">addRows</span> :: [<span class="hljs-type">Float</span>] -&gt; [<span class="hljs-type">Float</span>] -&gt; [<span class="hljs-type">Float</span>]<br><span class="hljs-title">addRows</span> xs ys = [fst item + snd item | item &lt;- zip xs ys]<br><br><span class="hljs-comment">--    addRows xs ys = [xs !! i + ys !! i | i &lt;- index]</span><br><span class="hljs-comment">--    where</span><br><span class="hljs-comment">--        len = length xs</span><br><span class="hljs-comment">--        index = take len [0..]</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">df</span> -Th<br></code></pre></td></tr></table></figure>
 
-<h2 id="h"><a href="#h" class="headerlink" title="(h)"></a>(h)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Haskell">(+#+) :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span><br>(+#+) x <span class="hljs-type">Null</span> = x<br>(+#+) <span class="hljs-type">Null</span> x = x<br>(+#+) (<span class="hljs-type">Row</span> row1 rest1) (<span class="hljs-type">Row</span> row2 rest2) = <span class="hljs-type">Row</span> (addRows row1 row2) ((+#+) rest1 rest2)<br></code></pre></td></tr></table></figure>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle">Filesystem           Type            <span class="hljs-keyword">Size</span>      Used Available Use% Mounted on<br><span class="hljs-regexp">/dev/mm</span>cblk1p1       vfat           <span class="hljs-number">14.8</span>G    <span class="hljs-number">672.0</span>K     <span class="hljs-number">14.8</span>G   <span class="hljs-number">0</span>% <span class="hljs-regexp">/mnt/</span>sd<br></code></pre></td></tr></table></figure>
 
-<h2 id="i"><a href="#i" class="headerlink" title="(i)"></a>(i)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Haskell">(+##+) :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">Maybe</span> <span class="hljs-type">Matrix</span><br>(+##+) x y<br>    | not (legitMatrix x) || not (legitMatrix y) = <span class="hljs-type">Nothing</span><br>    | sizeMatrix x /= sizeMatrix y = <span class="hljs-type">Nothing</span><br>    | otherwise = <span class="hljs-type">Just</span> ((+#+) x y)<br></code></pre></td></tr></table></figure>
-
-<h2 id="j"><a href="#j" class="headerlink" title="(j)"></a>(j)</h2><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Haskell"><span class="hljs-title">showMatrix</span> :: <span class="hljs-type">Matrix</span> -&gt; <span class="hljs-type">IO</span>()<br><span class="hljs-title">showMatrix</span> <span class="hljs-type">Null</span> = putStr <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-title">showMatrix</span> (<span class="hljs-type">Row</span> row rest) = <br>    <span class="hljs-keyword">do</span><br>        putStr <span class="hljs-string">&quot;[&quot;</span><br>        putStr (display row)<br>        putStrLn <span class="hljs-string">&quot;]&quot;</span><br>        showMatrix rest<br>    <span class="hljs-keyword">where</span><br>        display row <br>            | length row == <span class="hljs-number">1</span> = show (head row)<br>            | otherwise = show (head row) ++ <span class="hljs-string">&quot;\t&quot;</span> ++ display (tail row)<br></code></pre></td></tr></table></figure>
+<p><code>vfat</code> -&gt; <code>FAT32</code></p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a target="_blank" rel="noopener" href="https://www.integralmemory.com/faq1/why-does-my-usb-drive-show-less-capacity-than-stated-on-my-pc-or-mac/">Why does my USB drive show less capacity than stated on my PC or MAC | Integral Memory</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/sophgo/sophpi-huashan/wiki/4.%E5%BC%80%E5%8F%91%E6%9D%BF%E7%A1%AC%E4%BB%B6%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97#1%E5%8D%8E%E5%B1%B1%E6%B4%BE-cv181%E7%B3%BB%E5%88%97%E5%BC%80%E5%8F%91%E6%9D%BF%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D">4.1. 华山派-CV181系列开发板基本介绍 · sophgo&#x2F;sophpi-huashan Wiki</a></p>
 
                 
               </div>
@@ -344,7 +354,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Programming-Language/" class="category-chain-item">Programming Language</a>
+  <a href="/categories/DevOps/" class="category-chain-item">DevOps</a>
   
   
 
@@ -359,13 +369,17 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Haskell/">#Haskell</a>
+        <a href="/tags/TF-Card/">#TF Card</a>
       
-        <a href="/tags/Functional-Programming/">#Functional Programming</a>
+        <a href="/tags/Linux/">#Linux</a>
       
-        <a href="/tags/Currying/">#Currying</a>
+        <a href="/tags/Mount/">#Mount</a>
       
-        <a href="/tags/Polymorphism/">#Polymorphism</a>
+        <a href="/tags/Partition/">#Partition</a>
+      
+        <a href="/tags/SBC/">#SBC</a>
+      
+        <a href="/tags/Huashan-pi/">#Huashan-pi</a>
       
     </div>
   
@@ -377,32 +391,32 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>A Haskell Practice with Answer</div>
-      <div>https://lingkkang.github.io/2023/05/24/hs-practice/</div>
+      <div>Partition and Mount TF Card on Linux</div>
+      <div>https://lingkkang.github.io/2023/06/13/access-tf/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Lingkang</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
-          <div>May 24, 2023</div>
+          <div>发布于</div>
+          <div>2023年6月13日</div>
         </div>
       
       
       
         <div class="license-meta-item">
-          <div>Licensed under</div>
+          <div>许可协议</div>
           <div>
             
               
               
                 <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
                     <i class="iconfont icon-by"></i>
                   </span>
                 </a>
@@ -422,19 +436,13 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/01/code-server-cn/" title="在云服务器部署 VS Code Server">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">在云服务器部署 VS Code Server</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/23/hide-static-java/" title="Hide Superclass Static Methods in Java">
-                        <span class="hidden-mobile">Hide Superclass Static Methods in Java</span>
-                        <span class="visible-mobile">Next</span>
+                      <a href="/2023/06/01/code-server-cn/" title="在云服务器部署 VS Code Server">
+                        <span class="hidden-mobile">在云服务器部署 VS Code Server</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -455,7 +463,7 @@
     <div id="toc">
   <p class="toc-header">
     <i class="iconfont icon-list"></i>
-    <span>Table of Contents</span>
+    <span>目录</span>
   </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
@@ -511,7 +519,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -519,7 +527,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -696,7 +704,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

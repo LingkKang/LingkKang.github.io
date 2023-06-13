@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-06-01T05:52:30.000Z</updated>
+  <updated>2023-06-13T03:55:00.000Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Partition and Mount TF Card on Linux</title>
+    <link href="https://lingkkang.github.io/2023/06/13/access-tf/"/>
+    <id>https://lingkkang.github.io/2023/06/13/access-tf/</id>
+    <published>2023-06-13T03:55:40.000Z</published>
+    <updated>2023-06-13T03:55:00.000Z</updated>
+    
+    
+    <summary type="html">Some dirty works.</summary>
+    
+    
+    
+    <category term="DevOps" scheme="https://lingkkang.github.io/categories/DevOps/"/>
+    
+    
+    <category term="TF Card" scheme="https://lingkkang.github.io/tags/TF-Card/"/>
+    
+    <category term="Linux" scheme="https://lingkkang.github.io/tags/Linux/"/>
+    
+    <category term="Mount" scheme="https://lingkkang.github.io/tags/Mount/"/>
+    
+    <category term="Partition" scheme="https://lingkkang.github.io/tags/Partition/"/>
+    
+    <category term="SBC" scheme="https://lingkkang.github.io/tags/SBC/"/>
+    
+    <category term="Huashan-pi" scheme="https://lingkkang.github.io/tags/Huashan-pi/"/>
+    
+  </entry>
   
   <entry>
     <title>在云服务器部署 VS Code Server</title>
@@ -60,13 +89,13 @@
     <category term="Programming Language" scheme="https://lingkkang.github.io/categories/Programming-Language/"/>
     
     
-    <category term="Polymorphism" scheme="https://lingkkang.github.io/tags/Polymorphism/"/>
-    
     <category term="Haskell" scheme="https://lingkkang.github.io/tags/Haskell/"/>
     
     <category term="Functional Programming" scheme="https://lingkkang.github.io/tags/Functional-Programming/"/>
     
     <category term="Currying" scheme="https://lingkkang.github.io/tags/Currying/"/>
+    
+    <category term="Polymorphism" scheme="https://lingkkang.github.io/tags/Polymorphism/"/>
     
   </entry>
   
@@ -85,13 +114,13 @@
     <category term="Programming Language" scheme="https://lingkkang.github.io/categories/Programming-Language/"/>
     
     
+    <category term="Polymorphism" scheme="https://lingkkang.github.io/tags/Polymorphism/"/>
+    
     <category term="Java" scheme="https://lingkkang.github.io/tags/Java/"/>
     
     <category term="Inheritance" scheme="https://lingkkang.github.io/tags/Inheritance/"/>
     
     <category term="Static" scheme="https://lingkkang.github.io/tags/Static/"/>
-    
-    <category term="Polymorphism" scheme="https://lingkkang.github.io/tags/Polymorphism/"/>
     
     <category term="Overriding" scheme="https://lingkkang.github.io/tags/Overriding/"/>
     
@@ -123,41 +152,6 @@
     <category term="Subnet Mask" scheme="https://lingkkang.github.io/tags/Subnet-Mask/"/>
     
     <category term="IPv4" scheme="https://lingkkang.github.io/tags/IPv4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Update Weights in Linear Perceptron</title>
-    <link href="https://lingkkang.github.io/2023/05/12/perceptron/"/>
-    <id>https://lingkkang.github.io/2023/05/12/perceptron/</id>
-    <published>2023-05-12T06:26:43.000Z</published>
-    <updated>2023-05-17T14:26:55.972Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Algorithms &amp; Data Structures" scheme="https://lingkkang.github.io/categories/Algorithms-Data-Structures/"/>
-    
-    
-    <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
-    
-    <category term="Machine Learning" scheme="https://lingkkang.github.io/tags/Machine-Learning/"/>
-    
-    <category term="Artificial Intelligence" scheme="https://lingkkang.github.io/tags/Artificial-Intelligence/"/>
-    
-    <category term="Linear Perceptron" scheme="https://lingkkang.github.io/tags/Linear-Perceptron/"/>
-    
-    <category term="Neural Network" scheme="https://lingkkang.github.io/tags/Neural-Network/"/>
-    
-    <category term="Deep Learning" scheme="https://lingkkang.github.io/tags/Deep-Learning/"/>
     
   </entry>
   
