@@ -89,13 +89,13 @@
     <category term="Programming Language" scheme="https://lingkkang.github.io/categories/Programming-Language/"/>
     
     
-    <category term="Polymorphism" scheme="https://lingkkang.github.io/tags/Polymorphism/"/>
-    
     <category term="Haskell" scheme="https://lingkkang.github.io/tags/Haskell/"/>
     
     <category term="Functional Programming" scheme="https://lingkkang.github.io/tags/Functional-Programming/"/>
     
     <category term="Currying" scheme="https://lingkkang.github.io/tags/Currying/"/>
+    
+    <category term="Polymorphism" scheme="https://lingkkang.github.io/tags/Polymorphism/"/>
     
   </entry>
   
@@ -114,13 +114,13 @@
     <category term="Programming Language" scheme="https://lingkkang.github.io/categories/Programming-Language/"/>
     
     
+    <category term="Polymorphism" scheme="https://lingkkang.github.io/tags/Polymorphism/"/>
+    
     <category term="Java" scheme="https://lingkkang.github.io/tags/Java/"/>
     
     <category term="Inheritance" scheme="https://lingkkang.github.io/tags/Inheritance/"/>
     
     <category term="Static" scheme="https://lingkkang.github.io/tags/Static/"/>
-    
-    <category term="Polymorphism" scheme="https://lingkkang.github.io/tags/Polymorphism/"/>
     
     <category term="Overriding" scheme="https://lingkkang.github.io/tags/Overriding/"/>
     
