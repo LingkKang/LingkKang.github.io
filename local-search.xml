@@ -352,13 +352,13 @@
     
     <tags>
       
+      <tag>Register</tag>
+      
       <tag>xv6</tag>
       
       <tag>QEMU</tag>
       
       <tag>C</tag>
-      
-      <tag>Register</tag>
       
       <tag>Peripheral</tag>
       
@@ -391,13 +391,15 @@
     
     <tags>
       
+      <tag>RISC-V</tag>
+      
+      <tag>Register</tag>
+      
       <tag>xv6</tag>
       
       <tag>Memory</tag>
       
       <tag>Bootstrap</tag>
-      
-      <tag>RISC-V</tag>
       
       <tag>Assembly</tag>
       
@@ -406,8 +408,6 @@
       <tag>QEMU</tag>
       
       <tag>C</tag>
-      
-      <tag>Register</tag>
       
     </tags>
     
