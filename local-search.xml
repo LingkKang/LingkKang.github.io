@@ -8,7 +8,7 @@
     <link href="/2023/06/13/access-tf/"/>
     <url>/2023/06/13/access-tf/</url>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Partition-and-Mount-TF-Card-on-Linux"><a href="#Partition-and-Mount-TF-Card-on-Linux" class="headerlink" title="Partition and Mount TF Card on Linux"></a>Partition and Mount TF Card on Linux</h1><p>Simply plugging in a TF Card to the board may not work even with built-in drivers.</p><p>This blog takes an 16 GB micro SD card and a single board computer (SBC) Huashan-pi CV1812H as an example of how to do partitioning and mounting to let our Linux system recognize the card.</p><h2 id="Basic-Commands"><a href="#Basic-Commands" class="headerlink" title="Basic Commands"></a>Basic Commands</h2><h3 id="df"><a href="#df" class="headerlink" title="df"></a><code>df</code></h3><p>Running the bash command <code>df -h</code> allows you to see all mounted disk devices.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs console">Filesystem                Size      Used Available Use% Mounted on<br>/dev/root                13.6M     13.6M         0 100% /<br>devtmpfs                 33.3M         0     33.3M   0% /dev<br>tmpfs                    33.3M         0     33.3M   0% /dev/shm<br>tmpfs                     2.9G     80.0K      2.7G   0% /tmp<br>tmpfs                    33.3M     12.0K     33.3M   0% /run<br>tmpfs                    33.3M     12.0K     33.3M   0% /run<br>tmpfs                     2.9G     80.0K      2.7G   0% /tmp<br>tmpfs                    33.3M         0     33.3M   0% /var/empty<br>/dev/mmcblk0p6            5.5M      5.5M         0 100% /mnt/cfg<br>/dev/mmcblk0p7            2.9G     80.0K      2.7G   0% /mnt/data<br>/dev/mmcblk0p7            2.9G     80.0K      2.7G   0% /tmp<br></code></pre></td></tr></table></figure><p>It is clear that our 16 GB micro SD card is not listed.</p><h3 id="fdisk"><a href="#fdisk" class="headerlink" title="fdisk"></a><code>fdisk</code></h3><p>Running teh command <code>fdisk -l</code> shows all of hardware disk drives:</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs console">Disk /dev/mmcblk0: 7456 MB, 7818182656 bytes, 15269888 sectors<br>238592 cylinders, 4 heads, 16 sectors/track<br>Units: sectors of 1 * 512 = 512 bytes<br><br>Disk /dev/mmcblk0 doesn&#x27;t contain a valid partition table<br>Disk /dev/mmcblk0p1: 8 MB, 8388608 bytes, 16384 sectors<br>256 cylinders, 4 heads, 16 sectors/track<br>Units: sectors of 1 * 512 = 512 bytes<br><br>Disk /dev/mmcblk0p1 doesn&#x27;t contain a valid partition table<br>Disk /dev/mmcblk1: 15 GB, 15931539456 bytes, 31116288 sectors<br>1936 cylinders, 255 heads, 63 sectors/track<br>Units: sectors of 1 * 512 = 512 bytes<br><br>Device       Boot StartCHS    EndCHS        StartLBA     EndLBA    Sectors  Size Id Type<br>/dev/mmcblk1p1    0,130,3     1023,254,63       8192   31116287   31108096 14.8G  c Win95 FAT32 (LBA)<br></code></pre></td></tr></table></figure><p><em>Line 11</em> is exactly what we are looking for. This 15 GB is the size of our TF card. There is always <a href="https://www.integralmemory.com/faq1/why-does-my-usb-drive-show-less-capacity-than-stated-on-my-pc-or-mac/">a discrepancy between the labeled size and the actual available size on OS</a>, which can be quite annoying.</p><p>Our card is located at the path <code>/dev/mmcblk1</code></p><h2 id="Partitioning"><a href="#Partitioning" class="headerlink" title="Partitioning"></a>Partitioning</h2><p>The next step is going to partition the disk. This can be done by using the <code>fdisk</code> command. For more details, you can refer to <code>man fdisk</code> or <code>tldr fdisk</code>.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fdisk /dev/mmcblk1<br></code></pre></td></tr></table></figure><p>This command will allow us to perform the partitioning.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs console">The number of cylinders for this disk is set to 1936.<br>There is nothing wrong with that, but this is larger than 1024,<br>and could in certain setups cause problems with:<br>1) software that runs at boot time (e.g., old versions of LILO)<br>2) booting and partitioning software from other OSs<br>   (e.g., DOS FDISK, OS/2 FDISK)<br><br>Command (m for help): p<br>Disk /dev/mmcblk1: 15 GB, 15931539456 bytes, 31116288 sectors<br>1936 cylinders, 255 heads, 63 sectors/track<br>Units: sectors of 1 * 512 = 512 bytes<br><br>Device       Boot StartCHS    EndCHS        StartLBA     EndLBA    Sectors  Size Id Type<br>/dev/mmcblk1p1    0,130,3     1023,254,63       8192   31116287   31108096 14.8G  c Win95 FAT32 (LBA)<br><br>Command (m for help): n<br>Partition type<br>   p   primary partition (1-4)<br>   e   extended<br>e<br>Partition number (1-4): 4<br>First sector (63-31116287, default 63):<br>Using default value 63<br>Last sector or +size&#123;,K,M,G,T&#125; (63-8191, default 8191):<br>Using default value 8191<br><br>Command (m for help): w<br>The partition table has been altered.<br>Calling ioctl() to re-read partition table<br></code></pre></td></tr></table></figure><p>press <code>Enter</code> to use default values for the first and last sector.</p><p>These values represent disk location references that map to specific locations on the disk. </p><h2 id="Mounting"><a href="#Mounting" class="headerlink" title="Mounting"></a>Mounting</h2><p>The last step is to mount the drive to a directory path. If the path <code>/mnt/sd</code> does not exist, create it using the <code>mkdir</code> command.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mount /dev/mmcblk1p1 /mnt/sd<br></code></pre></td></tr></table></figure><h2 id="Done"><a href="#Done" class="headerlink" title="Done"></a>Done</h2><p>We are all set now. Running the command <code>df -Th</code> will verify that our TF card is mounted with <code>vfat</code> type, which corresponds to the <code>FAT32</code> file system.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs console">Filesystem           Type            Size      Used Available Use% Mounted on<br>/dev/mmcblk1p1       vfat           14.8G    672.0K     14.8G   0% /mnt/sd<br></code></pre></td></tr></table></figure><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol><li><a href="https://doc-en.rvspace.org/VisionFive2/Quick_Start_Guide/VisionFive2_QSG/extend_partition.html">Extend Partition on SD Card or eMMC</a></li><li><a href="http://blog.itpub.net/20674423/viewspace-722812">Linux下分区详解之–Fdisk_ITPUB博客</a></li><li><a href="https://github.com/sophgo/sophpi-huashan/wiki/4.%E5%BC%80%E5%8F%91%E6%9D%BF%E7%A1%AC%E4%BB%B6%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97#1%E5%8D%8E%E5%B1%B1%E6%B4%BE-cv181%E7%B3%BB%E5%88%97%E5%BC%80%E5%8F%91%E6%9D%BF%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D">4.1. 华山派-CV181系列开发板基本介绍 · sophgo&#x2F;sophpi-huashan Wiki</a></li><li><a href="https://tldp.org/HOWTO/Partition/requirements.html">4. Partitioning requirements</a></li><li><a href="https://tldp.org/HOWTO/Partition/fdisk_partitioning.html#mixed">5. Partitioning with fdisk - 5.3. Mixed primary and logical partitions</a></li><li><a href="https://www.integralmemory.com/faq1/why-does-my-usb-drive-show-less-capacity-than-stated-on-my-pc-or-mac/">Why does my USB drive show less capacity than stated on my PC or MAC | Integral Memory</a></li></ol>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Partition-and-Mount-TF-Card-on-Linux"><a href="#Partition-and-Mount-TF-Card-on-Linux" class="headerlink" title="Partition and Mount TF Card on Linux"></a>Partition and Mount TF Card on Linux</h1><p>Simply plugging in a TF Card to the board may not work even with built-in drivers.</p><p>This blog takes an 16 GB micro SD card and a single board computer (SBC) Huashan-pi CV1812H as an example of how to do partitioning and mounting to let our Linux system recognize the card.</p><h2 id="Basic-Commands"><a href="#Basic-Commands" class="headerlink" title="Basic Commands"></a>Basic Commands</h2><h3 id="df"><a href="#df" class="headerlink" title="df"></a><code>df</code></h3><p>Running the bash command <code>df -h</code> allows you to see all mounted disk devices.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs console">Filesystem                Size      Used Available Use% Mounted on<br>/dev/root                13.6M     13.6M         0 100% /<br>devtmpfs                 33.3M         0     33.3M   0% /dev<br>tmpfs                    33.3M         0     33.3M   0% /dev/shm<br>tmpfs                     2.9G     80.0K      2.7G   0% /tmp<br>tmpfs                    33.3M     12.0K     33.3M   0% /run<br>tmpfs                    33.3M     12.0K     33.3M   0% /run<br>tmpfs                     2.9G     80.0K      2.7G   0% /tmp<br>tmpfs                    33.3M         0     33.3M   0% /var/empty<br>/dev/mmcblk0p6            5.5M      5.5M         0 100% /mnt/cfg<br>/dev/mmcblk0p7            2.9G     80.0K      2.7G   0% /mnt/data<br>/dev/mmcblk0p7            2.9G     80.0K      2.7G   0% /tmp<br></code></pre></td></tr></table></figure><p>It is clear that our 16 GB micro SD card is not listed.</p><h3 id="fdisk"><a href="#fdisk" class="headerlink" title="fdisk"></a><code>fdisk</code></h3><p>Running teh command <code>fdisk -l</code> shows all of hardware disk drives:</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs console">Disk /dev/mmcblk0: 7456 MB, 7818182656 bytes, 15269888 sectors<br>238592 cylinders, 4 heads, 16 sectors/track<br>Units: sectors of 1 * 512 = 512 bytes<br><br>Disk /dev/mmcblk0 doesn&#x27;t contain a valid partition table<br>Disk /dev/mmcblk0p1: 8 MB, 8388608 bytes, 16384 sectors<br>256 cylinders, 4 heads, 16 sectors/track<br>Units: sectors of 1 * 512 = 512 bytes<br><br>Disk /dev/mmcblk0p1 doesn&#x27;t contain a valid partition table<br>Disk /dev/mmcblk1: 15 GB, 15931539456 bytes, 31116288 sectors<br>1936 cylinders, 255 heads, 63 sectors/track<br>Units: sectors of 1 * 512 = 512 bytes<br><br>Device       Boot StartCHS    EndCHS        StartLBA     EndLBA    Sectors  Size Id Type<br>/dev/mmcblk1p1    0,130,3     1023,254,63       8192   31116287   31108096 14.8G  c Win95 FAT32 (LBA)<br></code></pre></td></tr></table></figure><p><em>Line 11</em> is exactly what we are looking for. This 15 GB is the size of our TF card. There is always <a href="https://www.integralmemory.com/faq1/why-does-my-usb-drive-show-less-capacity-than-stated-on-my-pc-or-mac/">a discrepancy between the labeled size and the actual available size on OS</a>, which can be quite annoying.</p><p>Our card is located at the path <code>/dev/mmcblk1</code></p><h2 id="Partitioning"><a href="#Partitioning" class="headerlink" title="Partitioning"></a>Partitioning</h2><p>The next step is going to partition the disk. This can be done by using the <code>fdisk</code> command. For more details, you can refer to <code>man fdisk</code> or <code>tldr fdisk</code>.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fdisk /dev/mmcblk1<br></code></pre></td></tr></table></figure><p>This command will allow us to perform the partitioning.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs console">The number of cylinders for this disk is set to 1936.<br>There is nothing wrong with that, but this is larger than 1024,<br>and could in certain setups cause problems with:<br>1) software that runs at boot time (e.g., old versions of LILO)<br>2) booting and partitioning software from other OSs<br>   (e.g., DOS FDISK, OS/2 FDISK)<br><br>Command (m for help): p<br>Disk /dev/mmcblk1: 15 GB, 15931539456 bytes, 31116288 sectors<br>1936 cylinders, 255 heads, 63 sectors/track<br>Units: sectors of 1 * 512 = 512 bytes<br><br>Device       Boot StartCHS    EndCHS        StartLBA     EndLBA    Sectors  Size Id Type<br>/dev/mmcblk1p1    0,130,3     1023,254,63       8192   31116287   31108096 14.8G  c Win95 FAT32 (LBA)<br><br>Command (m for help): n<br>Partition type<br>   p   primary partition (1-4)<br>   e   extended<br>e<br>Partition number (1-4): 4<br>First sector (63-31116287, default 63):<br>Using default value 63<br>Last sector or +size&#123;,K,M,G,T&#125; (63-8191, default 8191):<br>Using default value 8191<br><br>Command (m for help): w<br>The partition table has been altered.<br>Calling ioctl() to re-read partition table<br></code></pre></td></tr></table></figure><p>press <code>Enter</code> to use default values for the first and last sector.</p><p>These values represent disk location references that map to specific locations on the disk. </p><h2 id="Mounting"><a href="#Mounting" class="headerlink" title="Mounting"></a>Mounting</h2><p>The last step is to mount the drive to a directory path. If the path <code>/mnt/sd</code> does not exist, create it using the <code>mkdir</code> command.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mount /dev/mmcblk1p1 /mnt/sd<br></code></pre></td></tr></table></figure><h2 id="Done"><a href="#Done" class="headerlink" title="Done"></a>Done</h2><p>We are all set now. Running the command <code>df -Th</code> will verify that our TF card is mounted with <code>vfat</code> type, which corresponds to the <code>FAT32</code> file system.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs console">Filesystem           Type            Size      Used Available Use% Mounted on<br>/dev/mmcblk1p1       vfat           14.8G    672.0K     14.8G   0% /mnt/sd<br></code></pre></td></tr></table></figure><h2 id="On-Removal"><a href="#On-Removal" class="headerlink" title="On Removal"></a>On Removal</h2><p>Simply unmount the device so that the card can be removed safely.</p><ol><li>Do not use the resource inside the mounted device, e.g., reading from or writing to it, and remember navigate outside the directory <code>/mnt/sd</code>.</li><li>Run command <code>umount /mnt/sd</code> (unmount by mounted directory path) or <code>umount /dev/mmcblk1p1</code> (unmount by device name), they are equivalent.</li></ol><h2 id="Next-Time"><a href="#Next-Time" class="headerlink" title="Next Time"></a>Next Time</h2><p>Next time when you restart the board or plugged in the micro SD card again, running command <code>mount /dev/mmcblk1p1 /mnt/sd</code> is needed, otherwise the system still do not have a path to access the file in the card.</p><p>Alternatively, you can put the following lines into shell script to automate the procedure.</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-meta">#!/bin/sh</span><br><br><span class="hljs-comment"># Check if the TF card device exists</span><br><span class="hljs-keyword">if</span> [ -e <span class="hljs-string">&quot;/dev/mmcblk1&quot;</span> ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;TF card is detected. Mounting...&quot;</span><br>    mount /dev/mmcblk1p1 /mnt/sd   <span class="hljs-comment"># Replace /mnt/sd with your desired mount point</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;TF card mounted successfully.&quot;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;TF card is not detected.&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol><li><a href="https://doc-en.rvspace.org/VisionFive2/Quick_Start_Guide/VisionFive2_QSG/extend_partition.html">Extend Partition on SD Card or eMMC</a></li><li><a href="http://blog.itpub.net/20674423/viewspace-722812">Linux下分区详解之–Fdisk_ITPUB博客</a></li><li><a href="https://github.com/sophgo/sophpi-huashan/wiki/4.%E5%BC%80%E5%8F%91%E6%9D%BF%E7%A1%AC%E4%BB%B6%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97#1%E5%8D%8E%E5%B1%B1%E6%B4%BE-cv181%E7%B3%BB%E5%88%97%E5%BC%80%E5%8F%91%E6%9D%BF%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D">4.1. 华山派-CV181系列开发板基本介绍 · sophgo&#x2F;sophpi-huashan Wiki</a></li><li><a href="https://tldp.org/HOWTO/Partition/requirements.html">4. Partitioning requirements</a></li><li><a href="https://tldp.org/HOWTO/Partition/fdisk_partitioning.html#mixed">5. Partitioning with fdisk - 5.3. Mixed primary and logical partitions</a></li><li><a href="https://www.integralmemory.com/faq1/why-does-my-usb-drive-show-less-capacity-than-stated-on-my-pc-or-mac/">Why does my USB drive show less capacity than stated on my PC or MAC | Integral Memory</a></li></ol>]]></content>
     
     
     <categories>
@@ -31,6 +31,8 @@
       <tag>SBC</tag>
       
       <tag>Huashan-pi</tag>
+      
+      <tag>Disk</tag>
       
     </tags>
     
@@ -90,13 +92,13 @@
     
     <tags>
       
+      <tag>Polymorphism</tag>
+      
       <tag>Haskell</tag>
       
       <tag>Functional Programming</tag>
       
       <tag>Currying</tag>
-      
-      <tag>Polymorphism</tag>
       
     </tags>
     
@@ -121,13 +123,13 @@
     
     <tags>
       
-      <tag>Polymorphism</tag>
-      
       <tag>Java</tag>
       
       <tag>Inheritance</tag>
       
       <tag>Static</tag>
+      
+      <tag>Polymorphism</tag>
       
       <tag>Overriding</tag>
       
@@ -350,13 +352,13 @@
     
     <tags>
       
-      <tag>Register</tag>
-      
       <tag>xv6</tag>
       
       <tag>QEMU</tag>
       
       <tag>C</tag>
+      
+      <tag>Register</tag>
       
       <tag>Peripheral</tag>
       
@@ -389,15 +391,13 @@
     
     <tags>
       
-      <tag>RISC-V</tag>
-      
-      <tag>Register</tag>
-      
       <tag>xv6</tag>
       
       <tag>Memory</tag>
       
       <tag>Bootstrap</tag>
+      
+      <tag>RISC-V</tag>
       
       <tag>Assembly</tag>
       
@@ -406,6 +406,8 @@
       <tag>QEMU</tag>
       
       <tag>C</tag>
+      
+      <tag>Register</tag>
       
     </tags>
     
@@ -598,13 +600,13 @@
     
     <tags>
       
-      <tag>Tree</tag>
-      
-      <tag>Binary Tree</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Tree</tag>
+      
+      <tag>Binary Tree</tag>
       
     </tags>
     
@@ -654,9 +656,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>Linked List</tag>
+      
+      <tag>Python</tag>
       
     </tags>
     
@@ -737,11 +739,11 @@
     
     <tags>
       
+      <tag>Linked List</tag>
+      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
-      
-      <tag>Linked List</tag>
       
     </tags>
     

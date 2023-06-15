@@ -32,6 +32,7 @@
 <meta property="article:tag" content="Partition">
 <meta property="article:tag" content="SBC">
 <meta property="article:tag" content="Huashan-pi">
+<meta property="article:tag" content="Disk">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -244,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k words
+          4.3k words
         
       </span>
     
@@ -255,7 +256,7 @@
         
         
         
-          29 mins
+          36 mins
         
       </span>
     
@@ -331,6 +332,15 @@
 <h2 id="Done"><a href="#Done" class="headerlink" title="Done"></a>Done</h2><p>We are all set now. Running the command <code>df -Th</code> will verify that our TF card is mounted with <code>vfat</code> type, which corresponds to the <code>FAT32</code> file system.</p>
 <figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs console">Filesystem           Type            Size      Used Available Use% Mounted on<br>/dev/mmcblk1p1       vfat           14.8G    672.0K     14.8G   0% /mnt/sd<br></code></pre></td></tr></table></figure>
 
+<h2 id="On-Removal"><a href="#On-Removal" class="headerlink" title="On Removal"></a>On Removal</h2><p>Simply unmount the device so that the card can be removed safely.</p>
+<ol>
+<li>Do not use the resource inside the mounted device, e.g., reading from or writing to it, and remember navigate outside the directory <code>/mnt/sd</code>.</li>
+<li>Run command <code>umount /mnt/sd</code> (unmount by mounted directory path) or <code>umount /dev/mmcblk1p1</code> (unmount by device name), they are equivalent.</li>
+</ol>
+<h2 id="Next-Time"><a href="#Next-Time" class="headerlink" title="Next Time"></a>Next Time</h2><p>Next time when you restart the board or plugged in the micro SD card again, running command <code>mount /dev/mmcblk1p1 /mnt/sd</code> is needed, otherwise the system still do not have a path to access the file in the card.</p>
+<p>Alternatively, you can put the following lines into shell script to automate the procedure.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-meta">#!/bin/sh</span><br><br><span class="hljs-comment"># Check if the TF card device exists</span><br><span class="hljs-keyword">if</span> [ -e <span class="hljs-string">&quot;/dev/mmcblk1&quot;</span> ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;TF card is detected. Mounting...&quot;</span><br>    mount /dev/mmcblk1p1 /mnt/sd   <span class="hljs-comment"># Replace /mnt/sd with your desired mount point</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;TF card mounted successfully.&quot;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;TF card is not detected.&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
+
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://doc-en.rvspace.org/VisionFive2/Quick_Start_Guide/VisionFive2_QSG/extend_partition.html">Extend Partition on SD Card or eMMC</a></li>
 <li><a target="_blank" rel="noopener" href="http://blog.itpub.net/20674423/viewspace-722812">Linux下分区详解之–Fdisk_ITPUB博客</a></li>
@@ -383,6 +393,8 @@
         <a href="/tags/SBC/">#SBC</a>
       
         <a href="/tags/Huashan-pi/">#Huashan-pi</a>
+      
+        <a href="/tags/Disk/">#Disk</a>
       
     </div>
   
