@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-06-15T03:58:00.000Z</updated>
+  <updated>2023-06-16T08:54:08.000Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Share Files Between Host and Linux Virtual Machine over Hyper-V</title>
+    <link href="https://lingkkang.github.io/2023/06/16/share-file-host-and-vm-hyper-v/"/>
+    <id>https://lingkkang.github.io/2023/06/16/share-file-host-and-vm-hyper-v/</id>
+    <published>2023-06-16T07:15:08.000Z</published>
+    <updated>2023-06-16T08:54:08.000Z</updated>
+    
+    
+    <summary type="html">Set up shared directory via CIFS.</summary>
+    
+    
+    
+    <category term="DevOps" scheme="https://lingkkang.github.io/categories/DevOps/"/>
+    
+    
+    <category term="Linux" scheme="https://lingkkang.github.io/tags/Linux/"/>
+    
+    <category term="Hyper-V" scheme="https://lingkkang.github.io/tags/Hyper-V/"/>
+    
+    <category term="virtual machine" scheme="https://lingkkang.github.io/tags/virtual-machine/"/>
+    
+    <category term="mount" scheme="https://lingkkang.github.io/tags/mount/"/>
+    
+    <category term="CIFS" scheme="https://lingkkang.github.io/tags/CIFS/"/>
+    
+  </entry>
   
   <entry>
     <title>Partition and Mount TF Card on Linux</title>
@@ -127,33 +154,6 @@
     <category term="Overriding" scheme="https://lingkkang.github.io/tags/Overriding/"/>
     
     <category term="Hiding" scheme="https://lingkkang.github.io/tags/Hiding/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Subnet and IPv4 Classes</title>
-    <link href="https://lingkkang.github.io/2023/05/15/subnet/"/>
-    <id>https://lingkkang.github.io/2023/05/15/subnet/</id>
-    <published>2023-05-15T13:05:00.000Z</published>
-    <updated>2023-05-17T14:50:35.293Z</updated>
-    
-    
-    <summary type="html">Understand it quickly with a table.</summary>
-    
-    
-    
-    <category term="Computer Network" scheme="https://lingkkang.github.io/categories/Computer-Network/"/>
-    
-    
-    <category term="IP" scheme="https://lingkkang.github.io/tags/IP/"/>
-    
-    <category term="Routing" scheme="https://lingkkang.github.io/tags/Routing/"/>
-    
-    <category term="Subnet" scheme="https://lingkkang.github.io/tags/Subnet/"/>
-    
-    <category term="Subnet Mask" scheme="https://lingkkang.github.io/tags/Subnet-Mask/"/>
-    
-    <category term="IPv4" scheme="https://lingkkang.github.io/tags/IPv4/"/>
     
   </entry>
   

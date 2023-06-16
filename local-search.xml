@@ -4,6 +4,39 @@
   
   
   <entry>
+    <title>Share Files Between Host and Linux Virtual Machine over Hyper-V</title>
+    <link href="/2023/06/16/share-file-host-and-vm-hyper-v/"/>
+    <url>/2023/06/16/share-file-host-and-vm-hyper-v/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Share-Files-Between-Host-and-Linux-Virtual-Machine-over-Hyper-V"><a href="#Share-Files-Between-Host-and-Linux-Virtual-Machine-over-Hyper-V" class="headerlink" title="Share Files Between Host and Linux Virtual Machine over Hyper-V"></a>Share Files Between Host and Linux Virtual Machine over Hyper-V</h1><p>Generally speaking, just follow this post and things will be all set.</p><p><a href="https://linuxhint.com/shared_folders_hypver-v_ubuntu_guest/">Shared Folders over Hyper-V Ubuntu Guest</a></p><p>Also, <a href="https://learn.microsoft.com/en-us/answers/questions/707320/attach-usb-device-to-hyper-v-guest-machine">attach a USB drive to the VM</a> is a feasible way, but on Windows 10, it is not support to make a removable device <em>offline</em>, so it is not applicable for SD &#x2F; TF card. Unreasonable…</p><h2 id="Some-Notices"><a href="#Some-Notices" class="headerlink" title="Some Notices"></a>Some Notices</h2><h3 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h3><p>On <em>Advanced sharing settings</em> on host Windows machine, make sure all entries under <em>All Networks</em> item are selected as <strong>turned on</strong>. Otherwise, there might be a permission deny on mounting.</p><h3 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h3><p>For accessing host directory as root user, no <code>-o</code> flag needed when running <code>mount.cifs</code> command. Also, password for host root can be put as pressing <code>Enter</code>.</p><h3 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h3><p>Read and write to the shared directory will need <em>root permission</em> at this case.</p><h3 id="4"><a href="#4" class="headerlink" title="4."></a>4.</h3><p>Simply running <code>umount</code> (unmount) the directory like unmount other device can disable the sharing.</p><h2 id="Next-Time"><a href="#Next-Time" class="headerlink" title="Next Time"></a>Next Time</h2><p>Every time start the linux vm, simply run <code>mount.cifs</code> again can enable the directory sharing.</p><p>Or it can be automated by a bash script as follow:</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-meta">#!/bin/bash</span><br><br>MOUNTED=$(<span class="hljs-built_in">df</span> -h /path/to/vm/shared/dir/ | grep dev)<br><br><span class="hljs-keyword">if</span> ! [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$MOUNTED</span>&quot;</span> ] ; <span class="hljs-keyword">then</span><br>    sudo mount.cifs //WIN-DESKTOP/shared_folder_name /path/to/vm/shared/dir/<br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure><p>If the CIFS is not mounted, the path is mounted from device tree <code>/dev</code> by default. But after mounting, it will be changed to the host shared folder name, this can be verified by <code>df -h</code>.</p><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol><li><a href="https://linuxhint.com/shared_folders_hypver-v_ubuntu_guest/">Shared Folders over Hyper-V Ubuntu Guest</a></li><li><a href="https://www.isumsoft.com/it/share-files-folders-or-drives-between-host-and-hyper-v-virtual-machine/">Share Files, Folders or Drives Between Host and Hyper-V Virtual Machine</a></li><li><a href="https://cifs.com/">All About CIFS</a></li><li><a href="https://learn.microsoft.com/en-us/answers/questions/707320/attach-usb-device-to-hyper-v-guest-machine">Attach USB device to Hyper-V guest machine - Microsoft Q&amp;A</a></li><li><a href="https://www.maths.cam.ac.uk/computing/linux/unixinfo/perms">File Permissions and Sharing Files | Computing</a></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>DevOps</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>Hyper-V</tag>
+      
+      <tag>virtual machine</tag>
+      
+      <tag>mount</tag>
+      
+      <tag>CIFS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Partition and Mount TF Card on Linux</title>
     <link href="/2023/06/13/access-tf/"/>
     <url>/2023/06/13/access-tf/</url>
@@ -600,13 +633,13 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
-      <tag>LeetCode</tag>
-      
       <tag>Tree</tag>
       
       <tag>Binary Tree</tag>
+      
+      <tag>Python</tag>
+      
+      <tag>LeetCode</tag>
       
     </tags>
     
@@ -656,9 +689,9 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     
@@ -710,9 +743,9 @@
     
     <tags>
       
-      <tag>生活</tag>
-      
       <tag>读书</tag>
+      
+      <tag>生活</tag>
       
       <tag>Summary</tag>
       
@@ -739,11 +772,11 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     
