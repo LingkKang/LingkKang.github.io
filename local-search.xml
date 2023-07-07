@@ -4,6 +4,51 @@
   
   
   <entry>
+    <title>Access MySQL Localhost on Windows Host from WSL2</title>
+    <link href="/2023/07/07/wsl2mysql/"/>
+    <url>/2023/07/07/wsl2mysql/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Access-MySQL-Localhost-on-Windows-Host-from-WSL2"><a href="#Access-MySQL-Localhost-on-Windows-Host-from-WSL2" class="headerlink" title="Access MySQL Localhost on Windows Host from WSL2"></a>Access MySQL Localhost on Windows Host from WSL2</h1><p>It’s common to have a MySQL server running on localhost for development. But when using WSL2, it’s not that easy to access the localhost on Windows host. This post will show how to do it.</p><h2 id="Check-Private-Network"><a href="#Check-Private-Network" class="headerlink" title="Check Private Network"></a>Check Private Network</h2><p>Run command <code>ip route</code> on WSL2 to get the IP address of the private network.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ip route</span><br>default via 172.23.144.1 dev eth0<br>172.23.144.0/20 dev eth0 proto kernel scope link src 172.23.151.37 <br></code></pre></td></tr></table></figure><p>The first line represents the default route, the IP address <code>172.23.144.1</code> is the gateway or next-hop IP address. Actually, this is also the IP address of the host machine, where our MySQL server is running.</p><p>The second line represents a specific route for the network <code>172.23.144.0/20</code>, which is a <a href="https://lingkkang.github.io/2023/05/15/subnet/">subnet</a> for WSL2. The source <code>src 172.23.151.37</code> is the IP address that will be used when sending traffic to the network, i.e., the IP address of WSL2.</p><p>Run following command can also validate the IP address of the host machine.</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">echo</span> $(hostname).<span class="hljs-built_in">local</span><br>ping -c 2 $(hostname).<span class="hljs-built_in">local</span><br></code></pre></td></tr></table></figure><p>Actually, the WSL2 and the Windows host machine are all on a shared Hyper-V switch, which is a virtual network switch.</p><p>However, the IP address of the host machine is <strong>not static</strong>, it will change after rebooting. So it’s not a good idea to have the IP address hard-coded in the configuration.</p><p>And the solution is to use the hostname of the host machine, which is also the name of the host machine. The hostname can be found by running <code>hostname</code> on Windows PowerShell, or <code>echo $(hostname)</code> on WSL2. The <code>.local</code> suffix is also needed. See the python script for <a href="#test-connection">connection testing</a>.</p><p>It is also noteworthy that the private network IPv4 addresses all begin with <code>172</code>. This would be helpful when we configure MySQL user.</p><h2 id="Create-MySQL-User"><a href="#Create-MySQL-User" class="headerlink" title="Create MySQL User"></a>Create MySQL User</h2><p>Since all users on MySQL server are on <code>localhost</code> by default, it is required to create a new user for WSL2. </p><p>Note that both user name <code>user</code> and host name <code>host</code> need to match to log in, otherwise, it will be denied. For example, if we try to log in as root in Python from WSL2, it will raise an an <code>mysql.connector.errors.ProgrammingError</code>, with an error message that <code>1045 (28000): Access denied for user &#39;root&#39;@&#39;172.23.151.37&#39;</code>.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs console"><span class="hljs-meta prompt_">mysql&gt; </span><span class="language-bash">SELECT user, host FROM mysql.user;</span><br>+------------------+-----------+<br>| user             | host      |<br>+------------------+-----------+<br>| mysql.infoschema | localhost |<br>| mysql.session    | localhost |<br>| mysql.sys        | localhost |<br>| root             | localhost |<br>+------------------+-----------+<br>4 rows in set (0.01 sec)<br></code></pre></td></tr></table></figure><p>Log in MySQL Command Line Client with root privilege, and create a user for WSL2, say, <code>wsl2</code>.</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;wsl2&#x27;</span>@<span class="hljs-string">&#x27;172.%&#x27;</span>;<br></code></pre></td></tr></table></figure><p>or, if password is needed,</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;wsl2&#x27;</span>@<span class="hljs-string">&#x27;172.%&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;password&#x27;</span>;<br></code></pre></td></tr></table></figure><p>Here <code>%</code> percentage sign is a wildcard which means any IP address that begins with <code>172</code>.</p><p>We could see at this stage the user <code>wsl2</code> has no privilege.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs console"><span class="hljs-meta prompt_">mysql&gt; </span><span class="language-bash">SELECT user, host, select_priv, create_priv, insert_priv FROM mysql.user WHERE user=<span class="hljs-string">&#x27;wsl2&#x27;</span>;</span><br>+------+-------+-------------+-------------+-------------+<br>| user | host  | select_priv | create_priv | insert_priv |<br>+------+-------+-------------+-------------+-------------+<br>| wsl2 | 172.% | N           | N           | N           |<br>+------+-------+-------------+-------------+-------------+<br>1 row in set (0.01 sec)<br></code></pre></td></tr></table></figure><h2 id="Grant-Privilege"><a href="#Grant-Privilege" class="headerlink" title="Grant Privilege"></a>Grant Privilege</h2><p>Grant privilege to the user <code>wsl2</code> as per requirement.</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">ON</span> <span class="hljs-operator">*</span>.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;wsl2&#x27;</span>@<span class="hljs-string">&#x27;172.%&#x27;</span>;<br><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">ON</span> <span class="hljs-operator">*</span>.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;wsl2&#x27;</span>@<span class="hljs-string">&#x27;172.%&#x27;</span>;<br><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">ON</span> <span class="hljs-operator">*</span>.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;wsl2&#x27;</span>@<span class="hljs-string">&#x27;172.%&#x27;</span>;<br>FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure><p>Rerun the query, we could see the user <code>wsl2</code> has the privilege now.</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">user</span>, host, select_priv, create_priv, insert_priv <span class="hljs-keyword">FROM</span> mysql.user <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">user</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;wsl2&#x27;</span>;<br></code></pre></td></tr></table></figure><h2 id="Test-Connection"><a href="#Test-Connection" class="headerlink" title="Test Connection"></a>Test Connection</h2><p>Here is a simple python script. Run it on WSL2 to test the connection.</p><p>Remember to replace the <code>user</code>, <code>password</code> and <code>host</code> with your own. The <code>host</code> should be exactly the same as what <code>echo $(hostname).local</code> returns on WSL2.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment">#!/usr/bin/python3</span><br><br><span class="hljs-keyword">from</span> mysql <span class="hljs-keyword">import</span> connector<br><br>connection = connector.connect(<br>    user=<span class="hljs-string">&quot;wsl2&quot;</span>,<br>    password=<span class="hljs-string">&quot;password&quot;</span>,<br>    host=<span class="hljs-string">&quot;DESKTOP-4T7NV3Q.local&quot;</span><br>)<br><br>cursor = connection.cursor()<br>cursor.execute(<span class="hljs-string">&quot;SHOW DATABASES;&quot;</span>)<br><br><span class="hljs-keyword">for</span> db <span class="hljs-keyword">in</span> cursor.fetchall():<br>    <span class="hljs-built_in">print</span>(db[<span class="hljs-number">0</span>])<br><br>cursor.close()<br>connection.close()<br></code></pre></td></tr></table></figure><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol><li><a href="https://man7.org/linux/man-pages/man8/ip.8.html">ip(8) - Linux manual page</a></li><li><a href="https://learn.microsoft.com/en-us/windows/wsl/networking">Accessing network applications with WSL | Microsoft Learn</a></li><li><a href="https://unix.stackexchange.com/questions/715507/connect-to-host-machine-from-wsl2">networking - Connect to host machine from WSL2 - Unix &amp; Linux Stack Exchange</a></li><li><a href="https://dev.mysql.com/doc/refman/8.0/en/user-names.html">MySQL :: MySQL 8.0 Reference Manual :: 6.2.1 Account User Names and Passwords</a></li><li><a href="https://dev.mysql.com/doc/refman/8.0/en/grant-tables.html">MySQL :: MySQL 8.0 Reference Manual :: 6.2.3 Grant Tables</a></li><li><a href="https://dev.mysql.com/doc/refman/8.0/en/create-user.html">MySQL :: MySQL 8.0 Reference Manual :: 13.7.1.3 CREATE USER Statement</a></li><li><a href="https://stackoverflow.com/questions/50177216/how-to-grant-all-privileges-to-root-user-in-mysql-8-0">How to grant all privileges to root user in MySQL 8.0 - Stack Overflow</a></li><li><a href="https://askubuntu.com/questions/1322175/not-allowed-to-create-user-with-grant">mysql - Not Allowed to Create User with GRANT - Ask Ubuntu</a></li><li><a href="https://docs.digitalocean.com/products/databases/mysql/how-to/modify-user-privileges/">How to Modify User Privileges in MySQL Databases :: DigitalOcean Documentation</a></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>DevOps</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>SQL</tag>
+      
+      <tag>Hyper-V</tag>
+      
+      <tag>IP</tag>
+      
+      <tag>IPv4</tag>
+      
+      <tag>MySQL</tag>
+      
+      <tag>WSL2</tag>
+      
+      <tag>Windows</tag>
+      
+      <tag>CRUD</tag>
+      
+      <tag>Rouging</tag>
+      
+      <tag>Privileged Access Management</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Share Files Between Host and Linux Virtual Machine over Hyper-V</title>
     <link href="/2023/06/16/share-file-host-and-vm-hyper-v/"/>
     <url>/2023/06/16/share-file-host-and-vm-hyper-v/</url>
@@ -226,13 +271,13 @@
       
       <tag>Optimization</tag>
       
-      <tag>Machine Learning</tag>
-      
       <tag>Artificial Intelligence</tag>
       
       <tag>Linear Perceptron</tag>
       
       <tag>Neural Network</tag>
+      
+      <tag>Machine Learning</tag>
       
       <tag>Deep Learning</tag>
       
@@ -261,11 +306,11 @@
       
       <tag>Optimization</tag>
       
-      <tag>MDP</tag>
+      <tag>Artificial Intelligence</tag>
       
       <tag>Machine Learning</tag>
       
-      <tag>Artificial Intelligence</tag>
+      <tag>MDP</tag>
       
       <tag>Bellman Equation</tag>
       
@@ -743,9 +788,9 @@
     
     <tags>
       
-      <tag>读书</tag>
-      
       <tag>生活</tag>
+      
+      <tag>读书</tag>
       
       <tag>Summary</tag>
       

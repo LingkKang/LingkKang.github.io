@@ -16,28 +16,34 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Set up shared directory via CIFS.">
+    <meta name="description" content="Manage MySQL server on Windows host from WSL2.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Share Files Between Host and Linux Virtual Machine over Hyper-V">
-<meta property="og:url" content="https://lingkkang.github.io/2023/06/16/share-file-host-and-vm-hyper-v/index.html">
+<meta property="og:title" content="Access MySQL Localhost on Windows Host from WSL2">
+<meta property="og:url" content="https://lingkkang.github.io/2023/07/07/wsl2mysql/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Set up shared directory via CIFS.">
+<meta property="og:description" content="Manage MySQL server on Windows host from WSL2.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-06-16T07:15:08.000Z">
-<meta property="article:modified_time" content="2023-06-16T08:54:08.000Z">
+<meta property="article:published_time" content="2023-07-07T01:00:04.000Z">
+<meta property="article:modified_time" content="2023-07-07T03:33:04.000Z">
 <meta property="article:author" content="Lingkang">
 <meta property="article:tag" content="Linux">
+<meta property="article:tag" content="SQL">
 <meta property="article:tag" content="Hyper-V">
-<meta property="article:tag" content="virtual machine">
-<meta property="article:tag" content="mount">
-<meta property="article:tag" content="CIFS">
+<meta property="article:tag" content="IP">
+<meta property="article:tag" content="IPv4">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="WSL2">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="CRUD">
+<meta property="article:tag" content="Rouging">
+<meta property="article:tag" content="Privileged Access Management">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Share Files Between Host and Linux Virtual Machine over Hyper-V - Lingkang&#39;s Blog</title>
+  <title>Access MySQL Localhost on Windows Host from WSL2 - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -220,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Share Files Between Host and Linux Virtual Machine over Hyper-V"></span>
+            <span id="subtitle" data-typed-text="Access MySQL Localhost on Windows Host from WSL2"></span>
           
         </div>
 
@@ -231,8 +237,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-16 15:15" pubdate>
-          June 16, 2023 pm
+        <time datetime="2023-07-07 09:00" pubdate>
+          July 7, 2023 am
         </time>
       </span>
     
@@ -243,7 +249,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          4.2k words
         
       </span>
     
@@ -254,7 +260,7 @@
         
         
         
-          12 mins
+          35 mins
         
       </span>
     
@@ -292,12 +298,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Share Files Between Host and Linux Virtual Machine over Hyper-V</h1>
+            <h1 style="display: none">Access MySQL Localhost on Windows Host from WSL2</h1>
             
               <p class="note note-info">
                 
                   
-                    Last updated on June 16, 2023 pm
+                    Last updated on July 7, 2023 am
                   
                 
               </p>
@@ -305,24 +311,53 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Share-Files-Between-Host-and-Linux-Virtual-Machine-over-Hyper-V"><a href="#Share-Files-Between-Host-and-Linux-Virtual-Machine-over-Hyper-V" class="headerlink" title="Share Files Between Host and Linux Virtual Machine over Hyper-V"></a>Share Files Between Host and Linux Virtual Machine over Hyper-V</h1><p>Generally speaking, just follow this post and things will be all set.</p>
-<p><a target="_blank" rel="noopener" href="https://linuxhint.com/shared_folders_hypver-v_ubuntu_guest/">Shared Folders over Hyper-V Ubuntu Guest</a></p>
-<p>Also, <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/answers/questions/707320/attach-usb-device-to-hyper-v-guest-machine">attach a USB drive to the VM</a> is a feasible way, but on Windows 10, it is not support to make a removable device <em>offline</em>, so it is not applicable for SD &#x2F; TF card. Unreasonable…</p>
-<h2 id="Some-Notices"><a href="#Some-Notices" class="headerlink" title="Some Notices"></a>Some Notices</h2><h3 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h3><p>On <em>Advanced sharing settings</em> on host Windows machine, make sure all entries under <em>All Networks</em> item are selected as <strong>turned on</strong>. Otherwise, there might be a permission deny on mounting.</p>
-<h3 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h3><p>For accessing host directory as root user, no <code>-o</code> flag needed when running <code>mount.cifs</code> command. Also, password for host root can be put as pressing <code>Enter</code>.</p>
-<h3 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h3><p>Read and write to the shared directory will need <em>root permission</em> at this case.</p>
-<h3 id="4"><a href="#4" class="headerlink" title="4."></a>4.</h3><p>Simply running <code>umount</code> (unmount) the directory like unmount other device can disable the sharing.</p>
-<h2 id="Next-Time"><a href="#Next-Time" class="headerlink" title="Next Time"></a>Next Time</h2><p>Every time start the linux vm, simply run <code>mount.cifs</code> again can enable the directory sharing.</p>
-<p>Or it can be automated by a bash script as follow:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-meta">#!/bin/bash</span><br><br>MOUNTED=$(<span class="hljs-built_in">df</span> -h /path/to/vm/shared/dir/ | grep dev)<br><br><span class="hljs-keyword">if</span> ! [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$MOUNTED</span>&quot;</span> ] ; <span class="hljs-keyword">then</span><br>    sudo mount.cifs //WIN-DESKTOP/shared_folder_name /path/to/vm/shared/dir/<br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
+                <h1 id="Access-MySQL-Localhost-on-Windows-Host-from-WSL2"><a href="#Access-MySQL-Localhost-on-Windows-Host-from-WSL2" class="headerlink" title="Access MySQL Localhost on Windows Host from WSL2"></a>Access MySQL Localhost on Windows Host from WSL2</h1><p>It’s common to have a MySQL server running on localhost for development. But when using WSL2, it’s not that easy to access the localhost on Windows host. This post will show how to do it.</p>
+<h2 id="Check-Private-Network"><a href="#Check-Private-Network" class="headerlink" title="Check Private Network"></a>Check Private Network</h2><p>Run command <code>ip route</code> on WSL2 to get the IP address of the private network.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ip route</span><br>default via 172.23.144.1 dev eth0<br>172.23.144.0/20 dev eth0 proto kernel scope link src 172.23.151.37 <br></code></pre></td></tr></table></figure>
 
-<p>If the CIFS is not mounted, the path is mounted from device tree <code>/dev</code> by default. But after mounting, it will be changed to the host shared folder name, this can be verified by <code>df -h</code>.</p>
+<p>The first line represents the default route, the IP address <code>172.23.144.1</code> is the gateway or next-hop IP address. Actually, this is also the IP address of the host machine, where our MySQL server is running.</p>
+<p>The second line represents a specific route for the network <code>172.23.144.0/20</code>, which is a <a href="https://lingkkang.github.io/2023/05/15/subnet/">subnet</a> for WSL2. The source <code>src 172.23.151.37</code> is the IP address that will be used when sending traffic to the network, i.e., the IP address of WSL2.</p>
+<p>Run following command can also validate the IP address of the host machine.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">echo</span> $(hostname).<span class="hljs-built_in">local</span><br>ping -c 2 $(hostname).<span class="hljs-built_in">local</span><br></code></pre></td></tr></table></figure>
+
+<p>Actually, the WSL2 and the Windows host machine are all on a shared Hyper-V switch, which is a virtual network switch.</p>
+<p>However, the IP address of the host machine is <strong>not static</strong>, it will change after rebooting. So it’s not a good idea to have the IP address hard-coded in the configuration.</p>
+<p>And the solution is to use the hostname of the host machine, which is also the name of the host machine. The hostname can be found by running <code>hostname</code> on Windows PowerShell, or <code>echo $(hostname)</code> on WSL2. The <code>.local</code> suffix is also needed. See the python script for <a href="#test-connection">connection testing</a>.</p>
+<p>It is also noteworthy that the private network IPv4 addresses all begin with <code>172</code>. This would be helpful when we configure MySQL user.</p>
+<h2 id="Create-MySQL-User"><a href="#Create-MySQL-User" class="headerlink" title="Create MySQL User"></a>Create MySQL User</h2><p>Since all users on MySQL server are on <code>localhost</code> by default, it is required to create a new user for WSL2. </p>
+<p>Note that both user name <code>user</code> and host name <code>host</code> need to match to log in, otherwise, it will be denied. For example, if we try to log in as root in Python from WSL2, it will raise an an <code>mysql.connector.errors.ProgrammingError</code>, with an error message that <code>1045 (28000): Access denied for user &#39;root&#39;@&#39;172.23.151.37&#39;</code>.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs console"><span class="hljs-meta prompt_">mysql&gt; </span><span class="language-bash">SELECT user, host FROM mysql.user;</span><br>+------------------+-----------+<br>| user             | host      |<br>+------------------+-----------+<br>| mysql.infoschema | localhost |<br>| mysql.session    | localhost |<br>| mysql.sys        | localhost |<br>| root             | localhost |<br>+------------------+-----------+<br>4 rows in set (0.01 sec)<br></code></pre></td></tr></table></figure>
+
+<p>Log in MySQL Command Line Client with root privilege, and create a user for WSL2, say, <code>wsl2</code>.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;wsl2&#x27;</span>@<span class="hljs-string">&#x27;172.%&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>or, if password is needed,</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;wsl2&#x27;</span>@<span class="hljs-string">&#x27;172.%&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;password&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>Here <code>%</code> percentage sign is a wildcard which means any IP address that begins with <code>172</code>.</p>
+<p>We could see at this stage the user <code>wsl2</code> has no privilege.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs console"><span class="hljs-meta prompt_">mysql&gt; </span><span class="language-bash">SELECT user, host, select_priv, create_priv, insert_priv FROM mysql.user WHERE user=<span class="hljs-string">&#x27;wsl2&#x27;</span>;</span><br>+------+-------+-------------+-------------+-------------+<br>| user | host  | select_priv | create_priv | insert_priv |<br>+------+-------+-------------+-------------+-------------+<br>| wsl2 | 172.% | N           | N           | N           |<br>+------+-------+-------------+-------------+-------------+<br>1 row in set (0.01 sec)<br></code></pre></td></tr></table></figure>
+
+<h2 id="Grant-Privilege"><a href="#Grant-Privilege" class="headerlink" title="Grant Privilege"></a>Grant Privilege</h2><p>Grant privilege to the user <code>wsl2</code> as per requirement.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">ON</span> <span class="hljs-operator">*</span>.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;wsl2&#x27;</span>@<span class="hljs-string">&#x27;172.%&#x27;</span>;<br><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">ON</span> <span class="hljs-operator">*</span>.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;wsl2&#x27;</span>@<span class="hljs-string">&#x27;172.%&#x27;</span>;<br><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">ON</span> <span class="hljs-operator">*</span>.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;wsl2&#x27;</span>@<span class="hljs-string">&#x27;172.%&#x27;</span>;<br>FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure>
+
+<p>Rerun the query, we could see the user <code>wsl2</code> has the privilege now.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">user</span>, host, select_priv, create_priv, insert_priv <span class="hljs-keyword">FROM</span> mysql.user <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">user</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;wsl2&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Test-Connection"><a href="#Test-Connection" class="headerlink" title="Test Connection"></a>Test Connection</h2><p>Here is a simple python script. Run it on WSL2 to test the connection.</p>
+<p>Remember to replace the <code>user</code>, <code>password</code> and <code>host</code> with your own. The <code>host</code> should be exactly the same as what <code>echo $(hostname).local</code> returns on WSL2.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-comment">#!/usr/bin/python3</span><br><br><span class="hljs-keyword">from</span> mysql <span class="hljs-keyword">import</span> connector<br><br>connection = connector.connect(<br>    user=<span class="hljs-string">&quot;wsl2&quot;</span>,<br>    password=<span class="hljs-string">&quot;password&quot;</span>,<br>    host=<span class="hljs-string">&quot;DESKTOP-4T7NV3Q.local&quot;</span><br>)<br><br>cursor = connection.cursor()<br>cursor.execute(<span class="hljs-string">&quot;SHOW DATABASES;&quot;</span>)<br><br><span class="hljs-keyword">for</span> db <span class="hljs-keyword">in</span> cursor.fetchall():<br>    <span class="hljs-built_in">print</span>(db[<span class="hljs-number">0</span>])<br><br>cursor.close()<br>connection.close()<br></code></pre></td></tr></table></figure>
+
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://linuxhint.com/shared_folders_hypver-v_ubuntu_guest/">Shared Folders over Hyper-V Ubuntu Guest</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.isumsoft.com/it/share-files-folders-or-drives-between-host-and-hyper-v-virtual-machine/">Share Files, Folders or Drives Between Host and Hyper-V Virtual Machine</a></li>
-<li><a target="_blank" rel="noopener" href="https://cifs.com/">All About CIFS</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/answers/questions/707320/attach-usb-device-to-hyper-v-guest-machine">Attach USB device to Hyper-V guest machine - Microsoft Q&amp;A</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.maths.cam.ac.uk/computing/linux/unixinfo/perms">File Permissions and Sharing Files | Computing</a></li>
+<li><a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man8/ip.8.html">ip(8) - Linux manual page</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/wsl/networking">Accessing network applications with WSL | Microsoft Learn</a></li>
+<li><a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/715507/connect-to-host-machine-from-wsl2">networking - Connect to host machine from WSL2 - Unix &amp; Linux Stack Exchange</a></li>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/user-names.html">MySQL :: MySQL 8.0 Reference Manual :: 6.2.1 Account User Names and Passwords</a></li>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/grant-tables.html">MySQL :: MySQL 8.0 Reference Manual :: 6.2.3 Grant Tables</a></li>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/create-user.html">MySQL :: MySQL 8.0 Reference Manual :: 13.7.1.3 CREATE USER Statement</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/50177216/how-to-grant-all-privileges-to-root-user-in-mysql-8-0">How to grant all privileges to root user in MySQL 8.0 - Stack Overflow</a></li>
+<li><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/1322175/not-allowed-to-create-user-with-grant">mysql - Not Allowed to Create User with GRANT - Ask Ubuntu</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.digitalocean.com/products/databases/mysql/how-to/modify-user-privileges/">How to Modify User Privileges in MySQL Databases :: DigitalOcean Documentation</a></li>
 </ol>
 
                 
@@ -359,13 +394,25 @@
       
         <a href="/tags/Linux/">#Linux</a>
       
+        <a href="/tags/SQL/">#SQL</a>
+      
         <a href="/tags/Hyper-V/">#Hyper-V</a>
       
-        <a href="/tags/virtual-machine/">#virtual machine</a>
+        <a href="/tags/IP/">#IP</a>
       
-        <a href="/tags/mount/">#mount</a>
+        <a href="/tags/IPv4/">#IPv4</a>
       
-        <a href="/tags/CIFS/">#CIFS</a>
+        <a href="/tags/MySQL/">#MySQL</a>
+      
+        <a href="/tags/WSL2/">#WSL2</a>
+      
+        <a href="/tags/Windows/">#Windows</a>
+      
+        <a href="/tags/CRUD/">#CRUD</a>
+      
+        <a href="/tags/Rouging/">#Rouging</a>
+      
+        <a href="/tags/Privileged-Access-Management/">#Privileged Access Management</a>
       
     </div>
   
@@ -377,8 +424,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Share Files Between Host and Linux Virtual Machine over Hyper-V</div>
-      <div>https://lingkkang.github.io/2023/06/16/share-file-host-and-vm-hyper-v/</div>
+      <div>Access MySQL Localhost on Windows Host from WSL2</div>
+      <div>https://lingkkang.github.io/2023/07/07/wsl2mysql/</div>
     </div>
     <div class="license-meta">
       
@@ -390,7 +437,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 16, 2023</div>
+          <div>July 7, 2023</div>
         </div>
       
       
@@ -422,18 +469,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/07/wsl2mysql/" title="Access MySQL Localhost on Windows Host from WSL2">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Access MySQL Localhost on Windows Host from WSL2</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/13/access-tf/" title="Partition and Mount TF Card on Linux">
-                        <span class="hidden-mobile">Partition and Mount TF Card on Linux</span>
+                      <a href="/2023/06/16/share-file-host-and-vm-hyper-v/" title="Share Files Between Host and Linux Virtual Machine over Hyper-V">
+                        <span class="hidden-mobile">Share Files Between Host and Linux Virtual Machine over Hyper-V</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
