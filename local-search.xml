@@ -4,6 +4,41 @@
   
   
   <entry>
+    <title>Performance Issue of Memory Alignment</title>
+    <link href="/2023/07/26/align-test/"/>
+    <url>/2023/07/26/align-test/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Performance-Issue-of-Memory-Alignment"><a href="#Performance-Issue-of-Memory-Alignment" class="headerlink" title="Performance Issue of Memory Alignment"></a>Performance Issue of Memory Alignment</h1><p>Once we discussed <a href="https://lingkkang.github.io/2023/03/12/align/">some tricks on alignment of numbers</a>. In this post, we will explore the difference on code performance between aligned and unaligned memory access, especially on the access and assignment to the members of <code>struct</code> (and possibly <code>class</code>). A piece of ready-to-go C++ code is provided in <a href="#appendix">appendix</a>.</p><h2 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h2><p>We plan to use <code>struct</code> to demonstrate the performance difference. Basically, it would contain three members: <code>char</code>, <code>int</code> and <code>double</code>. We will try to align them in different ways and see the performance difference.</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Struct1</span><br>&#123;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">char</span> my_char = <span class="hljs-string">&#x27;\0&#x27;</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">int</span> my_int = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">double</span> my_double = <span class="hljs-number">0.0</span>;<br>&#125;<br></code></pre></td></tr></table></figure><p>The size of each type is as follows, but the size of <code>Struct1</code>, presumably be the sum of its members’ size, is not guaranteed.</p><div style="margin: 0 auto; width: fit-content;"><table><thead><tr><th align="center">Data Type</th><th align="center">Size in Bytes</th></tr></thead><tbody><tr><td align="center"><code>char</code></td><td align="center">1</td></tr><tr><td align="center"><code>int</code></td><td align="center">4</td></tr><tr><td align="center"><code>double</code></td><td align="center">8</td></tr><tr><td align="center"><code>Struct1</code></td><td align="center">16</td></tr></tbody></table></div><p>If we run with code <code>sizeof(Struct1)</code>, actually the result might be 16, as the compiler do some padding to make the size of <code>Struct1</code> a multiple of 4, trying to make it not too inefficient. And we won’t touch this part for simplicity.</p><p>By the rule of combination, we have 6 ways to align the members of our <code>struct</code>, namely <code>Struct1</code> to <code>Struct6</code> (see <a href="#test.hh">appendix <code>test.hh</code></a>).</p><h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>The idea is simple: </p><ol><li>Initialize an object;</li><li>Assign values to its members;</li><li>Loop for many many times;</li><li>Record the time consumed in total of one type.</li><li>Compare the time across different types.</li></ol><p>So the basic code goes like this:</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">define</span> ITER 10000000</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// get start time</span><br>    <span class="hljs-keyword">auto</span> start = std::chrono::high_resolution_clock::<span class="hljs-built_in">now</span>();<br><br>    <span class="hljs-comment">// start looping</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; ITER; ++i) &#123;<br>        Struct1 data;<br>        data.c = <span class="hljs-string">&#x27;A&#x27;</span>;<br>        data.i = <span class="hljs-number">42</span>;<br>        data.d = <span class="hljs-number">3.14</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// get finish time</span><br>    <span class="hljs-keyword">auto</span> end = std::chrono::high_resolution_clock::<span class="hljs-built_in">now</span>();<br>    <span class="hljs-comment">// calculate time duration in microseconds</span><br>    <span class="hljs-keyword">auto</span> duration = <br>        std::chrono::<span class="hljs-built_in">duration_cast</span>&lt;std::chrono::microseconds&gt;(end - start)<br>            .<span class="hljs-built_in">count</span>();<br><br>    std::cout <br>        &lt;&lt; <span class="hljs-string">&quot;Access time of Struct1 with proper alignment: &quot;</span> <br>        &lt;&lt; duration &lt;&lt; <span class="hljs-string">&quot; microseconds&quot;</span> &lt;&lt; std::endl;<br>&#125;<br></code></pre></td></tr></table></figure><p>Simply replace <code>Struct1</code> with <code>Struct2</code> … <code>Struct6</code> and we can get the time consumed by each type.</p><p>But some changes are needed to make the code more readable convenient to collect data.</p><ol><li>Implemented a <code>template</code> with generic type to avoid code duplication.</li><li>Used a vector <code>time</code> to store the time consumed by each type.</li><li>For each value of <code>iter</code>, we run the test for 5 times, or, 5 <code>epoch</code>.</li><li>Used two array <code>min_arr</code> and <code>max_arr</code> to keep tracking which type attributes to the max and min consumed time. </li><li>Save the result to a csv file for further analysis.</li><li>Prompt out current iteration and epoch so that we can know the progress.</li></ol><p>For example, after one <code>epoch</code>, when we get <code>time</code> vector with values <code>294146, 276858, 265321, 267835, 278274, 282499</code>, we can know that <code>Struct3</code> is the fastest and <code>Struct1</code> is the slowest. Then we can increment <code>min_arr[2]</code> and <code>max_arr[0]</code> (indies start from 0) by <code>1</code>, this is done by <code>count()</code> function.</p><p>Also note that the order of accessing members counts. For example, if we access <code>char</code> first, then <code>int</code>, then <code>double</code>, it is different from accessing <code>double</code> first, then <code>int</code>, then <code>char</code>. This will also affect the performance. Here, we simply access them in the reversed order of their declaration.</p><p>Implementation details can be found in <a href="#test.cpp">appendix <code>test.cpp</code></a>.</p><h2 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h2><p>We calculated <code>iter</code> from 100000000 to 100001000 with step 10, and <code>epoch</code> from 1 to 5. This means we have 500 lines of data in total. So the result is quite accurate and convincing from statistical perspective.</p><p>The final <code>min_arr</code> and <code>max_arr</code> are as follows:</p><div style="margin: 0 auto; width: fit-content;"><table><thead><tr><th align="center"></th><th align="center"><code>Struct1</code></th><th align="center"><code>Struct2</code></th><th align="center"><code>Struct3</code></th><th align="center"><code>Struct4</code></th><th align="center"><code>Struct5</code></th><th align="center"><code>Struct6</code></th></tr></thead><tbody><tr><td align="center">MAX Count</td><td align="center"><strong>288</strong></td><td align="center">209</td><td align="center">2</td><td align="center">4</td><td align="center">0</td><td align="center">2</td></tr><tr><td align="center">MIN Count</td><td align="center">0</td><td align="center">0</td><td align="center">50</td><td align="center">67</td><td align="center"><strong>331</strong></td><td align="center">57</td></tr></tbody></table></div><p>We can see that <code>Struct5</code> is the fastest and <code>Struct1</code> is the slowest in general.</p><p><img src="/images/one_time/align-test.png" alt="Visualization"></p><p>And they are quite dominant over other types.</p><p>Full results can be found <a href="/assets/align-test.csv">here</a></p><h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>This result is quite self-explanatory. If we check the size of these <code>struct</code>s, they are not all 16 Bytes.</p><div style="margin: 0 auto; width: fit-content;"><table><thead><tr><th align="center">Data Type</th><th align="center">Size in Bytes</th></tr></thead><tbody><tr><td align="center"><code>Struct1</code></td><td align="center">16</td></tr><tr><td align="center"><code>Struct2</code></td><td align="center"><strong>24</strong></td></tr><tr><td align="center"><code>Struct3</code></td><td align="center">16</td></tr><tr><td align="center"><code>Struct4</code></td><td align="center"><strong>24</strong></td></tr><tr><td align="center"><code>Struct5</code></td><td align="center">16</td></tr><tr><td align="center"><code>Struct6</code></td><td align="center">16</td></tr></tbody></table></div><p>We can see <code>Struct2</code> and <code>Struct4</code> are 24 Bytes, which is not a multiple of 8. Compiler do padding and alignment based on 8 Bytes to each structure member. The compiler also have <a href="https://gcc.gnu.org/onlinedocs/gcc-13.1.0/gcc/Common-Type-Attributes.html#index-aligned-type-attribute">alignment attribute</a>, which can be used to control the alignment of structure members. For example, we can use <code>__attribute__((aligned(8)))</code> to make sure the structure is aligned to 8 Bytes in GCC&#x2F;g++.</p><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul><li><a href="https://lemire.me/blog/2012/05/31/data-alignment-for-speed-myth-or-reality/">Data alignment for speed: myth or reality? – Daniel Lemire’s blog</a></li><li><a href="https://fylux.github.io/2017/07/11/Memory_Alignment/">Memory Alignment and Performance · Fylux</a></li><li><a href="https://developer.ibm.com/articles/pa-dalign/">Data alignment: Straighten up and fly right - IBM Developer</a></li><li><a href="https://stackoverflow.com/questions/1898153/how-to-determine-if-memory-is-aligned">c - How to determine if memory is aligned? - Stack Overflow</a></li><li><a href="https://gcc.gnu.org/onlinedocs/gcc-13.1.0/gcc/Attribute-Syntax.html">Attribute Syntax (Using the GNU Compiler Collection (GCC))</a></li><li><a href="https://gcc.gnu.org/onlinedocs/gcc-13.1.0/gcc/Common-Type-Attributes.html">Common Type Attributes (Using the GNU Compiler Collection (GCC))</a></li></ul><h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><h3 id="Environment-and-Compilation"><a href="#Environment-and-Compilation" class="headerlink" title="Environment and Compilation"></a>Environment and Compilation</h3><ul><li>Compiler: MinGW32 GCC 9.2.0</li><li>OS: Windows 10</li><li>Arch: X86_64</li></ul><p>Build with command <code>g++ -O0 test.cpp -o test</code>.</p><h3 id="test-hh"><a href="#test-hh" class="headerlink" title="test.hh"></a><code>test.hh</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> __TEST_HH__</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> __TEST_HH__</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ITER_MAX 100001000</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ITER_MIN 100000000</span><br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Struct1</span><br>&#123;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">char</span> my_char = <span class="hljs-string">&#x27;\0&#x27;</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">int</span> my_int = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">double</span> my_double = <span class="hljs-number">0.0</span>;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">assign</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        my_char = <span class="hljs-string">&#x27;a&#x27;</span>;<br>        my_int = <span class="hljs-number">42</span>;<br>        my_double = <span class="hljs-number">3.14</span>;<br>    &#125;<br>&#125;;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Struct2</span><br>&#123;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">char</span> my_char = <span class="hljs-string">&#x27;\0&#x27;</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">double</span> my_double = <span class="hljs-number">0.0</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">int</span> my_int = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">assign</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        my_char = <span class="hljs-string">&#x27;a&#x27;</span>;<br>        my_double = <span class="hljs-number">3.14</span>;<br>        my_int = <span class="hljs-number">42</span>;<br>    &#125;<br>&#125;;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Struct3</span><br>&#123;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">int</span> my_int = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">char</span> my_char = <span class="hljs-string">&#x27;\0&#x27;</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">double</span> my_double = <span class="hljs-number">0.0</span>;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">assign</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        my_int = <span class="hljs-number">42</span>;<br>        my_char = <span class="hljs-string">&#x27;a&#x27;</span>;<br>        my_double = <span class="hljs-number">3.14</span>;<br>    &#125;<br>&#125;;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Struct4</span><br>&#123;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">int</span> my_int = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">double</span> my_double = <span class="hljs-number">0.0</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">char</span> my_char = <span class="hljs-string">&#x27;\0&#x27;</span>;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">assign</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        my_int = <span class="hljs-number">42</span>;<br>        my_double = <span class="hljs-number">3.14</span>;<br>        my_char = <span class="hljs-string">&#x27;a&#x27;</span>;<br>    &#125;<br>&#125;;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Struct5</span><br>&#123;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">double</span> my_double = <span class="hljs-number">0.0</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">char</span> my_char = <span class="hljs-string">&#x27;\0&#x27;</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">int</span> my_int = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">assign</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        my_double = <span class="hljs-number">3.14</span>;<br>        my_char = <span class="hljs-string">&#x27;a&#x27;</span>;<br>        my_int = <span class="hljs-number">42</span>;<br>    &#125;<br>&#125;;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Struct6</span><br>&#123;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">double</span> my_double = <span class="hljs-number">0.0</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">int</span> my_int = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">char</span> my_char = <span class="hljs-string">&#x27;\0&#x27;</span>;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">assign</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>        my_double = <span class="hljs-number">3.14</span>;<br>        my_int = <span class="hljs-number">42</span>;<br>        my_char = <span class="hljs-string">&#x27;a&#x27;</span>;<br>    &#125;<br>&#125;;<br><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">// __TEST_HH__</span></span><br></code></pre></td></tr></table></figure><h3 id="test-cpp"><a href="#test-cpp" class="headerlink" title="test.cpp"></a><code>test.cpp</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;chrono&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fstream&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;test.hh&quot;</span></span><br><br><span class="hljs-type">int</span> min_arr[<span class="hljs-number">6</span>];<br><span class="hljs-type">int</span> max_arr[<span class="hljs-number">6</span>];<br><br><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> StructType&gt;<br><span class="hljs-function"><span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-title">runTest</span><span class="hljs-params">(<span class="hljs-type">long</span> <span class="hljs-type">long</span> iter)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">auto</span> start = std::chrono::high_resolution_clock::<span class="hljs-built_in">now</span>();<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">long</span> <span class="hljs-type">long</span> i = <span class="hljs-number">0</span>; i &lt; iter; i++)<br>    &#123;<br>        <span class="hljs-comment">// init object and do value assignment `iter` times</span><br>        StructType data;<br>        data.<span class="hljs-built_in">assign</span>();<br>    &#125;<br><br>    <span class="hljs-keyword">auto</span> finish = std::chrono::high_resolution_clock::<span class="hljs-built_in">now</span>();<br>    <span class="hljs-keyword">auto</span> duration = std::chrono::<span class="hljs-built_in">duration_cast</span>&lt;std::chrono::microseconds&gt;(finish - start).<span class="hljs-built_in">count</span>();<br><br>    <span class="hljs-keyword">return</span> duration;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print_min_max</span><span class="hljs-params">()</span></span>&#123;<br>    <br>    std::cout &lt;&lt; <span class="hljs-string">&quot;MAX [&quot;</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">6</span>; i++)<br>        std::cout &lt;&lt; max_arr[i] &lt;&lt; <span class="hljs-string">&quot;, &quot;</span>;<br>    std::cout &lt;&lt; <span class="hljs-string">&quot;]&quot;</span> &lt;&lt; std::endl;<br><br>    std::cout &lt;&lt; <span class="hljs-string">&quot;MIN [&quot;</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">6</span>; i++)<br>        std::cout &lt;&lt; min_arr[i] &lt;&lt; <span class="hljs-string">&quot;, &quot;</span>;<br>    std::cout &lt;&lt; <span class="hljs-string">&quot;]&quot;</span> &lt;&lt; std::endl;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">count</span><span class="hljs-params">(std::vector&lt;<span class="hljs-type">long</span> <span class="hljs-type">long</span>&gt; &amp;time_vec)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// keep track of the max and min</span><br>    <span class="hljs-keyword">auto</span> max = std::<span class="hljs-built_in">max_element</span>(time_vec.<span class="hljs-built_in">begin</span>(), time_vec.<span class="hljs-built_in">end</span>()) - time_vec.<span class="hljs-built_in">begin</span>();<br>    max_arr[max] += <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">auto</span> min = std::<span class="hljs-built_in">min_element</span>(time_vec.<span class="hljs-built_in">begin</span>(), time_vec.<span class="hljs-built_in">end</span>()) - time_vec.<span class="hljs-built_in">begin</span>();<br>    min_arr[min] += <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    std::vector&lt;<span class="hljs-type">long</span> <span class="hljs-type">long</span>&gt; time;<br><br>    <span class="hljs-comment">// write timing result to csv file</span><br>    std::ofstream output_file;<br>    output_file.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;output.csv&quot;</span>);<br>    output_file <span class="hljs-comment">// print csv headers</span><br>        &lt;&lt; <span class="hljs-string">&quot;iteration,epoch,&quot;</span> &lt;&lt; <span class="hljs-string">&quot;struct1,&quot;</span> &lt;&lt; <span class="hljs-string">&quot;struct2,&quot;</span><br>        &lt;&lt; <span class="hljs-string">&quot;struct3,&quot;</span> &lt;&lt; <span class="hljs-string">&quot;struct4,&quot;</span> &lt;&lt; <span class="hljs-string">&quot;struct5,&quot;</span><br>        &lt;&lt; <span class="hljs-string">&quot;struct6,&quot;</span> &lt;&lt; std::endl;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">long</span> <span class="hljs-type">long</span> iter = ITER_MIN; iter &lt;= ITER_MAX; iter += <span class="hljs-number">10</span>)<br>    &#123;<br>        std::cout &lt;&lt; <span class="hljs-string">&quot;Iteration time: &quot;</span> &lt;&lt; iter &lt;&lt; std::endl;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> epoch = <span class="hljs-number">1</span>; epoch &lt; <span class="hljs-number">6</span>; epoch++)<br>        &#123;<br>            std::cout &lt;&lt; <span class="hljs-string">&quot;Epoch: &quot;</span> &lt;&lt; epoch &lt;&lt; std::endl;<br>            time.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">runTest</span>&lt;Struct1&gt;(iter));<br>            time.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">runTest</span>&lt;Struct2&gt;(iter));<br>            time.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">runTest</span>&lt;Struct3&gt;(iter));<br>            time.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">runTest</span>&lt;Struct4&gt;(iter));<br>            time.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">runTest</span>&lt;Struct5&gt;(iter));<br>            time.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">runTest</span>&lt;Struct6&gt;(iter));<br>            output_file &lt;&lt; iter &lt;&lt; <span class="hljs-string">&quot;,&quot;</span> &lt;&lt; epoch &lt;&lt; <span class="hljs-string">&quot;,&quot;</span>;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> index = <span class="hljs-number">0</span>; index &lt; time.<span class="hljs-built_in">size</span>(); index++)<br>                output_file &lt;&lt; time[index] &lt;&lt; <span class="hljs-string">&quot;,&quot;</span>;<br>            output_file &lt;&lt; std::endl;<br>            <span class="hljs-built_in">count</span>(time);<br>            time.<span class="hljs-built_in">clear</span>();<br>        &#125;<br>        <span class="hljs-built_in">print_min_max</span>();<br>    &#125;<br><br>    <span class="hljs-built_in">print_min_max</span>();<br>    output_file.<span class="hljs-built_in">close</span>();<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure><h3 id="plot-py"><a href="#plot-py" class="headerlink" title="plot.py"></a><code>plot.py</code></h3><p>Also include a python script to plot the result, as a backup.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>x = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]<br>y_max = [-<span class="hljs-number">288</span>, -<span class="hljs-number">209</span>, -<span class="hljs-number">2</span>, -<span class="hljs-number">4</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">2</span>] <span class="hljs-comment"># slowest</span><br>y_min = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">50</span>, <span class="hljs-number">67</span>, <span class="hljs-number">331</span>, <span class="hljs-number">57</span>]     <span class="hljs-comment"># fastest</span><br><br>fig, ax = plt.subplots(facecolor=<span class="hljs-string">&quot;#eaeaf2&quot;</span>,)<br><br>fig.set_figheight(<span class="hljs-number">6</span>)<br>fig.set_figwidth(<span class="hljs-number">6</span>)<br><br>ax.set_xlabel(<span class="hljs-string">&quot;Structs&quot;</span>)<br>ax.set_ylabel(<span class="hljs-string">&quot;Times of Max/Min&quot;</span>)<br>ax.set_title(<span class="hljs-string">&quot;Max/Min Counts over Experiment&quot;</span>, fontsize=<span class="hljs-number">18</span>, pad=<span class="hljs-number">15</span>)<br><br>bar_max = ax.bar(x, y_max, <span class="hljs-number">0.35</span>, label=<span class="hljs-string">&quot;slowest&quot;</span>, color=<span class="hljs-string">&quot;#97d6fc&quot;</span>) <span class="hljs-comment"># green</span><br>bar_min = ax.bar(x, y_min, <span class="hljs-number">0.35</span>, label=<span class="hljs-string">&quot;fastest&quot;</span>, color=<span class="hljs-string">&quot;#ff8282&quot;</span>) <span class="hljs-comment"># red</span><br>ax.axhline(<span class="hljs-number">0</span>, color=<span class="hljs-string">&quot;black&quot;</span>, linewidth=<span class="hljs-number">0.5</span>)<br>ax.legend()<br><br><span class="hljs-comment"># add value labels above each bar</span><br><span class="hljs-keyword">for</span> bar <span class="hljs-keyword">in</span> bar_min:<br>    height = bar.get_height()<br>    ax.text(<br>        bar.get_x() + bar.get_width() / <span class="hljs-number">2.0</span>,<br>        height,<br>        <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;<span class="hljs-built_in">int</span>(height)&#125;</span>&quot;</span>,<br>        ha=<span class="hljs-string">&quot;center&quot;</span>,<br>        va=<span class="hljs-string">&quot;bottom&quot;</span>,<br>        fontsize=<span class="hljs-number">9</span>,<br>    )<br><br><span class="hljs-comment"># add value labels below each bar</span><br><span class="hljs-keyword">for</span> bar <span class="hljs-keyword">in</span> bar_max:<br>    height = bar.get_height()<br>    ax.text(<br>        bar.get_x() + bar.get_width() / <span class="hljs-number">2.0</span>,<br>        height-<span class="hljs-number">25</span>,<br>        <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;-<span class="hljs-built_in">int</span>(height)&#125;</span>&quot;</span>,<br>        ha=<span class="hljs-string">&quot;center&quot;</span>,<br>        va=<span class="hljs-string">&quot;bottom&quot;</span>,<br>        fontsize=<span class="hljs-number">9</span>,<br>    )<br><br>plt.xticks(rotation=<span class="hljs-number">45</span>)<br>plt.tight_layout()<br>plt.subplots_adjust(wspace=<span class="hljs-number">0</span>, top=<span class="hljs-number">0.85</span>, bottom=<span class="hljs-number">0.12</span>, left=<span class="hljs-number">0.18</span>, right=<span class="hljs-number">0.95</span>)<br><span class="hljs-comment"># plt.show()</span><br>plt.savefig(<span class="hljs-string">&quot;align-test.png&quot;</span>, facecolor=<span class="hljs-string">&quot;#eee&quot;</span>, dpi=<span class="hljs-number">500</span>)<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Programming Language</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C</tag>
+      
+      <tag>Optimization</tag>
+      
+      <tag>Memory</tag>
+      
+      <tag>Alignment</tag>
+      
+      <tag>Padding</tag>
+      
+      <tag>Cpp</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Access MySQL Localhost on Windows Host from WSL2</title>
     <link href="/2023/07/07/wsl2mysql/"/>
     <url>/2023/07/07/wsl2mysql/</url>
@@ -24,12 +59,6 @@
       
       <tag>SQL</tag>
       
-      <tag>Hyper-V</tag>
-      
-      <tag>IP</tag>
-      
-      <tag>IPv4</tag>
-      
       <tag>MySQL</tag>
       
       <tag>WSL2</tag>
@@ -38,7 +67,13 @@
       
       <tag>CRUD</tag>
       
+      <tag>Hyper-V</tag>
+      
+      <tag>IP</tag>
+      
       <tag>Rouging</tag>
+      
+      <tag>IPv4</tag>
       
       <tag>Privileged Access Management</tag>
       
@@ -170,13 +205,13 @@
     
     <tags>
       
-      <tag>Polymorphism</tag>
-      
       <tag>Haskell</tag>
       
       <tag>Functional Programming</tag>
       
       <tag>Currying</tag>
+      
+      <tag>Polymorphism</tag>
       
     </tags>
     
@@ -201,13 +236,13 @@
     
     <tags>
       
+      <tag>Polymorphism</tag>
+      
       <tag>Java</tag>
       
       <tag>Inheritance</tag>
       
       <tag>Static</tag>
-      
-      <tag>Polymorphism</tag>
       
       <tag>Overriding</tag>
       
@@ -238,13 +273,13 @@
       
       <tag>IP</tag>
       
+      <tag>IPv4</tag>
+      
       <tag>Routing</tag>
       
       <tag>Subnet</tag>
       
       <tag>Subnet Mask</tag>
-      
-      <tag>IPv4</tag>
       
     </tags>
     
@@ -271,13 +306,13 @@
       
       <tag>Optimization</tag>
       
+      <tag>Machine Learning</tag>
+      
       <tag>Artificial Intelligence</tag>
       
       <tag>Linear Perceptron</tag>
       
       <tag>Neural Network</tag>
-      
-      <tag>Machine Learning</tag>
       
       <tag>Deep Learning</tag>
       
@@ -306,11 +341,11 @@
       
       <tag>Optimization</tag>
       
-      <tag>Artificial Intelligence</tag>
+      <tag>MDP</tag>
       
       <tag>Machine Learning</tag>
       
-      <tag>MDP</tag>
+      <tag>Artificial Intelligence</tag>
       
       <tag>Bellman Equation</tag>
       
@@ -357,7 +392,7 @@
     
     <categories>
       
-      <category>Operating System</category>
+      <category>Operating System &amp; Architecture</category>
       
     </categories>
     
@@ -367,6 +402,8 @@
       <tag>RISC-V</tag>
       
       <tag>QEMU</tag>
+      
+      <tag>Emulation</tag>
       
       <tag>Interrupt</tag>
       
@@ -399,13 +436,15 @@
     
     <tags>
       
-      <tag>Bitwise Operation</tag>
-      
       <tag>Optimization</tag>
+      
+      <tag>Memory</tag>
+      
+      <tag>Bitwise Operation</tag>
       
       <tag>xv6</tag>
       
-      <tag>Memory</tag>
+      <tag>Alignment</tag>
       
     </tags>
     
@@ -423,20 +462,22 @@
     
     <categories>
       
-      <category>Operating System</category>
+      <category>Operating System &amp; Architecture</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>Register</tag>
+      <tag>C</tag>
       
       <tag>xv6</tag>
       
+      <tag>Register</tag>
+      
       <tag>QEMU</tag>
       
-      <tag>C</tag>
+      <tag>Emulation</tag>
       
       <tag>Peripheral</tag>
       
@@ -462,20 +503,22 @@
     
     <categories>
       
-      <category>Operating System</category>
+      <category>Operating System &amp; Architecture</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>RISC-V</tag>
+      <tag>C</tag>
       
-      <tag>Register</tag>
+      <tag>Memory</tag>
       
       <tag>xv6</tag>
       
-      <tag>Memory</tag>
+      <tag>RISC-V</tag>
+      
+      <tag>Register</tag>
       
       <tag>Bootstrap</tag>
       
@@ -485,7 +528,7 @@
       
       <tag>QEMU</tag>
       
-      <tag>C</tag>
+      <tag>Emulation</tag>
       
     </tags>
     
@@ -589,9 +632,9 @@
     
     <tags>
       
-      <tag>Memory</tag>
-      
       <tag>C</tag>
+      
+      <tag>Memory</tag>
       
       <tag>Dynamic Memory Allocation</tag>
       
@@ -678,13 +721,13 @@
     
     <tags>
       
-      <tag>Tree</tag>
-      
-      <tag>Binary Tree</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Tree</tag>
+      
+      <tag>Binary Tree</tag>
       
     </tags>
     
@@ -734,9 +777,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>Linked List</tag>
+      
+      <tag>Python</tag>
       
     </tags>
     
@@ -788,9 +831,9 @@
     
     <tags>
       
-      <tag>生活</tag>
-      
       <tag>读书</tag>
+      
+      <tag>生活</tag>
       
       <tag>Summary</tag>
       
@@ -817,11 +860,11 @@
     
     <tags>
       
+      <tag>Linked List</tag>
+      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
-      
-      <tag>Linked List</tag>
       
     </tags>
     
