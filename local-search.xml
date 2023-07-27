@@ -205,13 +205,15 @@
     
     <tags>
       
+      <tag>Matrix</tag>
+      
+      <tag>Polymorphism</tag>
+      
       <tag>Haskell</tag>
       
       <tag>Functional Programming</tag>
       
       <tag>Currying</tag>
-      
-      <tag>Polymorphism</tag>
       
     </tags>
     
@@ -236,13 +238,13 @@
     
     <tags>
       
-      <tag>Polymorphism</tag>
-      
       <tag>Java</tag>
       
       <tag>Inheritance</tag>
       
       <tag>Static</tag>
+      
+      <tag>Polymorphism</tag>
       
       <tag>Overriding</tag>
       
@@ -442,9 +444,9 @@
       
       <tag>Alignment</tag>
       
-      <tag>xv6</tag>
-      
       <tag>Bitwise Operation</tag>
+      
+      <tag>xv6</tag>
       
     </tags>
     
@@ -473,9 +475,9 @@
       
       <tag>C</tag>
       
-      <tag>QEMU</tag>
-      
       <tag>xv6</tag>
+      
+      <tag>QEMU</tag>
       
       <tag>Emulation</tag>
       
@@ -518,6 +520,8 @@
       
       <tag>Memory</tag>
       
+      <tag>xv6</tag>
+      
       <tag>Bootstrap</tag>
       
       <tag>Assembly</tag>
@@ -525,8 +529,6 @@
       <tag>Stack</tag>
       
       <tag>QEMU</tag>
-      
-      <tag>xv6</tag>
       
       <tag>Emulation</tag>
       
@@ -581,6 +583,8 @@
       <tag>Python</tag>
       
       <tag>Linear Algebra</tag>
+      
+      <tag>Matrix</tag>
       
       <tag>Determinant</tag>
       

@@ -16,32 +16,30 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Exhilarating &#39;Hello world&#39;.">
+    <meta name="description" content="Read Paper 0InfoSmart Multi-Task Scheduling for OpenCL Programs on CPU&#x2F;GPU Heterogeneous Platforms Authros: Yuan Wen, Zheng Wang, Michael F.P. O’Boyle Published in: HiPC 2014 Dec. DOI: 10.1109&amp;#x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Read and Write by Polling with UART">
-<meta property="og:url" content="https://lingkkang.github.io/2023/02/28/polling-read-write/index.html">
+<meta property="og:title" content="Read Paper 0">
+<meta property="og:url" content="https://lingkkang.github.io/2023/07/27/read-paper-0-wen/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Exhilarating &#39;Hello world&#39;.">
+<meta property="og:description" content="Read Paper 0InfoSmart Multi-Task Scheduling for OpenCL Programs on CPU&#x2F;GPU Heterogeneous Platforms Authros: Yuan Wen, Zheng Wang, Michael F.P. O’Boyle Published in: HiPC 2014 Dec. DOI: 10.1109&amp;#x">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-02-28T01:49:31.000Z">
-<meta property="article:modified_time" content="2023-02-28T12:05:00.000Z">
+<meta property="og:image" content="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/7113430/7116705/7116910/7116910-table-1-source-large.gif">
+<meta property="og:image" content="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/7113430/7116705/7116910/7116910-fig-6-source-large.gif">
+<meta property="article:published_time" content="2023-07-27T12:20:00.000Z">
+<meta property="article:modified_time" content="2023-07-27T13:29:00.000Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="Register">
-<meta property="article:tag" content="C">
-<meta property="article:tag" content="xv6">
-<meta property="article:tag" content="QEMU">
-<meta property="article:tag" content="Emulation">
-<meta property="article:tag" content="Peripheral">
-<meta property="article:tag" content="UART">
-<meta property="article:tag" content="Baud Rate">
-<meta property="article:tag" content="Polling">
+<meta property="article:tag" content="GPU">
+<meta property="article:tag" content="OpenCL">
+<meta property="article:tag" content="task scheduling">
+<meta property="article:tag" content="machine learning">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/7113430/7116705/7116910/7116910-table-1-source-large.gif">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Read and Write by Polling with UART - Lingkang&#39;s Blog</title>
+  <title>Read Paper 0 - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -224,7 +222,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Read and Write by Polling with UART"></span>
+            <span id="subtitle" data-typed-text="Read Paper 0"></span>
           
         </div>
 
@@ -235,8 +233,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-28 09:49" pubdate>
-          February 28, 2023 am
+        <time datetime="2023-07-27 20:20" pubdate>
+          July 27, 2023 pm
         </time>
       </span>
     
@@ -247,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k words
+          2k words
         
       </span>
     
@@ -258,7 +256,7 @@
         
         
         
-          22 mins
+          17 mins
         
       </span>
     
@@ -296,12 +294,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Read and Write by Polling with UART</h1>
+            <h1 style="display: none">Read Paper 0</h1>
             
               <p class="note note-info">
                 
                   
-                    Last updated on February 28, 2023 pm
+                    Last updated on July 27, 2023 pm
                   
                 
               </p>
@@ -309,39 +307,58 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Read-and-Write-by-Polling-with-UART"><a href="#Read-and-Write-by-Polling-with-UART" class="headerlink" title="Read and Write by Polling with UART"></a>Read and Write by Polling with UART</h1><p>In the early stages of development, the first ‘hello world’ is implemented via UART serial port since handling the screen is a more complicated task.</p>
-<p>Developing on QEMU is just like developing on a physical machine. The kernel runs in the QEMU virtual machine, which is connected to the host machine by UART, specifically the <a target="_blank" rel="noopener" href="http://byterunner.com/16550.html">16550 UART</a>.</p>
-<p>UART, or universal asynchronous receiver&#x2F;transmitter, is a serial-port communicator embedded on board. It needs some settings and initialization for data tranmission, and these tasks are done in the file <code>uart.c</code>.</p>
-<p>Basically, everything inside 16550 UART is mapped to the memory location <code>UART0</code>. One register may have one or more functionalities, and is always distinguished by the <strong>read mode</strong> and <strong>write mode</strong>.</p>
-<h2 id="Initialize-UART"><a href="#Initialize-UART" class="headerlink" title="Initialize UART"></a>Initialize UART</h2><p>This is done in 3 steps:</p>
+                <h1 id="Read-Paper-0"><a href="#Read-Paper-0" class="headerlink" title="Read Paper 0"></a>Read Paper 0</h1><h2 id="Info"><a href="#Info" class="headerlink" title="Info"></a>Info</h2><p><strong>Smart Multi-Task Scheduling for OpenCL Programs on CPU&#x2F;GPU Heterogeneous Platforms</strong></p>
+<p><strong>Authros</strong>: <a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=8CHUcJEAAAAJ">Yuan Wen</a>, Zheng Wang, Michael F.P. O’Boyle</p>
+<p><strong>Published in</strong>: HiPC 2014 Dec.</p>
+<p><strong>DOI</strong>: <a target="_blank" rel="noopener" href="https://doi.org/10.1109/HiPC.2014.7116910">10.1109&#x2F;HiPC.2014.7116910</a></p>
+<p><strong>Keywords</strong>: GPU, OpenCL, task scheduling, machine learning</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p>To find the best map from OpenCL application to hardware resource, CPU or GPU. </p>
+<p>The requirements are:</p>
+<ul>
+<li>Enlarge the system throughput (STP)</li>
+<li>Reduce the average normalized turn-around time (ANTT)</li>
+</ul>
+<p><strong>STP</strong>: the number of tasks completed per unit time.</p>
+<p><strong>ANTT</strong>: the average time between the submission of a task and the completion of it.</p>
+<h3 id="Alternative"><a href="#Alternative" class="headerlink" title="Alternative"></a>Alternative</h3><p>Other scheduling policies:</p>
+<ul>
+<li>All on CPU</li>
+<li>All on GPU</li>
+<li>First come first serve (FCFS): baseline</li>
+<li>Input size guided: GPU gets the task with larger input size</li>
+<li>Work item guided: GPU gets the task with larger number of work items</li>
+</ul>
+<h2 id="Key-Idea"><a href="#Key-Idea" class="headerlink" title="Key Idea"></a>Key Idea</h2><p>Predict the <strong>speedup</strong> of a task. Speedup is defined as the ratio of the execution time of a task on CPU to that on GPU.</p>
+<p>Organize all OpenCL tasks into a queue based on <strong>predicted speedup</strong> and <strong>runtime data transfer size</strong>. High speedup side tasks are scheduled to GPU, while low speedup side tasks are scheduled to CPU.</p>
+<p>When CPU or GPU is idle, pop the task from the queue’s two side accordingly, until the end of the queue.</p>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>The predictor takes in:</p>
 <ol>
-<li>Disable interrupts (which will be discussed in the future).</li>
-<li>Set the baud rate.</li>
-<li>Set the data communication format.</li>
+<li>Static code features</li>
+<li>Runtime features</li>
 </ol>
-<p>More information can be found in the source code.</p>
-<p>UART initialization should only be done once after booting.</p>
-<h2 id="Setting-the-Baud-Rate"><a href="#Setting-the-Baud-Rate" class="headerlink" title="Setting the Baud Rate"></a>Setting the Baud Rate</h2><p>The baud rate is the frequency of data transmission and should be set to the same value for both the transmitter and receiver.</p>
-<p>But note that the divisor latch is seprated into 2 parts, <code>DLL</code> and <code>DLM</code>, which stand for the least and most significant bits of the divisor latch, respectively. </p>
-<h2 id="Polling-and-UART-I-x2F-O"><a href="#Polling-and-UART-I-x2F-O" class="headerlink" title="Polling and UART I&#x2F;O"></a>Polling and UART I&#x2F;O</h2><p>To write things through UART, we just need to put the data into <code>THR</code> (the <em>transmit holding register</em> in write mode). However, as data transmission takes time, we need to check whether the data in <code>THR</code> was sent before new data was put into it.</p>
-<p>The <em>line status register</em>‘s bit 5 (6<sup>th</sup> bit) is designed for this purpose. This bit will be set to 0 to indicate that transmission is complete.</p>
-<p>Therefore, when we want to write through UART, we keep checking this bit. When we get a zero, we know that we can put our data. This procedure of continuously asking a register is also known as <strong>polling</strong>. </p>
-<p>Printing a string could be seen as printing chars iteratively. </p>
-<p>Reading data from console is technically the same thing, except that we check and read data from different registers.</p>
-<h2 id="Other-Notes"><a href="#Other-Notes" class="headerlink" title="Other Notes"></a>Other Notes</h2><p>Remember to add <code>--nographic</code> flag when running QEMU. This flag means to disable the QEMU graphic monitor and use UART as the I&#x2F;O device, so all output and input will be displayed on the current terminal.</p>
-<p>To quit QEMU emulator, just press <code>Ctrl + A</code> then press <code>X</code>. Or press <code>Ctrl + A</code> followed by <code>C</code>, and then type <code>quit</code>.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a target="_blank" rel="noopener" href="http://byterunner.com/16550.html">ByteRunner.com | TECHNICAL DATA ON 16550</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Q5411w7z5/?p=17">[完结] 循序渐进，学习开发一个RISC-V上的操作系统 - 汪辰 - 第7章（下）-Hello RVOS_哔哩哔哩_bilibili</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/plctlab/riscv-operating-system-mooc/blob/main/code/os/01-helloRVOS/uart.c">riscv-operating-system-mooc&#x2F;uart.c at main · plctlab&#x2F;riscv-operating-system-mooc</a></li>
-<li><a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2022/xv6/book-riscv-rev3.pdf">xv6: a simple, Unix-like teaching operating system</a>, Russ Cox, Frans Kaashoek, Robert Morris, MIT, 5 September 2022, <em>5.1 Code: Console input</em> (P53 - 55)</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/uart.c">xv6-riscv&#x2F;uart.c at riscv · mit-pdos&#x2F;xv6-riscv</a></li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/16550_UART">16550 UART - Wikipedia</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c">qemu&#x2F;virt.c at master · qemu&#x2F;qemu</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.qemu.org/docs/master/system/invocation.html#:~:text=parallel%20port%20data.-,%2Dnographic,-Normally%2C%20if%20QEMU">QEMU documentation –nographic</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/weijunji/p/xv6-study-8.html">XV6学习（8）中断和设备驱动 - 星見遥 - 博客园</a></li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cross_compiler">Cross compiler - Wikipedia</a></li>
+<p>Output a speedup category of the task. Tow categories are used: high speedup side and low speedup side.</p>
+<p>Use <strong>Support Vector Machines</strong> classifier and train &#x2F; evaluate with <strong>leave-one-out cross-validation</strong>.</p>
+<p><img src="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/7113430/7116705/7116910/7116910-table-1-source-large.gif" srcset="/img/loading.gif" lazyload alt="Used features"></p>
+<p><img src="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/7113430/7116705/7116910/7116910-fig-6-source-large.gif" srcset="/img/loading.gif" lazyload alt="Importance of the features"></p>
+<blockquote>
+<p>The larger the square is, the more important the feature is.</p>
+</blockquote>
+<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p>The experiment took place on real machine.</p>
+<p>35 OpenCL benchmarks are used.</p>
+<h2 id="Limitation"><a href="#Limitation" class="headerlink" title="Limitation"></a>Limitation</h2><ol>
+<li>To compare with the <em>best STP</em> queue (comes from exhaustive searching), there is still 50% gap. As speedup is only one proxy of execution time. (Impossible to find the best ANTT queue)</li>
+<li>prediction accuracy is not high enough. On STP, SVM model is 87% accurate, decision tree model is 72%.</li>
+<li>coarse-grained classification. Only two categories are used. Enlarge the number of categories may improve the performance but not always.</li>
 </ol>
+<hr>
+<blockquote>
+<p>Y. Wen, Z. Wang and M. F.P. O’Boyle, “Smart Multi-Task Scheduling for OpenCL Programs on CPU&#x2F;GPU Heterogeneous Platforms,” 2014 21st International Conference on High Performance Computing (HiPC), Goa, India, 2014, pp. 1-10, doi: 10.1109&#x2F;HiPC.2014.7116910.</p>
+</blockquote>
+<!--
+
+https://lingkkang.github.io/2023/07/27/read-paper-0-wen/
+
+-->
 
                 
               </div>
@@ -360,7 +377,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Operating-System-Architecture/" class="category-chain-item">Operating System &amp; Architecture</a>
+  <a href="/categories/Read-Papers/" class="category-chain-item">Read Papers</a>
   
   
 
@@ -375,23 +392,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Register/">#Register</a>
+        <a href="/tags/GPU/">#GPU</a>
       
-        <a href="/tags/C/">#C</a>
+        <a href="/tags/OpenCL/">#OpenCL</a>
       
-        <a href="/tags/xv6/">#xv6</a>
+        <a href="/tags/task-scheduling/">#task scheduling</a>
       
-        <a href="/tags/QEMU/">#QEMU</a>
-      
-        <a href="/tags/Emulation/">#Emulation</a>
-      
-        <a href="/tags/Peripheral/">#Peripheral</a>
-      
-        <a href="/tags/UART/">#UART</a>
-      
-        <a href="/tags/Baud-Rate/">#Baud Rate</a>
-      
-        <a href="/tags/Polling/">#Polling</a>
+        <a href="/tags/machine-learning/">#machine learning</a>
       
     </div>
   
@@ -403,8 +410,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Read and Write by Polling with UART</div>
-      <div>https://lingkkang.github.io/2023/02/28/polling-read-write/</div>
+      <div>Read Paper 0</div>
+      <div>https://lingkkang.github.io/2023/07/27/read-paper-0-wen/</div>
     </div>
     <div class="license-meta">
       
@@ -416,7 +423,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 28, 2023</div>
+          <div>July 27, 2023</div>
         </div>
       
       
@@ -443,29 +450,6 @@
 
 
 
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2023/03/12/align/" title="Align Number to Multiple">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Align Number to Multiple</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2023/02/23/boot-risc-v/" title="RISC-V Machine Boot Code">
-                        <span class="hidden-mobile">RISC-V Machine Boot Code</span>
-                        <span class="visible-mobile">Next</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
               
             </div>
 
