@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-07-26T14:47:05.000Z</updated>
+  <updated>2023-07-31T07:05:06.000Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Migrate GitLab from CentOS to Ubuntu on ECS</title>
+    <link href="https://lingkkang.github.io/2023/07/31/migrate-gitlab/"/>
+    <id>https://lingkkang.github.io/2023/07/31/migrate-gitlab/</id>
+    <published>2023-07-31T05:04:06.000Z</published>
+    <updated>2023-07-31T07:05:06.000Z</updated>
+    
+    
+    <summary type="html">In this post, we migrate GitLab from CentOS to Ubuntu on Alibaba Cloud ECS, with GitLab backup and restore.</summary>
+    
+    
+    
+    <category term="DevOps" scheme="https://lingkkang.github.io/categories/DevOps/"/>
+    
+    
+    <category term="Linux" scheme="https://lingkkang.github.io/tags/Linux/"/>
+    
+    <category term="Server" scheme="https://lingkkang.github.io/tags/Server/"/>
+    
+    <category term="Cloud" scheme="https://lingkkang.github.io/tags/Cloud/"/>
+    
+    <category term="ECS" scheme="https://lingkkang.github.io/tags/ECS/"/>
+    
+    <category term="GitLab" scheme="https://lingkkang.github.io/tags/GitLab/"/>
+    
+    <category term="Ubuntu" scheme="https://lingkkang.github.io/tags/Ubuntu/"/>
+    
+    <category term="CentOS" scheme="https://lingkkang.github.io/tags/CentOS/"/>
+    
+  </entry>
   
   <entry>
     <title>Performance Issue of Memory Alignment</title>
@@ -139,35 +170,6 @@
     <category term="Huashan-pi" scheme="https://lingkkang.github.io/tags/Huashan-pi/"/>
     
     <category term="Disk" scheme="https://lingkkang.github.io/tags/Disk/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在云服务器部署 VS Code Server</title>
-    <link href="https://lingkkang.github.io/2023/06/01/code-server-cn/"/>
-    <id>https://lingkkang.github.io/2023/06/01/code-server-cn/</id>
-    <published>2023-06-01T01:44:00.000Z</published>
-    <updated>2023-06-01T05:52:30.000Z</updated>
-    
-    
-    <summary type="html">白嫖好耶！</summary>
-    
-    
-    
-    <category term="DevOps" scheme="https://lingkkang.github.io/categories/DevOps/"/>
-    
-    
-    <category term="VS Code" scheme="https://lingkkang.github.io/tags/VS-Code/"/>
-    
-    <category term="Server" scheme="https://lingkkang.github.io/tags/Server/"/>
-    
-    <category term="Proxy" scheme="https://lingkkang.github.io/tags/Proxy/"/>
-    
-    <category term="Cloud" scheme="https://lingkkang.github.io/tags/Cloud/"/>
-    
-    <category term="Nginx" scheme="https://lingkkang.github.io/tags/Nginx/"/>
-    
-    <category term="ECS" scheme="https://lingkkang.github.io/tags/ECS/"/>
     
   </entry>
   
