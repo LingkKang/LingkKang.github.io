@@ -57,15 +57,15 @@
     
     <tags>
       
-      <tag>C</tag>
-      
-      <tag>Cpp</tag>
-      
       <tag>Optimization</tag>
       
       <tag>Memory</tag>
       
       <tag>Alignment</tag>
+      
+      <tag>C</tag>
+      
+      <tag>Cpp</tag>
       
       <tag>Padding</tag>
       
@@ -98,10 +98,6 @@
       
       <tag>Hyper-V</tag>
       
-      <tag>IP</tag>
-      
-      <tag>IPv4</tag>
-      
       <tag>MySQL</tag>
       
       <tag>WSL2</tag>
@@ -110,7 +106,11 @@
       
       <tag>CRUD</tag>
       
+      <tag>IP</tag>
+      
       <tag>Rouging</tag>
+      
+      <tag>IPv4</tag>
       
       <tag>Privileged Access Management</tag>
       
@@ -312,13 +312,13 @@
       
       <tag>IP</tag>
       
+      <tag>IPv4</tag>
+      
       <tag>Routing</tag>
       
       <tag>Subnet</tag>
       
       <tag>Subnet Mask</tag>
-      
-      <tag>IPv4</tag>
       
     </tags>
     
@@ -345,13 +345,13 @@
       
       <tag>Optimization</tag>
       
-      <tag>Machine Learning</tag>
-      
       <tag>Artificial Intelligence</tag>
       
       <tag>Linear Perceptron</tag>
       
       <tag>Neural Network</tag>
+      
+      <tag>Machine Learning</tag>
       
       <tag>Deep Learning</tag>
       
@@ -380,11 +380,11 @@
       
       <tag>Optimization</tag>
       
-      <tag>MDP</tag>
+      <tag>Artificial Intelligence</tag>
       
       <tag>Machine Learning</tag>
       
-      <tag>Artificial Intelligence</tag>
+      <tag>MDP</tag>
       
       <tag>Bellman Equation</tag>
       
@@ -475,15 +475,15 @@
     
     <tags>
       
+      <tag>Bitwise Operation</tag>
+      
       <tag>Optimization</tag>
+      
+      <tag>xv6</tag>
       
       <tag>Memory</tag>
       
       <tag>Alignment</tag>
-      
-      <tag>Bitwise Operation</tag>
-      
-      <tag>xv6</tag>
       
     </tags>
     
@@ -510,9 +510,9 @@
       
       <tag>Register</tag>
       
-      <tag>C</tag>
-      
       <tag>xv6</tag>
+      
+      <tag>C</tag>
       
       <tag>QEMU</tag>
       
@@ -553,11 +553,11 @@
       
       <tag>Register</tag>
       
-      <tag>C</tag>
+      <tag>xv6</tag>
       
       <tag>Memory</tag>
       
-      <tag>xv6</tag>
+      <tag>C</tag>
       
       <tag>Bootstrap</tag>
       
@@ -679,9 +679,9 @@
     
     <tags>
       
-      <tag>C</tag>
-      
       <tag>Memory</tag>
+      
+      <tag>C</tag>
       
       <tag>Dynamic Memory Allocation</tag>
       
@@ -768,13 +768,13 @@
     
     <tags>
       
-      <tag>Tree</tag>
-      
-      <tag>Binary Tree</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Tree</tag>
+      
+      <tag>Binary Tree</tag>
       
     </tags>
     
@@ -824,9 +824,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>Linked List</tag>
+      
+      <tag>Python</tag>
       
     </tags>
     
@@ -878,9 +878,9 @@
     
     <tags>
       
-      <tag>生活</tag>
-      
       <tag>读书</tag>
+      
+      <tag>生活</tag>
       
       <tag>Summary</tag>
       
@@ -907,11 +907,11 @@
     
     <tags>
       
+      <tag>Linked List</tag>
+      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
-      
-      <tag>Linked List</tag>
       
     </tags>
     
