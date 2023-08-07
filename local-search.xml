@@ -244,13 +244,13 @@
       
       <tag>Matrix</tag>
       
+      <tag>Polymorphism</tag>
+      
       <tag>Haskell</tag>
       
       <tag>Functional Programming</tag>
       
       <tag>Currying</tag>
-      
-      <tag>Polymorphism</tag>
       
     </tags>
     
@@ -275,13 +275,13 @@
     
     <tags>
       
-      <tag>Polymorphism</tag>
-      
       <tag>Java</tag>
       
       <tag>Inheritance</tag>
       
       <tag>Static</tag>
+      
+      <tag>Polymorphism</tag>
       
       <tag>Overriding</tag>
       
@@ -444,9 +444,9 @@
       
       <tag>Emulation</tag>
       
-      <tag>Interrupt</tag>
-      
       <tag>Peripheral</tag>
+      
+      <tag>Interrupt</tag>
       
       <tag>PLIC</tag>
       
@@ -512,19 +512,19 @@
       
       <tag>xv6</tag>
       
-      <tag>QEMU</tag>
-      
       <tag>C</tag>
       
-      <tag>Emulation</tag>
+      <tag>QEMU</tag>
       
-      <tag>Peripheral</tag>
+      <tag>Emulation</tag>
       
       <tag>UART</tag>
       
       <tag>Baud Rate</tag>
       
       <tag>Polling</tag>
+      
+      <tag>Peripheral</tag>
       
     </tags>
     
@@ -557,6 +557,8 @@
       
       <tag>Memory</tag>
       
+      <tag>C</tag>
+      
       <tag>Bootstrap</tag>
       
       <tag>Assembly</tag>
@@ -564,8 +566,6 @@
       <tag>Stack</tag>
       
       <tag>QEMU</tag>
-      
-      <tag>C</tag>
       
       <tag>Emulation</tag>
       
@@ -878,9 +878,9 @@
     
     <tags>
       
-      <tag>生活</tag>
-      
       <tag>读书</tag>
+      
+      <tag>生活</tag>
       
       <tag>Summary</tag>
       
