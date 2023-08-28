@@ -57,15 +57,15 @@
     
     <tags>
       
-      <tag>C</tag>
-      
-      <tag>Cpp</tag>
-      
       <tag>Optimization</tag>
       
       <tag>Memory</tag>
       
       <tag>Alignment</tag>
+      
+      <tag>C</tag>
+      
+      <tag>Cpp</tag>
       
       <tag>Padding</tag>
       
@@ -98,10 +98,6 @@
       
       <tag>Hyper-V</tag>
       
-      <tag>IP</tag>
-      
-      <tag>IPv4</tag>
-      
       <tag>MySQL</tag>
       
       <tag>WSL2</tag>
@@ -110,7 +106,11 @@
       
       <tag>CRUD</tag>
       
+      <tag>IP</tag>
+      
       <tag>Rouging</tag>
+      
+      <tag>IPv4</tag>
       
       <tag>Privileged Access Management</tag>
       
@@ -244,13 +244,13 @@
       
       <tag>Matrix</tag>
       
+      <tag>Polymorphism</tag>
+      
       <tag>Haskell</tag>
       
       <tag>Functional Programming</tag>
       
       <tag>Currying</tag>
-      
-      <tag>Polymorphism</tag>
       
     </tags>
     
@@ -275,13 +275,13 @@
     
     <tags>
       
-      <tag>Polymorphism</tag>
-      
       <tag>Java</tag>
       
       <tag>Inheritance</tag>
       
       <tag>Static</tag>
+      
+      <tag>Polymorphism</tag>
       
       <tag>Overriding</tag>
       
@@ -312,13 +312,13 @@
       
       <tag>IP</tag>
       
+      <tag>IPv4</tag>
+      
       <tag>Routing</tag>
       
       <tag>Subnet</tag>
       
       <tag>Subnet Mask</tag>
-      
-      <tag>IPv4</tag>
       
     </tags>
     
@@ -475,15 +475,15 @@
     
     <tags>
       
+      <tag>Bitwise Operation</tag>
+      
       <tag>Optimization</tag>
+      
+      <tag>xv6</tag>
       
       <tag>Memory</tag>
       
       <tag>Alignment</tag>
-      
-      <tag>Bitwise Operation</tag>
-      
-      <tag>xv6</tag>
       
     </tags>
     
@@ -508,13 +508,13 @@
     
     <tags>
       
-      <tag>C</tag>
+      <tag>Register</tag>
       
       <tag>xv6</tag>
       
-      <tag>QEMU</tag>
+      <tag>C</tag>
       
-      <tag>Register</tag>
+      <tag>QEMU</tag>
       
       <tag>Emulation</tag>
       
@@ -549,23 +549,23 @@
     
     <tags>
       
-      <tag>C</tag>
+      <tag>RISC-V</tag>
       
-      <tag>Memory</tag>
+      <tag>Register</tag>
       
       <tag>xv6</tag>
       
-      <tag>Bootstrap</tag>
+      <tag>Memory</tag>
       
-      <tag>RISC-V</tag>
+      <tag>C</tag>
+      
+      <tag>Bootstrap</tag>
       
       <tag>Assembly</tag>
       
       <tag>Stack</tag>
       
       <tag>QEMU</tag>
-      
-      <tag>Register</tag>
       
       <tag>Emulation</tag>
       
@@ -679,9 +679,9 @@
     
     <tags>
       
-      <tag>C</tag>
-      
       <tag>Memory</tag>
+      
+      <tag>C</tag>
       
       <tag>Dynamic Memory Allocation</tag>
       
@@ -770,11 +770,11 @@
       
       <tag>Python</tag>
       
+      <tag>LeetCode</tag>
+      
       <tag>Tree</tag>
       
       <tag>Binary Tree</tag>
-      
-      <tag>LeetCode</tag>
       
     </tags>
     
