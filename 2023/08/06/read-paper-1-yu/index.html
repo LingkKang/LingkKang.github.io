@@ -244,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k words
+          3.2k words
         
       </span>
     
@@ -255,7 +255,7 @@
         
         
         
-          19 mins
+          27 mins
         
       </span>
     
@@ -364,12 +364,36 @@
 <p>Each one corresponds to a dedicated operation module in the PE.</p>
 <h4 id="U-type"><a href="#U-type" class="headerlink" title="U-type"></a>U-type</h4><p>Deliver corresponding operation parameters for its paired C-type</p>
 <h3 id="Microarchitecture"><a href="#Microarchitecture" class="headerlink" title="Microarchitecture"></a>Microarchitecture</h3><p><strong>Overlay</strong>: reconfigurable architectures implemented on top of FPGAs. They are regular designs described using structural HDL, but have reconfigurable capabilities. They may be considered as “softcore FPGA IPs (<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Semiconductor_intellectual_property_core">Semiconductor intellectual property core</a>)”. </p>
-<h3 id="Compiler"><a href="#Compiler" class="headerlink" title="Compiler"></a>Compiler</h3><ul>
+<h3 id="Compiler"><a href="#Compiler" class="headerlink" title="Compiler"></a>Compiler</h3><p>Do the following on input CNN configuration:</p>
+<ul>
 <li>Operation fusion</li>
 <li>Network slicing</li>
 <li>Throughput optimization</li>
 </ul>
-<h4 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h4><h4 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h4><h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p><strong>MAC</strong>: multiply and accumulate <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Multiply%E2%80%93accumulate_operation">Multiply–accumulate operation - Wikipedia</a></p>
+<p>Divided into two major stages: Translation and Optimization.</p>
+<p>Extract necessary information from model definition files and reorganize them into a unified <strong>intermediate representation</strong> (<strong>IR</strong>)</p>
+<ol>
+<li>perform <strong>operation fusion</strong> to combine closely related operations.</li>
+<li>perform data quantization (generate dynamic fixed-point representations)</li>
+<li>perform network slicing</li>
+<li>perform optimization</li>
+<li>rearrange processed weights</li>
+</ol>
+<h4 id="Translation-Operation-Fusion"><a href="#Translation-Operation-Fusion" class="headerlink" title="Translation: Operation Fusion"></a>Translation: Operation Fusion</h4><p>merge or concatenate related layer operations</p>
+<ol>
+<li>p-fusion: only contributes to off-chip memory access reduction</li>
+<li>r-fusion: <ul>
+<li>avoids communication latency</li>
+<li>reduces the total number of operations and inference time</li>
+</ul>
+</li>
+</ol>
+<p>Major layers: Convolution and Fully Connected (FC) layers</p>
+<p>Affiliated layers: Pooling, Padding, Activation, Residual and Output Concatenation layers</p>
+<p>r-fusion-I: batch normalization elimination, avoiding separate computation of batch normalization</p>
+<p>r-fusion-II: input sharing, identifying input sharing layers and reassembling them</p>
+<h4 id="Data-Quantization"><a href="#Data-Quantization" class="headerlink" title="Data Quantization"></a>Data Quantization</h4><p>Use <strong>dynamic quantization scheme</strong> to get 8-bit fixed-point values.</p>
+<h4 id="Intermediate-Representation"><a href="#Intermediate-Representation" class="headerlink" title="Intermediate Representation"></a>Intermediate Representation</h4><h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p><strong>MAC</strong>: multiply and accumulate <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Multiply%E2%80%93accumulate_operation">Multiply–accumulate operation - Wikipedia</a></p>
 <h2 id="Limitation"><a href="#Limitation" class="headerlink" title="Limitation"></a>Limitation</h2><hr>
 <blockquote>
 <p>Y. Yu, C. Wu, T. Zhao, K. Wang and L. He, “OPU: An FPGA-Based Overlay Processor for Convolutional Neural Networks,” in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 28, no. 1, pp. 35-47, Jan. 2020, doi: 10.1109&#x2F;TVLSI.2019.2939726.</p>

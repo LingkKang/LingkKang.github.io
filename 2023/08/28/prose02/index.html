@@ -16,32 +16,24 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Exhilarating &#39;Hello world&#39;.">
+    <meta name="description" content="这段时间一种低落的情绪一直把整个人包裹着，不知道原因是什么。 是许多事情合在一起的结果吧。     就好像看书时隐隐发现情节不太对，看看剩余的页数，似乎故事不可避免地将要走向悲剧；又好像笑着说再见，慢慢地挥手，但是转身之后再一想，似乎就再也见不到了；也好像轻轻地拥抱，越是应该松开时越舍不得；或许还有，电影正片后的片尾字幕，大剧结束后缓缓拉上的帷幕，伴着勾起回忆的背景音乐，真的会怅然若失。 就好像在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Read and Write by Polling with UART">
-<meta property="og:url" content="https://lingkkang.github.io/2023/02/28/polling-read-write/index.html">
+<meta property="og:title" content="C&#39;est la vie.">
+<meta property="og:url" content="https://lingkkang.github.io/2023/08/28/prose02/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Exhilarating &#39;Hello world&#39;.">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-02-28T01:49:31.000Z">
-<meta property="article:modified_time" content="2023-02-28T12:05:00.000Z">
+<meta property="og:description" content="这段时间一种低落的情绪一直把整个人包裹着，不知道原因是什么。 是许多事情合在一起的结果吧。     就好像看书时隐隐发现情节不太对，看看剩余的页数，似乎故事不可避免地将要走向悲剧；又好像笑着说再见，慢慢地挥手，但是转身之后再一想，似乎就再也见不到了；也好像轻轻地拥抱，越是应该松开时越舍不得；或许还有，电影正片后的片尾字幕，大剧结束后缓缓拉上的帷幕，伴着勾起回忆的背景音乐，真的会怅然若失。 就好像在">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-28T02:20:09.000Z">
+<meta property="article:modified_time" content="2023-08-29T04:26:37.000Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="Register">
-<meta property="article:tag" content="C">
-<meta property="article:tag" content="xv6">
-<meta property="article:tag" content="QEMU">
-<meta property="article:tag" content="Emulation">
-<meta property="article:tag" content="Peripheral">
-<meta property="article:tag" content="UART">
-<meta property="article:tag" content="Baud Rate">
-<meta property="article:tag" content="Polling">
+<meta property="article:tag" content="生活">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Read and Write by Polling with UART - Lingkang&#39;s Blog</title>
+  <title>C&#39;est la vie. - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -130,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                <span>Home</span>
+                <span>首页</span>
               </a>
             </li>
           
@@ -142,7 +134,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                <span>Archives</span>
+                <span>归档</span>
               </a>
             </li>
           
@@ -154,7 +146,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                <span>Categories</span>
+                <span>分类</span>
               </a>
             </li>
           
@@ -166,7 +158,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                <span>Tags</span>
+                <span>标签</span>
               </a>
             </li>
           
@@ -178,7 +170,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
-                <span>Links</span>
+                <span>友链</span>
               </a>
             </li>
           
@@ -190,7 +182,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                <span>About</span>
+                <span>关于</span>
               </a>
             </li>
           
@@ -224,7 +216,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Read and Write by Polling with UART"></span>
+            <span id="subtitle" data-typed-text="C&#39;est la vie."></span>
           
         </div>
 
@@ -235,8 +227,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-28 09:49" pubdate>
-          February 28, 2023 am
+        <time datetime="2023-08-28 10:20" pubdate>
+          2023年8月28日 上午
         </time>
       </span>
     
@@ -247,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k words
+          831 字
         
       </span>
     
@@ -258,7 +250,7 @@
         
         
         
-          22 mins
+          7 分钟
         
       </span>
     
@@ -296,12 +288,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Read and Write by Polling with UART</h1>
+            <h1 style="display: none">C&#39;est la vie.</h1>
             
               <p class="note note-info">
                 
                   
-                    Last updated on February 28, 2023 pm
+                    本文最后更新于：2023年8月29日 中午
                   
                 
               </p>
@@ -309,39 +301,29 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Read-and-Write-by-Polling-with-UART"><a href="#Read-and-Write-by-Polling-with-UART" class="headerlink" title="Read and Write by Polling with UART"></a>Read and Write by Polling with UART</h1><p>In the early stages of development, the first ‘hello world’ is implemented via UART serial port since handling the screen is a more complicated task.</p>
-<p>Developing on QEMU is just like developing on a physical machine. The kernel runs in the QEMU virtual machine, which is connected to the host machine by UART, specifically the <a target="_blank" rel="noopener" href="http://byterunner.com/16550.html">16550 UART</a>.</p>
-<p>UART, or universal asynchronous receiver&#x2F;transmitter, is a serial-port communicator embedded on board. It needs some settings and initialization for data tranmission, and these tasks are done in the file <code>uart.c</code>.</p>
-<p>Basically, everything inside 16550 UART is mapped to the memory location <code>UART0</code>. One register may have one or more functionalities, and is always distinguished by the <strong>read mode</strong> and <strong>write mode</strong>.</p>
-<h2 id="Initialize-UART"><a href="#Initialize-UART" class="headerlink" title="Initialize UART"></a>Initialize UART</h2><p>This is done in 3 steps:</p>
-<ol>
-<li>Disable interrupts (which will be discussed in the future).</li>
-<li>Set the baud rate.</li>
-<li>Set the data communication format.</li>
-</ol>
-<p>More information can be found in the source code.</p>
-<p>UART initialization should only be done once after booting.</p>
-<h2 id="Setting-the-Baud-Rate"><a href="#Setting-the-Baud-Rate" class="headerlink" title="Setting the Baud Rate"></a>Setting the Baud Rate</h2><p>The baud rate is the frequency of data transmission and should be set to the same value for both the transmitter and receiver.</p>
-<p>But note that the divisor latch is seprated into 2 parts, <code>DLL</code> and <code>DLM</code>, which stand for the least and most significant bits of the divisor latch, respectively. </p>
-<h2 id="Polling-and-UART-I-x2F-O"><a href="#Polling-and-UART-I-x2F-O" class="headerlink" title="Polling and UART I&#x2F;O"></a>Polling and UART I&#x2F;O</h2><p>To write things through UART, we just need to put the data into <code>THR</code> (the <em>transmit holding register</em> in write mode). However, as data transmission takes time, we need to check whether the data in <code>THR</code> was sent before new data was put into it.</p>
-<p>The <em>line status register</em>‘s bit 5 (6<sup>th</sup> bit) is designed for this purpose. This bit will be set to 0 to indicate that transmission is complete.</p>
-<p>Therefore, when we want to write through UART, we keep checking this bit. When we get a zero, we know that we can put our data. This procedure of continuously asking a register is also known as <strong>polling</strong>. </p>
-<p>Printing a string could be seen as printing chars iteratively. </p>
-<p>Reading data from console is technically the same thing, except that we check and read data from different registers.</p>
-<h2 id="Other-Notes"><a href="#Other-Notes" class="headerlink" title="Other Notes"></a>Other Notes</h2><p>Remember to add <code>--nographic</code> flag when running QEMU. This flag means to disable the QEMU graphic monitor and use UART as the I&#x2F;O device, so all output and input will be displayed on the current terminal.</p>
-<p>To quit QEMU emulator, just press <code>Ctrl + A</code> then press <code>X</code>. Or press <code>Ctrl + A</code> followed by <code>C</code>, and then type <code>quit</code>.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a target="_blank" rel="noopener" href="http://byterunner.com/16550.html">ByteRunner.com | TECHNICAL DATA ON 16550</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Q5411w7z5/?p=17">[完结] 循序渐进，学习开发一个RISC-V上的操作系统 - 汪辰 - 第7章（下）-Hello RVOS_哔哩哔哩_bilibili</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/plctlab/riscv-operating-system-mooc/blob/main/code/os/01-helloRVOS/uart.c">riscv-operating-system-mooc&#x2F;uart.c at main · plctlab&#x2F;riscv-operating-system-mooc</a></li>
-<li><a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2022/xv6/book-riscv-rev3.pdf">xv6: a simple, Unix-like teaching operating system</a>, Russ Cox, Frans Kaashoek, Robert Morris, MIT, 5 September 2022, <em>5.1 Code: Console input</em> (P53 - 55)</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/uart.c">xv6-riscv&#x2F;uart.c at riscv · mit-pdos&#x2F;xv6-riscv</a></li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/16550_UART">16550 UART - Wikipedia</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c">qemu&#x2F;virt.c at master · qemu&#x2F;qemu</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.qemu.org/docs/master/system/invocation.html#:~:text=parallel%20port%20data.-,%2Dnographic,-Normally%2C%20if%20QEMU">QEMU documentation –nographic</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/weijunji/p/xv6-study-8.html">XV6学习（8）中断和设备驱动 - 星見遥 - 博客园</a></li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cross_compiler">Cross compiler - Wikipedia</a></li>
-</ol>
+                <p>这段时间一种低落的情绪一直把整个人包裹着，不知道原因是什么。</p>
+<p>是许多事情合在一起的结果吧。</p>
+<!-- Tanya Chua - 墜落 -->
+
+<iframe style="border-radius:12px; margin-bottom: 16px;" src="https://open.spotify.com/embed/track/2uGzm6W4SDCnsgeESJs5PK?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+<p>就好像看书时隐隐发现情节不太对，看看剩余的页数，似乎故事不可避免地将要走向悲剧；又好像笑着说再见，慢慢地挥手，但是转身之后再一想，似乎就再也见不到了；也好像轻轻地拥抱，越是应该松开时越舍不得；或许还有，电影正片后的片尾字幕，大剧结束后缓缓拉上的帷幕，伴着勾起回忆的背景音乐，真的会怅然若失。</p>
+<p>就好像在大雨突然落下时着急忙慌跑进路边的店家躲雨，然后浑身湿透地看着窗外激烈的大雨一直一直下，呆呆地望着；又好像走到过去曾走过的路，想起许多曾在此处发生的事情；也好像听到许久前一直在单曲循环但是又有段时间没听的歌，冷不丁地会想起当时那段时间一直在一边听歌一边做的事情；或许还有，忙碌一天后看着窗外夜色浓郁，很累但却不愿睡去，仿佛还有事情要做但又不知道是什么，不知所措。</p>
+<!-- 吳青峰 - 太空 -->
+
+<iframe style="border-radius:12px; margin-bottom: 16px;" src="https://open.spotify.com/embed/track/6VcRonz2dMc0xgbi5R14HF?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+<p>我总是问我的朋友，我们还能再见吗？会再见吗？我们真的还能再见面吗？每个人都很温暖，都说，当然啦，肯定的，会再见面的。可是真的是这样吗？我不知道，或者说，我不相信。</p>
+<p>我的脑海里总有一种倒计时一样的闹钟，不断再提醒我，“你和眼前的人面对面的时间越来越少了哦”。就好像那种质子的倒计时，每分每秒在不断递减，只不过脑海中的倒计时没有这么精确具象而已。每次见面，我都觉得再见一次的机会就少了一次。我想，宁愿不见面，闹钟就会一直静止了吧。</p>
+<!-- Original Broadway Cast of Hamilton - Who Lives, Who Dies, Who Tells Your Story -->
+
+<iframe style="border-radius:12px; margin-bottom: 16px;" src="https://open.spotify.com/embed/track/7EsSVPxaYoAZjQwhspJBs2?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+<p>我一直在想，当我有一天空下来了，我要这样这样，那样那样，但是许久已经没有理想中空闲的一天了。但是倒过来说，一天过去后再想想，这样的一天本该怎样怎样，又只是剩下后悔。再后来，也不后悔了，就这样吧。如果有选择，无论怎么选，最后都会后悔的。</p>
+<p>好多次了，有些歌一听到开头就会觉得非常失落，甚至哽咽起来。有些太脆弱了吧。</p>
+<p>It’s okay to have an off-day, or possibly an off-month, even an off-year.</p>
+<p>It’s okay to be not okay.</p>
+<p>C’est la vie.</p>
 
                 
               </div>
@@ -360,7 +342,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Operating-System-Architecture/" class="category-chain-item">Operating System &amp; Architecture</a>
+  <a href="/categories/%E9%9A%8F%E7%AC%94/" class="category-chain-item">随笔</a>
   
   
 
@@ -375,23 +357,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Register/">#Register</a>
-      
-        <a href="/tags/C/">#C</a>
-      
-        <a href="/tags/xv6/">#xv6</a>
-      
-        <a href="/tags/QEMU/">#QEMU</a>
-      
-        <a href="/tags/Emulation/">#Emulation</a>
-      
-        <a href="/tags/Peripheral/">#Peripheral</a>
-      
-        <a href="/tags/UART/">#UART</a>
-      
-        <a href="/tags/Baud-Rate/">#Baud Rate</a>
-      
-        <a href="/tags/Polling/">#Polling</a>
+        <a href="/tags/%E7%94%9F%E6%B4%BB/">#生活</a>
       
     </div>
   
@@ -403,32 +369,32 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Read and Write by Polling with UART</div>
-      <div>https://lingkkang.github.io/2023/02/28/polling-read-write/</div>
+      <div>C&#39;est la vie.</div>
+      <div>https://lingkkang.github.io/2023/08/28/prose02/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Lingkang</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
-          <div>February 28, 2023</div>
+          <div>发布于</div>
+          <div>2023年8月28日</div>
         </div>
       
       
       
         <div class="license-meta-item">
-          <div>Licensed under</div>
+          <div>许可协议</div>
           <div>
             
               
               
                 <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
                     <i class="iconfont icon-by"></i>
                   </span>
                 </a>
@@ -448,19 +414,13 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/12/align/" title="Align Number to Multiple">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Align Number to Multiple</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/23/boot-risc-v/" title="RISC-V Machine Boot Code">
-                        <span class="hidden-mobile">RISC-V Machine Boot Code</span>
-                        <span class="visible-mobile">Next</span>
+                      <a href="/2023/07/31/migrate-gitlab/" title="Migrate GitLab from CentOS to Ubuntu on ECS">
+                        <span class="hidden-mobile">Migrate GitLab from CentOS to Ubuntu on ECS</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -481,7 +441,7 @@
     <div id="toc">
   <p class="toc-header">
     <i class="iconfont icon-list"></i>
-    <span>Table of Contents</span>
+    <span>目录</span>
   </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
@@ -537,7 +497,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -545,7 +505,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -724,7 +684,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

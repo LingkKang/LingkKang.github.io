@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>C&#39;est la vie.</title>
+    <link href="/2023/08/28/prose02/"/>
+    <url>/2023/08/28/prose02/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><p>这段时间一种低落的情绪一直把整个人包裹着，不知道原因是什么。</p><p>是许多事情合在一起的结果吧。</p><!-- Tanya Chua - 墜落 --><iframe style="border-radius:12px; margin-bottom: 16px;" src="https://open.spotify.com/embed/track/2uGzm6W4SDCnsgeESJs5PK?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><p>就好像看书时隐隐发现情节不太对，看看剩余的页数，似乎故事不可避免地将要走向悲剧；又好像笑着说再见，慢慢地挥手，但是转身之后再一想，似乎就再也见不到了；也好像轻轻地拥抱，越是应该松开时越舍不得；或许还有，电影正片后的片尾字幕，大剧结束后缓缓拉上的帷幕，伴着勾起回忆的背景音乐，真的会怅然若失。</p><p>就好像在大雨突然落下时着急忙慌跑进路边的店家躲雨，然后浑身湿透地看着窗外激烈的大雨一直一直下，呆呆地望着；又好像走到过去曾走过的路，想起许多曾在此处发生的事情；也好像听到许久前一直在单曲循环但是又有段时间没听的歌，冷不丁地会想起当时那段时间一直在一边听歌一边做的事情；或许还有，忙碌一天后看着窗外夜色浓郁，很累但却不愿睡去，仿佛还有事情要做但又不知道是什么，不知所措。</p><!-- 吳青峰 - 太空 --><iframe style="border-radius:12px; margin-bottom: 16px;" src="https://open.spotify.com/embed/track/6VcRonz2dMc0xgbi5R14HF?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><p>我总是问我的朋友，我们还能再见吗？会再见吗？我们真的还能再见面吗？每个人都很温暖，都说，当然啦，肯定的，会再见面的。可是真的是这样吗？我不知道，或者说，我不相信。</p><p>我的脑海里总有一种倒计时一样的闹钟，不断再提醒我，“你和眼前的人面对面的时间越来越少了哦”。就好像那种质子的倒计时，每分每秒在不断递减，只不过脑海中的倒计时没有这么精确具象而已。每次见面，我都觉得再见一次的机会就少了一次。我想，宁愿不见面，闹钟就会一直静止了吧。</p><!-- Original Broadway Cast of Hamilton - Who Lives, Who Dies, Who Tells Your Story --><iframe style="border-radius:12px; margin-bottom: 16px;" src="https://open.spotify.com/embed/track/7EsSVPxaYoAZjQwhspJBs2?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><p>我一直在想，当我有一天空下来了，我要这样这样，那样那样，但是许久已经没有理想中空闲的一天了。但是倒过来说，一天过去后再想想，这样的一天本该怎样怎样，又只是剩下后悔。再后来，也不后悔了，就这样吧。如果有选择，无论怎么选，最后都会后悔的。</p><p>好多次了，有些歌一听到开头就会觉得非常失落，甚至哽咽起来。有些太脆弱了吧。</p><p>It’s okay to have an off-day, or possibly an off-month, even an off-year.</p><p>It’s okay to be not okay.</p><p>C’est la vie.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>随笔</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>生活</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Migrate GitLab from CentOS to Ubuntu on ECS</title>
     <link href="/2023/07/31/migrate-gitlab/"/>
     <url>/2023/07/31/migrate-gitlab/</url>
@@ -57,15 +82,15 @@
     
     <tags>
       
+      <tag>C</tag>
+      
+      <tag>Cpp</tag>
+      
       <tag>Optimization</tag>
       
       <tag>Memory</tag>
       
       <tag>Alignment</tag>
-      
-      <tag>C</tag>
-      
-      <tag>Cpp</tag>
       
       <tag>Padding</tag>
       
@@ -242,8 +267,6 @@
     
     <tags>
       
-      <tag>Matrix</tag>
-      
       <tag>Polymorphism</tag>
       
       <tag>Haskell</tag>
@@ -251,6 +274,8 @@
       <tag>Functional Programming</tag>
       
       <tag>Currying</tag>
+      
+      <tag>Matrix</tag>
       
     </tags>
     
@@ -444,9 +469,9 @@
       
       <tag>Emulation</tag>
       
-      <tag>Peripheral</tag>
-      
       <tag>Interrupt</tag>
+      
+      <tag>Peripheral</tag>
       
       <tag>PLIC</tag>
       
@@ -475,15 +500,15 @@
     
     <tags>
       
-      <tag>Bitwise Operation</tag>
-      
       <tag>Optimization</tag>
-      
-      <tag>xv6</tag>
       
       <tag>Memory</tag>
       
       <tag>Alignment</tag>
+      
+      <tag>Bitwise Operation</tag>
+      
+      <tag>xv6</tag>
       
     </tags>
     
@@ -510,21 +535,21 @@
       
       <tag>Register</tag>
       
-      <tag>xv6</tag>
-      
       <tag>C</tag>
+      
+      <tag>xv6</tag>
       
       <tag>QEMU</tag>
       
       <tag>Emulation</tag>
+      
+      <tag>Peripheral</tag>
       
       <tag>UART</tag>
       
       <tag>Baud Rate</tag>
       
       <tag>Polling</tag>
-      
-      <tag>Peripheral</tag>
       
     </tags>
     
@@ -553,11 +578,11 @@
       
       <tag>Register</tag>
       
-      <tag>xv6</tag>
+      <tag>C</tag>
       
       <tag>Memory</tag>
       
-      <tag>C</tag>
+      <tag>xv6</tag>
       
       <tag>Bootstrap</tag>
       
@@ -619,9 +644,9 @@
       
       <tag>Python</tag>
       
-      <tag>Linear Algebra</tag>
-      
       <tag>Matrix</tag>
+      
+      <tag>Linear Algebra</tag>
       
       <tag>Determinant</tag>
       
@@ -679,9 +704,9 @@
     
     <tags>
       
-      <tag>Memory</tag>
-      
       <tag>C</tag>
+      
+      <tag>Memory</tag>
       
       <tag>Dynamic Memory Allocation</tag>
       
@@ -878,9 +903,9 @@
     
     <tags>
       
-      <tag>读书</tag>
-      
       <tag>生活</tag>
+      
+      <tag>读书</tag>
       
       <tag>Summary</tag>
       
