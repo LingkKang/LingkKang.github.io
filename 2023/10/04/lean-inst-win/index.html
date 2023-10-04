@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://lingkkang.github.io/images/one_time/lean-ext.png">
 <meta property="og:image" content="https://lingkkang.github.io/images/one_time/lean-done.png">
 <meta property="article:published_time" content="2023-10-04T21:23:32.000Z">
-<meta property="article:modified_time" content="2023-10-04T23:42:41.812Z">
+<meta property="article:modified_time" content="2023-10-04T23:46:23.962Z">
 <meta property="article:author" content="Lingkang">
 <meta property="article:tag" content="VS Code">
 <meta property="article:tag" content="Lean">
@@ -321,14 +321,14 @@
 
 <h2 id="3-Add-the-path-to-the-environment-variables"><a href="#3-Add-the-path-to-the-environment-variables" class="headerlink" title="3. Add the path to the environment variables"></a>3. Add the path to the environment variables</h2><p>Add the path to the <code>bin</code> folder to the <code>PATH</code> environment variable.</p>
 <ol>
-<li>On the left-bottom <strong>Start</strong> menu or <strong>search bar</strong>, type <code>env</code> and select <strong>Edit the system environment variables</strong>.</li>
-<li>On the pop-up window, click the right-bottom <strong>Environment Variables…</strong> button.</li>
-<li>On the <strong>System variables</strong> section, find the <code>path</code> variable and double click it.</li>
-<li>on the pop-up window, click the <strong>New</strong> button. You will need to input the path to <code>lean</code>‘s <code>bin</code> folder (Better to copy and paste it from the file explorer).In my case, it is <code>D:\lean\bin</code>.</li>
+<li>On the lower left <strong>Start</strong> menu or <strong>search bar</strong>, type <code>env</code> and select <strong>Edit the system environment variables</strong>.</li>
+<li>On the pop-up window, click the bottom right button <strong>Environment Variables…</strong>.</li>
+<li>On the <strong>System variables</strong> section, scroll down and find the <code>path</code> variable and double click it.</li>
+<li>on the pop-up window, click the <strong>New</strong> button. You will need to input the path to <code>lean</code>‘s <code>bin</code> folder (Better to copy and paste it from the file explorer). In my case, it is <code>D:\lean\bin</code>.</li>
 <li>Click <strong>OK</strong> on all the pop-up windows to save the changes.</li>
 </ol>
-<p>This change may take effect several minutes later (and terminals will not recognize <code>lean</code> until you close and reopen them), or you can simply restart your computer to make sure it works.</p>
-<h2 id="4-Test-the-Installation-Optional"><a href="#4-Test-the-Installation-Optional" class="headerlink" title="4. Test the Installation (Optional)"></a>4. Test the Installation (Optional)</h2><p>Open a new command prompt or PowerShell window, and run <code>lean --version</code> again:</p>
+<p>This change may take a few minutes to take effect (and terminals will not recognize <code>lean</code> until you close and reopen them), or you can simply restart your computer to make sure it works.</p>
+<h2 id="4-Test-the-installation-optional"><a href="#4-Test-the-installation-optional" class="headerlink" title="4. Test the installation (optional)"></a>4. Test the installation (optional)</h2><p>Open a new command prompt or PowerShell window, and run <code>lean --version</code> again:</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">PowerShell <span class="hljs-number">7.3</span>.<span class="hljs-number">7</span><br><span class="hljs-built_in">PS</span> C:\Users\Lingkang&gt; lean <span class="hljs-literal">--version</span><br>Lean (version <span class="hljs-number">3.51</span>.<span class="hljs-number">1</span>, commit cce7990ea86a, Release)<br><span class="hljs-built_in">PS</span> C:\Users\Lingkang&gt; lean <span class="hljs-literal">--help</span><br>Lean (version <span class="hljs-number">3.51</span>.<span class="hljs-number">1</span>, commit cce7990ea86a, Release)<br>Miscellaneous:<br>  <span class="hljs-literal">--help</span> <span class="hljs-literal">-h</span>          display this message<br>  <span class="hljs-literal">--version</span> <span class="hljs-literal">-v</span>       display version number<br>  <span class="hljs-literal">--githash</span>          display the git commit hash number used to build this binary<br>  <span class="hljs-literal">--run</span>              executes the <span class="hljs-string">&#x27;main&#x27;</span> definition<br>...<br></code></pre></td></tr></table></figure>
 
 <h2 id="5-Install-the-Lean-Extension-for-VS-Code"><a href="#5-Install-the-Lean-Extension-for-VS-Code" class="headerlink" title="5. Install the Lean Extension for VS Code"></a>5. Install the Lean Extension for VS Code</h2><p>Now at this point, you can use Lean 3 in the command prompt or PowerShell. However, if you want to use Lean 3 in VS Code, you will need to install the Lean extension for VS Code.</p>

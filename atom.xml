@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-10-04T23:42:41.812Z</updated>
+  <updated>2023-10-04T23:46:23.962Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://lingkkang.github.io/2023/10/04/lean-inst-win/"/>
     <id>https://lingkkang.github.io/2023/10/04/lean-inst-win/</id>
     <published>2023-10-04T21:23:32.000Z</published>
-    <updated>2023-10-04T23:42:41.812Z</updated>
+    <updated>2023-10-04T23:46:23.962Z</updated>
     
     
     <summary type="html">Quite annoying to get Lean 4 installed without noticing it.</summary>
@@ -114,11 +114,15 @@
     
     <category term="Linux" scheme="https://lingkkang.github.io/tags/Linux/"/>
     
-    <category term="Windows" scheme="https://lingkkang.github.io/tags/Windows/"/>
-    
     <category term="SQL" scheme="https://lingkkang.github.io/tags/SQL/"/>
     
+    <category term="Windows" scheme="https://lingkkang.github.io/tags/Windows/"/>
+    
     <category term="Hyper-V" scheme="https://lingkkang.github.io/tags/Hyper-V/"/>
+    
+    <category term="IP" scheme="https://lingkkang.github.io/tags/IP/"/>
+    
+    <category term="IPv4" scheme="https://lingkkang.github.io/tags/IPv4/"/>
     
     <category term="MySQL" scheme="https://lingkkang.github.io/tags/MySQL/"/>
     
@@ -126,11 +130,7 @@
     
     <category term="CRUD" scheme="https://lingkkang.github.io/tags/CRUD/"/>
     
-    <category term="IP" scheme="https://lingkkang.github.io/tags/IP/"/>
-    
     <category term="Rouging" scheme="https://lingkkang.github.io/tags/Rouging/"/>
-    
-    <category term="IPv4" scheme="https://lingkkang.github.io/tags/IPv4/"/>
     
     <category term="Privileged Access Management" scheme="https://lingkkang.github.io/tags/Privileged-Access-Management/"/>
     
