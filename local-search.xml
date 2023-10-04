@@ -4,6 +4,29 @@
   
   
   <entry>
+    <title>Installing Lean 3 on Windows</title>
+    <link href="/2023/10/04/lean-inst-win/"/>
+    <url>/2023/10/04/lean-inst-win/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Installing-Lean-3-on-Windows"><a href="#Installing-Lean-3-on-Windows" class="headerlink" title="Installing Lean 3 on Windows"></a>Installing Lean 3 on Windows</h1><p>If you following the <a href="https://leanprover-community.github.io/install/windows.html">official installation guide on Windows</a>, Lean 4 will be installed automatically. However, if you want to install Lean 3 on Windows, you can follow the steps below.</p><p>These should be the minimum steps and I will try to keep them as clear as possible.</p><h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>I assume you have <a href="https://code.visualstudio.com/">Visual Studio Code</a> installed. (And possibly a web browser 🤷)</p><h2 id="1-Download-the-latest-release"><a href="#1-Download-the-latest-release" class="headerlink" title="1. Download the latest release"></a>1. Download the latest release</h2><p>Head to the <a href="https://github.com/leanprover-community/lean">Lean 3 repository on GitHub</a>, find the latest release, and download the <code>lean-&lt;version&gt;-windows.zip</code> file.</p><p>At the moment, the latest release is <a href="https://github.com/leanprover-community/lean/releases/tag/v3.51.1">Release v3.51.1</a>, so I will download <code>lean-3.51.1-windows.zip</code>.</p><p>There may be a warning that says “This file is not commonly downloaded and may be dangerous”, I’m not sure why, but just keep downloading it. It should be safe as long as you are downloading it from the official repository.</p><p><img src="/../images/one_time/lean-warn.png" alt="Download Lean 3"></p><h2 id="2-Unzip-the-file"><a href="#2-Unzip-the-file" class="headerlink" title="2. Unzip the file"></a>2. Unzip the file</h2><p>Unzip the downloaded file to a directory of your choice. There should be three folders: <code>bin</code>, <code>include</code>, and <code>lib</code> respectively.</p><p>I put them on my D drive, and also renamed the folder to <code>lean</code>. So now I have <code>D:\lean\bin</code>, <code>D:\lean\include</code>, and <code>D:\lean\lib</code>.</p><p>Optionally, you can test the <code>lean.exe</code> in the <code>bin</code> folder by running <code>.\lean.exe --version</code> in a command prompt or PowerShell:</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell"><span class="hljs-built_in">PS</span> D:\lean&gt; <span class="hljs-built_in">cd</span> bin<br><span class="hljs-built_in">PS</span> D:\lean\bin&gt; ./lean <span class="hljs-literal">--version</span><br>Lean (version <span class="hljs-number">3.51</span>.<span class="hljs-number">1</span>, commit cce7990ea86a, Release)<br></code></pre></td></tr></table></figure><h2 id="3-Add-the-path-to-the-environment-variables"><a href="#3-Add-the-path-to-the-environment-variables" class="headerlink" title="3. Add the path to the environment variables"></a>3. Add the path to the environment variables</h2><p>Add the path to the <code>bin</code> folder to the <code>PATH</code> environment variable.</p><ol><li>On the left-bottom <strong>Start</strong> menu or <strong>search bar</strong>, type <code>env</code> and select <strong>Edit the system environment variables</strong>.</li><li>On the pop-up window, click the right-bottom <strong>Environment Variables…</strong> button.</li><li>On the <strong>System variables</strong> section, find the <code>path</code> variable and double click it.</li><li>on the pop-up window, click the <strong>New</strong> button. You will need to input the path to <code>lean</code>‘s <code>bin</code> folder (Better to copy and paste it from the file explorer).In my case, it is <code>D:\lean\bin</code>.</li><li>Click <strong>OK</strong> on all the pop-up windows to save the changes.</li></ol><p>This change may take effect several minutes later (and terminals will not recognize <code>lean</code> until you close and reopen them), or you can simply restart your computer to make sure it works.</p><h2 id="4-Test-the-Installation-Optional"><a href="#4-Test-the-Installation-Optional" class="headerlink" title="4. Test the Installation (Optional)"></a>4. Test the Installation (Optional)</h2><p>Open a new command prompt or PowerShell window, and run <code>lean --version</code> again:</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">PowerShell <span class="hljs-number">7.3</span>.<span class="hljs-number">7</span><br><span class="hljs-built_in">PS</span> C:\Users\Lingkang&gt; lean <span class="hljs-literal">--version</span><br>Lean (version <span class="hljs-number">3.51</span>.<span class="hljs-number">1</span>, commit cce7990ea86a, Release)<br><span class="hljs-built_in">PS</span> C:\Users\Lingkang&gt; lean <span class="hljs-literal">--help</span><br>Lean (version <span class="hljs-number">3.51</span>.<span class="hljs-number">1</span>, commit cce7990ea86a, Release)<br>Miscellaneous:<br>  <span class="hljs-literal">--help</span> <span class="hljs-literal">-h</span>          display this message<br>  <span class="hljs-literal">--version</span> <span class="hljs-literal">-v</span>       display version number<br>  <span class="hljs-literal">--githash</span>          display the git commit hash number used to build this binary<br>  <span class="hljs-literal">--run</span>              executes the <span class="hljs-string">&#x27;main&#x27;</span> definition<br>...<br></code></pre></td></tr></table></figure><h2 id="5-Install-the-Lean-Extension-for-VS-Code"><a href="#5-Install-the-Lean-Extension-for-VS-Code" class="headerlink" title="5. Install the Lean Extension for VS Code"></a>5. Install the Lean Extension for VS Code</h2><p>Now at this point, you can use Lean 3 in the command prompt or PowerShell. However, if you want to use Lean 3 in VS Code, you will need to install the Lean extension for VS Code.</p><p>Open VS Code, navigate to the <strong>Extensions</strong> tab, and search for <code>lean</code>, most of the time, the first result should be what we want. Click the <strong>Install</strong> button to install it.</p><p><img src="/../images/one_time/lean-ext.png" alt="Lean Extension"></p><p>The extension is supposed to find the installed Lean 3 automatically.</p><h2 id="6-All-Done"><a href="#6-All-Done" class="headerlink" title="6. All Done!"></a>6. All Done!</h2><p>Now you can use Lean 3 in VS Code!</p><p>Create a new file with extension <code>.lean</code>, and you should see the Lean logo on the bottom-right corner of the window. Click it to start the Lean server if needed.</p><p>Try some basic Lean code:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Lean">#check 1 + 1<br></code></pre></td></tr></table></figure><p>or </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Lean">#eval 1 + 1<br></code></pre></td></tr></table></figure><p>The <code>Lean Infoview</code> window should pop up provide plenty of information about the code, including the result.</p><p><img src="/../images/one_time/lean-done.png" alt="Lean 3 in VS Code"></p><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol><li><a href="https://leanprover-community.github.io/install/windows.html">Installing Lean 4 on Windows</a></li><li><a href="https://github.com/leanprover-community/lean">leanprover-community&#x2F;lean: Lean Theorem Prover</a></li><li><a href="https://leanprover-community.github.io/">Lean community</a></li><li><a href="https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574%28v=office.14%29#to-add-a-path-to-the-path-environment-variable">How to: Add Tool Locations to the PATH Environment Variable | Microsoft Learn</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=jroesch.lean">lean - Visual Studio Marketplace</a></li><li><a href="https://github.com/leanprover/vscode-lean">leanprover&#x2F;vscode-lean: Extension for VS Code that provides support for the older Lean 3 language. Succeeded by vscode-lean4 (‘lean4’ in the extensions menu) for the Lean 4 language.</a></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>VS Code</tag>
+      
+      <tag>Lean</tag>
+      
+      <tag>Windows</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Migrate GitLab from CentOS to Ubuntu on ECS</title>
     <link href="/2023/07/31/migrate-gitlab/"/>
     <url>/2023/07/31/migrate-gitlab/</url>
@@ -57,15 +80,15 @@
     
     <tags>
       
+      <tag>C</tag>
+      
+      <tag>Cpp</tag>
+      
       <tag>Optimization</tag>
       
       <tag>Memory</tag>
       
       <tag>Alignment</tag>
-      
-      <tag>C</tag>
-      
-      <tag>Cpp</tag>
       
       <tag>Padding</tag>
       
@@ -94,6 +117,8 @@
       
       <tag>Linux</tag>
       
+      <tag>Windows</tag>
+      
       <tag>SQL</tag>
       
       <tag>Hyper-V</tag>
@@ -101,8 +126,6 @@
       <tag>MySQL</tag>
       
       <tag>WSL2</tag>
-      
-      <tag>Windows</tag>
       
       <tag>CRUD</tag>
       
@@ -475,15 +498,15 @@
     
     <tags>
       
-      <tag>Bitwise Operation</tag>
-      
       <tag>Optimization</tag>
-      
-      <tag>xv6</tag>
       
       <tag>Memory</tag>
       
       <tag>Alignment</tag>
+      
+      <tag>Bitwise Operation</tag>
+      
+      <tag>xv6</tag>
       
     </tags>
     
@@ -510,9 +533,9 @@
       
       <tag>Register</tag>
       
-      <tag>xv6</tag>
-      
       <tag>C</tag>
+      
+      <tag>xv6</tag>
       
       <tag>QEMU</tag>
       
@@ -553,11 +576,11 @@
       
       <tag>Register</tag>
       
-      <tag>xv6</tag>
+      <tag>C</tag>
       
       <tag>Memory</tag>
       
-      <tag>C</tag>
+      <tag>xv6</tag>
       
       <tag>Bootstrap</tag>
       
@@ -679,9 +702,9 @@
     
     <tags>
       
-      <tag>Memory</tag>
-      
       <tag>C</tag>
+      
+      <tag>Memory</tag>
       
       <tag>Dynamic Memory Allocation</tag>
       
@@ -878,9 +901,9 @@
     
     <tags>
       
-      <tag>生活</tag>
-      
       <tag>读书</tag>
+      
+      <tag>生活</tag>
       
       <tag>Summary</tag>
       

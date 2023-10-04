@@ -16,29 +16,30 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Hiding!">
+    <meta name="description" content="Quite annoying to get Lean 4 installed without noticing it.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hide Superclass Static Methods in Java">
-<meta property="og:url" content="https://lingkkang.github.io/2023/05/23/hide-static-java/index.html">
+<meta property="og:title" content="Installing Lean 3 on Windows">
+<meta property="og:url" content="https://lingkkang.github.io/2023/10/04/lean-inst-win/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Hiding!">
+<meta property="og:description" content="Quite annoying to get Lean 4 installed without noticing it.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-05-23T13:57:00.000Z">
-<meta property="article:modified_time" content="2023-05-23T14:37:00.000Z">
+<meta property="og:image" content="https://lingkkang.github.io/images/one_time/lean-warn.png">
+<meta property="og:image" content="https://lingkkang.github.io/images/one_time/lean-ext.png">
+<meta property="og:image" content="https://lingkkang.github.io/images/one_time/lean-done.png">
+<meta property="article:published_time" content="2023-10-04T21:23:32.000Z">
+<meta property="article:modified_time" content="2023-10-04T23:42:41.812Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content="Inheritance">
-<meta property="article:tag" content="Static">
-<meta property="article:tag" content="Polymorphism">
-<meta property="article:tag" content="Overriding">
-<meta property="article:tag" content="Hiding">
+<meta property="article:tag" content="VS Code">
+<meta property="article:tag" content="Lean">
+<meta property="article:tag" content="Windows">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lingkkang.github.io/images/one_time/lean-warn.png">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Hide Superclass Static Methods in Java - Lingkang&#39;s Blog</title>
+  <title>Installing Lean 3 on Windows - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -221,7 +222,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hide Superclass Static Methods in Java"></span>
+            <span id="subtitle" data-typed-text="Installing Lean 3 on Windows"></span>
           
         </div>
 
@@ -232,8 +233,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-23 14:57" pubdate>
-          May 23, 2023 pm
+        <time datetime="2023-10-04 22:23" pubdate>
+          October 4, 2023 pm
         </time>
       </span>
     
@@ -244,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          3.3k words
         
       </span>
     
@@ -255,7 +256,7 @@
         
         
         
-          19 mins
+          28 mins
         
       </span>
     
@@ -293,12 +294,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hide Superclass Static Methods in Java</h1>
+            <h1 style="display: none">Installing Lean 3 on Windows</h1>
             
               <p class="note note-info">
                 
                   
-                    Last updated on May 23, 2023 pm
+                    Last updated on October 5, 2023 am
                   
                 
               </p>
@@ -306,39 +307,52 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Hide-Superclass-Static-Methods-in-Java"><a href="#Hide-Superclass-Static-Methods-in-Java" class="headerlink" title="Hide Superclass Static Methods in Java"></a>Hide Superclass Static Methods in Java</h1><p>A <code>static</code> method <em><strong>cannot</strong></em> be overridden in Java. </p>
-<p>This is because the concept of method <strong>overriding</strong> is based on dynamic or late binding, which means the actual method to be executed is determined at runtime based on the type of the object. And a static method cannot show runtime polymorphism.</p>
-<p>However, Java does accept a static method existing in subclass with same declaration signature to its superclass. It does not override the static method in the superclass. Instead, it hides the superclass method, meaning the subclass has its own separate static method with the same name. </p>
-<h2 id="Hiding"><a href="#Hiding" class="headerlink" title="Hiding"></a>Hiding</h2><p>This could be seen with the following example:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x + <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="Installing-Lean-3-on-Windows"><a href="#Installing-Lean-3-on-Windows" class="headerlink" title="Installing Lean 3 on Windows"></a>Installing Lean 3 on Windows</h1><p>If you following the <a target="_blank" rel="noopener" href="https://leanprover-community.github.io/install/windows.html">official installation guide on Windows</a>, Lean 4 will be installed automatically. However, if you want to install Lean 3 on Windows, you can follow the steps below.</p>
+<p>These should be the minimum steps and I will try to keep them as clear as possible.</p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>I assume you have <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a> installed. (And possibly a web browser 🤷)</p>
+<h2 id="1-Download-the-latest-release"><a href="#1-Download-the-latest-release" class="headerlink" title="1. Download the latest release"></a>1. Download the latest release</h2><p>Head to the <a target="_blank" rel="noopener" href="https://github.com/leanprover-community/lean">Lean 3 repository on GitHub</a>, find the latest release, and download the <code>lean-&lt;version&gt;-windows.zip</code> file.</p>
+<p>At the moment, the latest release is <a target="_blank" rel="noopener" href="https://github.com/leanprover-community/lean/releases/tag/v3.51.1">Release v3.51.1</a>, so I will download <code>lean-3.51.1-windows.zip</code>.</p>
+<p>There may be a warning that says “This file is not commonly downloaded and may be dangerous”, I’m not sure why, but just keep downloading it. It should be safe as long as you are downloading it from the official repository.</p>
+<p><img src="/../images/one_time/lean-warn.png" srcset="/img/loading.gif" lazyload alt="Download Lean 3"></p>
+<h2 id="2-Unzip-the-file"><a href="#2-Unzip-the-file" class="headerlink" title="2. Unzip the file"></a>2. Unzip the file</h2><p>Unzip the downloaded file to a directory of your choice. There should be three folders: <code>bin</code>, <code>include</code>, and <code>lib</code> respectively.</p>
+<p>I put them on my D drive, and also renamed the folder to <code>lean</code>. So now I have <code>D:\lean\bin</code>, <code>D:\lean\include</code>, and <code>D:\lean\lib</code>.</p>
+<p>Optionally, you can test the <code>lean.exe</code> in the <code>bin</code> folder by running <code>.\lean.exe --version</code> in a command prompt or PowerShell:</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell"><span class="hljs-built_in">PS</span> D:\lean&gt; <span class="hljs-built_in">cd</span> bin<br><span class="hljs-built_in">PS</span> D:\lean\bin&gt; ./lean <span class="hljs-literal">--version</span><br>Lean (version <span class="hljs-number">3.51</span>.<span class="hljs-number">1</span>, commit cce7990ea86a, Release)<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x * <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="3-Add-the-path-to-the-environment-variables"><a href="#3-Add-the-path-to-the-environment-variables" class="headerlink" title="3. Add the path to the environment variables"></a>3. Add the path to the environment variables</h2><p>Add the path to the <code>bin</code> folder to the <code>PATH</code> environment variable.</p>
+<ol>
+<li>On the left-bottom <strong>Start</strong> menu or <strong>search bar</strong>, type <code>env</code> and select <strong>Edit the system environment variables</strong>.</li>
+<li>On the pop-up window, click the right-bottom <strong>Environment Variables…</strong> button.</li>
+<li>On the <strong>System variables</strong> section, find the <code>path</code> variable and double click it.</li>
+<li>on the pop-up window, click the <strong>New</strong> button. You will need to input the path to <code>lean</code>‘s <code>bin</code> folder (Better to copy and paste it from the file explorer).In my case, it is <code>D:\lean\bin</code>.</li>
+<li>Click <strong>OK</strong> on all the pop-up windows to save the changes.</li>
+</ol>
+<p>This change may take effect several minutes later (and terminals will not recognize <code>lean</code> until you close and reopen them), or you can simply restart your computer to make sure it works.</p>
+<h2 id="4-Test-the-Installation-Optional"><a href="#4-Test-the-Installation-Optional" class="headerlink" title="4. Test the Installation (Optional)"></a>4. Test the Installation (Optional)</h2><p>Open a new command prompt or PowerShell window, and run <code>lean --version</code> again:</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">PowerShell <span class="hljs-number">7.3</span>.<span class="hljs-number">7</span><br><span class="hljs-built_in">PS</span> C:\Users\Lingkang&gt; lean <span class="hljs-literal">--version</span><br>Lean (version <span class="hljs-number">3.51</span>.<span class="hljs-number">1</span>, commit cce7990ea86a, Release)<br><span class="hljs-built_in">PS</span> C:\Users\Lingkang&gt; lean <span class="hljs-literal">--help</span><br>Lean (version <span class="hljs-number">3.51</span>.<span class="hljs-number">1</span>, commit cce7990ea86a, Release)<br>Miscellaneous:<br>  <span class="hljs-literal">--help</span> <span class="hljs-literal">-h</span>          display this message<br>  <span class="hljs-literal">--version</span> <span class="hljs-literal">-v</span>       display version number<br>  <span class="hljs-literal">--githash</span>          display the git commit hash number used to build this binary<br>  <span class="hljs-literal">--run</span>              executes the <span class="hljs-string">&#x27;main&#x27;</span> definition<br>...<br></code></pre></td></tr></table></figure>
 
-<p>Simply calling static method is easy to understand: </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Java">A.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br>B.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br></code></pre></td></tr></table></figure>
+<h2 id="5-Install-the-Lean-Extension-for-VS-Code"><a href="#5-Install-the-Lean-Extension-for-VS-Code" class="headerlink" title="5. Install the Lean Extension for VS Code"></a>5. Install the Lean Extension for VS Code</h2><p>Now at this point, you can use Lean 3 in the command prompt or PowerShell. However, if you want to use Lean 3 in VS Code, you will need to install the Lean extension for VS Code.</p>
+<p>Open VS Code, navigate to the <strong>Extensions</strong> tab, and search for <code>lean</code>, most of the time, the first result should be what we want. Click the <strong>Install</strong> button to install it.</p>
+<p><img src="/../images/one_time/lean-ext.png" srcset="/img/loading.gif" lazyload alt="Lean Extension"></p>
+<p>The extension is supposed to find the installed Lean 3 automatically.</p>
+<h2 id="6-All-Done"><a href="#6-All-Done" class="headerlink" title="6. All Done!"></a>6. All Done!</h2><p>Now you can use Lean 3 in VS Code!</p>
+<p>Create a new file with extension <code>.lean</code>, and you should see the Lean logo on the bottom-right corner of the window. Click it to start the Lean server if needed.</p>
+<p>Try some basic Lean code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Lean">#check 1 + 1<br></code></pre></td></tr></table></figure>
 
-<p>The two methods exist peacefully. Inside the class <code>B</code>, the <code>myMethod</code> of class <code>A</code> is only <em>hidden</em> from the scope.</p>
-<h2 id="Another-Perspective"><a href="#Another-Perspective" class="headerlink" title="Another Perspective"></a>Another Perspective</h2><p>Another way to check it out is like this:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-type">A</span> <span class="hljs-variable">myInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">A</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br><br>myInstance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br><br><span class="hljs-type">B</span> <span class="hljs-variable">anotherInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>anotherInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br></code></pre></td></tr></table></figure>
+<p>or </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Lean">#eval 1 + 1<br></code></pre></td></tr></table></figure>
 
-<p>But note that access <code>static</code> method by instance is not a good practice. This is only for demonstration. Typically, it will cause a warning that <em>The static method <code>myMethod(int)</code> from the type <code>A</code> should be accessed in a static way</em>.</p>
-<h2 id="Overriding"><a href="#Overriding" class="headerlink" title="Overriding"></a>Overriding</h2><p>Note how is this different from <strong>overriding</strong>.</p>
-<p>For example, if both comment out the keyword <code>static</code> in class <code>A</code> and <code>B</code>,</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-comment">/* static */</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x + <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-comment">/* static */</span> <span class="hljs-type">int</span> <span class="hljs-title function_">myMethod</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-keyword">return</span> x * <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>In class <code>B</code>, overriding occurs, and the result of running <code>myMethod</code> would be different:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-type">A</span> <span class="hljs-variable">myInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">A</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 + 2 = 7</span><br><br>myInstance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>myInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br><br><span class="hljs-type">B</span> <span class="hljs-variable">anotherInstance</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>anotherInstance.myMethod(<span class="hljs-number">5</span>); <span class="hljs-comment">// 5 * 2 = 10</span><br></code></pre></td></tr></table></figure>
-
-<p>There is also no warning anymore.</p>
-<h2 id="Remark"><a href="#Remark" class="headerlink" title="Remark"></a>Remark</h2><p>Same as preventing from overriding, add keyword <code>final</code> can also prevent a <code>static</code> method from hiding.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/IandI/override.html">Overriding and Hiding Methods (The Java™ Tutorials &gt; Learning the Java Language &gt; Interfaces and Inheritance)</a></li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/2475259/can-i-override-and-overload-static-methods-in-java">Can I override and overload static methods in Java? - Stack Overflow</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.javatpoint.com/can-we-override-static-method-in-java">Can We Override Static Method in Java - Javatpoint</a></li>
-<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jls/se20/html/jls-8.html#jls-8.4.3.3">Chapter 8. Classes - 8.4.3.3. <code>final</code> Methods</a></li>
-</ul>
+<p>The <code>Lean Infoview</code> window should pop up provide plenty of information about the code, including the result.</p>
+<p><img src="/../images/one_time/lean-done.png" srcset="/img/loading.gif" lazyload alt="Lean 3 in VS Code"></p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://leanprover-community.github.io/install/windows.html">Installing Lean 4 on Windows</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/leanprover-community/lean">leanprover-community&#x2F;lean: Lean Theorem Prover</a></li>
+<li><a target="_blank" rel="noopener" href="https://leanprover-community.github.io/">Lean community</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574%28v=office.14%29#to-add-a-path-to-the-path-environment-variable">How to: Add Tool Locations to the PATH Environment Variable | Microsoft Learn</a></li>
+<li><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=jroesch.lean">lean - Visual Studio Marketplace</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/leanprover/vscode-lean">leanprover&#x2F;vscode-lean: Extension for VS Code that provides support for the older Lean 3 language. Succeeded by vscode-lean4 (‘lean4’ in the extensions menu) for the Lean 4 language.</a></li>
+</ol>
 
                 
               </div>
@@ -347,42 +361,15 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Programming-Language/" class="category-chain-item">Programming Language</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Java/">#Java</a>
+        <a href="/tags/VS-Code/">#VS Code</a>
       
-        <a href="/tags/Inheritance/">#Inheritance</a>
+        <a href="/tags/Lean/">#Lean</a>
       
-        <a href="/tags/Static/">#Static</a>
-      
-        <a href="/tags/Polymorphism/">#Polymorphism</a>
-      
-        <a href="/tags/Overriding/">#Overriding</a>
-      
-        <a href="/tags/Hiding/">#Hiding</a>
+        <a href="/tags/Windows/">#Windows</a>
       
     </div>
   
@@ -394,8 +381,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hide Superclass Static Methods in Java</div>
-      <div>https://lingkkang.github.io/2023/05/23/hide-static-java/</div>
+      <div>Installing Lean 3 on Windows</div>
+      <div>https://lingkkang.github.io/2023/10/04/lean-inst-win/</div>
     </div>
     <div class="license-meta">
       
@@ -407,7 +394,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 23, 2023</div>
+          <div>October 4, 2023</div>
         </div>
       
       
@@ -439,18 +426,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/24/hs-practice/" title="A Haskell Practice with Answer">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">A Haskell Practice with Answer</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/15/subnet/" title="Subnet and IPv4 Classes">
-                        <span class="hidden-mobile">Subnet and IPv4 Classes</span>
+                      <a href="/2023/07/31/migrate-gitlab/" title="Migrate GitLab from CentOS to Ubuntu on ECS">
+                        <span class="hidden-mobile">Migrate GitLab from CentOS to Ubuntu on ECS</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-07-31T07:05:06.000Z</updated>
+  <updated>2023-10-04T23:42:41.812Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Installing Lean 3 on Windows</title>
+    <link href="https://lingkkang.github.io/2023/10/04/lean-inst-win/"/>
+    <id>https://lingkkang.github.io/2023/10/04/lean-inst-win/</id>
+    <published>2023-10-04T21:23:32.000Z</published>
+    <updated>2023-10-04T23:42:41.812Z</updated>
+    
+    
+    <summary type="html">Quite annoying to get Lean 4 installed without noticing it.</summary>
+    
+    
+    
+    
+    <category term="VS Code" scheme="https://lingkkang.github.io/tags/VS-Code/"/>
+    
+    <category term="Lean" scheme="https://lingkkang.github.io/tags/Lean/"/>
+    
+    <category term="Windows" scheme="https://lingkkang.github.io/tags/Windows/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Migrate GitLab from CentOS to Ubuntu on ECS</title>
     <link href="https://lingkkang.github.io/2023/07/31/migrate-gitlab/"/>
     <id>https://lingkkang.github.io/2023/07/31/migrate-gitlab/</id>
-    <published>2023-07-31T05:04:06.000Z</published>
-    <updated>2023-07-31T07:05:06.000Z</updated>
+    <published>2023-07-31T12:04:06.000Z</published>
+    <updated>2023-07-31T14:05:06.000Z</updated>
     
     
     <summary type="html">In this post, we migrate GitLab from CentOS to Ubuntu on Alibaba Cloud ECS, with GitLab backup and restore.</summary>
@@ -51,8 +72,8 @@
     <title>Performance Issue of Memory Alignment</title>
     <link href="https://lingkkang.github.io/2023/07/26/align-test/"/>
     <id>https://lingkkang.github.io/2023/07/26/align-test/</id>
-    <published>2023-07-26T11:28:05.000Z</published>
-    <updated>2023-07-26T14:47:05.000Z</updated>
+    <published>2023-07-26T18:28:05.000Z</published>
+    <updated>2023-07-26T21:47:05.000Z</updated>
     
     
     <summary type="html">Not so easy to tell...</summary>
@@ -62,15 +83,15 @@
     <category term="Programming Language" scheme="https://lingkkang.github.io/categories/Programming-Language/"/>
     
     
+    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
+    
+    <category term="Cpp" scheme="https://lingkkang.github.io/tags/Cpp/"/>
+    
     <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
     
     <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
     
     <category term="Alignment" scheme="https://lingkkang.github.io/tags/Alignment/"/>
-    
-    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
-    
-    <category term="Cpp" scheme="https://lingkkang.github.io/tags/Cpp/"/>
     
     <category term="Padding" scheme="https://lingkkang.github.io/tags/Padding/"/>
     
@@ -80,8 +101,8 @@
     <title>Access MySQL Localhost on Windows Host from WSL2</title>
     <link href="https://lingkkang.github.io/2023/07/07/wsl2mysql/"/>
     <id>https://lingkkang.github.io/2023/07/07/wsl2mysql/</id>
-    <published>2023-07-07T01:00:04.000Z</published>
-    <updated>2023-07-07T03:33:04.000Z</updated>
+    <published>2023-07-07T08:00:04.000Z</published>
+    <updated>2023-07-07T10:33:04.000Z</updated>
     
     
     <summary type="html">Manage MySQL server on Windows host from WSL2.</summary>
@@ -93,6 +114,8 @@
     
     <category term="Linux" scheme="https://lingkkang.github.io/tags/Linux/"/>
     
+    <category term="Windows" scheme="https://lingkkang.github.io/tags/Windows/"/>
+    
     <category term="SQL" scheme="https://lingkkang.github.io/tags/SQL/"/>
     
     <category term="Hyper-V" scheme="https://lingkkang.github.io/tags/Hyper-V/"/>
@@ -100,8 +123,6 @@
     <category term="MySQL" scheme="https://lingkkang.github.io/tags/MySQL/"/>
     
     <category term="WSL2" scheme="https://lingkkang.github.io/tags/WSL2/"/>
-    
-    <category term="Windows" scheme="https://lingkkang.github.io/tags/Windows/"/>
     
     <category term="CRUD" scheme="https://lingkkang.github.io/tags/CRUD/"/>
     
@@ -119,8 +140,8 @@
     <title>Share Files Between Host and Linux Virtual Machine over Hyper-V</title>
     <link href="https://lingkkang.github.io/2023/06/16/share-file-host-and-vm-hyper-v/"/>
     <id>https://lingkkang.github.io/2023/06/16/share-file-host-and-vm-hyper-v/</id>
-    <published>2023-06-16T07:15:08.000Z</published>
-    <updated>2023-06-16T08:54:08.000Z</updated>
+    <published>2023-06-16T14:15:08.000Z</published>
+    <updated>2023-06-16T15:54:08.000Z</updated>
     
     
     <summary type="html">Set up shared directory via CIFS.</summary>
@@ -139,37 +160,6 @@
     <category term="mount" scheme="https://lingkkang.github.io/tags/mount/"/>
     
     <category term="CIFS" scheme="https://lingkkang.github.io/tags/CIFS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Partition and Mount TF Card on Linux</title>
-    <link href="https://lingkkang.github.io/2023/06/13/access-tf/"/>
-    <id>https://lingkkang.github.io/2023/06/13/access-tf/</id>
-    <published>2023-06-13T03:55:40.000Z</published>
-    <updated>2023-06-15T03:58:00.000Z</updated>
-    
-    
-    <summary type="html">Some dirty works.</summary>
-    
-    
-    
-    <category term="DevOps" scheme="https://lingkkang.github.io/categories/DevOps/"/>
-    
-    
-    <category term="TF Card" scheme="https://lingkkang.github.io/tags/TF-Card/"/>
-    
-    <category term="Linux" scheme="https://lingkkang.github.io/tags/Linux/"/>
-    
-    <category term="Mount" scheme="https://lingkkang.github.io/tags/Mount/"/>
-    
-    <category term="Partition" scheme="https://lingkkang.github.io/tags/Partition/"/>
-    
-    <category term="SBC" scheme="https://lingkkang.github.io/tags/SBC/"/>
-    
-    <category term="Huashan-pi" scheme="https://lingkkang.github.io/tags/Huashan-pi/"/>
-    
-    <category term="Disk" scheme="https://lingkkang.github.io/tags/Disk/"/>
     
   </entry>
   
