@@ -6,7 +6,7 @@
   <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
   
   <link href="https://lingkkang.github.io/"/>
-  <updated>2023-10-04T23:46:23.962Z</updated>
+  <updated>2023-10-05T00:00:32.000Z</updated>
   <id>https://lingkkang.github.io/</id>
   
   <author>
@@ -21,12 +21,14 @@
     <link href="https://lingkkang.github.io/2023/10/04/lean-inst-win/"/>
     <id>https://lingkkang.github.io/2023/10/04/lean-inst-win/</id>
     <published>2023-10-04T21:23:32.000Z</published>
-    <updated>2023-10-04T23:46:23.962Z</updated>
+    <updated>2023-10-05T00:00:32.000Z</updated>
     
     
     <summary type="html">Quite annoying to get Lean 4 installed without noticing it.</summary>
     
     
+    
+    <category term="DevOps" scheme="https://lingkkang.github.io/categories/DevOps/"/>
     
     
     <category term="VS Code" scheme="https://lingkkang.github.io/tags/VS-Code/"/>
@@ -83,15 +85,15 @@
     <category term="Programming Language" scheme="https://lingkkang.github.io/categories/Programming-Language/"/>
     
     
-    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
-    
-    <category term="Cpp" scheme="https://lingkkang.github.io/tags/Cpp/"/>
-    
     <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
     
     <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
     
     <category term="Alignment" scheme="https://lingkkang.github.io/tags/Alignment/"/>
+    
+    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
+    
+    <category term="Cpp" scheme="https://lingkkang.github.io/tags/Cpp/"/>
     
     <category term="Padding" scheme="https://lingkkang.github.io/tags/Padding/"/>
     
