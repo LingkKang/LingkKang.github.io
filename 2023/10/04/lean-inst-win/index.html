@@ -245,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.3k words
+          3.5k words
         
       </span>
     
@@ -256,7 +256,7 @@
         
         
         
-          28 mins
+          30 mins
         
       </span>
     
@@ -314,6 +314,7 @@
 <p>At the moment, the latest release is <a target="_blank" rel="noopener" href="https://github.com/leanprover-community/lean/releases/tag/v3.51.1">Release v3.51.1</a>, so I will download <code>lean-3.51.1-windows.zip</code>.</p>
 <p>There may be a warning that says “This file is not commonly downloaded and may be dangerous”, I’m not sure why, but just keep downloading it. It should be safe as long as you are downloading it from the official repository.</p>
 <p><img src="/../images/one_time/lean-warn.png" srcset="/img/loading.gif" lazyload alt="Download Lean 3"></p>
+<p>Note that the Lean 3 is no more maintained officially, here we downloaded is the community version. If you want to get the last official version, which was released in 2019, you can download it from <a target="_blank" rel="noopener" href="https://github.com/leanprover/lean3/releases/tag/v3.4.2">Release v3.4.2 · leanprover&#x2F;lean3</a>, the rest of the steps should be the same.</p>
 <h2 id="2-Unzip-the-file"><a href="#2-Unzip-the-file" class="headerlink" title="2. Unzip the file"></a>2. Unzip the file</h2><p>Unzip the downloaded file to a directory of your choice. There should be three folders: <code>bin</code>, <code>include</code>, and <code>lib</code> respectively.</p>
 <p>I put them on my D drive, and also renamed the folder to <code>lean</code>. So now I have <code>D:\lean\bin</code>, <code>D:\lean\include</code>, and <code>D:\lean\lib</code>.</p>
 <p>Optionally, you can test the <code>lean.exe</code> in the <code>bin</code> folder by running <code>.\lean.exe --version</code> in a command prompt or PowerShell:</p>
@@ -341,7 +342,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Lean">#eval 1 + 1<br></code></pre></td></tr></table></figure>
 
 <p>or </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Lean">#check 1 + 1<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Lean">#check &quot;Hello world!&quot;<br></code></pre></td></tr></table></figure>
 
 <p>The <code>Lean Infoview</code> window should pop up to provide plenty of information about the code, including the result.</p>
 <p><img src="/../images/one_time/lean-done.png" srcset="/img/loading.gif" lazyload alt="Lean 3 in VS Code"></p>
