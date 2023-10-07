@@ -3,11 +3,11 @@
   <title>Lingkang&#39;s Blog</title>
   
   <subtitle>Hi there! This is Lingkang :)</subtitle>
-  <link href="https://lingkkang.github.io/atom.xml" rel="self"/>
+  <link href="https://lingkang.dev/atom.xml" rel="self"/>
   
-  <link href="https://lingkkang.github.io/"/>
+  <link href="https://lingkang.dev/"/>
   <updated>2023-10-05T00:00:32.000Z</updated>
-  <id>https://lingkkang.github.io/</id>
+  <id>https://lingkang.dev/</id>
   
   <author>
     <name>Lingkang</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Installing Lean 3 on Windows</title>
-    <link href="https://lingkkang.github.io/2023/10/04/lean-inst-win/"/>
-    <id>https://lingkkang.github.io/2023/10/04/lean-inst-win/</id>
+    <link href="https://lingkang.dev/2023/10/04/lean-inst-win/"/>
+    <id>https://lingkang.dev/2023/10/04/lean-inst-win/</id>
     <published>2023-10-04T21:23:32.000Z</published>
     <updated>2023-10-05T00:00:32.000Z</updated>
     
@@ -28,21 +28,21 @@
     
     
     
-    <category term="DevOps" scheme="https://lingkkang.github.io/categories/DevOps/"/>
+    <category term="DevOps" scheme="https://lingkang.dev/categories/DevOps/"/>
     
     
-    <category term="VS Code" scheme="https://lingkkang.github.io/tags/VS-Code/"/>
+    <category term="VS Code" scheme="https://lingkang.dev/tags/VS-Code/"/>
     
-    <category term="Lean" scheme="https://lingkkang.github.io/tags/Lean/"/>
+    <category term="Lean" scheme="https://lingkang.dev/tags/Lean/"/>
     
-    <category term="Windows" scheme="https://lingkkang.github.io/tags/Windows/"/>
+    <category term="Windows" scheme="https://lingkang.dev/tags/Windows/"/>
     
   </entry>
   
   <entry>
     <title>Migrate GitLab from CentOS to Ubuntu on ECS</title>
-    <link href="https://lingkkang.github.io/2023/07/31/migrate-gitlab/"/>
-    <id>https://lingkkang.github.io/2023/07/31/migrate-gitlab/</id>
+    <link href="https://lingkang.dev/2023/07/31/migrate-gitlab/"/>
+    <id>https://lingkang.dev/2023/07/31/migrate-gitlab/</id>
     <published>2023-07-31T12:04:06.000Z</published>
     <updated>2023-07-31T14:05:06.000Z</updated>
     
@@ -51,29 +51,29 @@
     
     
     
-    <category term="DevOps" scheme="https://lingkkang.github.io/categories/DevOps/"/>
+    <category term="DevOps" scheme="https://lingkang.dev/categories/DevOps/"/>
     
     
-    <category term="Linux" scheme="https://lingkkang.github.io/tags/Linux/"/>
+    <category term="Linux" scheme="https://lingkang.dev/tags/Linux/"/>
     
-    <category term="Server" scheme="https://lingkkang.github.io/tags/Server/"/>
+    <category term="Server" scheme="https://lingkang.dev/tags/Server/"/>
     
-    <category term="Cloud" scheme="https://lingkkang.github.io/tags/Cloud/"/>
+    <category term="Cloud" scheme="https://lingkang.dev/tags/Cloud/"/>
     
-    <category term="ECS" scheme="https://lingkkang.github.io/tags/ECS/"/>
+    <category term="ECS" scheme="https://lingkang.dev/tags/ECS/"/>
     
-    <category term="GitLab" scheme="https://lingkkang.github.io/tags/GitLab/"/>
+    <category term="GitLab" scheme="https://lingkang.dev/tags/GitLab/"/>
     
-    <category term="Ubuntu" scheme="https://lingkkang.github.io/tags/Ubuntu/"/>
+    <category term="Ubuntu" scheme="https://lingkang.dev/tags/Ubuntu/"/>
     
-    <category term="CentOS" scheme="https://lingkkang.github.io/tags/CentOS/"/>
+    <category term="CentOS" scheme="https://lingkang.dev/tags/CentOS/"/>
     
   </entry>
   
   <entry>
     <title>Performance Issue of Memory Alignment</title>
-    <link href="https://lingkkang.github.io/2023/07/26/align-test/"/>
-    <id>https://lingkkang.github.io/2023/07/26/align-test/</id>
+    <link href="https://lingkang.dev/2023/07/26/align-test/"/>
+    <id>https://lingkang.dev/2023/07/26/align-test/</id>
     <published>2023-07-26T18:28:05.000Z</published>
     <updated>2023-07-26T21:47:05.000Z</updated>
     
@@ -82,27 +82,27 @@
     
     
     
-    <category term="Programming Language" scheme="https://lingkkang.github.io/categories/Programming-Language/"/>
+    <category term="Programming Language" scheme="https://lingkang.dev/categories/Programming-Language/"/>
     
     
-    <category term="C" scheme="https://lingkkang.github.io/tags/C/"/>
+    <category term="C" scheme="https://lingkang.dev/tags/C/"/>
     
-    <category term="Cpp" scheme="https://lingkkang.github.io/tags/Cpp/"/>
+    <category term="Cpp" scheme="https://lingkang.dev/tags/Cpp/"/>
     
-    <category term="Optimization" scheme="https://lingkkang.github.io/tags/Optimization/"/>
+    <category term="Optimization" scheme="https://lingkang.dev/tags/Optimization/"/>
     
-    <category term="Memory" scheme="https://lingkkang.github.io/tags/Memory/"/>
+    <category term="Memory" scheme="https://lingkang.dev/tags/Memory/"/>
     
-    <category term="Alignment" scheme="https://lingkkang.github.io/tags/Alignment/"/>
+    <category term="Alignment" scheme="https://lingkang.dev/tags/Alignment/"/>
     
-    <category term="Padding" scheme="https://lingkkang.github.io/tags/Padding/"/>
+    <category term="Padding" scheme="https://lingkang.dev/tags/Padding/"/>
     
   </entry>
   
   <entry>
     <title>Access MySQL Localhost on Windows Host from WSL2</title>
-    <link href="https://lingkkang.github.io/2023/07/07/wsl2mysql/"/>
-    <id>https://lingkkang.github.io/2023/07/07/wsl2mysql/</id>
+    <link href="https://lingkang.dev/2023/07/07/wsl2mysql/"/>
+    <id>https://lingkang.dev/2023/07/07/wsl2mysql/</id>
     <published>2023-07-07T08:00:04.000Z</published>
     <updated>2023-07-07T10:33:04.000Z</updated>
     
@@ -111,37 +111,37 @@
     
     
     
-    <category term="DevOps" scheme="https://lingkkang.github.io/categories/DevOps/"/>
+    <category term="DevOps" scheme="https://lingkang.dev/categories/DevOps/"/>
     
     
-    <category term="Linux" scheme="https://lingkkang.github.io/tags/Linux/"/>
+    <category term="Linux" scheme="https://lingkang.dev/tags/Linux/"/>
     
-    <category term="SQL" scheme="https://lingkkang.github.io/tags/SQL/"/>
+    <category term="SQL" scheme="https://lingkang.dev/tags/SQL/"/>
     
-    <category term="Windows" scheme="https://lingkkang.github.io/tags/Windows/"/>
+    <category term="Windows" scheme="https://lingkang.dev/tags/Windows/"/>
     
-    <category term="Hyper-V" scheme="https://lingkkang.github.io/tags/Hyper-V/"/>
+    <category term="Hyper-V" scheme="https://lingkang.dev/tags/Hyper-V/"/>
     
-    <category term="IP" scheme="https://lingkkang.github.io/tags/IP/"/>
+    <category term="IP" scheme="https://lingkang.dev/tags/IP/"/>
     
-    <category term="IPv4" scheme="https://lingkkang.github.io/tags/IPv4/"/>
+    <category term="IPv4" scheme="https://lingkang.dev/tags/IPv4/"/>
     
-    <category term="MySQL" scheme="https://lingkkang.github.io/tags/MySQL/"/>
+    <category term="MySQL" scheme="https://lingkang.dev/tags/MySQL/"/>
     
-    <category term="WSL2" scheme="https://lingkkang.github.io/tags/WSL2/"/>
+    <category term="WSL2" scheme="https://lingkang.dev/tags/WSL2/"/>
     
-    <category term="CRUD" scheme="https://lingkkang.github.io/tags/CRUD/"/>
+    <category term="CRUD" scheme="https://lingkang.dev/tags/CRUD/"/>
     
-    <category term="Rouging" scheme="https://lingkkang.github.io/tags/Rouging/"/>
+    <category term="Rouging" scheme="https://lingkang.dev/tags/Rouging/"/>
     
-    <category term="Privileged Access Management" scheme="https://lingkkang.github.io/tags/Privileged-Access-Management/"/>
+    <category term="Privileged Access Management" scheme="https://lingkang.dev/tags/Privileged-Access-Management/"/>
     
   </entry>
   
   <entry>
     <title>Share Files Between Host and Linux Virtual Machine over Hyper-V</title>
-    <link href="https://lingkkang.github.io/2023/06/16/share-file-host-and-vm-hyper-v/"/>
-    <id>https://lingkkang.github.io/2023/06/16/share-file-host-and-vm-hyper-v/</id>
+    <link href="https://lingkang.dev/2023/06/16/share-file-host-and-vm-hyper-v/"/>
+    <id>https://lingkang.dev/2023/06/16/share-file-host-and-vm-hyper-v/</id>
     <published>2023-06-16T14:15:08.000Z</published>
     <updated>2023-06-16T15:54:08.000Z</updated>
     
@@ -150,18 +150,18 @@
     
     
     
-    <category term="DevOps" scheme="https://lingkkang.github.io/categories/DevOps/"/>
+    <category term="DevOps" scheme="https://lingkang.dev/categories/DevOps/"/>
     
     
-    <category term="Linux" scheme="https://lingkkang.github.io/tags/Linux/"/>
+    <category term="Linux" scheme="https://lingkang.dev/tags/Linux/"/>
     
-    <category term="Hyper-V" scheme="https://lingkkang.github.io/tags/Hyper-V/"/>
+    <category term="Hyper-V" scheme="https://lingkang.dev/tags/Hyper-V/"/>
     
-    <category term="virtual machine" scheme="https://lingkkang.github.io/tags/virtual-machine/"/>
+    <category term="virtual machine" scheme="https://lingkang.dev/tags/virtual-machine/"/>
     
-    <category term="mount" scheme="https://lingkkang.github.io/tags/mount/"/>
+    <category term="mount" scheme="https://lingkang.dev/tags/mount/"/>
     
-    <category term="CIFS" scheme="https://lingkkang.github.io/tags/CIFS/"/>
+    <category term="CIFS" scheme="https://lingkang.dev/tags/CIFS/"/>
     
   </entry>
   

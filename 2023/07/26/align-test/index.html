@@ -19,11 +19,11 @@
     <meta name="description" content="Not so easy to tell...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Performance Issue of Memory Alignment">
-<meta property="og:url" content="https://lingkkang.github.io/2023/07/26/align-test/index.html">
+<meta property="og:url" content="https://lingkang.dev/2023/07/26/align-test/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
 <meta property="og:description" content="Not so easy to tell...">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://lingkkang.github.io/images/one_time/align-test.png">
+<meta property="og:image" content="https://lingkang.dev/images/one_time/align-test.png">
 <meta property="article:published_time" content="2023-07-26T18:28:05.000Z">
 <meta property="article:modified_time" content="2023-07-26T21:47:05.000Z">
 <meta property="article:author" content="Lingkang">
@@ -34,7 +34,7 @@
 <meta property="article:tag" content="Alignment">
 <meta property="article:tag" content="Padding">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://lingkkang.github.io/images/one_time/align-test.png">
+<meta name="twitter:image" content="https://lingkang.dev/images/one_time/align-test.png">
   
   
   
@@ -82,7 +82,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"lingkkang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"lingkang.dev","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -308,7 +308,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Performance-Issue-of-Memory-Alignment"><a href="#Performance-Issue-of-Memory-Alignment" class="headerlink" title="Performance Issue of Memory Alignment"></a>Performance Issue of Memory Alignment</h1><p>We have already discussed <a href="https://lingkkang.github.io/2023/03/12/align/">some tricks for aligning numbers</a>. In this post, we will explore the difference in code performance between aligned and unaligned memory access, especially when accessing and assigning to the members of <code>struct</code> (and possibly <code>class</code>). A piece of ready-to-go C++ code is provided in the <a href="#appendix">appendix</a>.</p>
+                <h1 id="Performance-Issue-of-Memory-Alignment"><a href="#Performance-Issue-of-Memory-Alignment" class="headerlink" title="Performance Issue of Memory Alignment"></a>Performance Issue of Memory Alignment</h1><p>We have already discussed <a target="_blank" rel="noopener" href="https://lingkkang.github.io/2023/03/12/align/">some tricks for aligning numbers</a>. In this post, we will explore the difference in code performance between aligned and unaligned memory access, especially when accessing and assigning to the members of <code>struct</code> (and possibly <code>class</code>). A piece of ready-to-go C++ code is provided in the <a href="#appendix">appendix</a>.</p>
 <h2 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h2><p>We plan to use <code>struct</code> to demonstrate the performance difference. Basically, it would contain three members: <code>char</code>, <code>int</code> and <code>double</code>. We will try to align them in different ways and see the performance difference.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Struct1</span><br>&#123;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">char</span> my_char = <span class="hljs-string">&#x27;\0&#x27;</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">int</span> my_int = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">volatile</span> <span class="hljs-type">double</span> my_double = <span class="hljs-number">0.0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -522,7 +522,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>Performance Issue of Memory Alignment</div>
-      <div>https://lingkkang.github.io/2023/07/26/align-test/</div>
+      <div>https://lingkang.dev/2023/07/26/align-test/</div>
     </div>
     <div class="license-meta">
       

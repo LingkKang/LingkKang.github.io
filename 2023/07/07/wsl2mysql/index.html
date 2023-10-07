@@ -19,7 +19,7 @@
     <meta name="description" content="Manage MySQL server on Windows host from WSL2.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Access MySQL Localhost on Windows Host from WSL2">
-<meta property="og:url" content="https://lingkkang.github.io/2023/07/07/wsl2mysql/index.html">
+<meta property="og:url" content="https://lingkang.dev/2023/07/07/wsl2mysql/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
 <meta property="og:description" content="Manage MySQL server on Windows host from WSL2.">
 <meta property="og:locale" content="en_US">
@@ -85,7 +85,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"lingkkang.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"lingkang.dev","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -316,7 +316,7 @@
 <figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">ip route</span><br>default via 172.23.144.1 dev eth0<br>172.23.144.0/20 dev eth0 proto kernel scope link src 172.23.151.37 <br></code></pre></td></tr></table></figure>
 
 <p>The first line represents the default route, the IP address <code>172.23.144.1</code> is the gateway or next-hop IP address. Actually, this is also the IP address of the host machine, where our MySQL server is running.</p>
-<p>The second line represents a specific route for the network <code>172.23.144.0/20</code>, which is a <a href="https://lingkkang.github.io/2023/05/15/subnet/">subnet</a> for WSL2. The source <code>src 172.23.151.37</code> is the IP address that will be used when sending traffic to the network, i.e., the IP address of WSL2.</p>
+<p>The second line represents a specific route for the network <code>172.23.144.0/20</code>, which is a <a target="_blank" rel="noopener" href="https://lingkkang.github.io/2023/05/15/subnet/">subnet</a> for WSL2. The source <code>src 172.23.151.37</code> is the IP address that will be used when sending traffic to the network, i.e., the IP address of WSL2.</p>
 <p>Run following command can also validate the IP address of the host machine.</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">echo</span> $(hostname).<span class="hljs-built_in">local</span><br>ping -c 2 $(hostname).<span class="hljs-built_in">local</span><br></code></pre></td></tr></table></figure>
 
@@ -425,7 +425,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>Access MySQL Localhost on Windows Host from WSL2</div>
-      <div>https://lingkkang.github.io/2023/07/07/wsl2mysql/</div>
+      <div>https://lingkang.dev/2023/07/07/wsl2mysql/</div>
     </div>
     <div class="license-meta">
       
