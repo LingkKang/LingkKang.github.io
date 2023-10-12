@@ -18,7 +18,7 @@
   
     <meta name="description" content="Quite annoying to get Lean 4 installed without noticing it.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Installing Lean 3 on Windows">
+<meta property="og:title" content="Install Lean 3 on Windows">
 <meta property="og:url" content="https://lingkang.dev/2023/10/04/lean-inst-win/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
 <meta property="og:description" content="Quite annoying to get Lean 4 installed without noticing it.">
@@ -39,7 +39,7 @@
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Installing Lean 3 on Windows - Lingkang&#39;s Blog</title>
+  <title>Install Lean 3 on Windows - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -81,7 +81,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"lingkang.dev","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"lingkang.dev","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"G-S9PGLW5JVZ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -91,6 +91,33 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-S9PGLW5JVZ', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
   
@@ -222,7 +249,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Installing Lean 3 on Windows"></span>
+            <span id="subtitle" data-typed-text="Install Lean 3 on Windows"></span>
           
         </div>
 
@@ -294,7 +321,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Installing Lean 3 on Windows</h1>
+            <h1 style="display: none">Install Lean 3 on Windows</h1>
             
               <p class="note note-info">
                 
@@ -307,7 +334,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Installing-Lean-3-on-Windows"><a href="#Installing-Lean-3-on-Windows" class="headerlink" title="Installing Lean 3 on Windows"></a>Installing Lean 3 on Windows</h1><p>If you following the <a target="_blank" rel="noopener" href="https://leanprover-community.github.io/install/windows.html">official installation guide on Windows</a>, Lean 4 will be installed automatically. However, if you want to install Lean 3 on Windows, you can follow the steps below.</p>
+                <h1 id="Install-Lean-3-on-Windows"><a href="#Install-Lean-3-on-Windows" class="headerlink" title="Install Lean 3 on Windows"></a>Install Lean 3 on Windows</h1><p>If you following the <a target="_blank" rel="noopener" href="https://leanprover-community.github.io/install/windows.html">official installation guide on Windows</a>, Lean 4 will be installed automatically. However, if you want to install Lean 3 on Windows, you can follow the steps below.</p>
 <p>These should be the minimum steps and I will try to keep them as clear as possible.</p>
 <h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>I assume you have <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a> installed. (And possibly a web browser 🤷)</p>
 <h2 id="1-Download-the-latest-release"><a href="#1-Download-the-latest-release" class="headerlink" title="1. Download the latest release"></a>1. Download the latest release</h2><p>Head to the <a target="_blank" rel="noopener" href="https://github.com/leanprover-community/lean">Lean 3 repository on GitHub</a>, find the latest release, and download the <code>lean-&lt;version&gt;-windows.zip</code> file.</p>
@@ -406,7 +433,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Installing Lean 3 on Windows</div>
+      <div>Install Lean 3 on Windows</div>
       <div>https://lingkang.dev/2023/10/04/lean-inst-win/</div>
     </div>
     <div class="license-meta">
