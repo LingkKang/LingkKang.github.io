@@ -88,11 +88,11 @@
       
       <tag>C</tag>
       
+      <tag>Memory</tag>
+      
       <tag>Cpp</tag>
       
       <tag>Optimization</tag>
-      
-      <tag>Memory</tag>
       
       <tag>Alignment</tag>
       
@@ -129,17 +129,17 @@
       
       <tag>Hyper-V</tag>
       
-      <tag>IP</tag>
-      
-      <tag>IPv4</tag>
-      
       <tag>MySQL</tag>
       
       <tag>WSL2</tag>
       
       <tag>CRUD</tag>
       
+      <tag>IP</tag>
+      
       <tag>Rouging</tag>
+      
+      <tag>IPv4</tag>
       
       <tag>Privileged Access Management</tag>
       
@@ -341,13 +341,13 @@
       
       <tag>IP</tag>
       
+      <tag>IPv4</tag>
+      
       <tag>Routing</tag>
       
       <tag>Subnet</tag>
       
       <tag>Subnet Mask</tag>
-      
-      <tag>IPv4</tag>
       
     </tags>
     
@@ -504,15 +504,15 @@
     
     <tags>
       
-      <tag>Optimization</tag>
-      
       <tag>Memory</tag>
+      
+      <tag>xv6</tag>
+      
+      <tag>Optimization</tag>
       
       <tag>Alignment</tag>
       
       <tag>Bitwise Operation</tag>
-      
-      <tag>xv6</tag>
       
     </tags>
     
@@ -539,11 +539,11 @@
       
       <tag>Register</tag>
       
+      <tag>QEMU</tag>
+      
       <tag>C</tag>
       
       <tag>xv6</tag>
-      
-      <tag>QEMU</tag>
       
       <tag>Emulation</tag>
       
@@ -582,12 +582,6 @@
       
       <tag>Register</tag>
       
-      <tag>C</tag>
-      
-      <tag>Memory</tag>
-      
-      <tag>xv6</tag>
-      
       <tag>Bootstrap</tag>
       
       <tag>Assembly</tag>
@@ -595,6 +589,12 @@
       <tag>Stack</tag>
       
       <tag>QEMU</tag>
+      
+      <tag>C</tag>
+      
+      <tag>Memory</tag>
+      
+      <tag>xv6</tag>
       
       <tag>Emulation</tag>
       
@@ -797,13 +797,13 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
-      <tag>LeetCode</tag>
-      
       <tag>Tree</tag>
       
       <tag>Binary Tree</tag>
+      
+      <tag>Python</tag>
+      
+      <tag>LeetCode</tag>
       
     </tags>
     
@@ -853,9 +853,9 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     
@@ -936,11 +936,11 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     
