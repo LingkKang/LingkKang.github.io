@@ -6,7 +6,7 @@
   <link href="https://lingkang.dev/atom.xml" rel="self"/>
   
   <link href="https://lingkang.dev/"/>
-  <updated>2023-10-05T00:00:32.000Z</updated>
+  <updated>2023-10-31T19:29:32.000Z</updated>
   <id>https://lingkang.dev/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OSC Lab Task 5 Reasoning</title>
+    <link href="https://lingkang.dev/2023/10/31/osc-lab-task5/"/>
+    <id>https://lingkang.dev/2023/10/31/osc-lab-task5/</id>
+    <published>2023-10-31T18:29:32.000Z</published>
+    <updated>2023-10-31T19:29:32.000Z</updated>
+    
+    
+    <summary type="html">My version of analysis of OSC lab task 5</summary>
+    
+    
+    
+    <category term="Operating System &amp; Architecture" scheme="https://lingkang.dev/categories/Operating-System-Architecture/"/>
+    
+    
+    <category term="Python" scheme="https://lingkang.dev/tags/Python/"/>
+    
+    <category term="Linux" scheme="https://lingkang.dev/tags/Linux/"/>
+    
+    <category term="C" scheme="https://lingkang.dev/tags/C/"/>
+    
+    <category term="task scheduling" scheme="https://lingkang.dev/tags/task-scheduling/"/>
+    
+    <category term="Visualization" scheme="https://lingkang.dev/tags/Visualization/"/>
+    
+    <category term="Round Robin" scheme="https://lingkang.dev/tags/Round-Robin/"/>
+    
+  </entry>
   
   <entry>
     <title>Install Lean 3 on Windows</title>
@@ -85,15 +114,15 @@
     <category term="Programming Language" scheme="https://lingkang.dev/categories/Programming-Language/"/>
     
     
-    <category term="C" scheme="https://lingkang.dev/tags/C/"/>
+    <category term="Optimization" scheme="https://lingkang.dev/tags/Optimization/"/>
     
     <category term="Memory" scheme="https://lingkang.dev/tags/Memory/"/>
     
-    <category term="Cpp" scheme="https://lingkang.dev/tags/Cpp/"/>
-    
-    <category term="Optimization" scheme="https://lingkang.dev/tags/Optimization/"/>
-    
     <category term="Alignment" scheme="https://lingkang.dev/tags/Alignment/"/>
+    
+    <category term="C" scheme="https://lingkang.dev/tags/C/"/>
+    
+    <category term="Cpp" scheme="https://lingkang.dev/tags/Cpp/"/>
     
     <category term="Padding" scheme="https://lingkang.dev/tags/Padding/"/>
     
@@ -122,46 +151,19 @@
     
     <category term="Hyper-V" scheme="https://lingkang.dev/tags/Hyper-V/"/>
     
+    <category term="IP" scheme="https://lingkang.dev/tags/IP/"/>
+    
+    <category term="Routing" scheme="https://lingkang.dev/tags/Routing/"/>
+    
+    <category term="IPv4" scheme="https://lingkang.dev/tags/IPv4/"/>
+    
     <category term="MySQL" scheme="https://lingkang.dev/tags/MySQL/"/>
     
     <category term="WSL2" scheme="https://lingkang.dev/tags/WSL2/"/>
     
     <category term="CRUD" scheme="https://lingkang.dev/tags/CRUD/"/>
     
-    <category term="IP" scheme="https://lingkang.dev/tags/IP/"/>
-    
-    <category term="Rouging" scheme="https://lingkang.dev/tags/Rouging/"/>
-    
-    <category term="IPv4" scheme="https://lingkang.dev/tags/IPv4/"/>
-    
     <category term="Privileged Access Management" scheme="https://lingkang.dev/tags/Privileged-Access-Management/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Share Files Between Host and Linux Virtual Machine over Hyper-V</title>
-    <link href="https://lingkang.dev/2023/06/16/share-file-host-and-vm-hyper-v/"/>
-    <id>https://lingkang.dev/2023/06/16/share-file-host-and-vm-hyper-v/</id>
-    <published>2023-06-16T14:15:08.000Z</published>
-    <updated>2023-06-16T15:54:08.000Z</updated>
-    
-    
-    <summary type="html">Set up shared directory via CIFS.</summary>
-    
-    
-    
-    <category term="DevOps" scheme="https://lingkang.dev/categories/DevOps/"/>
-    
-    
-    <category term="Linux" scheme="https://lingkang.dev/tags/Linux/"/>
-    
-    <category term="Hyper-V" scheme="https://lingkang.dev/tags/Hyper-V/"/>
-    
-    <category term="virtual machine" scheme="https://lingkang.dev/tags/virtual-machine/"/>
-    
-    <category term="mount" scheme="https://lingkang.dev/tags/mount/"/>
-    
-    <category term="CIFS" scheme="https://lingkang.dev/tags/CIFS/"/>
     
   </entry>
   
