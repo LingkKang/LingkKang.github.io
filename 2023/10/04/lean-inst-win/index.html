@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://lingkang.dev/images/lean/lean-done.png">
 <meta property="og:image" content="https://lingkang.dev/images/lean/lean-done-full.png">
 <meta property="article:published_time" content="2023-10-04T21:23:32.000Z">
-<meta property="article:modified_time" content="2023-11-11T23:43:32.000Z">
+<meta property="article:modified_time" content="2023-11-12T13:21:32.000Z">
 <meta property="article:author" content="Lingkang">
 <meta property="article:tag" content="VS Code">
 <meta property="article:tag" content="Lean">
@@ -273,7 +273,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.9k words
+          13k words
         
       </span>
     
@@ -284,7 +284,7 @@
         
         
         
-          66 mins
+          108 mins
         
       </span>
     
@@ -327,7 +327,7 @@
               <p class="note note-info">
                 
                   
-                    Last updated on November 11, 2023 pm
+                    Last updated on November 12, 2023 pm
                   
                 
               </p>
@@ -411,10 +411,10 @@
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell"><span class="hljs-built_in">PS</span> E:\Code\Lean&gt; leanproject new proj<br>FileNotFoundError: [<span class="hljs-type">WinError</span> <span class="hljs-number">2</span>] The system cannot find the file specified<br></code></pre></td></tr></table></figure>
 
 <p>Here we directly head to resolve the issue, some thoughts over it could be found at <a href="#8-Appendix">8. Appendix</a>.</p>
-<p>First verify that <code>leanpkg</code> is installed correctly by running <code>leanpkg --version</code>:</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">PowerShell <span class="hljs-number">7.3</span>.<span class="hljs-number">9</span><br><span class="hljs-built_in">PS</span> C:\Users\Lingkang&gt; leanpkg <span class="hljs-literal">--version</span><br>Lean package manager, version <span class="hljs-number">3.51</span>.<span class="hljs-number">1</span><br><br>Usage: leanpkg &lt;command&gt;<br><br>configure              download dependencies<br>build [-- &lt;<span class="hljs-type">lean</span>-<span class="hljs-type">args</span>&gt;] download dependencies and build *.olean files<br>...<br></code></pre></td></tr></table></figure>
+<p>In side the <code>leanproject</code>, <code>leanpkg</code> is actually called for help, so we first verify that <code>leanpkg</code> is installed correctly. Run <code>leanpkg --version</code>:</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell">PowerShell <span class="hljs-number">7.3</span>.<span class="hljs-number">9</span><br><span class="hljs-built_in">PS</span> C:\Users\Lingkang&gt; leanpkg <span class="hljs-literal">--version</span><br>Lean package manager, version <span class="hljs-number">3.51</span>.<span class="hljs-number">1</span><br><br>Usage: leanpkg &lt;command&gt;<br><br>...<br></code></pre></td></tr></table></figure>
 
-<p>This should be runnable no matter what version of Lean 3 you are using, e.g., <code>v3.4.2</code> or <code>v3.51.1</code>. If not, double check your <a href="#1-Download-the-latest-release">step 1</a> to <a href="#3-Add-the-path-to-the-environment-variables">step 3</a>.</p>
+<p>This should be runnable no matter what version of Lean 3 you are using, e.g., <code>v3.4.2</code> or <code>v3.51.1</code>. If not, double check your footprint from <a href="#1-Download-the-latest-release">step 1</a> to <a href="#3-Add-the-path-to-the-environment-variables">step 3</a>.</p>
 <p>Navigate to the <code>bin</code> folder of <code>lean</code> (here it is <code>D:\lean\bin</code>), create a new file named <code>leanpkg.c</code> with the following content:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span><br>&#123;<br>    <span class="hljs-type">char</span> command[<span class="hljs-number">500</span>];<br>    <span class="hljs-built_in">strcpy</span>(command, <span class="hljs-string">&quot;leanpkg.bat&quot;</span>);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; argc; i++)<br>    &#123;<br>        <span class="hljs-built_in">strcat</span>(command, <span class="hljs-string">&quot; &quot;</span>);<br>        <span class="hljs-built_in">strcat</span>(command, argv[i]);<br>    &#125;<br>    system(command);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -423,21 +423,57 @@
 
 <p>Now retry <a href="#7-2-Create-a-new-Lean-3-project">7.2. Create a new Lean 3 project</a> and it should work.</p>
 <p>Here, we are basically <em>cheating</em> the python interpreter, see below for more details.</p>
-<h2 id="8-Appendix"><a href="#8-Appendix" class="headerlink" title="8. Appendix"></a>8. Appendix</h2><p>Stay tuned.</p>
-<div class="note note-warning">
-            <p>Unfinished.</p>
-          </div>
-
-<!-- , we can see that there are two `leanpkg` files: `leanpkg` and `leanpkg.bat`. The first one is a shell script (not sure why put a shell script in a Windows release), and the second one is CMD batch script.
-
-
-or (horrifyingly)
-
+<h2 id="8-Appendix"><a href="#8-Appendix" class="headerlink" title="8. Appendix"></a>8. Appendix</h2><p>Here are short explanations and some thoughts over the installation process.</p>
+<h3 id="8-1-Causes"><a href="#8-1-Causes" class="headerlink" title="8.1. Causes"></a>8.1. Causes</h3><p>If we run <code>leanproject</code> with debug flag, the error stack is quite horrifying:</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs PowerShell"><span class="hljs-built_in">PS</span> E:\Code\Lean&gt; leanproject <span class="hljs-literal">--debug</span> new proj<br>Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\runpy.py&quot;</span>, line <span class="hljs-number">196</span>, <span class="hljs-keyword">in</span> _run_module_as_main<br>    <span class="hljs-keyword">return</span> _run_code(code, main_globals, None,<br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\runpy.py&quot;</span>, line <span class="hljs-number">86</span>, <span class="hljs-keyword">in</span> _run_code<br>    exec(code, run_globals)<br>  File <span class="hljs-string">&quot;D:\Python3.10\Scripts\leanproject.exe\__main__.py&quot;</span>, line <span class="hljs-number">7</span>, <span class="hljs-keyword">in</span> &lt;<br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\site-packages\mathlibtools\leanproject.py&quot;</span>, li<br>    handle_exception(err, str(err))<br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\site-packages\mathlibtools\leanproject.py&quot;</span>, li<br>    raise exc<br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\site-packages\mathlibtools\leanproject.py&quot;</span>, li<br>    <span class="hljs-built_in">cli</span>() <span class="hljs-comment"># pylint: disable=no-value-for-parameter</span><br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\site-packages\click\core.py&quot;</span>, line <span class="hljs-number">716</span>, <span class="hljs-keyword">in</span> __c<br>    <span class="hljs-keyword">return</span> self.main(*args, **kwargs)<br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\site-packages\click\core.py&quot;</span>, line <span class="hljs-number">696</span>, <span class="hljs-keyword">in</span> mai<br>    <span class="hljs-built_in">rv</span> = self.invoke(ctx)<br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\site-packages\click\core.py&quot;</span>, line <span class="hljs-number">1060</span>, <span class="hljs-keyword">in</span> <span class="hljs-keyword">in</span><br>    <span class="hljs-keyword">return</span> _process_result(sub_ctx.command.invoke(sub_ctx))<br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\site-packages\click\core.py&quot;</span>, line <span class="hljs-number">889</span>, <span class="hljs-keyword">in</span> inv<br>    <span class="hljs-keyword">return</span> ctx.invoke(self.callback, **ctx.params)<br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\site-packages\click\core.py&quot;</span>, line <span class="hljs-number">534</span>, <span class="hljs-keyword">in</span> inv<br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\site-packages\mathlibtools\lib.py&quot;</span>, line <span class="hljs-number">700</span>, <span class="hljs-keyword">in</span> new<br>    subprocess.run([<span class="hljs-string">&#x27;leanpkg&#x27;</span>, <span class="hljs-string">&#x27;new&#x27;</span>, <span class="hljs-type">str</span>(<span class="hljs-type">path</span>)], check=True)<br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\subprocess.py&quot;</span>, line <span class="hljs-number">501</span>, <span class="hljs-keyword">in</span> run<br>    with Popen(*popenargs, **kwargs) as <span class="hljs-keyword">process</span>:<br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\subprocess.py&quot;</span>, line <span class="hljs-number">966</span>, <span class="hljs-keyword">in</span> __init__<br>    self._execute_child(args, executable, preexec_fn, close_fds,<br>  File <span class="hljs-string">&quot;D:\Python3.10\lib\subprocess.py&quot;</span>, line <span class="hljs-number">1435</span>, <span class="hljs-keyword">in</span> _execute_child<br>    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,<br>FileNotFoundError: [<span class="hljs-type">WinError</span> <span class="hljs-number">2</span>] The system cannot find the file specified<br></code></pre></td></tr></table></figure>
 
-<p>We can see that  –&gt;</p>
-<!-- [mathlib-tools/mathlibtools/lib.py at 23f16313a659674570ed5bc25f339be027a0c5b4 · leanprover-community/mathlib-tools](https://github.com/leanprover-community/mathlib-tools/blob/23f16313a659674570ed5bc25f339be027a0c5b4/mathlibtools/lib.py#L724) -->
+<p>We can see that the error is caused by <code>subprocess.run([&#39;leanpkg&#39;, &#39;new&#39;, str(path)], check=True)</code> in <code>mathlibtools/lib.py</code>, and almost everywhere calling <code>leanpkg</code> will cause the same error.</p>
+<p>Source: <a target="_blank" rel="noopener" href="https://github.com/leanprover-community/mathlib-tools/blob/master/mathlibtools/lib.py">mathlib-tools&#x2F;mathlibtools&#x2F;lib.py at master · leanprover-community&#x2F;mathlib-tools</a></p>
+<p>To abstract away irrelevant details, we can simplify the code to: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> subprocess<br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">run</span>(<span class="hljs-params">args: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>) -&gt; <span class="hljs-built_in">str</span>:<br>    <span class="hljs-keyword">return</span> subprocess.run(<br>        args, stdout=subprocess.PIPE, check=<span class="hljs-literal">False</span><br>    ).stdout.decode()<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-built_in">print</span>(run([<span class="hljs-string">&quot;leanpkg&quot;</span>, <span class="hljs-string">&quot;--version&quot;</span>]))<br>    <span class="hljs-comment"># print(run([&quot;leanpkg.bat&quot;, &quot;--version&quot;]))</span><br></code></pre></td></tr></table></figure>
 
+<p>Running it will cause the same error that we got from <code>leanproject</code>:</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs stata">Traceback (most recent call last):<br>  <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;E:\Code\Lean\test.py&quot;</span>, <span class="hljs-keyword">line</span> 13, <span class="hljs-keyword">in</span> &lt;module&gt;<br>    <span class="hljs-keyword">print</span>(<span class="hljs-keyword">run</span>([<span class="hljs-string">&quot;leanpkg&quot;</span>, <span class="hljs-string">&quot;--version&quot;</span>]))<br>  <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;E:\Code\Lean\test.py&quot;</span>, <span class="hljs-keyword">line</span> 6, <span class="hljs-keyword">in</span> <span class="hljs-keyword">run</span><br>    <span class="hljs-keyword">return</span> subprocess.<span class="hljs-keyword">run</span>(<br>  <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;D:\Python3.10\lib\subprocess.py&quot;</span>, <span class="hljs-keyword">line</span> 501, <span class="hljs-keyword">in</span> <span class="hljs-keyword">run</span><br>    with Popen(*popenargs, **kwargs) <span class="hljs-keyword">as</span> process:<br>  <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;D:\Python3.10\lib\subprocess.py&quot;</span>, <span class="hljs-keyword">line</span> 966, <span class="hljs-keyword">in</span> __init__<br>    self._execute_child(<span class="hljs-keyword">args</span>, executable, preexec_fn, close_fds,<br>  <span class="hljs-keyword">File</span> <span class="hljs-string">&quot;D:\Python3.10\lib\subprocess.py&quot;</span>, <span class="hljs-keyword">line</span> 1435, <span class="hljs-keyword">in</span> _execute_child<br>    hp, ht, pid, tid = _winapi.CreateProcess(executable, <span class="hljs-keyword">args</span>,<br>FileNotFoundError: [WinError 2] The system cannot find the <span class="hljs-keyword">file</span> specified<br></code></pre></td></tr></table></figure>
+
+<p>And if we change the from <code>leanpkg</code> to <code>leanpkg.bat</code>, it will work:</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">Lean package manager, <span class="hljs-keyword">version</span> 3.51.1<br><br>Usage: leanpkg &lt;<span class="hljs-keyword">command</span>&gt;<br><br><span class="hljs-string">...</span><br></code></pre></td></tr></table></figure>
+
+<p>Under the <code>bin</code> folder of <code>lean</code>, we can see that there are two <code>leanpkg</code> files: <code>leanpkg</code> and <code>leanpkg.bat</code>. The first one is a shell script (not sure why put a shell script in a Windows release), and the second one is CMD batch script. When we run <code>leanpkg --version</code> on the command prompt or PowerShell, Windows is smart enough to run the batch script. This can be verified by running <code>Get-Command leanpkg</code> in PowerShell, and the output will specify which file is used for the command.</p>
+<div style="margin: 0 auto; width: fit-content;">
+
+<table>
+<thead>
+<tr>
+<th align="center">CommandType</th>
+<th align="center">Name</th>
+<th align="center">Version</th>
+<th align="center">Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Application</td>
+<td align="center">leanpkg.bat</td>
+<td align="center">0.0.0.0</td>
+<td align="center">D:\lean\bin\leanpkg.bat</td>
+</tr>
+</tbody></table>
+</div>
+
+<div class="note note-info">
+            <p>Both <code>Get-Command leanpkg</code> and <code>Get-Command leanpkg.bat</code> will return the same result.</p>
+          </div>
+
+<p>However, when we run it in Python, it will try to find an executable exactly named as <code>leanpkg</code>, and it will fail. It can only success when we specify the batch script <code>leanpkg.bat</code>.</p>
+<h3 id="8-2-Solutions"><a href="#8-2-Solutions" class="headerlink" title="8.2. Solutions"></a>8.2. Solutions</h3><p>So the solution is quite simple, we can either:</p>
+<ol>
+<li>Change the Python source code to use <code>leanpkg.bat</code> instead of <code>leanpkg</code>;</li>
+<li>Create a new executable named <code>leanpkg</code> that calls <code>leanpkg.bat</code> under the hood;</li>
+</ol>
+<p>The first solution is quite straightforward, but modifying the source code might cause unexpected issues, and there are many places to modify.</p>
+<p>The second solution, as what we did in <a href="#7-3-Troubleshooting">7.3. Troubleshooting</a>, is to create a new executable named <code>leanpkg.exe</code> that passes everything to <code>leanpkg.bat</code>. A little bit tricky.</p>
+<h3 id="8-3-Questions"><a href="#8-3-Questions" class="headerlink" title="8.3. Questions"></a>8.3. Questions</h3><p>Even though this is a feasible way, I still not sure why the procedure would go so painful.</p>
+<p>The <code>leanproject</code> (or <code>mathlibtools</code>) was marked as obsolete just on August this year, and its CI tested on all major platforms, including Windows, with different Python versions from 3.7 to 3.11. There is no reason that it would be broken so soon.</p>
+<p>And also, the transition from Lean 3 to Lean 4 sucks. The official site becomes a mixture of them, and toolchains’s documentation nearly not exists.</p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://leanprover-community.github.io/install/windows.html">Installing Lean 4 on Windows</a></li>
 <li><a target="_blank" rel="noopener" href="https://leanprover-community.github.io/lean3/install/windows.html">Installing Lean 3 and mathlib on Windows</a></li>
@@ -450,6 +486,7 @@ or (horrifyingly)
 <li><a target="_blank" rel="noopener" href="https://leanprover-community.github.io/lean3/toolchain.html">The Lean tool chain</a></li>
 <li><a target="_blank" rel="noopener" href="https://leanprover-community.github.io/lean3/leanproject.html">Using leanproject</a></li>
 <li><a target="_blank" rel="noopener" href="https://pypi.org/project/mathlibtools/">mathlibtools · PyPI</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/leanprover-community/mathlib-tools">leanprover-community&#x2F;mathlib-tools: Development tools for https://github.com/leanprover-community/mathlib</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/leanprover-community/mathlib">leanprover-community&#x2F;mathlib: Lean 3’s obsolete mathematical components library: please use mathlib4</a></li>
 </ol>
 
