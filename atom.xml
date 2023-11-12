@@ -116,13 +116,13 @@
     
     <category term="C" scheme="https://lingkang.dev/tags/C/"/>
     
-    <category term="Cpp" scheme="https://lingkang.dev/tags/Cpp/"/>
+    <category term="Memory" scheme="https://lingkang.dev/tags/Memory/"/>
     
     <category term="Optimization" scheme="https://lingkang.dev/tags/Optimization/"/>
     
-    <category term="Memory" scheme="https://lingkang.dev/tags/Memory/"/>
-    
     <category term="Alignment" scheme="https://lingkang.dev/tags/Alignment/"/>
+    
+    <category term="Cpp" scheme="https://lingkang.dev/tags/Cpp/"/>
     
     <category term="Padding" scheme="https://lingkang.dev/tags/Padding/"/>
     
@@ -145,17 +145,17 @@
     
     <category term="Linux" scheme="https://lingkang.dev/tags/Linux/"/>
     
-    <category term="SQL" scheme="https://lingkang.dev/tags/SQL/"/>
-    
     <category term="Windows" scheme="https://lingkang.dev/tags/Windows/"/>
     
-    <category term="Hyper-V" scheme="https://lingkang.dev/tags/Hyper-V/"/>
+    <category term="SQL" scheme="https://lingkang.dev/tags/SQL/"/>
     
     <category term="IP" scheme="https://lingkang.dev/tags/IP/"/>
     
     <category term="Routing" scheme="https://lingkang.dev/tags/Routing/"/>
     
     <category term="IPv4" scheme="https://lingkang.dev/tags/IPv4/"/>
+    
+    <category term="Hyper-V" scheme="https://lingkang.dev/tags/Hyper-V/"/>
     
     <category term="MySQL" scheme="https://lingkang.dev/tags/MySQL/"/>
     
