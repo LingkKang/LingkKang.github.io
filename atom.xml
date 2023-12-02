@@ -6,7 +6,7 @@
   <link href="https://lingkang.dev/atom.xml" rel="self"/>
   
   <link href="https://lingkang.dev/"/>
-  <updated>2023-12-02T22:40:32.927Z</updated>
+  <updated>2023-12-02T23:02:40.454Z</updated>
   <id>https://lingkang.dev/</id>
   
   <author>
@@ -17,14 +17,14 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Post-Mortem Analysis for Multi-Threads Program</title>
+    <title>Post-Mortem Analysis for Multiprocessing Program in C</title>
     <link href="https://lingkang.dev/2023/12/02/core-dump/"/>
     <id>https://lingkang.dev/2023/12/02/core-dump/</id>
     <published>2023-12-02T21:26:24.000Z</published>
-    <updated>2023-12-02T22:40:32.927Z</updated>
+    <updated>2023-12-02T23:02:40.454Z</updated>
     
     
-    <summary type="html">When a program crashes, core dump is a useful tool to analyze reasons.</summary>
+    <summary type="html">When a program crashes, core dump is a useful asset to analyze reasons.</summary>
     
     
     
@@ -44,6 +44,8 @@
     <category term="Dead Lock" scheme="https://lingkang.dev/tags/Dead-Lock/"/>
     
     <category term="Pthread" scheme="https://lingkang.dev/tags/Pthread/"/>
+    
+    <category term="POSIX" scheme="https://lingkang.dev/tags/POSIX/"/>
     
     <category term="WSL2" scheme="https://lingkang.dev/tags/WSL2/"/>
     
@@ -68,9 +70,9 @@
     
     <category term="Python" scheme="https://lingkang.dev/tags/Python/"/>
     
-    <category term="Linux" scheme="https://lingkang.dev/tags/Linux/"/>
-    
     <category term="C" scheme="https://lingkang.dev/tags/C/"/>
+    
+    <category term="Linux" scheme="https://lingkang.dev/tags/Linux/"/>
     
     <category term="task scheduling" scheme="https://lingkang.dev/tags/task-scheduling/"/>
     

@@ -16,15 +16,15 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="When a program crashes, core dump is a useful tool to analyze reasons.">
+    <meta name="description" content="When a program crashes, core dump is a useful asset to analyze reasons.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Post-Mortem Analysis for Multi-Threads Program">
+<meta property="og:title" content="Post-Mortem Analysis for Multiprocessing Program in C">
 <meta property="og:url" content="https://lingkang.dev/2023/12/02/core-dump/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="When a program crashes, core dump is a useful tool to analyze reasons.">
+<meta property="og:description" content="When a program crashes, core dump is a useful asset to analyze reasons.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-02T21:26:24.000Z">
-<meta property="article:modified_time" content="2023-12-02T22:40:32.927Z">
+<meta property="article:modified_time" content="2023-12-02T23:02:40.454Z">
 <meta property="article:author" content="Lingkang">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="CentOS">
@@ -33,6 +33,7 @@
 <meta property="article:tag" content="Debug">
 <meta property="article:tag" content="Dead Lock">
 <meta property="article:tag" content="Pthread">
+<meta property="article:tag" content="POSIX">
 <meta property="article:tag" content="WSL2">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary_large_image">
@@ -41,7 +42,7 @@
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Post-Mortem Analysis for Multi-Threads Program - Lingkang&#39;s Blog</title>
+  <title>Post-Mortem Analysis for Multiprocessing Program in C - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -251,7 +252,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Post-Mortem Analysis for Multi-Threads Program"></span>
+            <span id="subtitle" data-typed-text="Post-Mortem Analysis for Multiprocessing Program in C"></span>
           
         </div>
 
@@ -323,7 +324,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Post-Mortem Analysis for Multi-Threads Program</h1>
+            <h1 style="display: none">Post-Mortem Analysis for Multiprocessing Program in C</h1>
             
               <p class="note note-info">
                 
@@ -336,7 +337,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Post-Mortem-Analysis-for-Multi-Threads-Program"><a href="#Post-Mortem-Analysis-for-Multi-Threads-Program" class="headerlink" title="Post-Mortem Analysis for Multi-Threads Program"></a>Post-Mortem Analysis for Multi-Threads Program</h1><p>When a program crashes, sometimes there is would be a <em>core dumped</em> message.</p>
+                <h1 id="Post-Mortem-Analysis-for-Multiprocessing-Program-in-C"><a href="#Post-Mortem-Analysis-for-Multiprocessing-Program-in-C" class="headerlink" title="Post-Mortem Analysis for Multiprocessing Program in C"></a>Post-Mortem Analysis for Multiprocessing Program in C</h1><p>When a program crashes, sometimes there is would be a <em>core dumped</em> message.</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">make: *** [Makefile:33: run] Segmentation fault (core dumped)<br></code></pre></td></tr></table></figure>
 
 <p>This core dump file is extremely useful for post-mortem analysis.</p>
@@ -452,6 +453,8 @@
       
         <a href="/tags/Pthread/">#Pthread</a>
       
+        <a href="/tags/POSIX/">#POSIX</a>
+      
         <a href="/tags/WSL2/">#WSL2</a>
       
         <a href="/tags/Docker/">#Docker</a>
@@ -466,7 +469,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Post-Mortem Analysis for Multi-Threads Program</div>
+      <div>Post-Mortem Analysis for Multiprocessing Program in C</div>
       <div>https://lingkang.dev/2023/12/02/core-dump/</div>
     </div>
     <div class="license-meta">
