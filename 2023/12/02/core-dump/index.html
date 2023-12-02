@@ -16,32 +16,32 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Exhilarating &#39;Hello world&#39;.">
+    <meta name="description" content="When a program crashes, core dump is a useful tool to analyze reasons.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Read and Write by Polling with UART">
-<meta property="og:url" content="https://lingkang.dev/2023/02/28/polling-read-write/index.html">
+<meta property="og:title" content="Post-Mortem Analysis for Multi-Threads Program">
+<meta property="og:url" content="https://lingkang.dev/2023/12/02/core-dump/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Exhilarating &#39;Hello world&#39;.">
+<meta property="og:description" content="When a program crashes, core dump is a useful tool to analyze reasons.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-02-28T09:49:31.000Z">
-<meta property="article:modified_time" content="2023-02-28T20:05:00.000Z">
+<meta property="article:published_time" content="2023-12-02T21:26:24.000Z">
+<meta property="article:modified_time" content="2023-12-02T22:40:32.927Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="Register">
 <meta property="article:tag" content="C">
-<meta property="article:tag" content="xv6">
-<meta property="article:tag" content="QEMU">
-<meta property="article:tag" content="Emulation">
-<meta property="article:tag" content="UART">
-<meta property="article:tag" content="Baud Rate">
-<meta property="article:tag" content="Polling">
-<meta property="article:tag" content="Peripheral">
+<meta property="article:tag" content="CentOS">
+<meta property="article:tag" content="Core Dump">
+<meta property="article:tag" content="GDB">
+<meta property="article:tag" content="Debug">
+<meta property="article:tag" content="Dead Lock">
+<meta property="article:tag" content="Pthread">
+<meta property="article:tag" content="WSL2">
+<meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Read and Write by Polling with UART - Lingkang&#39;s Blog</title>
+  <title>Post-Mortem Analysis for Multi-Threads Program - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -251,7 +251,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Read and Write by Polling with UART"></span>
+            <span id="subtitle" data-typed-text="Post-Mortem Analysis for Multi-Threads Program"></span>
           
         </div>
 
@@ -262,8 +262,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-28 09:49" pubdate>
-          February 28, 2023 am
+        <time datetime="2023-12-02 21:26" pubdate>
+          December 2, 2023 pm
         </time>
       </span>
     
@@ -274,7 +274,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k words
+          3.6k words
         
       </span>
     
@@ -285,7 +285,7 @@
         
         
         
-          22 mins
+          31 mins
         
       </span>
     
@@ -323,12 +323,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Read and Write by Polling with UART</h1>
+            <h1 style="display: none">Post-Mortem Analysis for Multi-Threads Program</h1>
             
               <p class="note note-info">
                 
                   
-                    Last updated on February 28, 2023 pm
+                    Last updated on December 2, 2023 pm
                   
                 
               </p>
@@ -336,39 +336,75 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Read-and-Write-by-Polling-with-UART"><a href="#Read-and-Write-by-Polling-with-UART" class="headerlink" title="Read and Write by Polling with UART"></a>Read and Write by Polling with UART</h1><p>In the early stages of development, the first ‘hello world’ is implemented via UART serial port since handling the screen is a more complicated task.</p>
-<p>Developing on QEMU is just like developing on a physical machine. The kernel runs in the QEMU virtual machine, which is connected to the host machine by UART, specifically the <a target="_blank" rel="noopener" href="http://byterunner.com/16550.html">16550 UART</a>.</p>
-<p>UART, or universal asynchronous receiver&#x2F;transmitter, is a serial-port communicator embedded on board. It needs some settings and initialization for data tranmission, and these tasks are done in the file <code>uart.c</code>.</p>
-<p>Basically, everything inside 16550 UART is mapped to the memory location <code>UART0</code>. One register may have one or more functionalities, and is always distinguished by the <strong>read mode</strong> and <strong>write mode</strong>.</p>
-<h2 id="Initialize-UART"><a href="#Initialize-UART" class="headerlink" title="Initialize UART"></a>Initialize UART</h2><p>This is done in 3 steps:</p>
-<ol>
-<li>Disable interrupts (which will be discussed in the future).</li>
-<li>Set the baud rate.</li>
-<li>Set the data communication format.</li>
-</ol>
-<p>More information can be found in the source code.</p>
-<p>UART initialization should only be done once after booting.</p>
-<h2 id="Setting-the-Baud-Rate"><a href="#Setting-the-Baud-Rate" class="headerlink" title="Setting the Baud Rate"></a>Setting the Baud Rate</h2><p>The baud rate is the frequency of data transmission and should be set to the same value for both the transmitter and receiver.</p>
-<p>But note that the divisor latch is seprated into 2 parts, <code>DLL</code> and <code>DLM</code>, which stand for the least and most significant bits of the divisor latch, respectively. </p>
-<h2 id="Polling-and-UART-I-x2F-O"><a href="#Polling-and-UART-I-x2F-O" class="headerlink" title="Polling and UART I&#x2F;O"></a>Polling and UART I&#x2F;O</h2><p>To write things through UART, we just need to put the data into <code>THR</code> (the <em>transmit holding register</em> in write mode). However, as data transmission takes time, we need to check whether the data in <code>THR</code> was sent before new data was put into it.</p>
-<p>The <em>line status register</em>‘s bit 5 (6<sup>th</sup> bit) is designed for this purpose. This bit will be set to 0 to indicate that transmission is complete.</p>
-<p>Therefore, when we want to write through UART, we keep checking this bit. When we get a zero, we know that we can put our data. This procedure of continuously asking a register is also known as <strong>polling</strong>. </p>
-<p>Printing a string could be seen as printing chars iteratively. </p>
-<p>Reading data from console is technically the same thing, except that we check and read data from different registers.</p>
-<h2 id="Other-Notes"><a href="#Other-Notes" class="headerlink" title="Other Notes"></a>Other Notes</h2><p>Remember to add <code>--nographic</code> flag when running QEMU. This flag means to disable the QEMU graphic monitor and use UART as the I&#x2F;O device, so all output and input will be displayed on the current terminal.</p>
-<p>To quit QEMU emulator, just press <code>Ctrl + A</code> then press <code>X</code>. Or press <code>Ctrl + A</code> followed by <code>C</code>, and then type <code>quit</code>.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a target="_blank" rel="noopener" href="http://byterunner.com/16550.html">ByteRunner.com | TECHNICAL DATA ON 16550</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Q5411w7z5/?p=17">[完结] 循序渐进，学习开发一个RISC-V上的操作系统 - 汪辰 - 第7章（下）-Hello RVOS_哔哩哔哩_bilibili</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/plctlab/riscv-operating-system-mooc/blob/main/code/os/01-helloRVOS/uart.c">riscv-operating-system-mooc&#x2F;uart.c at main · plctlab&#x2F;riscv-operating-system-mooc</a></li>
-<li><a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2022/xv6/book-riscv-rev3.pdf">xv6: a simple, Unix-like teaching operating system</a>, Russ Cox, Frans Kaashoek, Robert Morris, MIT, 5 September 2022, <em>5.1 Code: Console input</em> (P53 - 55)</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/uart.c">xv6-riscv&#x2F;uart.c at riscv · mit-pdos&#x2F;xv6-riscv</a></li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/16550_UART">16550 UART - Wikipedia</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/qemu/qemu/blob/master/hw/riscv/virt.c">qemu&#x2F;virt.c at master · qemu&#x2F;qemu</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.qemu.org/docs/master/system/invocation.html#:~:text=parallel%20port%20data.-,%2Dnographic,-Normally%2C%20if%20QEMU">QEMU documentation –nographic</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/weijunji/p/xv6-study-8.html">XV6学习（8）中断和设备驱动 - 星見遥 - 博客园</a></li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cross_compiler">Cross compiler - Wikipedia</a></li>
-</ol>
+                <h1 id="Post-Mortem-Analysis-for-Multi-Threads-Program"><a href="#Post-Mortem-Analysis-for-Multi-Threads-Program" class="headerlink" title="Post-Mortem Analysis for Multi-Threads Program"></a>Post-Mortem Analysis for Multi-Threads Program</h1><p>When a program crashes, sometimes there is would be a <em>core dumped</em> message.</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">make: *** [Makefile:33: run] Segmentation fault (core dumped)<br></code></pre></td></tr></table></figure>
+
+<p>This core dump file is extremely useful for post-mortem analysis.</p>
+<h2 id="Enable-Core-Dump"><a href="#Enable-Core-Dump" class="headerlink" title="Enable Core Dump"></a>Enable Core Dump</h2><p>Here is how to enable core dump on <em>CentOS</em>.</p>
+<h3 id="Set-ulimit"><a href="#Set-ulimit" class="headerlink" title="Set ulimit"></a>Set <code>ulimit</code></h3><p>If the value of <code>ulimit -c</code> is <code>0</code>, then core dump is disabled.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ulimit</span> -c unlimited<br></code></pre></td></tr></table></figure>
+
+<p>This operation only affect current shell session, so better to add it to users’ <code>.bashrc</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;ulimit -c unlimited&#x27;</span> &gt;&gt; ~/.bashrc<br></code></pre></td></tr></table></figure>
+
+<h3 id="Config-dumped-files-location"><a href="#Config-dumped-files-location" class="headerlink" title="Config dumped files location"></a>Config dumped files location</h3><p>On <em>CentOS</em>, the default core dump destination is defined in <code>/proc/sys/kernel/core_pattern</code>, which will require <code>sudo</code> permission to modify.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;dumps/core.%e.%t.%p&#x27;</span> | sudo <span class="hljs-built_in">tee</span> /proc/sys/kernel/core_pattern<br></code></pre></td></tr></table></figure>
+
+<p>Here we set the dumped file located in <code>dumps</code> directory of current working directory, with filename as <code>core.%e.%t.%p</code>. The placeholders’ meaning:</p>
+<ul>
+<li><code>%e</code>: name of the executable</li>
+<li><code>%t</code>: timestamp of dumping, in seconds since <a target="_blank" rel="noopener" href="https://man.archlinux.org/man/time.7.en#The_Epoch">the UNIX Epoch</a></li>
+<li><code>%p</code>: process ID of the task</li>
+</ul>
+<div class="note note-info">
+            <p>Inside a Docker container, the <code>/proc/sys/kernel/core_pattern</code> is <em>Read-Only</em>. This is because Docker on Windows uses WSL2 as backend. So simply change it in WSL2 would work.</p>
+          </div>
+
+<h2 id="Analyze-Core-Dump"><a href="#Analyze-Core-Dump" class="headerlink" title="Analyze Core Dump"></a>Analyze Core Dump</h2><p>Now that core dump is enabled, we can use <code>gdb</code> to analyze a crashed program’s exiting state.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gdb &lt;executable&gt; &lt;core dump file&gt;<br></code></pre></td></tr></table></figure>
+
+<p>Here are some useful commands:</p>
+<ul>
+<li><code>bt</code>: backtrace, show the stack trace</li>
+<li><code>frame &lt;frame id&gt;</code> or <code>f &lt;frame id&gt;</code>: switch to a specific stack frame which is shown in backtrace</li>
+<li><code>list</code>: show the source code of current stack frame</li>
+</ul>
+<h3 id="POSIX-Threads"><a href="#POSIX-Threads" class="headerlink" title="POSIX Threads"></a>POSIX Threads</h3><ul>
+<li><code>info threads</code>: show all threads’ information, current thread is marked with <code>*</code></li>
+<li><code>thread &lt;thread id&gt;</code>: switch to a specific thread</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs gdb">(gdb) info threads<br>  Id   Target Id         Frame<br>  4    Thread 0x7f9f675be700 (LWP 9983) pthread_cond_wait@@GLIBC_2.3.2 () at ../nptl/sysdeps/unix/sysv/linux/x86_64/pthread_cond_wait.S:185  <br>* 3    Thread 0x7f9f685c0700 (LWP 9981) __lll_lock_wait () at ../nptl/sysdeps/unix/sysv/linux/x86_64/lowlevellock.S:135<br>  2    Thread 0x7f9f68dc4740 (LWP 9980) 0x00007f9f68998017 in pthread_join (threadid=140322627389184, thread_return=0x0) at pthread_join.c:90<br>  1    ...<br></code></pre></td></tr></table></figure>
+
+<h4 id="Mutex"><a href="#Mutex" class="headerlink" title="Mutex"></a>Mutex</h4><p>If a thread is suck at <code>__lll_lock_wait()</code> function, then it is waiting for a mutex.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gdb">(gdb) bt<br>#0  __lll_lock_wait () at ../nptl/sysdeps/unix/sysv/linux/x86_64/lowlevellock.S:135<br>#1 ...<br></code></pre></td></tr></table></figure>
+
+<p>Use <code>p (pthread_mutex_t) &lt;mutex&gt;</code> to print a mutex’s value.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gdb">(gdb) p (pthread_mutex_t) my_mutex<br>$0 = &#123;__data = &#123;__lock = 2, __count = 0, __owner = 9982, __nusers = 1, __kind = 0, __spins = 0, __elision = 0, __list = &#123;__prev = 0x0,<br>      __next = 0x0&#125;&#125;, __size = &quot;\002\000\000\000\000\000\000\000\376&amp;\000\000\001&quot;, &#x27;\000&#x27; &lt;repeats 26 times&gt;, __align = 2&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>__owner</code>: the ID of the thread who locks the mutex at the moment</li>
+<li><code>__nusers</code>: the number of threads who are waiting for the mutex</li>
+<li><code>__kind</code>: the type of the mutex, <code>0</code> stands for <code>PTHREAD_MUTEX_NORMAL</code></li>
+</ul>
+<h4 id="Condition-Variable"><a href="#Condition-Variable" class="headerlink" title="Condition Variable"></a>Condition Variable</h4><p>If a thread is suck at <code>pthread_cond_wait()</code> function, then it is waiting for a condition variable.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gdb">(gdb) bt<br>#0  pthread_cond_wait@@GLIBC_2.3.2 () at ../nptl/sysdeps/unix/sysv/linux/x86_64/pthread_cond_wait.S:185<br>#1  ...<br></code></pre></td></tr></table></figure>
+
+<p>Similarly, use <code>p (pthread_cond_t) &lt;cond&gt;</code> to print a condition variable’s value.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs gdb">(gdb) p (pthread_cond_t) my_cond1<br>$20 = &#123;__data = &#123;__lock = 0, __futex = 0, __total_seq = 0, __wakeup_seq = 0, __woken_seq = 0, __mutex = 0x0, __nwaiters = 0, <br>    __broadcast_seq = 0&#125;, __size = &#x27;\000&#x27; &lt;repeats 47 times&gt;, __align = 0&#125;<br>(gdb) p (pthread_cond_t) my_cond2<br>$21 = &#123;__data = &#123;__lock = 0, __futex = 1, __total_seq = 1, __wakeup_seq = 0, __woken_seq = 0, __mutex = 0x603160 &lt;my_mutex2&gt;, <br>    __nwaiters = 2, __broadcast_seq = 0&#125;,<br>  __size = &quot;\000\000\000\000\001\000\000\000\001&quot;, &#x27;\000&#x27; &lt;repeats 23 times&gt;, &quot;`1`\000\000\000\000\000\002\000\000\000\000\000\000&quot;,     <br>  __align = 4294967296&#125;<br></code></pre></td></tr></table></figure>
+
+<div class="note note-warning">
+            <p>Unfinished</p>
+          </div>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Core_dump">Core dump - ArchWiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.educative.io/answers/what-is-a-core-dump">What is a core dump?</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.redhat.com/blog/a-guide-to-core-dump-handling-in-openshift">A Guide to Core Dump Handling in OpenShift</a></li>
+<li><a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man5/core.5.html">core(5) - Linux manual page</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Core_dump">Core dump - Wikipedia</a></li>
+<li><a target="_blank" rel="noopener" href="https://man.archlinux.org/man/time.7.en#The_Epoch">time(7) — Arch manual pages</a></li>
+<li><a target="_blank" rel="noopener" href="https://pubs.opengroup.org/onlinepubs/7908799/xsh/pthread.h.html">&lt;pthread.h&gt;</a></li>
+</ul>
 
                 
               </div>
@@ -387,7 +423,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Operating-System-Architecture/" class="category-chain-item">Operating System &amp; Architecture</a>
+  <a href="/categories/Programming-Language/" class="category-chain-item">Programming Language</a>
   
   
 
@@ -402,23 +438,23 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Register/">#Register</a>
-      
         <a href="/tags/C/">#C</a>
       
-        <a href="/tags/xv6/">#xv6</a>
+        <a href="/tags/CentOS/">#CentOS</a>
       
-        <a href="/tags/QEMU/">#QEMU</a>
+        <a href="/tags/Core-Dump/">#Core Dump</a>
       
-        <a href="/tags/Emulation/">#Emulation</a>
+        <a href="/tags/GDB/">#GDB</a>
       
-        <a href="/tags/UART/">#UART</a>
+        <a href="/tags/Debug/">#Debug</a>
       
-        <a href="/tags/Baud-Rate/">#Baud Rate</a>
+        <a href="/tags/Dead-Lock/">#Dead Lock</a>
       
-        <a href="/tags/Polling/">#Polling</a>
+        <a href="/tags/Pthread/">#Pthread</a>
       
-        <a href="/tags/Peripheral/">#Peripheral</a>
+        <a href="/tags/WSL2/">#WSL2</a>
+      
+        <a href="/tags/Docker/">#Docker</a>
       
     </div>
   
@@ -430,8 +466,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Read and Write by Polling with UART</div>
-      <div>https://lingkang.dev/2023/02/28/polling-read-write/</div>
+      <div>Post-Mortem Analysis for Multi-Threads Program</div>
+      <div>https://lingkang.dev/2023/12/02/core-dump/</div>
     </div>
     <div class="license-meta">
       
@@ -443,7 +479,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 28, 2023</div>
+          <div>December 2, 2023</div>
         </div>
       
       
@@ -475,18 +511,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/12/align/" title="Align Number to Multiple">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Align Number to Multiple</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/23/boot-risc-v/" title="RISC-V Machine Boot Code">
-                        <span class="hidden-mobile">RISC-V Machine Boot Code</span>
+                      <a href="/2023/10/31/osc-lab-task5/" title="OSC Lab Task 5 Reasoning">
+                        <span class="hidden-mobile">OSC Lab Task 5 Reasoning</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

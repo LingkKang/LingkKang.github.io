@@ -6,7 +6,7 @@
   <link href="https://lingkang.dev/atom.xml" rel="self"/>
   
   <link href="https://lingkang.dev/"/>
-  <updated>2023-10-31T19:29:32.000Z</updated>
+  <updated>2023-12-02T22:40:32.927Z</updated>
   <id>https://lingkang.dev/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Post-Mortem Analysis for Multi-Threads Program</title>
+    <link href="https://lingkang.dev/2023/12/02/core-dump/"/>
+    <id>https://lingkang.dev/2023/12/02/core-dump/</id>
+    <published>2023-12-02T21:26:24.000Z</published>
+    <updated>2023-12-02T22:40:32.927Z</updated>
+    
+    
+    <summary type="html">When a program crashes, core dump is a useful tool to analyze reasons.</summary>
+    
+    
+    
+    <category term="Programming Language" scheme="https://lingkang.dev/categories/Programming-Language/"/>
+    
+    
+    <category term="C" scheme="https://lingkang.dev/tags/C/"/>
+    
+    <category term="CentOS" scheme="https://lingkang.dev/tags/CentOS/"/>
+    
+    <category term="Core Dump" scheme="https://lingkang.dev/tags/Core-Dump/"/>
+    
+    <category term="GDB" scheme="https://lingkang.dev/tags/GDB/"/>
+    
+    <category term="Debug" scheme="https://lingkang.dev/tags/Debug/"/>
+    
+    <category term="Dead Lock" scheme="https://lingkang.dev/tags/Dead-Lock/"/>
+    
+    <category term="Pthread" scheme="https://lingkang.dev/tags/Pthread/"/>
+    
+    <category term="WSL2" scheme="https://lingkang.dev/tags/WSL2/"/>
+    
+    <category term="Docker" scheme="https://lingkang.dev/tags/Docker/"/>
+    
+  </entry>
   
   <entry>
     <title>OSC Lab Task 5 Reasoning</title>
@@ -91,11 +126,11 @@
     
     <category term="ECS" scheme="https://lingkang.dev/tags/ECS/"/>
     
+    <category term="CentOS" scheme="https://lingkang.dev/tags/CentOS/"/>
+    
     <category term="GitLab" scheme="https://lingkang.dev/tags/GitLab/"/>
     
     <category term="Ubuntu" scheme="https://lingkang.dev/tags/Ubuntu/"/>
-    
-    <category term="CentOS" scheme="https://lingkang.dev/tags/CentOS/"/>
     
   </entry>
   
@@ -125,45 +160,6 @@
     <category term="Alignment" scheme="https://lingkang.dev/tags/Alignment/"/>
     
     <category term="Padding" scheme="https://lingkang.dev/tags/Padding/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Access MySQL Localhost on Windows Host from WSL2</title>
-    <link href="https://lingkang.dev/2023/07/07/wsl2mysql/"/>
-    <id>https://lingkang.dev/2023/07/07/wsl2mysql/</id>
-    <published>2023-07-07T08:00:04.000Z</published>
-    <updated>2023-07-07T10:33:04.000Z</updated>
-    
-    
-    <summary type="html">Manage MySQL server on Windows host from WSL2.</summary>
-    
-    
-    
-    <category term="DevOps" scheme="https://lingkang.dev/categories/DevOps/"/>
-    
-    
-    <category term="Linux" scheme="https://lingkang.dev/tags/Linux/"/>
-    
-    <category term="SQL" scheme="https://lingkang.dev/tags/SQL/"/>
-    
-    <category term="Windows" scheme="https://lingkang.dev/tags/Windows/"/>
-    
-    <category term="Hyper-V" scheme="https://lingkang.dev/tags/Hyper-V/"/>
-    
-    <category term="IP" scheme="https://lingkang.dev/tags/IP/"/>
-    
-    <category term="Routing" scheme="https://lingkang.dev/tags/Routing/"/>
-    
-    <category term="IPv4" scheme="https://lingkang.dev/tags/IPv4/"/>
-    
-    <category term="MySQL" scheme="https://lingkang.dev/tags/MySQL/"/>
-    
-    <category term="WSL2" scheme="https://lingkang.dev/tags/WSL2/"/>
-    
-    <category term="CRUD" scheme="https://lingkang.dev/tags/CRUD/"/>
-    
-    <category term="Privileged Access Management" scheme="https://lingkang.dev/tags/Privileged-Access-Management/"/>
     
   </entry>
   
