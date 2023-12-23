@@ -24,18 +24,20 @@
 <meta property="og:description" content="When a program crashes, core dump is a useful asset to analyze reasons.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-02T21:26:24.000Z">
-<meta property="article:modified_time" content="2023-12-02T23:02:40.454Z">
+<meta property="article:modified_time" content="2023-12-23T17:27:24.000Z">
 <meta property="article:author" content="Lingkang">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="CentOS">
 <meta property="article:tag" content="Core Dump">
 <meta property="article:tag" content="GDB">
 <meta property="article:tag" content="Debug">
-<meta property="article:tag" content="Dead Lock">
 <meta property="article:tag" content="Pthread">
 <meta property="article:tag" content="POSIX">
 <meta property="article:tag" content="WSL2">
 <meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Deadlock">
+<meta property="article:tag" content="Mutex">
+<meta property="article:tag" content="Condition Variable">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -124,7 +126,7 @@
 
 
   
-<meta name="generator" content="Hexo 7.0.0-rc1"><link rel="alternate" href="/atom.xml" title="Lingkang's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Lingkang's Blog" type="application/atom+xml">
 </head>
 
 
@@ -275,7 +277,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.6k words
+          4.1k words
         
       </span>
     
@@ -286,7 +288,7 @@
         
         
         
-          31 mins
+          35 mins
         
       </span>
     
@@ -329,7 +331,7 @@
               <p class="note note-info">
                 
                   
-                    Last updated on December 2, 2023 pm
+                    Last updated on December 23, 2023 pm
                   
                 
               </p>
@@ -358,8 +360,13 @@
 <li><code>%p</code>: process ID of the task</li>
 </ul>
 <div class="note note-info">
-            <p>Inside a Docker container, the <code>/proc/sys/kernel/core_pattern</code> is <em>Read-Only</em>. This is because Docker on Windows uses WSL2 as backend. So simply change it in WSL2 would work.</p>
+            <p>Inside a Docker container, the <code>/proc/sys/kernel/core_pattern</code> is <em>Read-Only</em>. This is because Docker on Windows uses WSL2 as backend. So simply change it in WSL2 would work. However, this might be flushed after reboot. </p>
           </div>
+
+<!-- To make it permanent, add the following line to `/etc/sysctl.conf`: -->
+<!-- ``` bash -->
+<!-- kernel.core_pattern = dumps/core.%e.%t.%p -->
+<!-- ``` -->
 
 <h2 id="Analyze-Core-Dump"><a href="#Analyze-Core-Dump" class="headerlink" title="Analyze Core Dump"></a>Analyze Core Dump</h2><p>Now that core dump is enabled, we can use <code>gdb</code> to analyze a crashed program’s exiting state.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gdb &lt;executable&gt; &lt;core dump file&gt;<br></code></pre></td></tr></table></figure>
@@ -367,6 +374,7 @@
 <p>Here are some useful commands:</p>
 <ul>
 <li><code>bt</code>: backtrace, show the stack trace</li>
+<li><code>info locals</code>: show the local variables of current stack frame</li>
 <li><code>frame &lt;frame id&gt;</code> or <code>f &lt;frame id&gt;</code>: switch to a specific stack frame which is shown in backtrace</li>
 <li><code>list</code>: show the source code of current stack frame</li>
 </ul>
@@ -376,7 +384,7 @@
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs gdb">(gdb) info threads<br>  Id   Target Id         Frame<br>  4    Thread 0x7f9f675be700 (LWP 9983) pthread_cond_wait@@GLIBC_2.3.2 () at ../nptl/sysdeps/unix/sysv/linux/x86_64/pthread_cond_wait.S:185  <br>* 3    Thread 0x7f9f685c0700 (LWP 9981) __lll_lock_wait () at ../nptl/sysdeps/unix/sysv/linux/x86_64/lowlevellock.S:135<br>  2    Thread 0x7f9f68dc4740 (LWP 9980) 0x00007f9f68998017 in pthread_join (threadid=140322627389184, thread_return=0x0) at pthread_join.c:90<br>  1    ...<br></code></pre></td></tr></table></figure>
 
-<h4 id="Mutex"><a href="#Mutex" class="headerlink" title="Mutex"></a>Mutex</h4><p>If a thread is suck at <code>__lll_lock_wait()</code> function, then it is waiting for a mutex.</p>
+<h4 id="Mutex"><a href="#Mutex" class="headerlink" title="Mutex"></a>Mutex</h4><p>If a thread is stuck at <code>__lll_lock_wait()</code> function, then it is waiting for a mutex.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gdb">(gdb) bt<br>#0  __lll_lock_wait () at ../nptl/sysdeps/unix/sysv/linux/x86_64/lowlevellock.S:135<br>#1 ...<br></code></pre></td></tr></table></figure>
 
 <p>Use <code>p (pthread_mutex_t) &lt;mutex&gt;</code> to print a mutex’s value.</p>
@@ -387,7 +395,7 @@
 <li><code>__nusers</code>: the number of threads who are waiting for the mutex</li>
 <li><code>__kind</code>: the type of the mutex, <code>0</code> stands for <code>PTHREAD_MUTEX_NORMAL</code></li>
 </ul>
-<h4 id="Condition-Variable"><a href="#Condition-Variable" class="headerlink" title="Condition Variable"></a>Condition Variable</h4><p>If a thread is suck at <code>pthread_cond_wait()</code> function, then it is waiting for a condition variable.</p>
+<h4 id="Condition-Variable"><a href="#Condition-Variable" class="headerlink" title="Condition Variable"></a>Condition Variable</h4><p>If a thread is stuck at <code>pthread_cond_wait()</code> function, then it is waiting for a condition variable.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gdb">(gdb) bt<br>#0  pthread_cond_wait@@GLIBC_2.3.2 () at ../nptl/sysdeps/unix/sysv/linux/x86_64/pthread_cond_wait.S:185<br>#1  ...<br></code></pre></td></tr></table></figure>
 
 <p>Similarly, use <code>p (pthread_cond_t) &lt;cond&gt;</code> to print a condition variable’s value.</p>
@@ -397,6 +405,18 @@
             <p>Unfinished</p>
           </div>
 
+<h2 id="Analyze-Deadlocked-Program"><a href="#Analyze-Deadlocked-Program" class="headerlink" title="Analyze Deadlocked Program"></a>Analyze Deadlocked Program</h2><p>Even though this post is mainly about analyzing core dump, here is a short tip when a running program is deadlocked.</p>
+<blockquote>
+<p>Replace the <code>&lt;pid&gt;</code> with the process ID of the program, which can be found by <code>top</code> command.</p>
+</blockquote>
+<ol>
+<li>Use <code>gdb --pid &lt;pid&gt;</code> to attach to the program and debug as usual.</li>
+<li>Save the current state of the program as a core dump file.<ol>
+<li>Use <code>gcore</code> or <code>gcore &lt;name&gt;</code> to save the core when inside <code>gdb</code>.</li>
+<li>Use <code>gcore &lt;pid&gt;</code> or <code>gcore -o &lt;name&gt; &lt;pid&gt;</code> to dump the core when in shell.</li>
+</ol>
+</li>
+</ol>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Core_dump">Core dump - ArchWiki</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.educative.io/answers/what-is-a-core-dump">What is a core dump?</a></li>
@@ -449,8 +469,6 @@
       
         <a href="/tags/Debug/">#Debug</a>
       
-        <a href="/tags/Dead-Lock/">#Dead Lock</a>
-      
         <a href="/tags/Pthread/">#Pthread</a>
       
         <a href="/tags/POSIX/">#POSIX</a>
@@ -458,6 +476,12 @@
         <a href="/tags/WSL2/">#WSL2</a>
       
         <a href="/tags/Docker/">#Docker</a>
+      
+        <a href="/tags/Deadlock/">#Deadlock</a>
+      
+        <a href="/tags/Mutex/">#Mutex</a>
+      
+        <a href="/tags/Condition-Variable/">#Condition Variable</a>
       
     </div>
   
