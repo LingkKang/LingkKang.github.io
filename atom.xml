@@ -126,13 +126,13 @@
     
     <category term="Linux" scheme="https://lingkang.dev/tags/Linux/"/>
     
-    <category term="CentOS" scheme="https://lingkang.dev/tags/CentOS/"/>
-    
     <category term="Server" scheme="https://lingkang.dev/tags/Server/"/>
     
     <category term="Cloud" scheme="https://lingkang.dev/tags/Cloud/"/>
     
     <category term="ECS" scheme="https://lingkang.dev/tags/ECS/"/>
+    
+    <category term="CentOS" scheme="https://lingkang.dev/tags/CentOS/"/>
     
     <category term="GitLab" scheme="https://lingkang.dev/tags/GitLab/"/>
     

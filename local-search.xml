@@ -133,13 +133,13 @@
       
       <tag>Linux</tag>
       
-      <tag>CentOS</tag>
-      
       <tag>Server</tag>
       
       <tag>Cloud</tag>
       
       <tag>ECS</tag>
+      
+      <tag>CentOS</tag>
       
       <tag>GitLab</tag>
       
@@ -207,9 +207,9 @@
       
       <tag>WSL2</tag>
       
-      <tag>SQL</tag>
-      
       <tag>Windows</tag>
+      
+      <tag>SQL</tag>
       
       <tag>Hyper-V</tag>
       
@@ -623,9 +623,9 @@
       
       <tag>xv6</tag>
       
-      <tag>C</tag>
-      
       <tag>QEMU</tag>
+      
+      <tag>C</tag>
       
       <tag>Emulation</tag>
       
@@ -668,8 +668,6 @@
       
       <tag>Memory</tag>
       
-      <tag>C</tag>
-      
       <tag>Bootstrap</tag>
       
       <tag>Assembly</tag>
@@ -677,6 +675,8 @@
       <tag>Stack</tag>
       
       <tag>QEMU</tag>
+      
+      <tag>C</tag>
       
       <tag>Emulation</tag>
       
