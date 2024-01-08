@@ -205,11 +205,11 @@
       
       <tag>Linux</tag>
       
+      <tag>SQL</tag>
+      
       <tag>WSL2</tag>
       
       <tag>Windows</tag>
-      
-      <tag>SQL</tag>
       
       <tag>Hyper-V</tag>
       
@@ -355,13 +355,13 @@
       
       <tag>Matrix</tag>
       
-      <tag>Polymorphism</tag>
-      
       <tag>Haskell</tag>
       
       <tag>Functional Programming</tag>
       
       <tag>Currying</tag>
+      
+      <tag>Polymorphism</tag>
       
     </tags>
     
@@ -386,13 +386,13 @@
     
     <tags>
       
+      <tag>Polymorphism</tag>
+      
       <tag>Java</tag>
       
       <tag>Inheritance</tag>
       
       <tag>Static</tag>
-      
-      <tag>Polymorphism</tag>
       
       <tag>Overriding</tag>
       
@@ -555,9 +555,9 @@
       
       <tag>Emulation</tag>
       
-      <tag>Interrupt</tag>
-      
       <tag>Peripheral</tag>
+      
+      <tag>Interrupt</tag>
       
       <tag>PLIC</tag>
       
@@ -623,19 +623,19 @@
       
       <tag>xv6</tag>
       
-      <tag>QEMU</tag>
-      
       <tag>C</tag>
       
-      <tag>Emulation</tag>
+      <tag>QEMU</tag>
       
-      <tag>Peripheral</tag>
+      <tag>Emulation</tag>
       
       <tag>UART</tag>
       
       <tag>Baud Rate</tag>
       
       <tag>Polling</tag>
+      
+      <tag>Peripheral</tag>
       
     </tags>
     
@@ -668,6 +668,8 @@
       
       <tag>Memory</tag>
       
+      <tag>C</tag>
+      
       <tag>Bootstrap</tag>
       
       <tag>Assembly</tag>
@@ -675,8 +677,6 @@
       <tag>Stack</tag>
       
       <tag>QEMU</tag>
-      
-      <tag>C</tag>
       
       <tag>Emulation</tag>
       
@@ -881,13 +881,13 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
-      <tag>LeetCode</tag>
-      
       <tag>Tree</tag>
       
       <tag>Binary Tree</tag>
+      
+      <tag>Python</tag>
+      
+      <tag>LeetCode</tag>
       
     </tags>
     
@@ -937,9 +937,9 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     
@@ -1020,11 +1020,11 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     
