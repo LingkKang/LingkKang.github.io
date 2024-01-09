@@ -16,12 +16,12 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Remote Procedure Call (RPC) is a  Remote developmentThe server side in Go was developed on an Aliyun remote server, and the client side in Rust was developed on a local machine. VS Code with remote de">
+    <meta name="description" content="Implement RPC demo from scratchRemote Procedure Call (RPC) is a protocol that one program can call another program’s service via network. It is a way to make distributed system easier to use. sequence">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lingkang&#39;s Blog">
+<meta property="og:title" content="Implement RPC demo from scratch">
 <meta property="og:url" content="https://lingkang.dev/2024/01/08/rpc/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Remote Procedure Call (RPC) is a  Remote developmentThe server side in Go was developed on an Aliyun remote server, and the client side in Rust was developed on a local machine. VS Code with remote de">
+<meta property="og:description" content="Implement RPC demo from scratchRemote Procedure Call (RPC) is a protocol that one program can call another program’s service via network. It is a way to make distributed system easier to use. sequence">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-01-08T15:55:00.000Z">
 <meta property="article:modified_time" content="2024-01-09T09:10:00.000Z">
@@ -37,7 +37,7 @@
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Lingkang&#39;s Blog</title>
+  <title>Implement RPC demo from scratch - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -247,7 +247,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="Implement RPC demo from scratch"></span>
           
         </div>
 
@@ -270,7 +270,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          17 words
+          28 words
         
       </span>
     
@@ -318,7 +318,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">Implement RPC demo from scratch</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -331,7 +331,23 @@
             
               <div class="markdown-body">
                 
-                <p>Remote Procedure Call (RPC) is a </p>
+                <h1 id="Implement-RPC-demo-from-scratch"><a href="#Implement-RPC-demo-from-scratch" class="headerlink" title="Implement RPC demo from scratch"></a>Implement RPC demo from scratch</h1><p>Remote Procedure Call (RPC) is a protocol that one program can call another program’s service via network. It is a way to make distributed system easier to use.</p>
+<pre><code class=" mermaid">sequenceDiagram
+    activate Client
+
+    loop
+        Client -&gt;&gt; Server: send request
+        deactivate Client
+        activate Server
+
+        Server -&gt;&gt; Client: send response
+        activate Client
+        deactivate Server
+    end
+    activate Client
+    deactivate Client
+</code></pre>
+
 <h2 id="Remote-development"><a href="#Remote-development" class="headerlink" title="Remote development"></a>Remote development</h2><p>The server side in Go was developed on an Aliyun remote server, and the client side in Rust was developed on a local machine.</p>
 <p>VS Code with remote development extension was really helpful for this.</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.hpcs.cs.tsukuba.ac.jp/~tatebe/lecture/h23/dsys/dsd-tutorial.html">Introduction to Distributed System Design - Google Code University - Google Code</a></p>
@@ -391,7 +407,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
+      <div>Implement RPC demo from scratch</div>
       <div>https://lingkang.dev/2024/01/08/rpc/</div>
     </div>
     <div class="license-meta">
@@ -482,6 +498,21 @@
 
   
 
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
 
 
 
