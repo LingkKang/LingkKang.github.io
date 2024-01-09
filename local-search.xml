@@ -133,13 +133,13 @@
       
       <tag>Linux</tag>
       
+      <tag>CentOS</tag>
+      
       <tag>Server</tag>
       
       <tag>Cloud</tag>
       
       <tag>ECS</tag>
-      
-      <tag>CentOS</tag>
       
       <tag>GitLab</tag>
       
@@ -168,15 +168,15 @@
     
     <tags>
       
+      <tag>C</tag>
+      
+      <tag>Cpp</tag>
+      
       <tag>Optimization</tag>
       
       <tag>Memory</tag>
       
       <tag>Alignment</tag>
-      
-      <tag>C</tag>
-      
-      <tag>Cpp</tag>
       
       <tag>Padding</tag>
       
@@ -205,11 +205,11 @@
       
       <tag>Linux</tag>
       
-      <tag>SQL</tag>
-      
       <tag>WSL2</tag>
       
       <tag>Windows</tag>
+      
+      <tag>SQL</tag>
       
       <tag>Hyper-V</tag>
       
@@ -456,13 +456,13 @@
       
       <tag>Optimization</tag>
       
-      <tag>Machine Learning</tag>
-      
       <tag>Artificial Intelligence</tag>
       
       <tag>Linear Perceptron</tag>
       
       <tag>Neural Network</tag>
+      
+      <tag>Machine Learning</tag>
       
       <tag>Deep Learning</tag>
       
@@ -491,11 +491,11 @@
       
       <tag>Optimization</tag>
       
-      <tag>MDP</tag>
+      <tag>Artificial Intelligence</tag>
       
       <tag>Machine Learning</tag>
       
-      <tag>Artificial Intelligence</tag>
+      <tag>MDP</tag>
       
       <tag>Bellman Equation</tag>
       
@@ -555,9 +555,9 @@
       
       <tag>Emulation</tag>
       
-      <tag>Peripheral</tag>
-      
       <tag>Interrupt</tag>
+      
+      <tag>Peripheral</tag>
       
       <tag>PLIC</tag>
       
@@ -586,15 +586,15 @@
     
     <tags>
       
-      <tag>Bitwise Operation</tag>
-      
       <tag>Optimization</tag>
-      
-      <tag>xv6</tag>
       
       <tag>Memory</tag>
       
       <tag>Alignment</tag>
+      
+      <tag>Bitwise Operation</tag>
+      
+      <tag>xv6</tag>
       
     </tags>
     
@@ -621,21 +621,21 @@
       
       <tag>Register</tag>
       
-      <tag>xv6</tag>
-      
       <tag>C</tag>
+      
+      <tag>xv6</tag>
       
       <tag>QEMU</tag>
       
       <tag>Emulation</tag>
+      
+      <tag>Peripheral</tag>
       
       <tag>UART</tag>
       
       <tag>Baud Rate</tag>
       
       <tag>Polling</tag>
-      
-      <tag>Peripheral</tag>
       
     </tags>
     
@@ -664,11 +664,11 @@
       
       <tag>Register</tag>
       
-      <tag>xv6</tag>
+      <tag>C</tag>
       
       <tag>Memory</tag>
       
-      <tag>C</tag>
+      <tag>xv6</tag>
       
       <tag>Bootstrap</tag>
       
@@ -790,9 +790,9 @@
     
     <tags>
       
-      <tag>Memory</tag>
-      
       <tag>C</tag>
+      
+      <tag>Memory</tag>
       
       <tag>Debug</tag>
       
@@ -881,13 +881,13 @@
     
     <tags>
       
-      <tag>Tree</tag>
-      
-      <tag>Binary Tree</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Tree</tag>
+      
+      <tag>Binary Tree</tag>
       
     </tags>
     
@@ -937,9 +937,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>Linked List</tag>
+      
+      <tag>Python</tag>
       
     </tags>
     
@@ -1020,11 +1020,11 @@
     
     <tags>
       
+      <tag>Linked List</tag>
+      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
-      
-      <tag>Linked List</tag>
       
     </tags>
     

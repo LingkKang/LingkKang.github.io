@@ -16,29 +16,28 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Update Weights in Linear PerceptronSometimes you just find that preparing the data and visualizing it takes more time than building an AI model.  Linear PerceptronIt took me quite a long time to figur">
+    <meta name="description" content="Remote Procedure Call (RPC) is a  Remote developmentThe server side in Go was developed on an Aliyun remote server, and the client side in Rust was developed on a local machine. VS Code with remote de">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Update Weights in Linear Perceptron">
-<meta property="og:url" content="https://lingkang.dev/2023/05/12/perceptron/index.html">
+<meta property="og:title" content="Lingkang&#39;s Blog">
+<meta property="og:url" content="https://lingkang.dev/2024/01/08/rpc/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Update Weights in Linear PerceptronSometimes you just find that preparing the data and visualizing it takes more time than building an AI model.  Linear PerceptronIt took me quite a long time to figur">
+<meta property="og:description" content="Remote Procedure Call (RPC) is a  Remote developmentThe server side in Go was developed on an Aliyun remote server, and the client side in Rust was developed on a local machine. VS Code with remote de">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-05-12T13:26:43.000Z">
-<meta property="article:modified_time" content="2023-06-03T06:50:32.546Z">
+<meta property="article:published_time" content="2024-01-08T15:55:00.000Z">
+<meta property="article:modified_time" content="2024-01-09T09:10:00.000Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="Optimization">
-<meta property="article:tag" content="Artificial Intelligence">
-<meta property="article:tag" content="Linear Perceptron">
-<meta property="article:tag" content="Neural Network">
-<meta property="article:tag" content="Machine Learning">
-<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="Distributed System">
+<meta property="article:tag" content="RPC">
+<meta property="article:tag" content="TCP">
+<meta property="article:tag" content="Rust">
+<meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Update Weights in Linear Perceptron - Lingkang&#39;s Blog</title>
+  <title>Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -248,7 +247,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Update Weights in Linear Perceptron"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -259,8 +258,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-12 14:26" pubdate>
-          May 12, 2023 pm
+        <time datetime="2024-01-08 15:55" pubdate>
+          January 8, 2024 pm
         </time>
       </span>
     
@@ -271,7 +270,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          593 words
+          17 words
         
       </span>
     
@@ -282,7 +281,7 @@
         
         
         
-          5 mins
+          1 mins
         
       </span>
     
@@ -319,12 +318,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Update Weights in Linear Perceptron</h1>
+            <h1 id="seo-header"></h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    Last updated on June 3, 2023 am
+                    Last updated on January 9, 2024 am
                   
                 
               </p>
@@ -332,47 +331,13 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Update-Weights-in-Linear-Perceptron"><a href="#Update-Weights-in-Linear-Perceptron" class="headerlink" title="Update Weights in Linear Perceptron"></a>Update Weights in Linear Perceptron</h1><p>Sometimes you just find that preparing the data and visualizing it takes more time than building an AI model. </p>
-<h2 id="Linear-Perceptron"><a href="#Linear-Perceptron" class="headerlink" title="Linear Perceptron"></a>Linear Perceptron</h2><p>It took me quite a long time to figure out how the weights are updated in a simple perceptron model. Basically it follows the gradient descent procedure, but things in linear algebra format confused me for a while and I don’t know why so few people write it down explicitly. </p>
-<p>It goes like this:</p>
-<p><code>w_new</code> &#x3D; <code>w_old</code> + <code>learning_rate</code> * (<code>y_true</code> - <code>y_predicted</code>) * <code>x</code></p>
-<p>where</p>
-<ul>
-<li>all of the parameters are <strong>vectors</strong>, except the learning rate.</li>
-<li><code>x</code> is the input vector</li>
-<li><code>y_true</code> is the true label of the input (either 1 or -1 for a binary classification problem)</li>
-<li><code>y_predicted</code> is the predicted label of the input (either 1 or -1 for a binary classification problem)</li>
-</ul>
-<p>If it predicts a positive value as negative, <code>w</code> should be set higher and vice versa.</p>
-<h2 id="Some-Quotes"><a href="#Some-Quotes" class="headerlink" title="Some Quotes"></a>Some Quotes</h2><p>Here are some intriguing quotes from Prof. Hung-yi Lee (李宏毅)’s lecture. What a charismatic man.</p>
-<blockquote>
-<p>好，那到目前为止，我们讲了很多各式各样的模型，那我们现在还缺了一个东西，你知道缺什么东西吗？缺一个好名字。你知道这个外表啊是很重要的，一个死臭酸宅穿上西装以后就潮了起来；或者是织席贩履的，说他是汉左将军宜城亭侯中山靖王之后，也就潮了起来，对不对？所以我们的模型，也需要一个好名字。</p>
-</blockquote>
-<div style='text-align: right'>
-
-<p>Source: <a target="_blank" rel="noopener" href="https://youtu.be/bHcJCp2Fyxs?t=2955">【機器學習2021】預測本頻道觀看人數 (下) - 深度學習基本概念簡介 - YouTube</a></p>
-</div>
-
-<blockquote>
-<p>Neuron 是什么？Neuron 就是神经元。人脑中就是有很多神经元，很多神经元串起来就是一个神经网路，跟你的脑是一样的。接下来你就可以到处骗麻瓜说，“看到没有，这个模型就是在模拟人们脑，知道吗？这就是在模拟人脑，这个就是人工智慧”，然后麻瓜就会吓得把钱掏出来。</p>
-<p>但是啊，这个把戏在 80，90 年代的时候已经玩过了。Neural Network 不是什么新的技术，80，90 年代就已经用过了，当时已经把这个技术的名字搞到臭掉了。Neural Network 因为之前被吹捧得太过浮夸，所以后来大家对 Neural Network 这个名字都非常地感冒。它就像是个脏话一样，写在 paper 上面都注定害你的 paper 被拒绝。所以后来为了要重振 Neural Network 的雄风，所以怎么办呢？需要新的名字。怎么样新的名字呢？这边有很多的 Neuron，每一排 Neuron 我们就叫它一个 Layer，它们叫 Hidden Layer。有很多的 Hidden Layer 就叫做 Deep，这整套技术就叫做 Deep Learning。</p>
-</blockquote>
-<div style='text-align: right'>
-
-<p>Source: <a target="_blank" rel="noopener" href="https://youtu.be/bHcJCp2Fyxs?t=2989">【機器學習2021】預測本頻道觀看人數 (下) - 深度學習基本概念簡介 - YouTube</a></p>
-</div>
-
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Ye018rCVvOo">【機器學習2021】預測本頻道觀看人數 (上) - 機器學習基本概念簡介 - YouTube</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=bHcJCp2Fyxs">【機器學習2021】預測本頻道觀看人數 (下) - 深度學習基本概念簡介 - YouTube</a></li>
-<li><a target="_blank" rel="noopener" href="https://speech.ee.ntu.edu.tw/~hylee/index.php">Hung-yi Lee (李宏毅)</a></li>
-<li><a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note20.pdf">cs188-fa22-note20.pdf</a></li>
-<li><a target="_blank" rel="noopener" href="https://inst.eecs.berkeley.edu/~cs188/fa22/">CS 188 Fall 2022 | Introduction to Artificial Intelligence at UC Berkeley</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=iZTeva0WSTQ&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&index=5">Lecture 4 - Perceptron &amp; Generalized Linear Model | Stanford CS229: Machine Learning (Autumn 2018) - YouTube</a></li>
-<li><a target="_blank" rel="noopener" href="https://cs229.stanford.edu/syllabus-spring2021.html">CS229: Machine Learning</a></li>
-<li><a target="_blank" rel="noopener" href="https://wty-yy.space/posts/62139/">Perceptron Learning Algorithm 感知器算法 - 神经网络基础 - wty’s blog</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pinard/p/6042320.html">感知机原理小结 - 刘建平Pinard - 博客园</a></li>
-</ol>
+                <p>Remote Procedure Call (RPC) is a </p>
+<h2 id="Remote-development"><a href="#Remote-development" class="headerlink" title="Remote development"></a>Remote development</h2><p>The server side in Go was developed on an Aliyun remote server, and the client side in Rust was developed on a local machine.</p>
+<p>VS Code with remote development extension was really helpful for this.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.hpcs.cs.tsukuba.ac.jp/~tatebe/lecture/h23/dsys/dsd-tutorial.html">Introduction to Distributed System Design - Google Code University - Google Code</a></p>
+<p><a target="_blank" rel="noopener" href="https://pkg.go.dev/net/rpc">rpc package - net&#x2F;rpc - Go Packages</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/google/tarpc">google&#x2F;tarpc: An RPC framework for Rust with a focus on ease of use.</a></p>
+<p><a href="https://lingkang.dev/rpc_demo/client/index.html">client - Rust</a></p>
 
                 
               </div>
@@ -391,7 +356,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Algorithms-Data-Structures/" class="category-chain-item">Algorithms &amp; Data Structures</a>
+  <a href="/categories/Operating-System-Architecture/" class="category-chain-item">Operating System &amp; Architecture</a>
   
   
 
@@ -406,17 +371,15 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Optimization/" class="print-no-link">#Optimization</a>
+        <a href="/tags/Distributed-System/" class="print-no-link">#Distributed System</a>
       
-        <a href="/tags/Artificial-Intelligence/" class="print-no-link">#Artificial Intelligence</a>
+        <a href="/tags/RPC/" class="print-no-link">#RPC</a>
       
-        <a href="/tags/Linear-Perceptron/" class="print-no-link">#Linear Perceptron</a>
+        <a href="/tags/TCP/" class="print-no-link">#TCP</a>
       
-        <a href="/tags/Neural-Network/" class="print-no-link">#Neural Network</a>
+        <a href="/tags/Rust/" class="print-no-link">#Rust</a>
       
-        <a href="/tags/Machine-Learning/" class="print-no-link">#Machine Learning</a>
-      
-        <a href="/tags/Deep-Learning/" class="print-no-link">#Deep Learning</a>
+        <a href="/tags/Go/" class="print-no-link">#Go</a>
       
     </div>
   
@@ -428,8 +391,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Update Weights in Linear Perceptron</div>
-      <div>https://lingkang.dev/2023/05/12/perceptron/</div>
+      <div></div>
+      <div>https://lingkang.dev/2024/01/08/rpc/</div>
     </div>
     <div class="license-meta">
       
@@ -441,7 +404,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 12, 2023</div>
+          <div>January 8, 2024</div>
         </div>
       
       
@@ -468,29 +431,6 @@
 
 
 
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2023/05/15/subnet/" title="Subnet and IPv4 Classes">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Subnet and IPv4 Classes</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2023/05/06/mdp/" title="A MDP Take-away">
-                        <span class="hidden-mobile">A MDP Take-away</span>
-                        <span class="visible-mobile">Next</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
               
             </div>
 
