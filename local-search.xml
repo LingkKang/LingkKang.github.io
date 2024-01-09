@@ -4,6 +4,39 @@
   
   
   <entry>
+    <title>Implement RPC demo from scratch</title>
+    <link href="/2024/01/08/rpc/"/>
+    <url>/2024/01/08/rpc/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js"></script><h1 id="Implement-RPC-demo-from-scratch"><a href="#Implement-RPC-demo-from-scratch" class="headerlink" title="Implement RPC demo from scratch"></a>Implement RPC demo from scratch</h1><p>Remote Procedure Call (RPC) is a protocol that one program can call another program’s service via network. It is a way to make distributed system easier to use.</p><p>The core idea of RPC is all about calling a function provided by a remote server. The client side calls a function, and the server side executes the function and returns the result to the client side.</p><pre><code class=" mermaid">sequenceDiagram    activate Client    loop        Client -&gt;&gt; Server: send request        deactivate Client        activate Server        Server -&gt;&gt; Client: send response        activate Client        deactivate Server    end    activate Client    deactivate Client</code></pre><p>The source code can be found on GitHub: <a href="https://github.com/LingkKang/rpc_demo">LingkKang&#x2F;rpc_demo</a>.</p><p>The documentation of client side is available at <a href="https://lingkang.dev/rpc_demo/client/index.html">lingkang.dev&#x2F;rpc_demo</a>.</p><h2 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h2><p>The design of RPC is simple. The client side calls a function, and the server side executes the function and returns the result to the client side.</p><p>In this small demo, I plan to set the task as calculating the hypotenuse of a right triangle. The client side sends the length of the two sides of the triangle, and the server side calculates the hypotenuse and returns the result to the client side. All of them are denoted as <a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">float64</a>.</p><p>Next step is to design the interface of the RPC, i.e., the message used for communication between client and server. The design is simple and not considering scalability and security issue.</p><p>I did not use JSON or XML for the message format, as parsing them will require 3rd party libraries. Instead, I used raw binary format. The message format is as follows:</p><div style="margin: 0 auto; width: fit-content;"><table><thead><tr><th align="left">component</th><th align="center">size (bits)</th></tr></thead><tbody><tr><td align="left">message type</td><td align="center">2</td></tr><tr><td align="left">message length</td><td align="center">6</td></tr><tr><td align="left">message payload</td><td align="center">0 - 62 bytes</td></tr><tr><td align="left">message checksum</td><td align="center">8</td></tr></tbody></table></div><p>And there are 3 types of messages:</p><div style="margin: 0 auto; width: fit-content;"><table><thead><tr><th align="center">Bits</th><th align="center">Type</th></tr></thead><tbody><tr><td align="center"><code>0b00</code></td><td align="center">Error</td></tr><tr><td align="center"><code>0b01</code></td><td align="center">Request</td></tr><tr><td align="center"><code>0b10</code></td><td align="center">Response</td></tr><tr><td align="center"><code>0b11</code></td><td align="center"><em>Reserved</em></td></tr></tbody></table></div><p>See the documentation of <a href="https://lingkang.dev/rpc_demo/client/protocol/message/index.html"><code>client::protocol::message</code></a> for more details.</p><h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>There are lots of RPC frameworks available, but implementing it from scratch is a good way to understand how it works.</p><p>As described above, the code will be divided into two parts: client side and server side. Source code is available on GitHub: <a href="https://github.com/LingkKang/rpc_demo">LingkKang&#x2F;rpc_demo</a>.</p><h2 id="Remote-development"><a href="#Remote-development" class="headerlink" title="Remote development"></a>Remote development</h2><p>The server side in Go was developed on an Aliyun remote server, and the client side in Rust was developed on a local machine.</p><p>VS Code with remote development extension was really helpful for this. The latency is almost intangible, and the experience is almost the same as developing on a local machine.</p><p>If you see the commit history in graph, you will see that server and client were developed in parallel, but interactively.</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol><li><a href="https://www.hpcs.cs.tsukuba.ac.jp/~tatebe/lecture/h23/dsys/dsd-tutorial.html">Introduction to Distributed System Design - Google Code University - Google Code</a></li><li><a href="https://pkg.go.dev/net/rpc">rpc package - net&#x2F;rpc - Go Packages</a></li><li><a href="https://github.com/google/tarpc">google&#x2F;tarpc: An RPC framework for Rust with a focus on ease of use.</a></li><li><a href="https://grpc.io/">gRPC</a></li><li><a href="https://code.visualstudio.com/docs/remote/remote-overview">Visual Studio Code Remote Development</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack">Remote Development - Visual Studio Marketplace</a></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Operating System &amp; Architecture</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Distributed System</tag>
+      
+      <tag>RPC</tag>
+      
+      <tag>TCP</tag>
+      
+      <tag>Rust</tag>
+      
+      <tag>Go</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Post-Mortem Analysis for Multiprocessing Program in C</title>
     <link href="/2023/12/02/core-dump/"/>
     <url>/2023/12/02/core-dump/</url>
@@ -133,13 +166,13 @@
       
       <tag>Linux</tag>
       
+      <tag>CentOS</tag>
+      
       <tag>Server</tag>
       
       <tag>Cloud</tag>
       
       <tag>ECS</tag>
-      
-      <tag>CentOS</tag>
       
       <tag>GitLab</tag>
       
@@ -205,9 +238,9 @@
       
       <tag>Linux</tag>
       
-      <tag>SQL</tag>
-      
       <tag>WSL2</tag>
+      
+      <tag>SQL</tag>
       
       <tag>Windows</tag>
       
@@ -353,8 +386,6 @@
     
     <tags>
       
-      <tag>Polymorphism</tag>
-      
       <tag>Matrix</tag>
       
       <tag>Haskell</tag>
@@ -362,6 +393,8 @@
       <tag>Functional Programming</tag>
       
       <tag>Currying</tag>
+      
+      <tag>Polymorphism</tag>
       
     </tags>
     
@@ -386,13 +419,13 @@
     
     <tags>
       
+      <tag>Polymorphism</tag>
+      
       <tag>Java</tag>
       
       <tag>Inheritance</tag>
       
       <tag>Static</tag>
-      
-      <tag>Polymorphism</tag>
       
       <tag>Overriding</tag>
       
@@ -881,13 +914,13 @@
     
     <tags>
       
-      <tag>Tree</tag>
-      
-      <tag>Binary Tree</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Tree</tag>
+      
+      <tag>Binary Tree</tag>
       
     </tags>
     
@@ -937,9 +970,9 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>Linked List</tag>
+      
+      <tag>Python</tag>
       
     </tags>
     
@@ -1020,11 +1053,11 @@
     
     <tags>
       
+      <tag>Linked List</tag>
+      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
-      
-      <tag>Linked List</tag>
       
     </tags>
     
