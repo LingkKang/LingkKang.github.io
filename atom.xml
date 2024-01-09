@@ -24,13 +24,7 @@
     <updated>2024-01-09T09:10:00.000Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot;</summary>
-        
-      
+    <summary type="html">A simple RPC demo implemented in Go (server) and Rust (client).</summary>
     
     
     
@@ -159,13 +153,13 @@
     
     <category term="Linux" scheme="https://lingkang.dev/tags/Linux/"/>
     
-    <category term="CentOS" scheme="https://lingkang.dev/tags/CentOS/"/>
-    
     <category term="Server" scheme="https://lingkang.dev/tags/Server/"/>
     
     <category term="Cloud" scheme="https://lingkang.dev/tags/Cloud/"/>
     
     <category term="ECS" scheme="https://lingkang.dev/tags/ECS/"/>
+    
+    <category term="CentOS" scheme="https://lingkang.dev/tags/CentOS/"/>
     
     <category term="GitLab" scheme="https://lingkang.dev/tags/GitLab/"/>
     
