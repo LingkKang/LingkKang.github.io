@@ -24,7 +24,7 @@
 <meta property="og:description" content="Questions can be found here and some Lean code can be found here. Q1a. P ↔ Q :&#x3D; P → Q ∧ Q → P ¬ P :&#x3D; P → false  b.12¬ (P ∨ Q) ↔ ¬ P ∧ ¬ Q¬ (P ∧ Q) ↔ ¬ P ∨ ¬ Q  ¬ (P ∧ Q) → ¬ P ∨ ¬ Q is not p">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-01-15T09:55:35.322Z">
-<meta property="article:modified_time" content="2024-01-15T11:34:13.422Z">
+<meta property="article:modified_time" content="2024-01-15T21:26:37.314Z">
 <meta property="article:author" content="Lingkang">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -265,7 +265,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          309 words
+          428 words
         
       </span>
     
@@ -276,7 +276,7 @@
         
         
         
-          3 mins
+          4 mins
         
       </span>
     
@@ -318,7 +318,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    Last updated on January 15, 2024 am
+                    Last updated on January 15, 2024 pm
                   
                 
               </p>
@@ -371,18 +371,16 @@
 <p><code>rewrite</code> or <code>rewrite←</code></p>
 <h3 id="b-1"><a href="#b-1" class="headerlink" title="b."></a>b.</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Lean">-- (i)<br>theorem q2b1 : ∀ x : People, ∃ y : People, Loves x y := sorry<br><br>-- (ii)<br>theorem q2b2 : ∃ y : People, ∀ x : People, Loves x y := sorry<br><br>-- (iii)<br>theorem q2b3 : ∀ x y z : People, ¬ ((Loves x y) ∧ (Loves y z) → Loves x z) := sorry<br><br>-- (iv)<br>theorem q2b4 : ∃ x : People, ∀ y : People, ¬ (Loves x y) := sorry<br><br>-- (v)<br>theorem q2b5 : ∀ x y : People, ¬ (Loves x y → Loves y x) := sorry<br></code></pre></td></tr></table></figure>
 
-<h3 id="c-1"><a href="#c-1" class="headerlink" title="c."></a>c.</h3><div class="note note-warning">
-            <p>idk</p>
-          </div>
+<h3 id="c-1"><a href="#c-1" class="headerlink" title="c."></a>c.</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Lean">(∃ x : A, true)<br>(∀ x : A, false)<br></code></pre></td></tr></table></figure>
 
 <h2 id="Q3"><a href="#Q3" class="headerlink" title="Q3"></a>Q3</h2><h3 id="a-2"><a href="#a-2" class="headerlink" title="a."></a>a.</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Lean">def implb : bool → bool → bool<br>| x tt := tt<br>| tt _ := ff<br>| ff _ := tt<br></code></pre></td></tr></table></figure>
 
 
     <div class="fold">
-      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-dc73f5fd" role="button" aria-expanded="false" aria-controls="collapse-dc73f5fd">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-d7c7f3a4" role="button" aria-expanded="false" aria-controls="collapse-d7c7f3a4">
         <div class="fold-arrow">▶</div>Proof
       </div>
-      <div class="fold-collapse collapse" id="collapse-dc73f5fd">
+      <div class="fold-collapse collapse" id="collapse-d7c7f3a4">
         <div class="fold-content">
           <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs Lean">theorem q3a : ∀ x y : bool, (x = tt) → (y = tt) ↔ implb x y = tt :=<br>begin<br>  assume x y,<br>  constructor,<br>  assume xtyt,<br>  cases y,<br>  cases x,<br>  dsimp [implb],<br>  refl,<br>  dsimp [implb],<br>  apply xtyt,<br>  refl,<br>  cases x,<br>  dsimp [implb],<br>  refl,<br>  dsimp [implb],<br>  refl,<br>  assume ixyt,<br>  assume xt,<br>  rewrite xt at ixyt,<br>  cases y,<br>  dsimp [implb] at ixyt,<br>  exact ixyt,<br>  refl,<br>end<br></code></pre></td></tr></table></figure>
         </div>
@@ -400,24 +398,41 @@
 <tbody><tr>
 <td align="center">(i)</td>
 <td>✅</td>
-<td></td>
+<td>❎</td>
 </tr>
 <tr>
 <td align="center">(ii)</td>
-<td></td>
-<td></td>
+<td>❎</td>
+<td>✅</td>
 </tr>
 <tr>
 <td align="center">(iii)</td>
-<td></td>
-<td></td>
+<td>✅</td>
+<td>❎</td>
 </tr>
 <tr>
 <td align="center">(iv)</td>
-<td></td>
-<td></td>
+<td>❎</td>
+<td>✅</td>
 </tr>
 </tbody></table>
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-098520c4" role="button" aria-expanded="false" aria-controls="collapse-098520c4">
+        <div class="fold-arrow">▶</div>Proof
+      </div>
+      <div class="fold-collapse collapse" id="collapse-098520c4">
+        <div class="fold-content">
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs Lean"><br>theorem q3b1 : ∀ x : bool, ∃ y : bool , x ≠ y :=<br>begin<br>  assume x,<br>  cases x,<br>  existsi tt,<br>  assume eq,<br>  cases eq,<br>  existsi ff,<br>  assume eq,<br>  cases eq,<br>end<br><br>theorem q3b2_neg : ¬ (∃ x : bool, ∀ y : bool , x ≠ y) :=<br>begin<br>  assume h,<br>  cases h with a b,<br>  cases a,<br>  have f: ff ≠ ff,<br>  apply b,<br>  apply f,<br>  refl,<br><br>  have t: tt ≠ tt,<br>  apply b,<br>  apply t,<br>  refl,<br>end<br><br>theorem q3b3 : ∀ x : bool, ∃ y : bool, x = y :=<br>begin<br>  assume x,<br>  existsi x,<br>  refl,<br>end<br><br>theorem q3b4_neg : ¬ (∃ x : bool, ∀ y : bool, x = y) :=<br>begin<br>  assume h,<br>  cases h with a b,<br>  cases a,<br>  have f: ff = tt,<br>  apply b,<br>  contradiction,<br><br>  have t: tt = ff,<br>  apply b,<br>  contradiction,<br>end<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+
+<h3 id="c-2"><a href="#c-2" class="headerlink" title="c."></a>c.</h3><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">foo 4<br><span class="hljs-section">= foo (succ (succ 2))</span><br><span class="hljs-section">= succ (succ (foo 2))</span><br><span class="hljs-section">= succ (succ (foo (succ (succ 0))))</span><br><span class="hljs-section">= succ (succ (succ (succ (foo 0))))</span><br><span class="hljs-section">= succ (succ (succ (succ 1)))</span><br><span class="hljs-section">= 5</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">foo 5<br><span class="hljs-section">= foo (succ (succ 3))</span><br><span class="hljs-section">= succ (succ (foo 3))</span><br><span class="hljs-section">= succ (succ (succ (succ (foo 1))))</span><br><span class="hljs-section">= succ (succ (succ (succ (foo (succ 0)))))</span><br><span class="hljs-section">= succ (succ (succ (succ 0)))</span><br><span class="hljs-section">= 4</span><br></code></pre></td></tr></table></figure>
+
+<p>1. </p>
 <!-- 
 
 https://lingkang.dev/2024/01/15/ifr_exam/
@@ -480,6 +495,29 @@ https://lingkang.dev/2024/01/15/ifr_exam/
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/01/15/osc/" title="OSC">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">OSC</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/01/08/rpc/" title="Implement RPC demo from scratch">
+                        <span class="hidden-mobile">Implement RPC demo from scratch</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 

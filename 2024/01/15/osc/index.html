@@ -16,28 +16,23 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Aligning an integer to its closest muplitple of number m is easy. But if m is a power of 2, using bitwise operations can help a lot.">
+    <meta name="description" content="Process 1Memory Imageflowchart TD     Process --&gt; Code[&quot;Code (Text)&quot;]     Process --&gt; Data     Process --&gt; Stack     Process --&gt; Heap      Code --&gt; MemoryImage[Memory Image]">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Align Number to Multiple">
-<meta property="og:url" content="https://lingkang.dev/2023/03/12/align/index.html">
+<meta property="og:title" content="OSC">
+<meta property="og:url" content="https://lingkang.dev/2024/01/15/osc/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Aligning an integer to its closest muplitple of number m is easy. But if m is a power of 2, using bitwise operations can help a lot.">
+<meta property="og:description" content="Process 1Memory Imageflowchart TD     Process --&gt; Code[&quot;Code (Text)&quot;]     Process --&gt; Data     Process --&gt; Stack     Process --&gt; Heap      Code --&gt; MemoryImage[Memory Image]">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-03-12T09:28:05.000Z">
-<meta property="article:modified_time" content="2023-07-26T14:45:18.327Z">
+<meta property="article:published_time" content="2024-01-15T15:36:49.693Z">
+<meta property="article:modified_time" content="2024-01-15T17:10:07.330Z">
 <meta property="article:author" content="Lingkang">
-<meta property="article:tag" content="Bitwise Operation">
-<meta property="article:tag" content="Optimization">
-<meta property="article:tag" content="xv6">
-<meta property="article:tag" content="Memory">
-<meta property="article:tag" content="Alignment">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Align Number to Multiple - Lingkang&#39;s Blog</title>
+  <title>OSC - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -247,7 +242,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Align Number to Multiple"></span>
+            <span id="subtitle" data-typed-text="OSC"></span>
           
         </div>
 
@@ -258,8 +253,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-12 09:28" pubdate>
-          March 12, 2023 am
+        <time datetime="2024-01-15 15:36" pubdate>
+          January 15, 2024 pm
         </time>
       </span>
     
@@ -270,7 +265,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          77 words
+          80 words
         
       </span>
     
@@ -318,12 +313,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Align Number to Multiple</h1>
+            <h1 id="seo-header">OSC</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    Last updated on July 26, 2023 pm
+                    Last updated on January 15, 2024 pm
                   
                 
               </p>
@@ -331,46 +326,85 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Align-Number-to-Multiple"><a href="#Align-Number-to-Multiple" class="headerlink" title="Align Number to Multiple"></a>Align Number to Multiple</h1><p>Aligning an integer, say <code>n</code>, to its closest muplitple of <code>m</code> is easy by using <code>round(n / m) * m</code> (arithmetic division) or <code>(n + m - 1) / m * m</code> (<em>Euclidean division</em>).</p>
-<p>However, if <code>m</code> is a power of 2, i.e., <code>m</code> &#x3D; 2<sup>k</sup>, using bitwise operations can help a lot.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C">aligned_n = (n + (m - <span class="hljs-number">1</span>)) &amp; ~(m - <span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
+                <h1 id="Process-1"><a href="#Process-1" class="headerlink" title="Process 1"></a>Process 1</h1><h2 id="Memory-Image"><a href="#Memory-Image" class="headerlink" title="Memory Image"></a>Memory Image</h2><pre><code class=" mermaid">flowchart TD
+    Process --&gt; Code[&quot;Code (Text)&quot;]
+    Process --&gt; Data
+    Process --&gt; Stack
+    Process --&gt; Heap
 
-<h2 id="Explanation"><a href="#Explanation" class="headerlink" title="Explanation"></a>Explanation</h2><p>This should be viewed from a binary perspective.</p>
-<p>For example, say <code>m = 8</code> and demonstrate it in 8-bit binary.</p>
-<table>
-<thead>
-<tr>
-<th>variable</th>
-<th align="center">number</th>
-<th align="center">binary</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>m</code></td>
-<td align="center">8</td>
-<td align="center">0000 1000</td>
-</tr>
-<tr>
-<td><code>m - 1</code></td>
-<td align="center">7</td>
-<td align="center">0000 0111</td>
-</tr>
-<tr>
-<td><code>~(m - 1)</code></td>
-<td align="center">&#x2F;</td>
-<td align="center">1111 1000</td>
-</tr>
-</tbody></table>
-<p>By applying <em>bitwise AND</em> <code>&amp;</code>, the lower bits of the number are cleaned to <code>0</code>, leaving the result becoming the multiple of <code>m</code>.</p>
-<p>If not adding <code>m - 1</code>, the result will be the closest multiple smaller than <code>n</code>, and adding it makes sure the result is bigger than the original number <code>n</code>.</p>
-<h2 id="Remark"><a href="#Remark" class="headerlink" title="Remark"></a>Remark</h2><p><code>(n + m/2) &amp; ~(m-1)</code> is an alternative, and adding a number ranging from <code>m/2</code> to <code>m - 1</code> is technically all fine.</p>
-<p>This method could be helpful in memory page alignment, where standard library is not available and we can sacrifice a little bit of readability of the code. For example, <code>PGROUNDUP</code> and <code>PGROUNDDOWN</code> in <a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/riscv.h#L338-L339">xv6</a>, which stand for <em>page round up</em> and <em>page round down</em>, are implemented in this way.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/10493411/what-is-bit-masking">c - What is bit masking? - Stack Overflow</a></li>
-<li><a target="_blank" rel="noopener" href="https://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2">Bit Twiddling Hacks - Round up to the next highest power of 2</a></li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/43289022/what-do-pgroundup-and-pgrounddown-in-xv6-mean">c - What do PGROUNDUP and PGROUNDDOWN in xv6 mean? - Stack Overflow</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/mit-pdos/xv6-riscv">mit-pdos&#x2F;xv6-riscv: Xv6 for RISC-V</a></li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Bitwise_operation">Bitwise operation - Wikipedia</a></li>
+    Code --&gt; MemoryImage[Memory Image]
+    Data --&gt; MemoryImage
+    Stack --&gt; MemoryImage
+    Heap --&gt; MemoryImage
+</code></pre>
+
+<ul>
+<li><div title="An abstraction of a running instance of a program">Process</div></li>
+<li><div title="Code (text), data, stack and heap">Memory Image</div></li>
+</ul>
+<h2 id="Process-Control-Block"><a href="#Process-Control-Block" class="headerlink" title="Process Control Block"></a>Process Control Block</h2><pre><code class=" mermaid">flowchart LR
+    ProcessId[Process Identification] --&gt; PCB
+    PCtrl[Process Control Information] --&gt; PCB
+    PState[Process State Information] --&gt; PCB
+
+    PCB --&gt; ProcessTable[Process Table]
+</code></pre>
+
+<ul>
+<li><div title="PID, UID, Parent PID">Process Identification</div></li>
+<li><div title="Process state, scheduling information, etc">Process Control Information</div></li>
+<li><div title="User register, program counter, stack pointer,program status word, memory management information, files, etc">Process State Information</div></li>
+<li><div title="Where all the information necessary to administer a process stored">Process Control Block (PCB)</div></li>
+<li><div title="Where all the PCBs are recorded">Process Table</div></li>
+<li><div title="New, ready, running, blocked, terminated and suspended">Process States</div></li>
+</ul>
+<h2 id="Process-Status"><a href="#Process-Status" class="headerlink" title="Process Status"></a>Process Status</h2><pre><code class=" mermaid">flowchart TD
+
+New(New)
+Ready(Ready)
+Running(Running)
+Blocked(Blocked)
+Terminated(Terminated)
+
+    New-- Admit the process and commit to execution --&gt;Ready
+    Running-- Wait for input or syscall --&gt;Blocked
+    Ready-- Chosen by process scheduler --&gt;Running
+    Blocked-- Waited event finished --&gt;Ready
+    Running-- Surrender the processor --&gt;Ready
+    Running-- Finish or exception occurred --&gt;Terminated
+</code></pre>
+
+<ul>
+<li><div title="Just been created. Has a PCB and waiting to be admitted. May not be in memory yet">New</div></li>
+<li><div title="Waiting for CPU to become available">Ready</div></li>
+<li><div title="Currently executing instructions">Running</div></li>
+<li><div title="Can not continue">Blocked</div></li>
+<li><div title="No longer executable. PCB may be temporarily preserved">Terminated</div></li>
+<li><div title="Swapped out">Suspended</div></li>
+</ul>
+<p><strong>Interrupts</strong> and <strong>syscalls</strong> drive the transitions of process status.</p>
+<h2 id="Context-Switching-amp-Time-Slices"><a href="#Context-Switching-amp-Time-Slices" class="headerlink" title="Context Switching &amp; Time Slices"></a>Context Switching &amp; Time Slices</h2><p>The system saves the state of the old process and loads the state of the new process. (Overhead)</p>
+<p>Time Slices</p>
+<ul>
+<li>Short<ul>
+<li>good response time</li>
+<li>low effective</li>
+</ul>
+</li>
+<li>Long<ul>
+<li>poor response time</li>
+<li>better effective utilization</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>Save process registers</li>
+<li>Update PCB (Running -&gt; Ready &#x2F; Blocked)</li>
+<li>Move PCB to queue accordingly</li>
+<li>Run scheduler to select next process</li>
+<li>Update new PCB to Running state</li>
+<li>Update memory manage unit (MMU)</li>
+<li>Restore process</li>
 </ol>
 
                 
@@ -380,42 +414,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Algorithms-Data-Structures/" class="category-chain-item">Algorithms &amp; Data Structures</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Bitwise-Operation/" class="print-no-link">#Bitwise Operation</a>
-      
-        <a href="/tags/Optimization/" class="print-no-link">#Optimization</a>
-      
-        <a href="/tags/xv6/" class="print-no-link">#xv6</a>
-      
-        <a href="/tags/Memory/" class="print-no-link">#Memory</a>
-      
-        <a href="/tags/Alignment/" class="print-no-link">#Alignment</a>
-      
-    </div>
   
 </div>
 
@@ -425,8 +423,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Align Number to Multiple</div>
-      <div>https://lingkang.dev/2023/03/12/align/</div>
+      <div>OSC</div>
+      <div>https://lingkang.dev/2024/01/15/osc/</div>
     </div>
     <div class="license-meta">
       
@@ -438,7 +436,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 12, 2023</div>
+          <div>January 15, 2024</div>
         </div>
       
       
@@ -470,18 +468,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/02/peripheral-interrupt/" title="Peripheral Interrupt Procedure in RISC-V">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Peripheral Interrupt Procedure in RISC-V</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/28/polling-read-write/" title="Read and Write by Polling with UART">
-                        <span class="hidden-mobile">Read and Write by Polling with UART</span>
+                      <a href="/2024/01/15/ifr_exam/" title="ifr exam">
+                        <span class="hidden-mobile">ifr exam</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -539,6 +531,21 @@
 
   
 
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
 
 
 

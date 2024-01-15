@@ -237,3 +237,81 @@ begin
   assume eq,
   cases eq,
 end
+
+theorem q3b2_neg : ¬ (∃ x : bool, ∀ y : bool , x ≠ y) :=
+begin
+  assume h,
+  cases h with a b,
+  cases a,
+  have f: ff ≠ ff,
+  apply b,
+  apply f,
+  refl,
+
+  have t: tt ≠ tt,
+  apply b,
+  apply t,
+  refl,
+end
+
+theorem q3b3 : ∀ x : bool, ∃ y : bool, x = y :=
+begin
+  assume x,
+  existsi x,
+  refl,
+end
+
+theorem q3b4_neg : ¬ (∃ x : bool, ∀ y : bool, x = y) :=
+begin
+  assume h,
+  cases h with a b,
+  cases a,
+  have f: ff = tt,
+  apply b,
+  contradiction,
+
+  have t: tt = ff,
+  apply b,
+  contradiction,
+end
+
+open nat
+
+def foo : ℕ → ℕ 
+| zero := 1
+| (succ zero) := 0 
+| (succ (succ n)) := succ (succ (foo n))
+
+#eval foo 4
+#eval foo 5
+
+#eval foo 0
+#eval foo 1
+
+#eval foo 2
+#eval foo 3
+
+#eval foo 6
+#eval foo 7
+
+theorem inj: ∀ x y : ℕ, foo x = foo y → x = y :=
+begin
+  assume x y,
+  assume fxfy,
+  cases x,
+  cases y,
+  refl,
+  have h: ∀ a: ℕ, 0 ≠ succ a,
+  assume a,
+  assume eq,
+  cases eq,
+  have f: false,
+  apply h y,
+
+  induction x with x' ih,
+  induction y with y' ih',
+  refl,
+  dsimp [foo] at fxfy,
+
+
+end
