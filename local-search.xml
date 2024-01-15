@@ -201,15 +201,15 @@
     
     <tags>
       
+      <tag>C</tag>
+      
+      <tag>Cpp</tag>
+      
       <tag>Optimization</tag>
       
       <tag>Memory</tag>
       
       <tag>Alignment</tag>
-      
-      <tag>C</tag>
-      
-      <tag>Cpp</tag>
       
       <tag>Padding</tag>
       
@@ -238,9 +238,9 @@
       
       <tag>Linux</tag>
       
-      <tag>WSL2</tag>
-      
       <tag>SQL</tag>
+      
+      <tag>WSL2</tag>
       
       <tag>Windows</tag>
       
@@ -388,13 +388,13 @@
       
       <tag>Matrix</tag>
       
+      <tag>Polymorphism</tag>
+      
       <tag>Haskell</tag>
       
       <tag>Functional Programming</tag>
       
       <tag>Currying</tag>
-      
-      <tag>Polymorphism</tag>
       
     </tags>
     
@@ -419,13 +419,13 @@
     
     <tags>
       
-      <tag>Polymorphism</tag>
-      
       <tag>Java</tag>
       
       <tag>Inheritance</tag>
       
       <tag>Static</tag>
+      
+      <tag>Polymorphism</tag>
       
       <tag>Overriding</tag>
       
@@ -619,15 +619,15 @@
     
     <tags>
       
-      <tag>Bitwise Operation</tag>
-      
       <tag>Optimization</tag>
-      
-      <tag>xv6</tag>
       
       <tag>Memory</tag>
       
       <tag>Alignment</tag>
+      
+      <tag>xv6</tag>
+      
+      <tag>Bitwise Operation</tag>
       
     </tags>
     
@@ -654,11 +654,11 @@
       
       <tag>Register</tag>
       
-      <tag>xv6</tag>
+      <tag>C</tag>
       
       <tag>QEMU</tag>
       
-      <tag>C</tag>
+      <tag>xv6</tag>
       
       <tag>Emulation</tag>
       
@@ -697,7 +697,7 @@
       
       <tag>Register</tag>
       
-      <tag>xv6</tag>
+      <tag>C</tag>
       
       <tag>Memory</tag>
       
@@ -709,7 +709,7 @@
       
       <tag>QEMU</tag>
       
-      <tag>C</tag>
+      <tag>xv6</tag>
       
       <tag>Emulation</tag>
       
@@ -823,9 +823,9 @@
     
     <tags>
       
-      <tag>Memory</tag>
-      
       <tag>C</tag>
+      
+      <tag>Memory</tag>
       
       <tag>Debug</tag>
       
