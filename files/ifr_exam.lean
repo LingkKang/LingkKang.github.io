@@ -294,24 +294,109 @@ def foo : ℕ → ℕ
 #eval foo 6
 #eval foo 7
 
-theorem inj: ∀ x y : ℕ, foo x = foo y → x = y :=
+inductive my_list (A : Type)
+| nil : my_list
+| cons : A → my_list → my_list
+
+inductive Tree : Type
+| leaf : ℕ → Tree
+| node : Tree → Tree → Tree
+
+def t1 : Tree := Tree.node (Tree.node (Tree.leaf 1) (Tree.leaf 2)) (Tree.leaf 3)
+
+def tree2list : Tree → list ℕ
+| (Tree.leaf n) := [n]
+| (Tree.node t1 t2) := (tree2list t1) ++ (tree2list t2)
+
+#eval tree2list t1
+
+variables {A B C : Type}
+
+inductive Insert : A → list A → list A → Prop
+| ins_hd : ∀ a : A, ∀ as : list A, Insert a as (a :: as)
+| ins_tl : ∀ a b : A, ∀ as as' : list A, Insert a as as' → Insert a (b :: as) (b :: as')
+
+inductive Perm : list A → list A → Prop
+| perm_nil : Perm [] []
+| perm_cons : ∀ a : A, ∀ as bs bs' : list A, Perm as bs → Insert a bs bs' → Perm (a :: as) bs'
+
+open Insert
+open Perm
+
+example: Perm [1, 2] [2, 1] :=
+begin
+  apply perm_cons 1 [2] [2] [2, 1],
+  apply perm_cons 2 [] [] [2],
+  apply perm_nil,
+  apply ins_hd,
+  apply ins_tl,
+  apply ins_hd,
+end
+
+def is_tt : bool → Prop
+| ff := false
+| tt := true 
+
+theorem not_thm : ∀ x : bool, ¬ (is_tt x) ↔ is_tt (bnot x) :=
+begin
+  assume x,
+  constructor,
+  assume ntx,
+  cases x,
+  dsimp [bnot, is_tt],
+  constructor,
+  dsimp [bnot, is_tt],
+  dsimp [is_tt] at ntx,
+  apply ntx,
+  constructor,
+
+  assume tnx,
+  cases x,
+  dsimp [is_tt],
+  assume f,
+  assumption,
+  dsimp [is_tt],
+  assume t,
+  dsimp [bnot, is_tt] at tnx,
+  exact tnx,
+end
+
+theorem or_thm : ∀ x y: bool, is_tt x ∨ is_tt y ↔ is_tt (x || y) :=
 begin
   assume x y,
-  assume fxfy,
+  constructor,
   cases x,
-  cases y,
-  refl,
-  have h: ∀ a: ℕ, 0 ≠ succ a,
-  assume a,
-  assume eq,
-  cases eq,
-  have f: false,
-  apply h y,
+  dsimp [bor, is_tt],
+  assume txty,
+  cases txty with tx ty,
+  cases tx,
+  exact ty,
+  dsimp [is_tt],
+  assume txty,
+  constructor,
 
-  induction x with x' ih,
-  induction y with y' ih',
-  refl,
-  dsimp [foo] at fxfy,
-
-
+  cases x,
+  dsimp [bor, is_tt],
+  assume ttxy,
+  right,
+  exact ttxy,
+  dsimp [bor, is_tt],
+  assume t,
+  left,
+  constructor,
 end
+
+def my_implb: bool → bool → bool
+| tt ff := ff
+| _ _ := tt
+
+-- def my : bool → bool → bool
+-- | tt tt := tt
+-- | ff tt := tt
+-- | tt ff := ff
+-- | ff ff := tt
+
+def eqb : bool → bool → bool
+| tt tt := tt
+| ff ff := tt
+| _ _ := ff

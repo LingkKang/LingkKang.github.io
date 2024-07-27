@@ -6,7 +6,7 @@
   <link href="https://lingkang.dev/atom.xml" rel="self"/>
   
   <link href="https://lingkang.dev/"/>
-  <updated>2024-01-15T17:10:07.330Z</updated>
+  <updated>2024-03-26T12:50:55.138Z</updated>
   <id>https://lingkang.dev/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>OSC</title>
-    <link href="https://lingkang.dev/2024/01/15/osc/"/>
-    <id>https://lingkang.dev/2024/01/15/osc/</id>
-    <published>2024-01-15T15:36:49.693Z</published>
-    <updated>2024-01-15T17:10:07.330Z</updated>
+    <title>Paper Notes: Bitcask Key-Value Storage</title>
+    <link href="https://lingkang.dev/2024/03/26/read-paper-bitcask/"/>
+    <id>https://lingkang.dev/2024/03/26/read-paper-bitcask/</id>
+    <published>2024-03-26T12:34:00.000Z</published>
+    <updated>2024-03-26T12:50:55.138Z</updated>
     
     
       
@@ -34,27 +34,16 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>ifr exam</title>
-    <link href="https://lingkang.dev/2024/01/15/ifr_exam/"/>
-    <id>https://lingkang.dev/2024/01/15/ifr_exam/</id>
-    <published>2024-01-15T09:55:35.322Z</published>
-    <updated>2024-01-15T21:26:37.314Z</updated>
+    <category term="Paper Notes" scheme="https://lingkang.dev/categories/Paper-Notes/"/>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot;</summary>
-        
-      
+    <category term="Bitcask" scheme="https://lingkang.dev/tags/Bitcask/"/>
     
+    <category term="Key-Value Storage" scheme="https://lingkang.dev/tags/Key-Value-Storage/"/>
     
+    <category term="Database" scheme="https://lingkang.dev/tags/Database/"/>
     
+    <category term="Storage Engine" scheme="https://lingkang.dev/tags/Storage-Engine/"/>
     
   </entry>
   
@@ -87,8 +76,8 @@
   
   <entry>
     <title>Post-Mortem Analysis for Multiprocessing Program in C</title>
-    <link href="https://lingkang.dev/2023/12/02/core-dump/"/>
-    <id>https://lingkang.dev/2023/12/02/core-dump/</id>
+    <link href="https://lingkang.dev/2023/12/03/core-dump/"/>
+    <id>https://lingkang.dev/2023/12/03/core-dump/</id>
     <published>2023-12-02T21:26:24.000Z</published>
     <updated>2023-12-24T20:34:24.000Z</updated>
     
@@ -128,8 +117,8 @@
   
   <entry>
     <title>OSC Lab Task 5 Reasoning</title>
-    <link href="https://lingkang.dev/2023/10/31/osc-lab-task5/"/>
-    <id>https://lingkang.dev/2023/10/31/osc-lab-task5/</id>
+    <link href="https://lingkang.dev/2023/11/01/osc-lab-task5/"/>
+    <id>https://lingkang.dev/2023/11/01/osc-lab-task5/</id>
     <published>2023-10-31T18:29:32.000Z</published>
     <updated>2023-10-31T19:29:32.000Z</updated>
     
@@ -143,15 +132,38 @@
     
     <category term="Python" scheme="https://lingkang.dev/tags/Python/"/>
     
-    <category term="Linux" scheme="https://lingkang.dev/tags/Linux/"/>
-    
     <category term="C" scheme="https://lingkang.dev/tags/C/"/>
+    
+    <category term="Linux" scheme="https://lingkang.dev/tags/Linux/"/>
     
     <category term="task scheduling" scheme="https://lingkang.dev/tags/task-scheduling/"/>
     
     <category term="Visualization" scheme="https://lingkang.dev/tags/Visualization/"/>
     
     <category term="Round Robin" scheme="https://lingkang.dev/tags/Round-Robin/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Install Lean 3 on Windows</title>
+    <link href="https://lingkang.dev/2023/10/05/lean-inst-win/"/>
+    <id>https://lingkang.dev/2023/10/05/lean-inst-win/</id>
+    <published>2023-10-04T21:23:32.000Z</published>
+    <updated>2023-11-12T13:21:32.000Z</updated>
+    
+    
+    <summary type="html">Quite annoying to get Lean 4 installed without noticing it.</summary>
+    
+    
+    
+    <category term="DevOps" scheme="https://lingkang.dev/categories/DevOps/"/>
+    
+    
+    <category term="VS Code" scheme="https://lingkang.dev/tags/VS-Code/"/>
+    
+    <category term="Lean" scheme="https://lingkang.dev/tags/Lean/"/>
+    
+    <category term="Windows" scheme="https://lingkang.dev/tags/Windows/"/>
     
   </entry>
   
