@@ -133,9 +133,9 @@
       
       <tag>Python</tag>
       
-      <tag>C</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>C</tag>
       
       <tag>task scheduling</tag>
       
@@ -197,13 +197,13 @@
       
       <tag>Linux</tag>
       
-      <tag>CentOS</tag>
-      
       <tag>Server</tag>
       
       <tag>Cloud</tag>
       
       <tag>ECS</tag>
+      
+      <tag>CentOS</tag>
       
       <tag>GitLab</tag>
       
@@ -271,9 +271,9 @@
       
       <tag>WSL2</tag>
       
-      <tag>Windows</tag>
-      
       <tag>SQL</tag>
+      
+      <tag>Windows</tag>
       
       <tag>Hyper-V</tag>
       
@@ -683,9 +683,9 @@
     
     <tags>
       
-      <tag>C</tag>
-      
       <tag>Register</tag>
+      
+      <tag>C</tag>
       
       <tag>xv6</tag>
       
@@ -724,13 +724,13 @@
     
     <tags>
       
-      <tag>C</tag>
-      
-      <tag>Memory</tag>
-      
       <tag>RISC-V</tag>
       
       <tag>Register</tag>
+      
+      <tag>C</tag>
+      
+      <tag>Memory</tag>
       
       <tag>xv6</tag>
       
@@ -945,13 +945,13 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
-      <tag>LeetCode</tag>
-      
       <tag>Tree</tag>
       
       <tag>Binary Tree</tag>
+      
+      <tag>Python</tag>
+      
+      <tag>LeetCode</tag>
       
     </tags>
     
@@ -1001,9 +1001,9 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     
@@ -1084,11 +1084,11 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     
