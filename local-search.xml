@@ -283,17 +283,17 @@
       
       <tag>Windows</tag>
       
-      <tag>IP</tag>
-      
-      <tag>Routing</tag>
-      
-      <tag>IPv4</tag>
-      
       <tag>Hyper-V</tag>
       
       <tag>MySQL</tag>
       
       <tag>CRUD</tag>
+      
+      <tag>IP</tag>
+      
+      <tag>Routing</tag>
+      
+      <tag>IPv4</tag>
       
       <tag>Privileged Access Management</tag>
       
@@ -497,11 +497,11 @@
       
       <tag>Routing</tag>
       
+      <tag>IPv4</tag>
+      
       <tag>Subnet</tag>
       
       <tag>Subnet Mask</tag>
-      
-      <tag>IPv4</tag>
       
     </tags>
     
@@ -955,11 +955,11 @@
     
     <tags>
       
-      <tag>Python</tag>
-      
       <tag>Tree</tag>
       
       <tag>Binary Tree</tag>
+      
+      <tag>Python</tag>
       
       <tag>LeetCode</tag>
       
@@ -1011,9 +1011,9 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     
@@ -1094,11 +1094,11 @@
     
     <tags>
       
-      <tag>Linked List</tag>
-      
       <tag>Python</tag>
       
       <tag>LeetCode</tag>
+      
+      <tag>Linked List</tag>
       
     </tags>
     
