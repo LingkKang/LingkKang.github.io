@@ -16,12 +16,12 @@
   <meta name="author" content="Lingkang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Read Paper 0InfoSmart Multi-Task Scheduling for OpenCL Programs on CPU&#x2F;GPU Heterogeneous Platforms Authors: Yuan Wen, Zheng Wang, Michael F.P. O’Boyle Published in: HiPC 2014 Dec. DOI: 10.1109&amp;#x">
+    <meta name="description" content="Paper Notes: CPU&#x2F;GPU Task Scheduling with SVMInfoSmart Multi-Task Scheduling for OpenCL Programs on CPU&#x2F;GPU Heterogeneous Platforms Authors: Yuan Wen, Zheng Wang, Michael F.P. O’Boyle Publis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Read Paper 0">
+<meta property="og:title" content="Paper Notes: CPU&#x2F;GPU Task Scheduling with SVM">
 <meta property="og:url" content="https://lingkang.dev/2023/07/28/read-paper-0-wen/index.html">
 <meta property="og:site_name" content="Lingkang&#39;s Blog">
-<meta property="og:description" content="Read Paper 0InfoSmart Multi-Task Scheduling for OpenCL Programs on CPU&#x2F;GPU Heterogeneous Platforms Authors: Yuan Wen, Zheng Wang, Michael F.P. O’Boyle Published in: HiPC 2014 Dec. DOI: 10.1109&amp;#x">
+<meta property="og:description" content="Paper Notes: CPU&#x2F;GPU Task Scheduling with SVMInfoSmart Multi-Task Scheduling for OpenCL Programs on CPU&#x2F;GPU Heterogeneous Platforms Authors: Yuan Wen, Zheng Wang, Michael F.P. O’Boyle Publis">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/7113430/7116705/7116910/7116910-table-1-source-large.gif">
 <meta property="og:image" content="https://ieeexplore.ieee.org/mediastore_new/IEEE/content/media/7113430/7116705/7116910/7116910-fig-6-source-large.gif">
@@ -40,7 +40,7 @@
   
     <meta name="google-site-verification" content="_Z4a0qEOBfzKcSi9b2FxvxEvBcSQPH0SDX8XFGBut9M">
   
-  <title>Read Paper 0 - Lingkang&#39;s Blog</title>
+  <title>Paper Notes: CPU/GPU Task Scheduling with SVM - Lingkang&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -82,7 +82,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"lingkang.dev","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"lingkang.dev","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":"G-S9PGLW5JVZ"},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -92,6 +92,33 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
   
@@ -223,7 +250,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Read Paper 0"></span>
+            <span id="subtitle" data-typed-text="Paper Notes: CPU/GPU Task Scheduling with SVM"></span>
           
         </div>
 
@@ -246,7 +273,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          103 words
+          106 words
         
       </span>
     
@@ -294,7 +321,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Read Paper 0</h1>
+            <h1 id="seo-header">Paper Notes: CPU/GPU Task Scheduling with SVM</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
@@ -307,7 +334,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Read-Paper-0"><a href="#Read-Paper-0" class="headerlink" title="Read Paper 0"></a>Read Paper 0</h1><h2 id="Info"><a href="#Info" class="headerlink" title="Info"></a>Info</h2><p><strong>Smart Multi-Task Scheduling for OpenCL Programs on CPU&#x2F;GPU Heterogeneous Platforms</strong></p>
+                <h1 id="Paper-Notes-CPU-x2F-GPU-Task-Scheduling-with-SVM"><a href="#Paper-Notes-CPU-x2F-GPU-Task-Scheduling-with-SVM" class="headerlink" title="Paper Notes: CPU&#x2F;GPU Task Scheduling with SVM"></a>Paper Notes: CPU&#x2F;GPU Task Scheduling with SVM</h1><h2 id="Info"><a href="#Info" class="headerlink" title="Info"></a>Info</h2><p><strong>Smart Multi-Task Scheduling for OpenCL Programs on CPU&#x2F;GPU Heterogeneous Platforms</strong></p>
 <p><strong>Authors</strong>: <a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=8CHUcJEAAAAJ">Yuan Wen</a>, Zheng Wang, Michael F.P. O’Boyle</p>
 <p><strong>Published in</strong>: HiPC 2014 Dec.</p>
 <p><strong>DOI</strong>: <a target="_blank" rel="noopener" href="https://doi.org/10.1109/HiPC.2014.7116910">10.1109&#x2F;HiPC.2014.7116910</a></p>
@@ -412,7 +439,7 @@ https://lingkkang.github.io/2023/07/27/read-paper-0-wen/
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Read Paper 0</div>
+      <div>Paper Notes: CPU/GPU Task Scheduling with SVM</div>
       <div>https://lingkang.dev/2023/07/28/read-paper-0-wen/</div>
     </div>
     <div class="license-meta">
@@ -452,6 +479,29 @@ https://lingkkang.github.io/2023/07/27/read-paper-0-wen/
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/07/31/migrate-gitlab/" title="Migrate GitLab from CentOS to Ubuntu on ECS">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Migrate GitLab from CentOS to Ubuntu on ECS</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/27/align-test/" title="Performance Issue of Memory Alignment">
+                        <span class="hidden-mobile">Performance Issue of Memory Alignment</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
@@ -541,13 +591,6 @@ https://lingkkang.github.io/2023/07/27/read-paper-0-wen/
 
     
 
-    
-      <div class="col-lg-7 mx-auto nopadding-x-md">
-        <div class="container custom mx-auto">
-          <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-S9PGLW5JVZ"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date());
-gtag('config', 'G-S9PGLW5JVZ'); </script>
-        </div>
-      </div>
     
   </main>
 
